@@ -1,5 +1,5 @@
 # Documentation
 
-## [Assets](./assets.md)
-## [Extensions](./extensions.md)
-## [Nodes](./nodes/readme.md)
+- [Assets](./assets.md)
+- [Extensions](./extensions.md)
+- [Nodes](./nodes/readme.md)

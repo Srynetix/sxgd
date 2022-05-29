@@ -1,4 +1,4 @@
-# godot-sxgd - Srynetix' Godot Extensions
+# sxgd - Srynetix' Godot Extensions
 
 My personal collection of Godot Engine nodes and extensions.
 
