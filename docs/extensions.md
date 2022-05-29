@@ -1,6 +1,7 @@
 # Extensions
 
 ## SxColor - Color extensions
+*Source*: [SxColor.gd](../extensions/SxColor.gd)
 
 This extension exposes multiple static methods.
 
@@ -27,6 +28,7 @@ Generate a random color with a float alpha value.
 Generate a random color with an integer alpha value.
 
 ## SxLog - Global logging facility
+*Source*: [SxLog.gd](../extensions/SxLog.gd)
 
 This extension (which is a kind of global node) allows to manipulate loggers with log levels (as in `Python`), with a global configuration mechanism based on a string value (as in `Rust`).
 
@@ -110,6 +112,7 @@ Show an error message on current logger.
 Show a critical message on current logger.
 
 ## SxMath - More math functions
+*Source*: [SxMath.gd](../extensions/SxMath.gd)
 
 This extension contains more specific math functions.
 
@@ -144,6 +147,7 @@ Map a float value from one set of bounds to another.
 *Example*: `var n = SxMath.map(10.0, 0.0, 10.0, 0.0, 1.0)`
 
 ## SxShader - Shader utilities
+*Source*: [SxShader.gd](../extensions/SxShader.gd)
 
 This extension exposes shader utilities.
 
@@ -158,6 +162,7 @@ Get a shader param from a canvas item, handling edge cases like missing material
 Set a shader param from a canvas item, handling edge cases like missing material or non shader material.
 
 ## SxText - Text utilities
+*Source*: [SxText.gd](../extensions/SxText.gd)
 
 This extension exposes text utilities.
 
@@ -174,6 +179,7 @@ Convert a text to pascal case (like HelloWorld).
 *Example*: `var t = SxText.to_pascal_case("hello_world") # => "HelloWorld"`
 
 ## SxTileMap - Tilemap utilities
+*Source*: [SxTileMap.gd](../extensions/SxTileMap.gd)
 
 This extension exposes tilemap utilities.
 
