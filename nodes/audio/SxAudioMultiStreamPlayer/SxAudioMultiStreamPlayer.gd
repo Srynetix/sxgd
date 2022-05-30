@@ -1,3 +1,5 @@
+# An audio player with multiple simultaneous voices, configurable through the `max_voices` parameter.
+
 extends Node
 class_name SxAudioMultiStreamPlayer
 
@@ -24,14 +26,6 @@ func play(stream: AudioStream) -> void:
     else:
         play_on_player(stream, _find_oldest_active_player())
 
-# Play a stream on a specific voice.
-#
-# Example:
-#   player.play_on_voice(my_sound, 0)
-func play_on_voice(stream: AudioStream, voice: int) -> void:
-    var player: AudioStreamPlayer = _players[voice]
-    play_on_player(stream, player)
-
 # Play a stream on a specific player.
 #
 # Example:
@@ -40,6 +34,14 @@ func play_on_player(stream: AudioStream, player: AudioStreamPlayer) -> void:
     player.stop()
     player.stream = stream
     player.play()
+
+# Play a stream on a specific voice.
+#
+# Example:
+#   player.play_on_voice(my_sound, 0)
+func play_on_voice(stream: AudioStream, voice: int) -> void:
+    var player: AudioStreamPlayer = _players[voice]
+    play_on_player(stream, player)
 
 func _find_available_player() -> AudioStreamPlayer:
     for p in _players:
@@ -62,7 +64,7 @@ func _find_oldest_active_player() -> AudioStreamPlayer:
 
     return oldest_player
 
-func _ready():
+func _ready() -> void:
     for i in range(max_voices):
         var player = AudioStreamPlayer.new()
         add_child(player)
