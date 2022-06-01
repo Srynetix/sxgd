@@ -1,23 +1,32 @@
+# A wrapper around a SxAudioMultiStreamPlayer, to be used through inheritance as an autoload, which means:
+#
+# - inherit the node in your game,
+# - configure the `streams` parameter,
+# - and set it as **autoload**.
+
 extends Node
 class_name SxGlobalAudioFxPlayer
 
 # Maximum simultaneous voices.
 export(int, 1, 16) var max_voices = 4
+# Audio streams to play
 export(Dictionary) var streams = {}
 
 var player: SxAudioMultiStreamPlayer
 
-func _ready():
-    var player_scene: PackedScene = load("res://addons/sxgd/nodes/audio/SxAudioMultiStreamPlayer/SxAudioMultiStreamPlayer.tscn")
-    player = player_scene.instance()
-    player.max_voices = max_voices
-    add_child(player)
+# Get voice by index.
+func get_voice(voice: int) -> AudioStreamPlayer:
+    return player.get_voice(voice)
 
-func play(stream_name: String, voice: int = -1):
+# Play a stream on an automatically selected voice, or a specific voice.
+func play(stream_name: String, voice: int = -1) -> void:
     if voice == -1:
         player.play(streams[stream_name])
     else:
         player.play_on_voice(streams[stream_name], voice)
 
-func get_voice(voice: int) -> AudioStreamPlayer:
-    return player.get_voice(voice)
+func _ready() -> void:
+    var player_scene: PackedScene = load("res://addons/sxgd/nodes/audio/SxAudioMultiStreamPlayer/SxAudioMultiStreamPlayer.tscn")
+    player = player_scene.instance()
+    player.max_voices = max_voices
+    add_child(player)

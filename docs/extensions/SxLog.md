@@ -1,84 +1,162 @@
-# SxLog - Global logging facility
+# SxLog
 
-*Source*: [SxLog.gd](../../extensions/SxLog.gd)
+**[◀️ Back](../readme.md)**
 
-This extension (which is a kind of global node) allows to manipulate loggers with log levels (as in `Python`), with a global configuration mechanism based on a string value (as in `Rust`).
+|    |     |
+|----|-----|
+|*Source*|[SxLog.gd](../../extensions/SxLog.gd)|
+|*Inherits from*|`Reference`|
+|*Globally exported as*|`SxLog`|
 
-Six log levels are available, from lowest to highest: *TRACE*, *DEBUG*, *INFO*, *WARN*, *ERROR* and *CRITICAL*
+## Enums
 
+### `LogLevel`
+
+*Prototype*: `enum LogLevel { TRACE, DEBUG, INFO, WARN, ERROR, CRITICAL }`
+
+> Log level  
 ## Static methods
 
 ### `get_logger`
-`SxLog.get_logger(name: String) -> Logger`  
-Get or create a logger with a specific name.  
-*Example*: `SxLog.get_logger("my_logger")`
 
+*Prototype*: `static func get_logger(name: String) -> Logger`
+
+> Get logger from name.  
+>   
+> Example:  
+>   var logger = SxLog.get_logger("my_logger")  
 ### `configure_log_levels`
-`SxLog.configure_log_levels(conf: String) -> void`  
-Configure log level for each loggers using a configuration string.  
-*Example*: `SxLog.configure_log_levels("info,my_logger=debug")`
 
+*Prototype*: `static func configure_log_levels(conf: String) -> void`
+
+> Configure log level for each loggers using a configuration string.  
+>   
+> Example:  
+>   SxLog.configure_log_levels("info,my_logger=debug")  
 ### `set_max_log_level`
-`SxLog.set_max_log_level(name: String, level: int) -> void`  
-Set maximum log level for a specific logger.  
-*Example*: `SxLog.set_max_log_level("my_logger", SxLog.LogLevel.ERROR)`
 
+*Prototype*: `static func set_max_log_level(name: String, level: int) -> void`
+
+> Set maximum log level for a specific logger.  
+>   
+> Example:  
+>   SxLog.set_max_log_level("my_logger", LogLevel.WARN)  
 ### `trace`
-`SxLog.trace(message: String, args: Array = []) -> void`  
-Show a trace message on the root logger.
 
+*Prototype*: `static func trace(message: String, args: Array = []) -> void`
+
+> Show a trace message on the root logger  
 ### `debug`
-`SxLog.debug(message: String, args: Array = []) -> void`  
-Show a debug message on the root logger.
 
+*Prototype*: `static func debug(message: String, args: Array = []) -> void`
+
+> Show a debug message on the root logger  
 ### `info`
-`SxLog.info(message: String, args: Array = []) -> void`  
-Show an info message on the root logger.
 
+*Prototype*: `static func info(message: String, args: Array = []) -> void`
+
+> Show an info message on the root logger  
 ### `warn`
-`SxLog.warn(message: String, args: Array = []) -> void`  
-Show a warn message on the root logger.
 
+*Prototype*: `static func warn(message: String, args: Array = []) -> void`
+
+> Show a warn message on the root logger  
 ### `error`
-`SxLog.error(message: String, args: Array = []) -> void`  
-Show an error message on the root logger.
 
+*Prototype*: `static func error(message: String, args: Array = []) -> void`
+
+> Show an error message on the root logger  
 ### `critical`
-`SxLog.critical(message: String, args: Array = []) -> void`  
-Show a critical message on the root logger.
 
-## `Logger` class, methods
+*Prototype*: `static func critical(message: String, args: Array = []) -> void`
 
-### `set_max_log_level`
-`Logger.set_max_log_level(level: int) -> void`  
-Set maximum log level on current logger.  
-*Example*:
+> Show a critical message on the root logger  
+## LogMessage
 
-```
-var my_logger = SxLog.get_logger("my_logger")
-my_logger.set_max_log_level(SxLog.LogLevel.ERROR)
-```
+|    |     |
+|----|-----|
+|*Inherits from*|`Node`|
 
-### `trace`
-`Logger.trace(message: String, args: Array = []) -> void`  
-Show a trace message on current logger.
+> Log message  
+### LogMessage, Public variables
 
-### `debug`
-`Logger.debug(message: String, args: Array = []) -> void`  
-Show a debug message on current logger.
+#### `level`
 
-### `info`
-`Logger.info(message: String, args: Array = []) -> void`  
-Show an info message on current logger.
+*Code*: `var level: int`
 
-### `warn`
-`Logger.warn(message: String, args: Array = []) -> void`  
-Show a warn message on current logger.
+#### `logger_name`
 
-### `error`
-`Logger.error(message: String, args: Array = []) -> void`  
-Show an error message on current logger.
+*Code*: `var logger_name: String`
 
-### `critical`
-`Logger.critical(message: String, args: Array = []) -> void`  
-Show a critical message on current logger.
+#### `message`
+
+*Code*: `var message: String`
+
+#### `peer_id`
+
+*Code*: `var peer_id: int`
+
+### LogMessage, Static methods
+
+#### `new_message`
+
+*Prototype*: `static func new_message(level: int, name: String, message: String)`
+
+## Logger
+
+|    |     |
+|----|-----|
+|*Inherits from*|`Reference`|
+
+> Single logger handle  
+### Logger, Public variables
+
+#### `name`
+
+*Code*: `var name: String`
+
+#### `max_level`
+
+*Code*: `var max_level: int`
+
+#### `display_in_console`
+
+*Code*: `var display_in_console: bool`
+
+### Logger, Methods
+
+#### `set_max_log_level`
+
+*Prototype*: `func set_max_log_level(level: int) -> void`
+
+> Set max log level for this logger  
+#### `trace`
+
+*Prototype*: `func trace(message: String, args: Array = []) -> void`
+
+> Show a trace message  
+#### `debug`
+
+*Prototype*: `func debug(message: String, args: Array = []) -> void`
+
+> Show a debug message  
+#### `info`
+
+*Prototype*: `func info(message: String, args: Array = []) -> void`
+
+> Show an info message  
+#### `warn`
+
+*Prototype*: `func warn(message: String, args: Array = []) -> void`
+
+> Show a warn message  
+#### `error`
+
+*Prototype*: `func error(message: String, args: Array = []) -> void`
+
+> Show an error message  
+#### `critical`
+
+*Prototype*: `func critical(message: String, args: Array = []) -> void`
+
+> Show a critical message  

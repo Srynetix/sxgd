@@ -1,8 +1,15 @@
+# A vignette effect.
+#
+# <p align="center">
+#     <img src="../../../../images/nodes/SxVignette.gif" alt="preview" />
+# </p>
 tool
 extends ColorRect
 class_name SxVignette
 
+# Vignette size.
 export var vignette_size: float = 10 setget set_vignette_size
+# Vignette ratio.
 export var vignette_ratio: float = 0.25 setget set_vignette_ratio
 
 onready var tween: Tween = $Tween

@@ -1,8 +1,10 @@
 # Extensions
 
-- [SxColor](./SxColor.md) - Color extensions
-- [SxLog](./SxLog.md) - Global logging facility
-- [SxMath](./SxMath.md) - More math functions
-- [SxShader](./SxShader.md) - Shader utilities
-- [SxText](./SxText.md) - Text utilities
-- [SxTileMap](./SxTileMap.md) - Tilemap utilities
+**[◀️ Back](../readme.md)**
+
+- [SxColor](./SxColor.md)
+- [SxLog](./SxLog.md)
+- [SxMath](./SxMath.md)
+- [SxShader](./SxShader.md)
+- [SxText](./SxText.md)
+- [SxTileMap](./SxTileMap.md)

@@ -1,3 +1,8 @@
+# An animated shockwave effect.
+#
+# <p align="center">
+#     <img src="../../../../images/nodes/SxShockwave.gif" alt="preview" />
+# </p>
 tool
 extends ColorRect
 class_name SxShockwave

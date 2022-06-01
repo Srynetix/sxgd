@@ -1,17 +1,26 @@
-# SxText - Text utilities
+# SxText
 
-*Source*: [SxText.gd](../../extensions/SxText.gd)
+**[◀️ Back](../readme.md)**
 
-This extension exposes text utilities.
+|    |     |
+|----|-----|
+|*Source*|[SxText.gd](../../extensions/SxText.gd)|
+|*Inherits from*|`Reference`|
+|*Globally exported as*|`SxText`|
 
 ## Static methods
 
 ### `to_camel_case`
-`SxText.to_camel_case(s: String) -> String`  
-Convert a text to camel case (like helloWorld).  
-*Example*: `var t = SxText.to_camel_case("hello_world") # => "helloWorld"`
 
+*Prototype*: `static func to_camel_case(s: String) -> String`
+
+> Convert a text to camel case.  
+> Example:  
+>   SxText.to_camel_case("hello_world")  # => "helloWorld"  
 ### `to_pascal_case`
-`SxText.to_pascal_case(s: String) -> String`  
-Convert a text to pascal case (like HelloWorld).  
-*Example*: `var t = SxText.to_pascal_case("hello_world") # => "HelloWorld"`
+
+*Prototype*: `static func to_pascal_case(s: String) -> String`
+
+> Convert a text to pascal case.  
+> Example:  
+>   SxText.to_pascal_case("hello_world")  # => "HelloWorld"  
