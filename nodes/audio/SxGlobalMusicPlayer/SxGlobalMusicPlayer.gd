@@ -1,11 +1,12 @@
 # An audio player, used to play sound tracks, to be used through inheritance as an autoload.
-# (see [SxGlobalAudioFxPlayer](./SxGlobalAudioFxPlayer.md)).
+# (see [SxGlobalAudioFxPlayer](../SxGlobalAudioFxPlayer/SxGlobalAudioFxPlayer.md)).
 
 extends AudioStreamPlayer
 class_name SxGlobalMusicPlayer
 
 onready var tween: Tween = $Tween
 
+# Global volume in DB
 var global_volume_db: float setget _set_global_volume_db
 
 # Apply a "fade in" effect on sound with an optional duration in seconds.

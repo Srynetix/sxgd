@@ -7,7 +7,7 @@ charset = utf-8
 end_of_line = lf
 
 # Code files
-[*.gd]
+[{*.gd,*.py}]
 charset = utf-8
 end_of_line = lf
 indent_style = space

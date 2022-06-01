@@ -1,5 +1,6 @@
-# sxgd - Srynetix' Godot Extensions
+# .
 
-My personal collection of Godot Engine nodes and extensions.
+**[◀️ Back](../readme.md)**
 
-You can view all included stuff in the [documentation](./docs/readme.md) section.
+- [Extensions](./extensions/readme.md)
+- [Nodes](./nodes/readme.md)

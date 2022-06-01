@@ -1,15 +1,24 @@
-# SxShader - Shader utilities
+# SxShader
 
-*Source*: [SxShader.gd](../../extensions/SxShader.gd)
+**[◀️ Back](../readme.md)**
 
-This extension exposes shader utilities.
+|    |     |
+|----|-----|
+|*Source*|[SxShader.gd](../../extensions/SxShader.gd)|
+|*Inherits from*|`Reference`|
+|*Globally exported as*|`SxShader`|
 
 ## Static methods
 
 ### `get_shader_param`
-`SxShader.get_shader_param(item: CanvasItem, name: String)`  
-Get a shader param from a canvas item, handling edge cases like missing material or non shader material.
 
+*Prototype*: `static func get_shader_param(item: CanvasItem, name: String)`
+
+> Get a shader param from a canvas item.  
+> Handles edge cases like missing material or non-shader material.  
 ### `set_shader_param`
-`SxShader.set_shader_param(item: CanvasItem, name: String) -> void`  
-Set a shader param from a canvas item, handling edge cases like missing material or non shader material.
+
+*Prototype*: `static func set_shader_param(item: CanvasItem, name: String, value) -> void`
+
+> Set a shader param from a canvas item.  
+> Handles edge cases like missing material or non-shader material.  

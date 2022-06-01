@@ -1,3 +1,4 @@
+# A simple scene transition node, with a fade-in/fade-out effect.
 extends CanvasLayer
 class_name SxSceneTransitioner
 

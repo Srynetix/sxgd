@@ -1,3 +1,5 @@
-# Debug nodes
+# Debug
 
-- [SxDebugInfo](./SxDebugInfo.md)
+**[◀️ Back](../readme.md)**
+
+- [SxDebugInfo](./SxDebugInfo/SxDebugInfo.md)

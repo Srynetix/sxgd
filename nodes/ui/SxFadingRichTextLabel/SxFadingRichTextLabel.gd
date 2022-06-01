@@ -1,3 +1,4 @@
+# A wrapped RichTextLabel with a per-character fade-in effect.
 extends RichTextLabel
 class_name SxFadingRichTextLabel
 

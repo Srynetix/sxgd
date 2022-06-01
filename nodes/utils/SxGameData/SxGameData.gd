@@ -1,3 +1,4 @@
+# A general-purpose in-memory key-value store, to be used through inheritance and autoload.
 extends Node
 class_name SxGameData
 
