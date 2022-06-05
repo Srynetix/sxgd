@@ -11,6 +11,24 @@
 > A general-purpose in-memory key-value store, to be used through inheritance and autoload.  
 ## Methods
 
+### `store_static_value`
+
+*Prototype*: `func store_static_value(name: String, value) -> void`
+
+> Store static value in game data.  
+> Static data is not persisted to disk.  
+>   
+> Example:  
+>   data.store_static_value("levels", json_levels)  
+### `load_static_value`
+
+*Prototype*: `func load_static_value(name: String, orDefault = null)`
+
+> Load static value from game data.  
+> Static data is not persisted to disk.  
+>   
+> Example:  
+>   var levels = data.load_static_value("levels", Dictionary())  
 ### `store_value`
 
 *Prototype*: `func store_value(name: String, value) -> void`
@@ -80,3 +98,8 @@
 >   
 > Example:  
 >   data.load_from_disk("user://my_path.dat")  
+### `clear`
+
+*Prototype*: `func clear() -> void`
+
+> Clear all non-static data.  

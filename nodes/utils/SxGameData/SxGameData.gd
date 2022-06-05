@@ -3,7 +3,31 @@ extends Node
 class_name SxGameData
 
 var _data := Dictionary()
+var _static_data := Dictionary()
 var _logger = SxLog.get_logger("SxGameData")
+
+# Store static value in game data.
+# Static data is not persisted to disk.
+#
+# Example:
+#   data.store_static_value("levels", json_levels)
+func store_static_value(name: String, value) -> void:
+    _logger.debug("Storing static value '%s' in key '%s'." % [value, name])
+    _static_data[name] = value
+
+# Load static value from game data.
+# Static data is not persisted to disk.
+#
+# Example:
+#   var levels = data.load_static_value("levels", Dictionary())
+func load_static_value(name: String, orDefault = null):
+    if _static_data.has(name):
+        var value = _static_data[name]
+        _logger.debug("Loading stored static value '%s' from key '%s'." % [value, name])
+        return value
+
+    _logger.debug("Static key '%s' missing, loading default '%s'." % [name, orDefault])
+    return orDefault
 
 # Store value in game data.
 #
@@ -97,3 +121,7 @@ func load_from_disk(path: String = "user://save.dat") -> void:
         persist_to_disk(path)
     else:
         _logger.error("Could not load game data from path '%s'" % path)
+
+# Clear all non-static data.
+func clear() -> void:
+    _data.clear()
