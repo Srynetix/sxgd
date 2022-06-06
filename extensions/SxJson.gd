@@ -2,7 +2,7 @@ extends Reference
 class_name SxJson
 
 # Read JSON file at path `path`.
-static func read_json_file(path: String):
+static func read_json_file(path: String) -> Dictionary:
     var _logger = SxLog.get_logger("SxJson")
 
     var f = File.new()
@@ -12,4 +12,4 @@ static func read_json_file(path: String):
         return JSON.parse(f.get_as_text()).result
     else:
         _logger.error("Could not read JSON file '%s': %s" % [path, error])
-        return null
+        return Dictionary()
