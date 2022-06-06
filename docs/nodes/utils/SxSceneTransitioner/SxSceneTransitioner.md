@@ -34,6 +34,14 @@
 >   
 > Example:  
 >   SxSceneTransitioner.fade_to_scene_path("res://my_scene.tscn")  
+### `fade_to_cached_scene`
+
+*Prototype*: `func fade_to_cached_scene(cache: SxLoadCache, scene_name: String) -> void`
+
+> Fade current scene to another scene, using a SxLoadCache.  
+>   
+> Example:  
+>   SxSceneTransitioner.fade_to_cached_scene(cache, "MyScene")  
 ### `fade_out`
 
 *Prototype*: `func fade_out() -> void`
