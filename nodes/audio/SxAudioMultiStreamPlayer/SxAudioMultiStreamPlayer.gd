@@ -5,6 +5,8 @@ class_name SxAudioMultiStreamPlayer
 
 # Maximum simultaneous voices.
 export(int, 1, 16) var max_voices = 4
+# Audio bus output
+export(String) var audio_bus_output = "Master"
 
 var _players := Array()
 
@@ -69,4 +71,5 @@ func _ready() -> void:
         var player = AudioStreamPlayer.new()
         add_child(player)
 
+        player.bus = audio_bus_output
         _players.append(player)

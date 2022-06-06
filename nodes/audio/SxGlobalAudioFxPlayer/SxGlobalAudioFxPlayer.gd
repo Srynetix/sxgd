@@ -9,6 +9,8 @@ class_name SxGlobalAudioFxPlayer
 
 # Maximum simultaneous voices.
 export(int, 1, 16) var max_voices = 4
+# Audio bus output
+export(String) var audio_bus_output = "Master"
 # Audio streams to play
 export(Dictionary) var streams = {}
 
@@ -29,4 +31,5 @@ func _ready() -> void:
     var player_scene: PackedScene = load("res://addons/sxgd/nodes/audio/SxAudioMultiStreamPlayer/SxAudioMultiStreamPlayer.tscn")
     player = player_scene.instance()
     player.max_voices = max_voices
+    player.audio_bus_output = audio_bus_output
     add_child(player)
