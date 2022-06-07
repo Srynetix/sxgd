@@ -11,22 +11,24 @@ var _logger = SxLog.get_logger("SxGameData")
 #
 # Example:
 #   data.store_static_value("levels", json_levels)
-func store_static_value(name: String, value) -> void:
-    _logger.debug("Storing static value '%s' in key '%s'." % [value, name])
-    _static_data[name] = value
+#   data.store_static_value("my_data", my_data, "my_category")
+func store_static_value(name: String, value, category: String = "default") -> void:
+    _logger.debug("Storing static value '%s' in key '%s' [category: %s]." % [value, name, category])
+    _set_value(_static_data, name, category, value)
 
 # Load static value from game data.
 # Static data is not persisted to disk.
 #
 # Example:
 #   var levels = data.load_static_value("levels", Dictionary())
-func load_static_value(name: String, orDefault = null):
-    if _static_data.has(name):
-        var value = _static_data[name]
-        _logger.debug("Loading stored static value '%s' from key '%s'." % [value, name])
+#   var levels = data.load_static_value("my_data", Dictionary(), "my_category")
+func load_static_value(name: String, orDefault = null, category: String = "default"):
+    if _has_value(_static_data, name, category):
+        var value = _get_value(_static_data, name, category, null)
+        _logger.debug("Loading stored static value '%s' from key '%s' [category: %s]." % [value, name, category])
         return value
 
-    _logger.debug("Static key '%s' missing, loading default '%s'." % [name, orDefault])
+    _logger.debug("Static key '%s' missing [category: %s], loading default '%s'." % [name, category, orDefault])
     return orDefault
 
 # Store value in game data.
@@ -34,22 +36,24 @@ func load_static_value(name: String, orDefault = null):
 # Example:
 #   data.store_value("key", 123)
 #   data.store_value("key2", "hello")
-func store_value(name: String, value) -> void:
-    _logger.debug("Storing value '%s' in key '%s'." % [value, name])
-    _data[name] = value
+#   data.store_value("key3", "hello", "my_category")
+func store_value(name: String, value, category: String = "default") -> void:
+    _logger.debug("Storing value '%s' in key '%s' [category: %s]." % [value, name, category])
+    _set_value(_data, name, category, value)
 
 # Load value from game data.
 #
 # Example:
 #   var d1 = data.load_value("key")
 #   var d2 = data.load_value("key", 123)  # returns 123 if key is missing
-func load_value(name: String, orDefault = null):
-    if _data.has(name):
-        var value = _data[name]
-        _logger.debug("Loading stored value '%s' from key '%s'." % [value, name])
+#   var d2 = data.load_value("key2", 123, "my_category")
+func load_value(name: String, orDefault = null, category: String = "default"):
+    if has_value(name, category):
+        var value = _get_value(_data, name, category, null)
+        _logger.debug("Loading stored value '%s' from key '%s' [category: %s]." % [value, name, category])
         return value
 
-    _logger.debug("Key '%s' missing, loading default '%s'." % [name, orDefault])
+    _logger.debug("Key '%s' missing [category: %s], loading default '%s'." % [name, category, orDefault])
     return orDefault
 
 # Increment key and returns the value.
@@ -57,9 +61,10 @@ func load_value(name: String, orDefault = null):
 #
 # Example:
 #   var value = data.increment("key")
-func increment(name: String) -> int:
-    var num = load_value(name, 0) + 1
-    store_value(name, num)
+#   var value = data.increment("key", "my_category")
+func increment(name: String, category: String = "default") -> int:
+    var num = load_value(name, 0, category) + 1
+    store_value(name, num, category)
     return num
 
 # Decrement key and returns the value.
@@ -67,9 +72,10 @@ func increment(name: String) -> int:
 #
 # Example:
 #   var value = data.decrement("key")
-func decrement(name: String) -> int:
-    var num = load_value(name, 0) - 1
-    store_value(name, num)
+#   var value = data.decrement("key", "my_category")
+func decrement(name: String, category: String = "default") -> int:
+    var num = load_value(name, 0, category) - 1
+    store_value(name, num, category)
     return num
 
 # Remove key from game data.
@@ -77,20 +83,22 @@ func decrement(name: String) -> int:
 #
 # Example:
 #   data.remove("key")
-func remove(name: String) -> bool:
-    var found = _data.erase(name)
+#   data.remove("key", "my_category")
+func remove(name: String, category: String = "default") -> bool:
+    var found = _remove_value(_data, name, category)
     if found:
-        _logger.debug("Key '%s' removed." % [name])
+        _logger.debug("Key '%s' removed. [category: %s]" % [name, category])
     else:
-        _logger.debug("Trying to remove key '%s' but its missing." % [name])
+        _logger.debug("Trying to remove key '%s' but its missing [category: %s]." % [name, category])
     return found
 
 # Test if game data has a key.
 #
 # Example:
 #   var exists = data.has_value("key")
-func has_value(name: String) -> bool:
-    return _data.has(name)
+#   var exists = data.has_value("key", "my_category")
+func has_value(name: String, category: String = "default") -> bool:
+    return _has_value(_data, name, category)
 
 # Persist game data to disk at a specific path.
 #
@@ -125,3 +133,43 @@ func load_from_disk(path: String = "user://save.dat") -> void:
 # Clear all non-static data.
 func clear() -> void:
     _data.clear()
+
+# Clear all non-static data from category.
+func clear_category(category: String) -> void:
+    _clear_category(_data, category)
+
+# Dump each variable from a specific category.
+func dump_category(category: String) -> String:
+    var cat = _get_or_create_category(_data, category)
+    return JSON.print(cat, "", true)
+
+# Dump all variables.
+func dump_all() -> String:
+    return JSON.print(_data, "", true)
+
+func _clear_category(d: Dictionary, category: String) -> void:
+    if d.has(category):
+        d[category].clear()
+
+func _set_value(d: Dictionary, key: String, category: String, value) -> void:
+    var cat = _get_or_create_category(d, category)
+    cat[key] = value
+
+func _get_value(d: Dictionary, key: String, category: String, orDefault = null):
+    var cat = _get_or_create_category(d, category)
+    if !cat.has(key):
+        return orDefault
+    return cat[key]
+
+func _get_or_create_category(d: Dictionary, category: String) -> Dictionary:
+    if !d.has(category):
+        d[category] = Dictionary()
+    return d[category]
+
+func _has_value(d: Dictionary, key: String, category: String) -> bool:
+    var cat = _get_or_create_category(d, category)
+    return cat.has(key)
+
+func _remove_value(d: Dictionary, key: String, category: String) -> bool:
+    var cat = _get_or_create_category(d, category)
+    return cat.erase(key)
