@@ -13,3 +13,16 @@ static func read_json_file(path: String) -> Dictionary:
     else:
         _logger.error("Could not read JSON file '%s': %s" % [path, error])
         return Dictionary()
+
+# Write JSON to path `path`.
+static func write_json_file(json: Dictionary, path: String):
+    var _logger = SxLog.get_logger("SxJson")
+
+    var f = File.new()
+    var error = f.open(path, File.WRITE)
+    if error == OK:
+        _logger.debug("Writing JSON data to path '%s'." % path)
+        f.store_line(JSON.print(json, "  "))
+        f.close()
+    else:
+        _logger.error("Could not write JSON data to file '%s': %s" % [path, error])
