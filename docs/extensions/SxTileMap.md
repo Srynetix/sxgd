@@ -35,14 +35,14 @@
 > Generate cell rotation parameters from an angle in degrees.  
 ### `create_dump`
 
-*Prototype*: `static func create_dump(tilemap: TileMap) -> Array`
+*Prototype*: `static func create_dump(tilemap: TileMap) -> PoolIntArray`
 
-> Create a dump from a tilemap.  
-### `load_dump`
+> Create a dump from tilemap contents.  
+### `apply_dump`
 
-*Prototype*: `static func load_dump(tilemap: TileMap, array: Array) -> void`
+*Prototype*: `static func apply_dump(tilemap: TileMap, array: PoolIntArray) -> void`
 
-> Apply a dump in a tilemap.  
+> Overwrite tilemap contents with a dump.  
 ## CellRotationParams
 
 |    |     |
@@ -71,49 +71,3 @@
 *Prototype*: `static func from_values(transpose: bool, flip_x: bool, flip_y: bool) -> CellRotationParams`
 
 > Create params instance from arguments  
-#### `from_array`
-
-*Prototype*: `static func from_array(array: Array) -> CellRotationParams`
-
-### CellRotationParams, Methods
-
-#### `to_array`
-
-*Prototype*: `func to_array() -> Array`
-
-## CellDump
-
-|    |     |
-|----|-----|
-|*Inherits from*|`Node`|
-
-### CellDump, Public variables
-
-#### `tile_id`
-
-*Code*: `var tile_id: int`
-
-#### `tile_pos`
-
-*Code*: `var tile_pos: Vector2`
-
-#### `rotation_params`
-
-*Code*: `var rotation_params: CellRotationParams`
-
-### CellDump, Static methods
-
-#### `from_values`
-
-*Prototype*: `static func from_values(tile_id: int, tile_pos: Vector2, rotation_params: CellRotationParams) -> CellDump`
-
-#### `from_array`
-
-*Prototype*: `static func from_array(array: Array) -> CellDump`
-
-### CellDump, Methods
-
-#### `to_array`
-
-*Prototype*: `func to_array() -> Array`
-

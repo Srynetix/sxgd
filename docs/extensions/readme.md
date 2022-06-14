@@ -2,6 +2,7 @@
 
 **[◀️ Back](../readme.md)**
 
+- [SxBuffer](./SxBuffer.md)
 - [SxColor](./SxColor.md)
 - [SxJson](./SxJson.md)
 - [SxLog](./SxLog.md)

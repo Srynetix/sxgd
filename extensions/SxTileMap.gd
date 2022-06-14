@@ -17,32 +17,6 @@ class CellRotationParams:
         obj.flip_y = flip_y
         return obj
 
-    static func from_array(array: Array) -> CellRotationParams:
-        return CellRotationParams.from_values(array[0], array[1], array[2])
-
-    func to_array() -> Array:
-        return [transpose, flip_x, flip_y]
-
-class CellDump:
-    extends Node
-
-    var tile_id: int
-    var tile_pos: Vector2
-    var rotation_params: CellRotationParams
-
-    static func from_values(tile_id: int, tile_pos: Vector2, rotation_params: CellRotationParams) -> CellDump:
-        var obj = CellDump.new()
-        obj.tile_id = tile_id
-        obj.tile_pos = tile_pos
-        obj.rotation_params = rotation_params
-        return obj
-
-    func to_array() -> Array:
-        return [tile_id, [tile_pos.x, tile_pos.y], rotation_params.to_array()]
-
-    static func from_array(array: Array) -> CellDump:
-        return CellDump.from_values(array[0], Vector2(array[1][0], array[1][1]), CellRotationParams.from_array(array[2]))
-
 # Get rotation for a specific cell, in radians.
 #
 # Example:
@@ -97,19 +71,11 @@ static func rotation_degrees_to_params(angle_degrees: int) -> CellRotationParams
     else:
         return CellRotationParams.from_values(false, false, false)
 
-# Create a dump from a tilemap.
-static func create_dump(tilemap: TileMap) -> Array:
-    var array = []
-    for tile_pos in tilemap.get_used_cells():
-        var tile_idx = tilemap.get_cellv(tile_pos)
-        var params = get_cell_rotation_params(tilemap, tile_pos)
-        array.append(CellDump.from_values(tile_idx, tile_pos, params).to_array())
-    return array
+# Create a dump from tilemap contents.
+static func create_dump(tilemap: TileMap) -> PoolIntArray:
+    return tilemap.get("tile_data")
 
-# Apply a dump in a tilemap.
-static func load_dump(tilemap: TileMap, array: Array) -> void:
+# Overwrite tilemap contents with a dump.
+static func apply_dump(tilemap: TileMap, array: PoolIntArray) -> void:
     tilemap.clear()
-
-    for item in array:
-        var dump = CellDump.from_array(item)
-        tilemap.set_cellv(dump.tile_pos, dump.tile_id, dump.rotation_params.flip_x, dump.rotation_params.flip_y, dump.rotation_params.transpose)
+    tilemap.set("tile_data", array)
