@@ -14,9 +14,15 @@
 > <p align="center">  
 >   <img src="../../../../images/nodes/SxDebugInfo.png" alt="capture" />  
 > </p>  
-## Exports
+## Methods
 
-### `visible_on_startup`
+### `get_visibility`
 
-*Code*: `export var visible_on_startup: bool = false`
+*Prototype*: `func get_visibility() -> bool`
 
+> Get the visibility status.  
+### `set_visibility`
+
+*Prototype*: `func set_visibility(value: bool) -> void`
+
+> Set the visibility status.  

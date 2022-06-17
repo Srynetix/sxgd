@@ -8,6 +8,7 @@
 |*Inherits from*|`Reference`|
 |*Globally exported as*|`SxBuffer`|
 
+> Buffer utilities.  
 ## Static methods
 
 ### `zstd_compress`

@@ -8,6 +8,7 @@
 |*Inherits from*|`Reference`|
 |*Globally exported as*|`SxLog`|
 
+> Log utilities.  
 ## Enums
 
 ### `LogLevel`
@@ -25,6 +26,14 @@
 >   
 > Example:  
 >   var logger = SxLog.get_logger("my_logger")  
+### `get_messages`
+
+*Prototype*: `static func get_messages() -> Array`
+
+### `pop_messages`
+
+*Prototype*: `static func pop_messages() -> Array`
+
 ### `configure_log_levels`
 
 *Prototype*: `static func configure_log_levels(conf: String) -> void`
@@ -71,6 +80,42 @@
 *Prototype*: `static func critical(message: String, args: Array = []) -> void`
 
 > Show a critical message on the root logger  
+## _LogData
+
+|    |     |
+|----|-----|
+|*Inherits from*|`Node`|
+
+### _LogData, Static methods
+
+#### `get_messages`
+
+*Prototype*: `static func get_messages() -> Array`
+
+#### `add_message`
+
+*Prototype*: `static func add_message(message: LogMessage) -> void`
+
+#### `pop_messages`
+
+*Prototype*: `static func pop_messages() -> Array`
+
+## Utils
+
+|    |     |
+|----|-----|
+|*Inherits from*|`Node`|
+
+### Utils, Static methods
+
+#### `level_to_string`
+
+*Prototype*: `static func level_to_string(level: int) -> String`
+
+#### `level_from_name`
+
+*Prototype*: `static func level_from_name(name: String) -> int`
+
 ## LogMessage
 
 |    |     |
@@ -79,6 +124,10 @@
 
 > Log message  
 ### LogMessage, Public variables
+
+#### `time`
+
+*Code*: `var time: float`
 
 #### `level`
 
@@ -100,7 +149,7 @@
 
 #### `new_message`
 
-*Prototype*: `static func new_message(level: int, name: String, message: String)`
+*Prototype*: `static func new_message(time: float, level: int, name: String, message: String, peer_id: int = -1)`
 
 ## Logger
 
