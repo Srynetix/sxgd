@@ -1,6 +1,5 @@
 tool
 extends RichTextEffect
-class_name SxFadingRichTextEffect
 
 var bbcode: String = "sxgd-fadein"
 

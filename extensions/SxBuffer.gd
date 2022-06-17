@@ -1,3 +1,4 @@
+# Buffer utilities.
 extends Reference
 class_name SxBuffer
 

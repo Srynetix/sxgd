@@ -1,0 +1,110 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/sxgd/modules/SxFontAwesome/SxFAButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/sxgd/assets/fonts/Jost-400-Book.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="SxFAButtonTests" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 310.0
+margin_top = 112.0
+margin_right = 522.0
+margin_bottom = 368.0
+custom_constants/separation = 20
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 212.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 1 )
+text = "SxFAButton samples"
+align = 1
+valign = 1
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 44.0
+margin_right = 212.0
+margin_bottom = 256.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 3
+
+[node name="SxFAButton" parent="CenterContainer/VBoxContainer/GridContainer" instance=ExtResource( 1 )]
+icon_name = "binoculars"
+icon_size = 28
+
+[node name="SxFAButton2" parent="CenterContainer/VBoxContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 74.0
+margin_right = 138.0
+icon_size = 28
+
+[node name="SxFAButton3" parent="CenterContainer/VBoxContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 148.0
+margin_right = 212.0
+icon_name = "jedi"
+icon_size = 28
+
+[node name="SxFAButton4" parent="CenterContainer/VBoxContainer/GridContainer" instance=ExtResource( 1 )]
+margin_top = 74.0
+margin_bottom = 138.0
+custom_colors/font_color = Color( 0.713726, 0.0588235, 0.0588235, 1 )
+icon_name = "code"
+icon_size = 28
+icon_color = Color( 0.580392, 0.819608, 0.431373, 1 )
+
+[node name="SxFAButton5" parent="CenterContainer/VBoxContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 74.0
+margin_top = 74.0
+margin_right = 138.0
+margin_bottom = 138.0
+icon_name = "hands"
+icon_size = 28
+icon_color = Color( 0.32549, 0.431373, 0.847059, 1 )
+
+[node name="SxFAButton6" parent="CenterContainer/VBoxContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 148.0
+margin_top = 74.0
+margin_right = 212.0
+margin_bottom = 138.0
+icon_name = "mug-saucer"
+icon_size = 28
+icon_color = Color( 0.639216, 0.211765, 0.211765, 1 )
+
+[node name="SxFAButton7" parent="CenterContainer/VBoxContainer/GridContainer" instance=ExtResource( 1 )]
+margin_top = 148.0
+margin_bottom = 212.0
+icon_name = "shield"
+icon_size = 28
+
+[node name="SxFAButton8" parent="CenterContainer/VBoxContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 74.0
+margin_top = 148.0
+margin_right = 138.0
+margin_bottom = 212.0
+icon_name = "qrcode"
+icon_size = 28
+
+[node name="SxFAButton9" parent="CenterContainer/VBoxContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 148.0
+margin_top = 148.0
+margin_right = 212.0
+margin_bottom = 212.0
+icon_name = "cube"
+icon_size = 28

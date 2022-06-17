@@ -1,23 +1,75 @@
+# Log utilities.
 extends Reference
 class_name SxLog
 
 # Log level
 enum LogLevel { TRACE, DEBUG, INFO, WARN, ERROR, CRITICAL }
 
+class _LogData:
+    const _static_data = {"messages": [], "cursor": 0}
+
+    static func get_messages() -> Array:
+        return _static_data["messages"]
+
+    static func add_message(message: LogMessage) -> void:
+        _static_data["messages"].append(message)
+
+    static func pop_messages() -> Array:
+        var messages = _static_data["messages"]
+        _static_data["messages"] = []
+        return messages
+
+class Utils:
+    static func level_to_string(level: int) -> String:
+        match level:
+            LogLevel.TRACE:
+                return "trace"
+            LogLevel.DEBUG:
+                return "debug"
+            LogLevel.INFO:
+                return "info"
+            LogLevel.WARN:
+                return "warn"
+            LogLevel.ERROR:
+                return "error"
+
+        return "critical"
+
+    static func level_from_name(name: String) -> int:
+        match name:
+            "trace":
+                return LogLevel.TRACE
+            "debug":
+                return LogLevel.DEBUG
+            "info":
+                return LogLevel.INFO
+            "warn":
+                return LogLevel.WARN
+            "error":
+                return LogLevel.ERROR
+            "critical":
+                return LogLevel.CRITICAL
+
+        printerr("[SxLog] Unknown log level %s. Defaulting to INFO" % name)
+        return LogLevel.INFO
+
 # Log message
 class LogMessage:
     extends Node
 
+    var time: float
     var level: int
     var logger_name: String
     var message: String
     var peer_id: int
 
-    static func new_message(level: int, name: String, message: String):
+    static func new_message(time: float, level: int, name: String, message: String, peer_id: int = -1):
         var msg = LogMessage.new()
+        msg.time = time
         msg.level = level
-        msg.name = name
+        msg.logger_name = name
         msg.message = message
+        msg.peer_id = peer_id
         return msg
 
 # Single logger handle
@@ -27,7 +79,6 @@ class Logger:
     var name: String
     var max_level: int
     var display_in_console: bool
-    var _messages := Array()
 
     func _init(name: String, max_level: int, display_in_console: bool):
         self.name = name
@@ -65,21 +116,6 @@ class Logger:
     func _is_level_shown(level: int) -> bool:
         return level >= max_level
 
-    static func _level_to_string(level: int) -> String:
-        match level:
-            LogLevel.TRACE:
-                return "trace"
-            LogLevel.DEBUG:
-                return "debug"
-            LogLevel.INFO:
-                return "info"
-            LogLevel.WARN:
-                return "warn"
-            LogLevel.ERROR:
-                return "error"
-
-        return "critical"
-
     func _show_log_line(level: int, line: String) -> void:
         if !display_in_console:
             return
@@ -95,42 +131,29 @@ class Logger:
             output += " " + str(a)
         return output
 
-    func _format_log(level: int, message: String, args: Array = []) -> String:
-        var level_str = _level_to_string(level).to_upper()
-        return "[{level_str}] [{name}] {args}".format({
+    func _format_log(time: float, level: int, message: String, args: Array = []) -> String:
+        var level_str = Utils.level_to_string(level).to_upper()
+        return "[{time}] [{level_str}] [{name}] {args}".format({
+            "time": "%0.3f" % time,
             "level_str": level_str,
             "name": name,
             "args": _format_args(message, args)
         })
 
+    func _get_elapsed_time() -> float:
+        return OS.get_ticks_msec() / 1000.0
+
     func _log(level: int, message: String, args: Array = []) -> void:
         if !_is_level_shown(level):
             return
 
-        _messages.append(
-            LogMessage.new_message(
-                level, name, _format_args(message, args)
-            )
+        var time = _get_elapsed_time()
+        _show_log_line(level, _format_log(time, level, message, args))
+
+        var log_message = LogMessage.new_message(
+            time, level, name, _format_args(message, args)
         )
-        _show_log_line(level, _format_log(level, message, args))
-
-static func _level_from_name(name: String) -> int:
-    match name:
-        "trace":
-            return LogLevel.TRACE
-        "debug":
-            return LogLevel.DEBUG
-        "info":
-            return LogLevel.INFO
-        "warn":
-            return LogLevel.WARN
-        "error":
-            return LogLevel.ERROR
-        "critical":
-            return LogLevel.CRITICAL
-
-    printerr("[SxLog] Unknown log level %s. Defaulting to INFO" % name)
-    return LogLevel.INFO
+        _LogData.add_message(log_message)
 
 const _static_data = {
     "loggers": {},
@@ -152,6 +175,12 @@ static func get_logger(name: String) -> Logger:
         _static_data["loggers"][name] = logger
         return logger
 
+static func get_messages() -> Array:
+    return _LogData.get_messages()
+
+static func pop_messages() -> Array:
+    return _LogData.pop_messages()
+
 # Configure log level for each loggers using a configuration string.
 #
 # Example:
@@ -164,9 +193,9 @@ static func configure_log_levels(conf: String) -> void:
         if len_split == 0:
             continue
         elif len_split == 1:
-            set_max_log_level("root", _level_from_name(split[0]))
+            set_max_log_level("root", Utils.level_from_name(split[0]))
         elif len_split == 2:
-            set_max_log_level(split[0], _level_from_name(split[0]))
+            set_max_log_level(split[0], Utils.level_from_name(split[0]))
 
 # Set maximum log level for a specific logger.
 #

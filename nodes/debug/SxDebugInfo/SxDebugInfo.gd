@@ -7,23 +7,15 @@
 extends CanvasLayer
 class_name SxDebugInfo
 
-export var visible_on_startup: bool = false
-
 onready var _label: RichTextLabel = $MarginContainer/RichTextLabel
 
-func _ready():
-    _label.visible = visible_on_startup
+# Get the visibility status.
+func get_visibility() -> bool:
+    return _label.visible
 
-func _input(event: InputEvent):
-    if event is InputEventKey:
-        if event.pressed && event.scancode == KEY_F12:
-            _label.visible = !_label.visible
-
-        elif event.pressed && event.scancode == KEY_F5 && _label.visible:
-            get_tree().reload_current_scene()
-
-        elif event.pressed && event.scancode == KEY_F2 && _label.visible:
-            get_tree().paused = !get_tree().paused
+# Set the visibility status.
+func set_visibility(value: bool) -> void:
+    _label.visible = value
 
 func _process(delta):
     if _label.visible:
