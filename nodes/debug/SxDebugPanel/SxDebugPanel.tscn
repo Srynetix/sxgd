@@ -22,7 +22,7 @@ layer = 4
 script = ExtResource( 3 )
 
 [node name="Panel" type="Panel" parent="."]
-self_modulate = Color( 0, 0, 0, 0.847059 )
+self_modulate = Color( 0, 0, 0, 0.588235 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
