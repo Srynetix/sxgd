@@ -16,13 +16,11 @@ onready var copy: BackBufferCopy = $BackBufferCopy
 func set_strength(value: float) -> void:
     strength = value
 
-    if Engine.editor_hint:
-        if step1 == null && step2 == null:
-            _ready()
+    if !step1:
+        yield(self, "ready")
 
-    if step1 != null && step2 != null:
-        SxShader.set_shader_param(step1, "strength", value)
-        SxShader.set_shader_param(step2, "strength", value)
+    SxShader.set_shader_param(step1, "strength", value)
+    SxShader.set_shader_param(step2, "strength", value)
 
 func _ready():
     copy.rect = Rect2(rect_position, rect_size)

@@ -10,10 +10,9 @@ export var icon_size: int = 24 setget _set_icon_size
 # Icon color
 export var icon_color: Color = Color.white setget _set_icon_color
 
-var _label = null
+onready var _label = $SxFALabel
 
 func _ready():
-    _label = $SxFALabel
     _update_label()
 
 func _set_icon_name(value: String) -> void:
@@ -29,7 +28,9 @@ func _set_icon_color(value: Color) -> void:
     _update_label()
 
 func _update_label():
-    if _label:
-        _label.icon_name = icon_name
-        _label.icon_size = icon_size
-        _label.icon_color = icon_color
+    if !_label:
+        yield(self, "ready")
+
+    _label.icon_name = icon_name
+    _label.icon_size = icon_size
+    _label.icon_color = icon_color
