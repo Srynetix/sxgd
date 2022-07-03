@@ -4,6 +4,7 @@
 
 - [SxBuffer](./SxBuffer.md)
 - [SxColor](./SxColor.md)
+- [SxInput](./SxInput.md)
 - [SxJson](./SxJson.md)
 - [SxLog](./SxLog.md)
 - [SxMath](./SxMath.md)

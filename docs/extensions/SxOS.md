@@ -13,9 +13,22 @@
 
 ### `set_window_size_str`
 
-*Prototype*: `static func set_window_size_str(window_size: String)`
+*Prototype*: `static func set_window_size_str(window_size: String) -> void`
 
 > Set the window size from a WIDTHxHEIGHT string.  
 >   
 > Example:  
->   SxOS.set_window_size_str("1280x720")  
+> ```gdscript  
+> SxOS.set_window_size_str("1280x720")  
+> ```  
+### `is_mobile`
+
+*Prototype*: `static func is_mobile() -> bool`
+
+> Detect if the current system is a mobile environment.  
+>   
+> Example:  
+> ```gdscript  
+> if SxOS.is_mobile():  
+>   print("Mobile !")  
+> ```  
