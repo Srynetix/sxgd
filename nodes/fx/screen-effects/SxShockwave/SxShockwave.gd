@@ -31,7 +31,7 @@ func set_thickness(value: float) -> void:
     SxShader.set_shader_param(self, "thickness", value)
 
 func start_wave(position: Vector2) -> void:
-    wave_center = position
+    set_wave_center(position)
 
     tween.stop_all()
     tween.interpolate_property(material, "shader_param/size", 0.1, 1.25, 2)
@@ -40,7 +40,7 @@ func start_wave(position: Vector2) -> void:
     tween.start()
 
 func wave_is_running() -> bool:
-    return tween.is_active
+    return tween.is_active()
 
 func _exit_tree():
     tween.stop_all()
