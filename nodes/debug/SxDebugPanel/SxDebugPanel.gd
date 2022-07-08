@@ -11,12 +11,12 @@ enum PanelType {
 # Should the panel be visible on startup?
 export var visible_on_startup: bool = false
 
-onready var main_panel = $Panel
-onready var log_panel = $Panel/HBoxContainer/Container/SxLogPanel
-onready var debug_info = $Panel/SxDebugInfo
-onready var _visible = visible_on_startup
+onready var main_panel: Panel = $Panel
+onready var log_panel: SxLogPanel = $Panel/HBoxContainer/Container/SxLogPanel
+onready var debug_info: SxDebugInfo = $Panel/SxDebugInfo
+onready var _visible := visible_on_startup
 
-var _current_panel = PanelType.DEBUG_INFO
+var _current_panel: int = PanelType.DEBUG_INFO
 
 func _ready():
     debug_info.set_visibility(false)

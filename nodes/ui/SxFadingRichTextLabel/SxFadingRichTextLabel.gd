@@ -11,7 +11,7 @@ export var char_delay: float = 0.1
 # Fade out delay, in seconds
 export var fade_out_delay: float = 2
 # Text alignment
-export var text_alignment = Alignment.LEFT
+export(Alignment) var text_alignment := Alignment.LEFT
 
 # Text was completely shown
 signal shown()
@@ -38,9 +38,9 @@ func _ready():
 # Example:
 #   label.fade_in()
 func fade_in() -> void:
-    var chars_count = _strip_tags(_initial_text).length()
-    var total_delay = chars_count * char_delay + fade_out_delay
-    var new_bbcode = "[sxgd-fadein fadeoutdelay={fadeoutdelay} chardelay={chardelay} charscount={charscount}]{text}[/sxgd-fadein]".format({
+    var chars_count := _strip_tags(_initial_text).length()
+    var total_delay := chars_count * char_delay + fade_out_delay
+    var new_bbcode := "[sxgd-fadein fadeoutdelay={fadeoutdelay} chardelay={chardelay} charscount={charscount}]{text}[/sxgd-fadein]".format({
         "fadeoutdelay": fade_out_delay,
         "chardelay": char_delay,
         "charscount": chars_count,

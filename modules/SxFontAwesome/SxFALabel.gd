@@ -27,9 +27,9 @@ func _set_icon_color(value: Color) -> void:
     _update_color()
 
 func _update_font():
-    var fa_font = SxFAFont.create_fa_font(SxFAFont.Family.Solid, icon_size)
+    var fa_font := SxFAFont.create_fa_font(SxFAFont.Family.Solid, icon_size)
     set("custom_fonts/font", fa_font)
-    var code = SxFAFont.get_icon_code(icon_name)
+    var code := SxFAFont.get_icon_code(icon_name)
     if code != -1:
         text = char(code)
 

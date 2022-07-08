@@ -11,7 +11,7 @@ class CellRotationParams:
 
     # Create params instance from arguments
     static func from_values(transpose: bool, flip_x: bool, flip_y: bool) -> CellRotationParams:
-        var obj = CellRotationParams.new()
+        var obj := CellRotationParams.new()
         obj.transpose = transpose
         obj.flip_x = flip_x
         obj.flip_y = flip_y
@@ -20,18 +20,18 @@ class CellRotationParams:
 # Get rotation for a specific cell, in radians.
 #
 # Example:
-#   var r = SxTileMap.get_cell_rotation(tilemap, pos)
+#   var r := SxTileMap.get_cell_rotation(tilemap, pos)
 static func get_cell_rotation(tilemap: TileMap, pos: Vector2) -> float:
-    var params = get_cell_rotation_params(tilemap, pos)
+    var params := get_cell_rotation_params(tilemap, pos)
     return rotation_params_to_angle(params)
 
 # Get rotation for a specific cell, in a custom class format.
 static func get_cell_rotation_params(tilemap: TileMap, pos: Vector2) -> CellRotationParams:
-    var x = int(pos.x)
-    var y = int(pos.y)
-    var transposed = tilemap.is_cell_transposed(x, y)
-    var flip_x = tilemap.is_cell_x_flipped(x, y)
-    var flip_y = tilemap.is_cell_y_flipped(x, y)
+    var x := int(pos.x)
+    var y := int(pos.y)
+    var transposed := tilemap.is_cell_transposed(x, y)
+    var flip_x := tilemap.is_cell_x_flipped(x, y)
+    var flip_y := tilemap.is_cell_y_flipped(x, y)
 
     return CellRotationParams.from_values(transposed, flip_x, flip_y)
 

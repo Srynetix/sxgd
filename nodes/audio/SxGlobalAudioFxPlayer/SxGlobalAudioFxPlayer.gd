@@ -8,11 +8,11 @@ extends Node
 class_name SxGlobalAudioFxPlayer
 
 # Maximum simultaneous voices.
-export(int, 1, 16) var max_voices = 4
+export(int, 1, 16) var max_voices := 4
 # Audio bus output
-export(String) var audio_bus_output = "Master"
+export var audio_bus_output := "Master"
 # Audio streams to play
-export(Dictionary) var streams = {}
+export var streams := {}
 
 var player: SxAudioMultiStreamPlayer
 

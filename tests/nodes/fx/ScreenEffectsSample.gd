@@ -33,11 +33,11 @@ class FloatParamOptions:
 
 
 func _ready() -> void:
-    var viewport_size = get_viewport_rect().size
+    var viewport_size := get_viewport_rect().size
 
-    var sprite_count = 50
+    var sprite_count := 50
     for i in range(sprite_count):
-        var sprite = Sprite.new()
+        var sprite := Sprite.new()
         sprite.texture = texture
         sprite.scale = Vector2(rand_range(0.5, 2), rand_range(0.5, 2))
         sprite.position = Vector2(rand_range(0, viewport_size.x), rand_range(0, viewport_size.y))
@@ -56,14 +56,14 @@ func _ready() -> void:
     _on_item_selected(0)
 
 func _process(delta: float) -> void:
-    var viewport_size = get_viewport_rect().size
+    var viewport_size := get_viewport_rect().size
 
     for spr in _sprites:
         var sprite: Sprite = spr
-        var position = sprite.position
-        var rotation = sprite.rotation_degrees
-        var texture_size = sprite.texture.get_size()
-        var total_size = sprite.scale * texture_size
+        var position := sprite.position
+        var rotation := sprite.rotation_degrees
+        var texture_size := sprite.texture.get_size()
+        var total_size := sprite.scale * texture_size
 
         position.x -= sprite.scale.x * 100 * delta
         rotation += sprite.scale.y * 10 * delta
@@ -79,8 +79,8 @@ func _process(delta: float) -> void:
         sprite.rotation_degrees = rotation
         sprite.position = position
 
-    var selected_idx = effect_selection.selected
-    var selected_effect = effect_selection.get_item_text(selected_idx)
+    var selected_idx := effect_selection.selected
+    var selected_effect := effect_selection.get_item_text(selected_idx)
     _update_params(selected_effect)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -117,9 +117,9 @@ func _build_params(effect: String) -> void:
         _pr_float(shockwave, "thickness", FloatParamOptions.new().with_max_value(1))
         _pr_vector2(shockwave, "wave_center")
 
-        var hbox = HBoxContainer.new()
+        var hbox := HBoxContainer.new()
         hbox.size_flags_horizontal = SIZE_EXPAND_FILL
-        var btn = Button.new()
+        var btn := Button.new()
         btn.text = "Animate"
         btn.size_flags_horizontal = SIZE_EXPAND_FILL
         btn.connect("pressed", self, "_animate_shockwave")
@@ -141,7 +141,7 @@ func _update_params(effect: String) -> void:
         params.get_node("VignetteSize/Value").value = vignette.vignette_size
 
     elif effect == "Shockwave":
-        var center = shockwave.wave_center
+        var center := shockwave.wave_center
         params.get_node("WaveCenter/VBox/X").value = center.x
         params.get_node("WaveCenter/VBox/Y").value = center.y
         params.get_node("Force/Value").value = shockwave.force
@@ -159,12 +159,12 @@ func _set_effect_visibility(value: bool, obj: Control) -> void:
     obj.visible = value
 
 func _pr_visible(control: Control) -> void:
-    var visible_hbox = HBoxContainer.new()
+    var visible_hbox := HBoxContainer.new()
     visible_hbox.size_flags_horizontal = SIZE_EXPAND_FILL
-    var visible_label = Label.new()
+    var visible_label := Label.new()
     visible_label.text = "Visible"
     visible_label.rect_min_size = Vector2(40, 0)
-    var visible_checkbox = CheckBox.new()
+    var visible_checkbox := CheckBox.new()
     visible_checkbox.size_flags_horizontal = SIZE_EXPAND_FILL
     visible_checkbox.pressed = control.visible
 
@@ -177,16 +177,16 @@ func _pr_float(control: Control, name: String, opts: FloatParamOptions = null) -
     if opts == null:
         opts = FloatParamOptions.new()
 
-    var cap_name = SxText.to_pascal_case(name)
+    var cap_name := SxText.to_pascal_case(name)
     var current: float = control.get(name)
-    var hbox = HBoxContainer.new()
+    var hbox := HBoxContainer.new()
     hbox.name = cap_name
     hbox.size_flags_horizontal = SIZE_EXPAND_FILL
-    var label_obj = Label.new()
+    var label_obj := Label.new()
     label_obj.name = "Label"
     label_obj.text = cap_name
     label_obj.rect_min_size = Vector2(opts.min_size_x, 0)
-    var input = SpinBox.new()
+    var input := SpinBox.new()
     input.name = "Value"
     input.size_flags_horizontal = SIZE_EXPAND_FILL
     input.step = opts.step
@@ -200,25 +200,25 @@ func _pr_float(control: Control, name: String, opts: FloatParamOptions = null) -
     params.add_child(hbox)
 
 func _pr_vector2(control: Control, name: String, step: float = 0.01, min_size_x: float = 50) -> void:
-    var cap_name = SxText.to_pascal_case(name)
+    var cap_name := SxText.to_pascal_case(name)
     var current: Vector2 = control.get(name)
-    var hbox = HBoxContainer.new()
+    var hbox := HBoxContainer.new()
     hbox.name = cap_name
     hbox.size_flags_horizontal = SIZE_EXPAND_FILL
-    var label_obj = Label.new()
+    var label_obj := Label.new()
     label_obj.name = "Label"
     label_obj.text = cap_name
     label_obj.rect_min_size = Vector2(min_size_x, 0)
-    var vbox = VBoxContainer.new()
+    var vbox := VBoxContainer.new()
     vbox.name = "VBox"
     vbox.size_flags_horizontal = SIZE_EXPAND_FILL
-    var input_x = SpinBox.new()
+    var input_x := SpinBox.new()
     input_x.name = "X"
     input_x.size_flags_horizontal = SIZE_EXPAND_FILL
     input_x.max_value = 9999
     input_x.step = step
     input_x.value = current.x
-    var input_y = SpinBox.new()
+    var input_y := SpinBox.new()
     input_y.name = "Y"
     input_y.size_flags_horizontal = SIZE_EXPAND_FILL
     input_y.max_value = 9999
@@ -246,7 +246,7 @@ func _on_value_changed(value: float, obj: Control, name: String) -> void:
 
 func _on_value_changed_vector2(value: float, coord: String, obj: Control, name: String) -> void:
     var current: Vector2 = obj.get(name)
-    var param_name = name
+    var param_name := name
 
     if coord == "x":
         _update_shader(obj, param_name, Vector2(value, current.y))
@@ -254,9 +254,9 @@ func _on_value_changed_vector2(value: float, coord: String, obj: Control, name: 
         _update_shader(obj, param_name, Vector2(current.x, value))
 
 func _on_touch_position_update() -> void:
-    var viewport_size = get_viewport_rect().size
-    var selected_idx = effect_selection.selected
-    var effect_name = effect_selection.get_item_text(selected_idx)
+    var viewport_size := get_viewport_rect().size
+    var selected_idx := effect_selection.selected
+    var effect_name := effect_selection.get_item_text(selected_idx)
 
     if effect_name == "Shockwave":
         var x: SpinBox = params.get_node("WaveCenter/VBox/X")
@@ -265,5 +265,5 @@ func _on_touch_position_update() -> void:
         y.value = 1 - _last_touched_position.y / viewport_size.y
 
 func _on_item_selected(index: int) -> void:
-    var effect = effect_selection.get_item_text(index)
+    var effect := effect_selection.get_item_text(index)
     _build_params(effect)

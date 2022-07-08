@@ -4,7 +4,7 @@ extends Node
 class_name SxLoadCache
 
 var _cache := Dictionary()
-var _logger = SxLog.get_logger("SxLoadCache")
+var _logger := SxLog.get_logger("SxLoadCache")
 
 func _init():
     load_resources()
@@ -19,7 +19,7 @@ func load_resources():
 # Store a scene in the cache from its path.
 #
 # Example:
-#   var cache = SxLoadCache.new()
+#   var cache := SxLoadCache.new()
 #   cache.store_scene("MyScene", "res://my_scene.tscn")
 func store_scene(scene_name: String, scene_path: String) -> void:
     var scene: PackedScene = load(scene_path)
@@ -29,7 +29,7 @@ func store_scene(scene_name: String, scene_path: String) -> void:
 # Store a resource in the cache from its path.
 #
 # Example:
-#   var cache = SxLoadCache.new()
+#   var cache := SxLoadCache.new()
 #   cache.store_resource("MyResource", "res://my_resource.tscn")
 func store_resource(resource_name: String, resource_path: String) -> void:
     var resource: Resource = load(resource_path)
@@ -39,24 +39,24 @@ func store_resource(resource_name: String, resource_path: String) -> void:
 # Test if the cache has a scene registered.
 #
 # Example:
-#   var cache = SxLoadCache.new()
-#   var v = cache.has_scene("MyScene")
+#   var cache := SxLoadCache.new()
+#   var v := cache.has_scene("MyScene")
 func has_scene(scene_name: String) -> bool:
     return _cache.has(scene_name)
 
 # Test if the cache has a resource registered.
 #
 # Example:
-#   var cache = SxLoadCache.new()
-#   var v = cache.has_resource("MyResource")
+#   var cache := SxLoadCache.new()
+#   var v := cache.has_resource("MyResource")
 func has_resource(resource_name: String) -> bool:
     return _cache.has(resource_name)
 
 # Load a stored scene.
 #
 # Example:
-#   var cache = SxLoadCache.new()
-#   var scene = cache.load_scene("MyScene")
+#   var cache := SxLoadCache.new()
+#   var scene := cache.load_scene("MyScene")
 func load_scene(scene_name: String) -> PackedScene:
     assert(has_scene(scene_name), "Scene should be present in cache")
     _logger.trace("Loading scene '%s'." % scene_name)
@@ -65,8 +65,8 @@ func load_scene(scene_name: String) -> PackedScene:
 # Load a stored resource.
 #
 # Example:
-#   var cache = SxLoadCache.new()
-#   var resource = cache.load_resource("MyResource")
+#   var cache := SxLoadCache.new()
+#   var resource := cache.load_resource("MyResource")
 func load_resource(resource_name: String) -> Resource:
     assert(has_resource(resource_name), "Resource should be present in cache")
     _logger.trace("Loading resource '%s'." % resource_name)
@@ -75,9 +75,9 @@ func load_resource(resource_name: String) -> Resource:
 # Instantiate a scene.
 #
 # Example:
-#   var cache = SxLoadCache.new()
+#   var cache := SxLoadCache.new()
 #   var instance: MyScene = cache.instantiate_scene("MyScene")
-func instantiate_scene(scene_name: String) -> Object:
-    var scene = load_scene(scene_name)
+func instantiate_scene(scene_name: String) -> Node:
+    var scene := load_scene(scene_name)
     _logger.trace("Instantiating scene '%s'." % scene_name)
     return scene.instance()

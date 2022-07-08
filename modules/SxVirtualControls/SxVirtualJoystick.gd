@@ -27,9 +27,9 @@ export var dead_zone := 0.3
 
 onready var _head: TextureRect = $Head
 
-onready var _initial_head_position = _head.rect_position
+onready var _initial_head_position := _head.rect_position
 var _joystick_touch_index := -1
-var _action_mapping = {}
+var _action_mapping := {}
 
 func _ready():
     modulate = SxColor.with_alpha_f(Color.white, INITIAL_OPACITY)
@@ -53,11 +53,11 @@ func _input(event: InputEvent):
 
     elif event is InputEventScreenDrag:
         var drag_event: InputEventScreenDrag = event
-        var base_rect_drag = get_global_rect().grow(2)
+        var base_rect_drag := get_global_rect().grow(2)
         if _joystick_touch_index != -1:  # && base_rect_drag.has_point(drag_event.position):
-            var base_position = rect_global_position + rect_size / 2
-            var mouse_base_vec = (drag_event.position - base_position).clamped(base_rect_drag.size.length() / 2)
-            var force = mouse_base_vec / (rect_size / 2)
+            var base_position := rect_global_position + rect_size / 2
+            var mouse_base_vec := (drag_event.position - base_position).clamped(base_rect_drag.size.length() / 2)
+            var force := mouse_base_vec / (rect_size / 2)
 
             # Move head
             _head.rect_position = (rect_size / 2 - _head.rect_size / 2) + (force * rect_size / 2)
@@ -105,7 +105,7 @@ func _move(force: Vector2) -> void:
     emit_signal("changed", force)
 
 func _send_joystick_event(axis: int, value: float) -> void:
-    var action_value = _action_mapping[axis]
+    var action_value: String = _action_mapping[axis]
     if action_value != "":
         if value > 0:
             Input.action_press(action_value, value)

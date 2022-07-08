@@ -4,8 +4,8 @@ class_name SxShader
 # Get a shader param from a canvas item.
 # Handles edge cases like missing material or non-shader material.
 static func get_shader_param(item: CanvasItem, name: String):
-    var logger = SxLog.get_logger("SxShader")
-    var material = item.material
+    var logger := SxLog.get_logger("SxShader")
+    var material := item.material
 
     if material == null:
         logger.error("CanvasItem %s has no material" % item)
@@ -20,8 +20,8 @@ static func get_shader_param(item: CanvasItem, name: String):
 # Set a shader param from a canvas item.
 # Handles edge cases like missing material or non-shader material.
 static func set_shader_param(item: CanvasItem, name: String, value) -> void:
-    var logger = SxLog.get_logger("SxShader")
-    var material = item.material
+    var logger := SxLog.get_logger("SxShader")
+    var material := item.material
 
     if material == null:
         logger.error("CanvasItem %s has no material" % item)

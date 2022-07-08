@@ -35,8 +35,8 @@ func fade_out(duration: float = 0.5) -> void:
 #
 # Example:
 #   player.play_stream(my_stream)
-func play_stream(stream: AudioStream) -> void:
-    self.stream = stream
+func play_stream(stream_: AudioStream) -> void:
+    stream = stream_
     play()
 
 func _set_global_volume_db(value: float):

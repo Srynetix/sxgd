@@ -17,17 +17,17 @@ func _process(delta) -> void:
     _update_shake()
 
 func _update_shake() -> void:
-    var coef = rand_range(-1, 1) * max_shake_strength * shake_ratio
+    var coef := rand_range(-1, 1) * max_shake_strength * shake_ratio
     offset = Vector2(coef, coef)
 
 # Tween to a specific position
 #
 # Example:
 #   camera.tween_to_position(Vector2(100, 100))
-func tween_to_position(position: Vector2, speed: float = 0.5, zoom: float = 1, easing: int = Tween.TRANS_QUAD) -> void:
+func tween_to_position(position: Vector2, speed: float = 0.5, zoom_: float = 1, easing: int = Tween.TRANS_QUAD) -> void:
     tween.stop_all()
     tween.interpolate_property(self, "global_position", global_position, position, speed, easing, Tween.EASE_IN_OUT)
-    tween.interpolate_property(self, "zoom", self.zoom, Vector2.ONE * zoom, speed, easing, Tween.EASE_IN_OUT)
+    tween.interpolate_property(self, "zoom", zoom, Vector2.ONE * zoom, speed, easing, Tween.EASE_IN_OUT)
     tween.start()
 
     yield(tween, "tween_all_completed")
@@ -37,12 +37,12 @@ func tween_to_position(position: Vector2, speed: float = 0.5, zoom: float = 1, e
 # Example:
 #   camera.viewport_scroll(Vector2(0, 0), Direction.RIGHT)
 func viewport_scroll(top_left: Vector2, direction: int, speed: float = 0.65, easing: int = Tween.TRANS_QUAD) -> void:
-    var vp_size = get_viewport_rect().size
+    var vp_size := get_viewport_rect().size
     tween.stop_all()
 
     reset_limits()
-    var start_position = top_left + vp_size / 2
-    var end_position = _add_viewport_size_to_position(top_left, direction)
+    var start_position := top_left + vp_size / 2
+    var end_position := _add_viewport_size_to_position(top_left, direction)
     global_position = start_position
 
     tween.interpolate_property(self, "global_position", start_position, end_position, speed, easing, Tween.EASE_IN_OUT)
@@ -64,7 +64,7 @@ func reset_limits():
     smoothing_enabled = false
 
 func _add_viewport_size_to_position(top_left: Vector2, direction: int) -> Vector2:
-    var vp_size = get_viewport_rect().size
+    var vp_size := get_viewport_rect().size
 
     if direction == Direction.LEFT:
         return top_left + Vector2(-vp_size.x / 2, vp_size.y / 2)

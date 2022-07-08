@@ -6,7 +6,7 @@ class_name SxLog
 enum LogLevel { TRACE, DEBUG, INFO, WARN, ERROR, CRITICAL }
 
 class _LogData:
-    const _static_data = {"messages": [], "cursor": 0}
+    const _static_data := {"messages": [], "cursor": 0}
 
     static func get_messages() -> Array:
         return _static_data["messages"]
@@ -15,7 +15,7 @@ class _LogData:
         _static_data["messages"].append(message)
 
     static func pop_messages() -> Array:
-        var messages = _static_data["messages"]
+        var messages: Array = _static_data["messages"]
         _static_data["messages"] = []
         return messages
 
@@ -63,8 +63,8 @@ class LogMessage:
     var message: String
     var peer_id: int
 
-    static func new_message(time: float, level: int, name: String, message: String, peer_id: int = -1):
-        var msg = LogMessage.new()
+    static func new_message(time: float, level: int, name: String, message: String, peer_id: int = -1) -> LogMessage:
+        var msg := LogMessage.new()
         msg.time = time
         msg.level = level
         msg.logger_name = name
@@ -126,13 +126,13 @@ class Logger:
             printerr(line)
 
     func _format_args(message: String, args: Array = []) -> String:
-        var output = message
+        var output := message
         for a in args:
             output += " " + str(a)
         return output
 
     func _format_log(time: float, level: int, message: String, args: Array = []) -> String:
-        var level_str = Utils.level_to_string(level).to_upper()
+        var level_str := Utils.level_to_string(level).to_upper()
         return "[{time}] [{level_str}] [{name}] {args}".format({
             "time": "%0.3f" % time,
             "level_str": level_str,
@@ -147,31 +147,31 @@ class Logger:
         if !_is_level_shown(level):
             return
 
-        var time = _get_elapsed_time()
+        var time := _get_elapsed_time()
         _show_log_line(level, _format_log(time, level, message, args))
 
-        var log_message = LogMessage.new_message(
+        var log_message := LogMessage.new_message(
             time, level, name, _format_args(message, args)
         )
         _LogData.add_message(log_message)
 
-const _static_data = {
+const _static_data := {
     "loggers": {},
 }
 
-const SHOW_IN_CONSOLE = true
-const DEFAULT_LOG_LEVEL = LogLevel.INFO
+const SHOW_IN_CONSOLE := true
+const DEFAULT_LOG_LEVEL := LogLevel.INFO
 
 # Get logger from name.
 #
 # Example:
-#   var logger = SxLog.get_logger("my_logger")
+#   var logger := SxLog.get_logger("my_logger")
 static func get_logger(name: String) -> Logger:
-    var loggers = _static_data["loggers"]
+    var loggers: Dictionary = _static_data["loggers"]
     if loggers.has(name):
         return _static_data["loggers"][name]
     else:
-        var logger = Logger.new(name, DEFAULT_LOG_LEVEL, SHOW_IN_CONSOLE)
+        var logger := Logger.new(name, DEFAULT_LOG_LEVEL, SHOW_IN_CONSOLE)
         _static_data["loggers"][name] = logger
         return logger
 
@@ -186,10 +186,10 @@ static func pop_messages() -> Array:
 # Example:
 #   SxLog.configure_log_levels("info,my_logger=debug")
 static func configure_log_levels(conf: String) -> void:
-    var all_split = conf.split(",")
+    var all_split := conf.split(",")
     for log_conf in all_split:
-        var split = log_conf.split("=")
-        var len_split = len(split)
+        var split: Array = log_conf.split("=")
+        var len_split := len(split)
         if len_split == 0:
             continue
         elif len_split == 1:
@@ -202,35 +202,35 @@ static func configure_log_levels(conf: String) -> void:
 # Example:
 #   SxLog.set_max_log_level("my_logger", LogLevel.WARN)
 static func set_max_log_level(name: String, level: int) -> void:
-    var logger = get_logger(name)
+    var logger := get_logger(name)
     logger.set_max_log_level(level)
 
 # Show a trace message on the root logger
 static func trace(message: String, args: Array = []) -> void:
-    var root_logger = get_logger("root")
+    var root_logger := get_logger("root")
     root_logger.trace(message, args)
 
 # Show a debug message on the root logger
 static func debug(message: String, args: Array = []) -> void:
-    var root_logger = get_logger("root")
+    var root_logger := get_logger("root")
     root_logger.debug(message, args)
 
 # Show an info message on the root logger
 static func info(message: String, args: Array = []) -> void:
-    var root_logger = get_logger("root")
+    var root_logger := get_logger("root")
     root_logger.info(message, args)
 
 # Show a warn message on the root logger
 static func warn(message: String, args: Array = []) -> void:
-    var root_logger = get_logger("root")
+    var root_logger := get_logger("root")
     root_logger.warn(message, args)
 
 # Show an error message on the root logger
 static func error(message: String, args: Array = []) -> void:
-    var root_logger = get_logger("root")
+    var root_logger := get_logger("root")
     root_logger.error(message, args)
 
 # Show a critical message on the root logger
 static func critical(message: String, args: Array = []) -> void:
-    var root_logger = get_logger("root")
+    var root_logger := get_logger("root")
     root_logger.critical(message, args)

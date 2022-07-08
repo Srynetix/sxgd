@@ -19,11 +19,11 @@ func set_visibility(value: bool) -> void:
 
 func _process(delta):
     if _label.visible:
-        var version = Engine.get_version_info()
-        var mem_used_bytes = Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED)
-        var mem_used_megs = mem_used_bytes / 1000000.0
+        var version := Engine.get_version_info()
+        var mem_used_bytes := Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED)
+        var mem_used_megs := mem_used_bytes / 1000000.0
 
-        var text = ""
+        var text := ""
         text += " Godot Engine %s\n" % version["string"]
         text += " FPS: %s\n" % Engine.get_frames_per_second()
         text += " Process time: %s ms\n" % (Performance.get_monitor(Performance.TIME_PROCESS) * 1000)

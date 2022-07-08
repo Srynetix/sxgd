@@ -4,7 +4,7 @@ class_name SxGameData
 
 var _data := Dictionary()
 var _static_data := Dictionary()
-var _logger = SxLog.get_logger("SxGameData")
+var _logger := SxLog.get_logger("SxGameData")
 
 # Store static value in game data.
 # Static data is not persisted to disk.
@@ -60,8 +60,8 @@ func load_value(name: String, orDefault = null, category: String = "default"):
 # Starts from 0 if key does not exist.
 #
 # Example:
-#   var value = data.increment("key")
-#   var value = data.increment("key", "my_category")
+#   var value := data.increment("key")
+#   var value := data.increment("key", "my_category")
 func increment(name: String, category: String = "default") -> int:
     var num = load_value(name, 0, category) + 1
     store_value(name, num, category)
@@ -71,8 +71,8 @@ func increment(name: String, category: String = "default") -> int:
 # Starts from 0 if key does not exist.
 #
 # Example:
-#   var value = data.decrement("key")
-#   var value = data.decrement("key", "my_category")
+#   var value := data.decrement("key")
+#   var value := data.decrement("key", "my_category")
 func decrement(name: String, category: String = "default") -> int:
     var num = load_value(name, 0, category) - 1
     store_value(name, num, category)
@@ -85,7 +85,7 @@ func decrement(name: String, category: String = "default") -> int:
 #   data.remove("key")
 #   data.remove("key", "my_category")
 func remove(name: String, category: String = "default") -> bool:
-    var found = _remove_value(_data, name, category)
+    var found := _remove_value(_data, name, category)
     if found:
         _logger.debug("Key '%s' removed. [category: %s]" % [name, category])
     else:
@@ -95,8 +95,8 @@ func remove(name: String, category: String = "default") -> bool:
 # Test if game data has a key.
 #
 # Example:
-#   var exists = data.has_value("key")
-#   var exists = data.has_value("key", "my_category")
+#   var exists := data.has_value("key")
+#   var exists := data.has_value("key", "my_category")
 func has_value(name: String, category: String = "default") -> bool:
     return _has_value(_data, name, category)
 
@@ -105,8 +105,8 @@ func has_value(name: String, category: String = "default") -> bool:
 # Example:
 #   data.persist_to_disk("user://my_path.dat")
 func persist_to_disk(path: String = "user://save.dat") -> void:
-    var f = File.new()
-    var error = f.open(path, File.WRITE)
+    var f := File.new()
+    var error := f.open(path, File.WRITE)
     if error == OK:
         f.store_line(JSON.print(_data))
         f.close()
@@ -119,8 +119,8 @@ func persist_to_disk(path: String = "user://save.dat") -> void:
 # Example:
 #   data.load_from_disk("user://my_path.dat")
 func load_from_disk(path: String = "user://save.dat") -> void:
-    var f = File.new()
-    var error = f.open(path, File.READ)
+    var f := File.new()
+    var error := f.open(path, File.READ)
     if error == OK:
         _data = JSON.parse(f.get_as_text()).result
         _logger.debug("Game data loaded from path '%s'" % path)
@@ -140,7 +140,7 @@ func clear_category(category: String) -> void:
 
 # Dump each variable from a specific category.
 func dump_category(category: String) -> String:
-    var cat = _get_or_create_category(_data, category)
+    var cat := _get_or_create_category(_data, category)
     return JSON.print(cat, "", true)
 
 # Dump all variables.
@@ -152,11 +152,11 @@ func _clear_category(d: Dictionary, category: String) -> void:
         d[category].clear()
 
 func _set_value(d: Dictionary, key: String, category: String, value) -> void:
-    var cat = _get_or_create_category(d, category)
+    var cat := _get_or_create_category(d, category)
     cat[key] = value
 
 func _get_value(d: Dictionary, key: String, category: String, orDefault = null):
-    var cat = _get_or_create_category(d, category)
+    var cat := _get_or_create_category(d, category)
     if !cat.has(key):
         return orDefault
     return cat[key]
@@ -167,9 +167,9 @@ func _get_or_create_category(d: Dictionary, category: String) -> Dictionary:
     return d[category]
 
 func _has_value(d: Dictionary, key: String, category: String) -> bool:
-    var cat = _get_or_create_category(d, category)
+    var cat := _get_or_create_category(d, category)
     return cat.has(key)
 
 func _remove_value(d: Dictionary, key: String, category: String) -> bool:
-    var cat = _get_or_create_category(d, category)
+    var cat := _get_or_create_category(d, category)
     return cat.erase(key)

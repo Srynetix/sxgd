@@ -12,16 +12,16 @@ class_name SxInput
 #
 # Example:
 # ```gdscript
-# var movement = SxInput.get_joystick_movement("aim")
+# var movement := SxInput.get_joystick_movement("aim")
 # ```
 static func get_joystick_movement(action_name: String) -> Vector2:
-    var directions = ["left", "right", "up", "down"]
-    var forces = [0, 0, 0, 0]
+    var directions := ["left", "right", "up", "down"]
+    var forces := [0, 0, 0, 0]
     for i in range(len(directions)):
-        var dir = directions[i]
+        var dir: String = directions[i]
         forces[i] = Input.get_action_strength("%s_%s" % [action_name, dir])
 
-    var movement = Vector2()
+    var movement := Vector2()
     movement.x -= forces[0]
     movement.x += forces[1]
     movement.y -= forces[2]

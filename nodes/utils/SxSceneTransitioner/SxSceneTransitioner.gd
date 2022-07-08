@@ -37,7 +37,7 @@ func fade_to_scene_path(scene_path: String) -> void:
 #   SxSceneTransitioner.fade_to_cached_scene(cache, "MyScene")
 func fade_to_cached_scene(cache: SxLoadCache, scene_name: String) -> void:
     animation_player.play("fade_out")
-    var scene = cache.load_scene(scene_name)
+    var scene := cache.load_scene(scene_name)
     yield(animation_player, "animation_finished")
 
     get_tree().change_scene_to(scene)

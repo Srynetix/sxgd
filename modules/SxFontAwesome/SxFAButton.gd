@@ -10,7 +10,7 @@ export var icon_size: int = 24 setget _set_icon_size
 # Icon color
 export var icon_color: Color = Color.white setget _set_icon_color
 
-onready var _label = $SxFALabel
+onready var _label: SxFALabel = $SxFALabel
 
 func _ready():
     _update_label()

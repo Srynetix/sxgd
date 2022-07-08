@@ -5,8 +5,8 @@ class_name SxText
 # Example:
 #   SxText.to_camel_case("hello_world")  # => "helloWorld"
 static func to_camel_case(s: String) -> String:
-    var should_upper = false
-    var output = ""
+    var should_upper := false
+    var output := ""
     for c in s:
         if c == "_":
             should_upper = true
@@ -22,8 +22,8 @@ static func to_camel_case(s: String) -> String:
 # Example:
 #   SxText.to_pascal_case("hello_world")  # => "HelloWorld"
 static func to_pascal_case(s: String) -> String:
-    var should_upper = true
-    var output = ""
+    var should_upper := true
+    var output := ""
     for c in s:
         if c == "_":
             should_upper = true

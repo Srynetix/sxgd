@@ -4,16 +4,16 @@ extends Node
 class_name SxAudioMultiStreamPlayer
 
 # Maximum simultaneous voices.
-export(int, 1, 16) var max_voices = 4
+export(int, 1, 16) var max_voices := 4
 # Audio bus output
-export(String) var audio_bus_output = "Master"
+export var audio_bus_output := "Master"
 
 var _players := Array()
 
 # Get a voice by index.
 #
 # Example:
-#   var first_voice = player.get_voice(0)
+#   var first_voice := player.get_voice(0)
 func get_voice(voice: int) -> AudioStreamPlayer:
     return _players[voice]
 
@@ -22,7 +22,7 @@ func get_voice(voice: int) -> AudioStreamPlayer:
 # Example:
 #   player.play(my_stream)
 func play(stream: AudioStream) -> void:
-    var available = _find_available_player()
+    var available := _find_available_player()
     if available != null:
         play_on_player(stream, available)
     else:
@@ -55,11 +55,11 @@ func _find_available_player() -> AudioStreamPlayer:
 
 func _find_oldest_active_player() -> AudioStreamPlayer:
     var oldest_player: AudioStreamPlayer = _players[0]
-    var playback_pos = oldest_player.get_playback_position()
+    var playback_pos := oldest_player.get_playback_position()
 
     for i in range(1, max_voices):
         var player: AudioStreamPlayer = _players[i]
-        var pos = player.get_playback_position()
+        var pos := player.get_playback_position()
         if pos > playback_pos:
             playback_pos = pos
             oldest_player = player
@@ -68,7 +68,7 @@ func _find_oldest_active_player() -> AudioStreamPlayer:
 
 func _ready() -> void:
     for i in range(max_voices):
-        var player = AudioStreamPlayer.new()
+        var player := AudioStreamPlayer.new()
         add_child(player)
 
         player.bus = audio_bus_output
