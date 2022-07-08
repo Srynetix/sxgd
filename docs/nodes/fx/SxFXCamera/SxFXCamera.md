@@ -28,7 +28,7 @@
 
 ### `tween_to_position`
 
-*Prototype*: `func tween_to_position(position: Vector2, speed: float = 0.5, zoom: float = 1, easing: int = Tween.TRANS_QUAD) -> void`
+*Prototype*: `func tween_to_position(position: Vector2, speed: float = 0.5, zoom_: float = 1, easing: int = Tween.TRANS_QUAD) -> void`
 
 > Tween to a specific position  
 >   

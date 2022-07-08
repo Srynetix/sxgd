@@ -17,7 +17,7 @@
 > Get rotation for a specific cell, in radians.  
 >   
 > Example:  
->   var r = SxTileMap.get_cell_rotation(tilemap, pos)  
+>   var r := SxTileMap.get_cell_rotation(tilemap, pos)  
 ### `get_cell_rotation_params`
 
 *Prototype*: `static func get_cell_rotation_params(tilemap: TileMap, pos: Vector2) -> CellRotationParams`

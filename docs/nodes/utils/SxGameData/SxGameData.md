@@ -59,8 +59,8 @@
 > Starts from 0 if key does not exist.  
 >   
 > Example:  
->   var value = data.increment("key")  
->   var value = data.increment("key", "my_category")  
+>   var value := data.increment("key")  
+>   var value := data.increment("key", "my_category")  
 ### `decrement`
 
 *Prototype*: `func decrement(name: String, category: String = "default") -> int`
@@ -69,8 +69,8 @@
 > Starts from 0 if key does not exist.  
 >   
 > Example:  
->   var value = data.decrement("key")  
->   var value = data.decrement("key", "my_category")  
+>   var value := data.decrement("key")  
+>   var value := data.decrement("key", "my_category")  
 ### `remove`
 
 *Prototype*: `func remove(name: String, category: String = "default") -> bool`
@@ -88,8 +88,8 @@
 > Test if game data has a key.  
 >   
 > Example:  
->   var exists = data.has_value("key")  
->   var exists = data.has_value("key", "my_category")  
+>   var exists := data.has_value("key")  
+>   var exists := data.has_value("key", "my_category")  
 ### `persist_to_disk`
 
 *Prototype*: `func persist_to_disk(path: String = "user://save.dat") -> void`

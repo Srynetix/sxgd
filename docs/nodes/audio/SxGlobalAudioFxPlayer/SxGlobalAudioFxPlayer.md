@@ -17,17 +17,17 @@
 
 ### `max_voices`
 
-*Code*: `export(int, 1, 16) var max_voices = 4`
+*Code*: `export(int, 1, 16) var max_voices := 4`
 
 > Maximum simultaneous voices.  
 ### `audio_bus_output`
 
-*Code*: `export(String) var audio_bus_output = "Master"`
+*Code*: `export var audio_bus_output := "Master"`
 
 > Audio bus output  
 ### `streams`
 
-*Code*: `export(Dictionary) var streams = {}`
+*Code*: `export var streams := {}`
 
 > Audio streams to play  
 ## Public variables

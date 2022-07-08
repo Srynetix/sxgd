@@ -25,5 +25,5 @@
 >   
 > Example:  
 > ```gdscript  
-> var movement = SxInput.get_joystick_movement("aim")  
+> var movement := SxInput.get_joystick_movement("aim")  
 > ```  

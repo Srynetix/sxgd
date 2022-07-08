@@ -12,15 +12,15 @@
 
 ### `read_json_file`
 
-*Prototype*: `static func read_json_file(path: String) -> Dictionary`
+*Prototype*: `static func read_json_file(path: String)`
 
 > Read JSON file at path `path`.  
 ### `read_json_from_open_file`
 
-*Prototype*: `static func read_json_from_open_file(file: File) -> Dictionary`
+*Prototype*: `static func read_json_from_open_file(file: File)`
 
 ### `write_json_file`
 
-*Prototype*: `static func write_json_file(json: Dictionary, path: String)`
+*Prototype*: `static func write_json_file(json, path: String)`
 
 > Write JSON to path `path`.  

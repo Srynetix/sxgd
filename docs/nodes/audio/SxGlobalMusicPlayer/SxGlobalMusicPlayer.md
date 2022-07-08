@@ -41,7 +41,7 @@
 >   player.fade_out(2.0)  
 ### `play_stream`
 
-*Prototype*: `func play_stream(stream: AudioStream) -> void`
+*Prototype*: `func play_stream(stream_: AudioStream) -> void`
 
 > Plays an audio stream.  
 >   

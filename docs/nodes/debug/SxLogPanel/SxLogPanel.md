@@ -6,6 +6,7 @@
 |----|-----|
 |*Source*|[SxLogPanel.gd](../../../../nodes/debug/SxLogPanel/SxLogPanel.gd)|
 |*Inherits from*|`MarginContainer`|
+|*Globally exported as*|`SxLogPanel`|
 
 > Log panel, display scrollable logs.  
 ## Exports
@@ -19,7 +20,7 @@
 
 ### `last_message`
 
-*Code*: `var last_message = null`
+*Code*: `var last_message: SxLog.LogMessage = null`
 
 ### `template`
 

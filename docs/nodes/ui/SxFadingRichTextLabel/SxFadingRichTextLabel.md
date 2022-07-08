@@ -41,7 +41,7 @@
 > Fade out delay, in seconds  
 ### `text_alignment`
 
-*Code*: `export var text_alignment = Alignment.LEFT`
+*Code*: `export(Alignment) var text_alignment := Alignment.LEFT`
 
 > Text alignment  
 ## Methods

@@ -25,7 +25,7 @@
 > Get logger from name.  
 >   
 > Example:  
->   var logger = SxLog.get_logger("my_logger")  
+>   var logger := SxLog.get_logger("my_logger")  
 ### `get_messages`
 
 *Prototype*: `static func get_messages() -> Array`
@@ -149,7 +149,7 @@
 
 #### `new_message`
 
-*Prototype*: `static func new_message(time: float, level: int, name: String, message: String, peer_id: int = -1)`
+*Prototype*: `static func new_message(time: float, level: int, name: String, message: String, peer_id: int = -1) -> LogMessage`
 
 ## Logger
 
