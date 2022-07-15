@@ -31,6 +31,26 @@
 > Example:  
 >   var levels = data.load_static_value("levels", Dictionary())  
 >   var levels = data.load_static_value("my_data", Dictionary(), "my_category")  
+### `store_temporary_value`
+
+*Prototype*: `func store_temporary_value(name: String, value, category: String = "default") -> void`
+
+> Store temporary value in game data.  
+> Temporary data is not persisted to disk.  
+>   
+> Example:  
+>   data.store_temporary_value("foo", "bar")  
+>   data.store_temporary_value("foo", "bar", "my_category")  
+### `load_temporary_value`
+
+*Prototype*: `func load_temporary_value(name: String, orDefault = null, category: String = "default")`
+
+> Load temporary value from game data.  
+> Temporary data is not persisted to disk.  
+>   
+> Example:  
+>   var levels = data.load_temporary_value("foo", "bar")  
+>   var levels = data.load_temporary_value("foo", "bar", "my_category")  
 ### `store_value`
 
 *Prototype*: `func store_value(name: String, value, category: String = "default") -> void`

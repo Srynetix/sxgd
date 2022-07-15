@@ -4,6 +4,7 @@ class_name SxGameData
 
 var _data := Dictionary()
 var _static_data := Dictionary()
+var _temporary_data := Dictionary()
 var _logger := SxLog.get_logger("SxGameData")
 
 # Store static value in game data.
@@ -29,6 +30,31 @@ func load_static_value(name: String, orDefault = null, category: String = "defau
         return value
 
     _logger.debug("Static key '%s' missing [category: %s], loading default '%s'." % [name, category, orDefault])
+    return orDefault
+
+# Store temporary value in game data.
+# Temporary data is not persisted to disk.
+#
+# Example:
+#   data.store_temporary_value("foo", "bar")
+#   data.store_temporary_value("foo", "bar", "my_category")
+func store_temporary_value(name: String, value, category: String = "default") -> void:
+    _logger.debug("Storing temporary value '%s' in key '%s' [category: %s]." % [value, name, category])
+    _set_value(_temporary_data, name, category, value)
+
+# Load temporary value from game data.
+# Temporary data is not persisted to disk.
+#
+# Example:
+#   var levels = data.load_temporary_value("foo", "bar")
+#   var levels = data.load_temporary_value("foo", "bar", "my_category")
+func load_temporary_value(name: String, orDefault = null, category: String = "default"):
+    if _has_value(_temporary_data, name, category):
+        var value = _get_value(_temporary_data, name, category, null)
+        _logger.debug("Loading stored temporary value '%s' from key '%s' [category: %s]." % [value, name, category])
+        return value
+
+    _logger.debug("Temporary key '%s' missing [category: %s], loading default '%s'." % [name, category, orDefault])
     return orDefault
 
 # Store value in game data.
