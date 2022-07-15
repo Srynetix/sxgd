@@ -44,7 +44,7 @@
 >   SxSceneTransitioner.fade_to_cached_scene(cache, "MyScene")  
 ### `fade_out`
 
-*Prototype*: `func fade_out() -> void`
+*Prototype*: `func fade_out(speed: float = 1.0) -> void`
 
 > Apply a "fade out" effect.  
 >   
@@ -52,7 +52,7 @@
 >   SxSceneTransitioner.fade_out()  
 ### `fade_in`
 
-*Prototype*: `func fade_in() -> void`
+*Prototype*: `func fade_in(speed: float = 1.0) -> void`
 
 > Apply a "fade in" effect.  
 >   

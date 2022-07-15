@@ -47,8 +47,8 @@ func fade_to_cached_scene(cache: SxLoadCache, scene_name: String) -> void:
 #
 # Example:
 #   SxSceneTransitioner.fade_out()
-func fade_out() -> void:
-    animation_player.play("fade_out")
+func fade_out(speed: float = 1.0) -> void:
+    animation_player.play("fade_out", -1, speed)
     yield(animation_player, "animation_finished")
 
     emit_signal("animation_finished")
@@ -57,8 +57,8 @@ func fade_out() -> void:
 #
 # Example:
 #   SxSceneTransitioner.fade_in()
-func fade_in() -> void:
-    animation_player.play("fade_in")
+func fade_in(speed: float = 1.0) -> void:
+    animation_player.play("fade_in", -1, speed)
     yield(animation_player, "animation_finished")
 
     emit_signal("animation_finished")
