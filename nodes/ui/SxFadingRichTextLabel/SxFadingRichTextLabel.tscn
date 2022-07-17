@@ -13,7 +13,6 @@ bbcode_enabled = true
 scroll_active = false
 custom_effects = [ ExtResource( 1 ) ]
 script = ExtResource( 2 )
-CharDelay = 0.1
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
