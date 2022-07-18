@@ -113,6 +113,54 @@ class Logger:
     func critical(message: String, args: Array = []) -> void:
         _log(LogLevel.CRITICAL, message, args)
 
+    # Show a trace message for a method name
+    func trace_m(method: String, message: String, args: Array = []) -> void:
+        _log_method(LogLevel.TRACE, method, message, args)
+
+    # Show a debug message for a method name
+    func debug_m(method: String, message: String, args: Array = []) -> void:
+        _log_method(LogLevel.DEBUG, method, message, args)
+
+    # Show an info message for a method name
+    func info_m(method: String, message: String, args: Array = []) -> void:
+        _log_method(LogLevel.INFO, method, message, args)
+
+    # Show a warn message for a method name
+    func warn_m(method: String, message: String, args: Array = []) -> void:
+        _log_method(LogLevel.WARN, method, message, args)
+
+    # Show an error message for a method name
+    func error_m(method: String, message: String, args: Array = []) -> void:
+        _log_method(LogLevel.ERROR, method, message, args)
+
+    # Show a critical message for a method name
+    func critical_m(method: String, message: String, args: Array = []) -> void:
+        _log_method(LogLevel.CRITICAL, method, message, args)
+
+    # Show a trace message for a peer ID and method name
+    func trace_mn(peer_id: int, method: String, message: String, args: Array = []) -> void:
+        _log_method_network(LogLevel.TRACE, peer_id, method, message, args)
+
+    # Show a debug message for a peer ID and method name
+    func debug_mn(peer_id: int, method: String, message: String, args: Array = []) -> void:
+        _log_method_network(LogLevel.DEBUG, peer_id, method, message, args)
+
+    # Show an info message for a peer ID and method name
+    func info_mn(peer_id: int, method: String, message: String, args: Array = []) -> void:
+        _log_method_network(LogLevel.INFO, peer_id, method, message, args)
+
+    # Show a warn message for a peer ID and method name
+    func warn_mn(peer_id: int, method: String, message: String, args: Array = []) -> void:
+        _log_method_network(LogLevel.WARN, peer_id, method, message, args)
+
+    # Show an error message for a peer ID and method name
+    func error_mn(peer_id: int, method: String, message: String, args: Array = []) -> void:
+        _log_method_network(LogLevel.ERROR, peer_id, method, message, args)
+
+    # Show a critical message for a peer ID and method name
+    func critical_mn(peer_id: int, method: String, message: String, args: Array = []) -> void:
+        _log_method_network(LogLevel.CRITICAL, peer_id, method, message, args)
+
     func _is_level_shown(level: int) -> bool:
         return level >= max_level
 
@@ -140,6 +188,27 @@ class Logger:
             "args": _format_args(message, args)
         })
 
+    func _format_log_method(time: float, level: int, method: String, message: String, args: Array = []) -> String:
+        var level_str := Utils.level_to_string(level).to_upper()
+        return "[{time}] {[level_str}] [{name}::{method}] {args}".format({
+            "time": "%0.3f" % time,
+            "level_str": level_str,
+            "name": name,
+            "method": method,
+            "args": _format_args(message, args)
+        })
+
+    func _format_log_method_network(time: float, level: int, peer_id: int, method: String, message: String, args: Array = []) -> String:
+        var level_str := Utils.level_to_string(level).to_upper()
+        return "[{time}] {[level_str}] [{name}::{method}] *{peer_id}* {args}".format({
+            "time": "%0.3f" % time,
+            "level_str": level_str,
+            "name": name,
+            "method": method,
+            "peer_id": peer_id,
+            "args": _format_args(message, args)
+        })
+
     func _get_elapsed_time() -> float:
         return OS.get_ticks_msec() / 1000.0
 
@@ -152,6 +221,30 @@ class Logger:
 
         var log_message := LogMessage.new_message(
             time, level, name, _format_args(message, args)
+        )
+        _LogData.add_message(log_message)
+
+    func _log_method_network(level: int, peer_id: int, method: String, message: String, args: Array = []) -> void:
+        if !_is_level_shown(level):
+            return
+
+        var time := _get_elapsed_time()
+        _show_log_line(level, _format_log_method_network(time, level, peer_id, method, message, args))
+
+        var log_message := LogMessage.new_message(
+            time, level, "%s::%s" % [name, method], _format_args(message, args), peer_id
+        )
+        _LogData.add_message(log_message)
+
+    func _log_method(level: int, method: String, message: String, args: Array = []) -> void:
+        if !_is_level_shown(level):
+            return
+
+        var time := _get_elapsed_time()
+        _show_log_line(level, _format_log_method(time, level, method, message, args))
+
+        var log_message := LogMessage.new_message(
+            time, level, "%s::%s" % [name, method], _format_args(message, args)
         )
         _LogData.add_message(log_message)
 

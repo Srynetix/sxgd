@@ -209,3 +209,63 @@
 *Prototype*: `func critical(message: String, args: Array = []) -> void`
 
 > Show a critical message  
+#### `trace_m`
+
+*Prototype*: `func trace_m(method: String, message: String, args: Array = []) -> void`
+
+> Show a trace message for a method name  
+#### `debug_m`
+
+*Prototype*: `func debug_m(method: String, message: String, args: Array = []) -> void`
+
+> Show a debug message for a method name  
+#### `info_m`
+
+*Prototype*: `func info_m(method: String, message: String, args: Array = []) -> void`
+
+> Show an info message for a method name  
+#### `warn_m`
+
+*Prototype*: `func warn_m(method: String, message: String, args: Array = []) -> void`
+
+> Show a warn message for a method name  
+#### `error_m`
+
+*Prototype*: `func error_m(method: String, message: String, args: Array = []) -> void`
+
+> Show an error message for a method name  
+#### `critical_m`
+
+*Prototype*: `func critical_m(method: String, message: String, args: Array = []) -> void`
+
+> Show a critical message for a method name  
+#### `trace_mn`
+
+*Prototype*: `func trace_mn(peer_id: int, method: String, message: String, args: Array = []) -> void`
+
+> Show a trace message for a peer ID and method name  
+#### `debug_mn`
+
+*Prototype*: `func debug_mn(peer_id: int, method: String, message: String, args: Array = []) -> void`
+
+> Show a debug message for a peer ID and method name  
+#### `info_mn`
+
+*Prototype*: `func info_mn(peer_id: int, method: String, message: String, args: Array = []) -> void`
+
+> Show an info message for a peer ID and method name  
+#### `warn_mn`
+
+*Prototype*: `func warn_mn(peer_id: int, method: String, message: String, args: Array = []) -> void`
+
+> Show a warn message for a peer ID and method name  
+#### `error_mn`
+
+*Prototype*: `func error_mn(peer_id: int, method: String, message: String, args: Array = []) -> void`
+
+> Show an error message for a peer ID and method name  
+#### `critical_mn`
+
+*Prototype*: `func critical_mn(peer_id: int, method: String, message: String, args: Array = []) -> void`
+
+> Show a critical message for a peer ID and method name  
