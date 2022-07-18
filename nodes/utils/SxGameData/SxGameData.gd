@@ -7,6 +7,9 @@ var _static_data := Dictionary()
 var _temporary_data := Dictionary()
 var _logger := SxLog.get_logger("SxGameData")
 
+# Default file path, used in load_from_disk/persist_to_disk.
+var default_file_path := "user://save.dat"
+
 # Store static value in game data.
 # Static data is not persisted to disk.
 #
@@ -130,31 +133,39 @@ func has_value(name: String, category: String = "default") -> bool:
 #
 # Example:
 #   data.persist_to_disk("user://my_path.dat")
-func persist_to_disk(path: String = "user://save.dat") -> void:
+func persist_to_disk(path: String = "") -> void:
+    var target_path := default_file_path
+    if path != "":
+        target_path = path
+
     var f := File.new()
-    var error := f.open(path, File.WRITE)
+    var error := f.open(target_path, File.WRITE)
     if error == OK:
         f.store_line(JSON.print(_data))
         f.close()
-        _logger.debug("Game data persisted to path '%s'." % path)
+        _logger.debug("Game data persisted to path '%s'." % target_path)
     else:
-        _logger.error("Could not persist data to path '%s' (error: %s)" % [path, error])
+        _logger.error("Could not persist data to path '%s' (error: %s)" % [target_path, error])
 
 # Load game data from disk at a specific path.
 #
 # Example:
 #   data.load_from_disk("user://my_path.dat")
-func load_from_disk(path: String = "user://save.dat") -> void:
+func load_from_disk(path: String = "") -> void:
+    var target_path := default_file_path
+    if path != "":
+        target_path = path
+
     var f := File.new()
-    var error := f.open(path, File.READ)
+    var error := f.open(target_path, File.READ)
     if error == OK:
         _data = JSON.parse(f.get_as_text()).result
-        _logger.debug("Game data loaded from path '%s'" % path)
+        _logger.debug("Game data loaded from path '%s'" % target_path)
     elif error == ERR_FILE_NOT_FOUND:
-        _logger.debug("Missing saved game data, will create at path '%s'" % path)
-        persist_to_disk(path)
+        _logger.debug("Missing saved game data, will create at path '%s'" % target_path)
+        persist_to_disk(target_path)
     else:
-        _logger.error("Could not load game data from path '%s'" % path)
+        _logger.error("Could not load game data from path '%s'" % target_path)
 
 # Clear all non-static data.
 func clear() -> void:

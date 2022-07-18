@@ -9,6 +9,13 @@
 |*Globally exported as*|`SxGameData`|
 
 > A general-purpose in-memory key-value store, to be used through inheritance and autoload.  
+## Public variables
+
+### `default_file_path`
+
+*Code*: `var default_file_path := "user://save.dat"`
+
+> Default file path, used in load_from_disk/persist_to_disk.  
 ## Methods
 
 ### `store_static_value`
@@ -112,7 +119,7 @@
 >   var exists := data.has_value("key", "my_category")  
 ### `persist_to_disk`
 
-*Prototype*: `func persist_to_disk(path: String = "user://save.dat") -> void`
+*Prototype*: `func persist_to_disk(path: String = "") -> void`
 
 > Persist game data to disk at a specific path.  
 >   
@@ -120,7 +127,7 @@
 >   data.persist_to_disk("user://my_path.dat")  
 ### `load_from_disk`
 
-*Prototype*: `func load_from_disk(path: String = "user://save.dat") -> void`
+*Prototype*: `func load_from_disk(path: String = "") -> void`
 
 > Load game data from disk at a specific path.  
 >   
