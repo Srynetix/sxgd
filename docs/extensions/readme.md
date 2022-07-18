@@ -8,6 +8,7 @@
 - [SxJson](./SxJson.md)
 - [SxLog](./SxLog.md)
 - [SxMath](./SxMath.md)
+- [SxNetwork](./SxNetwork.md)
 - [SxOS](./SxOS.md)
 - [SxShader](./SxShader.md)
 - [SxText](./SxText.md)
