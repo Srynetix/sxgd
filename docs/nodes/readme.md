@@ -5,5 +5,6 @@
 - [Audio](./audio/readme.md)
 - [Debug](./debug/readme.md)
 - [Fx](./fx/readme.md)
+- [Input](./input/readme.md)
 - [Ui](./ui/readme.md)
 - [Utils](./utils/readme.md)

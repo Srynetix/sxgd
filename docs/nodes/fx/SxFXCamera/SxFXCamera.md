@@ -18,11 +18,11 @@
 
 ### `max_shake_strength`
 
-*Code*: `export var max_shake_strength: float = 2`
+*Code*: `export var max_shake_strength := 2.0`
 
 ### `shake_ratio`
 
-*Code*: `export var shake_ratio: float = 0`
+*Code*: `export var shake_ratio := 0.0`
 
 ## Methods
 

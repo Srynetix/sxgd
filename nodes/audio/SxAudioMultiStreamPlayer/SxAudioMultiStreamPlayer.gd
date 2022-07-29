@@ -42,23 +42,23 @@ func play_on_player(stream: AudioStream, player: AudioStreamPlayer) -> void:
 # Example:
 #   player.play_on_voice(my_sound, 0)
 func play_on_voice(stream: AudioStream, voice: int) -> void:
-    var player: AudioStreamPlayer = _players[voice]
+    var player := _players[voice] as AudioStreamPlayer
     play_on_player(stream, player)
 
 func _find_available_player() -> AudioStreamPlayer:
     for p in _players:
-        var player: AudioStreamPlayer = p
+        var player := p as AudioStreamPlayer
         if !player.playing:
             return player
 
     return null
 
 func _find_oldest_active_player() -> AudioStreamPlayer:
-    var oldest_player: AudioStreamPlayer = _players[0]
+    var oldest_player := _players[0] as AudioStreamPlayer
     var playback_pos := oldest_player.get_playback_position()
 
     for i in range(1, max_voices):
-        var player: AudioStreamPlayer = _players[i]
+        var player := _players[i] as AudioStreamPlayer
         var pos := player.get_playback_position()
         if pos > playback_pos:
             playback_pos = pos

@@ -20,7 +20,7 @@
 
 ### `visible_on_startup`
 
-*Code*: `export var visible_on_startup: bool = false`
+*Code*: `export var visible_on_startup := false`
 
 > Should the panel be visible on startup?  
 ## Methods

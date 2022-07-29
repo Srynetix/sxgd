@@ -18,12 +18,12 @@
 
 ### `angle_degrees`
 
-*Code*: `export var angle_degrees: float = 0 setget set_angle_degrees`
+*Code*: `export var angle_degrees := 0.0 setget set_angle_degrees`
 
 > Rotation angle in degrees.  
 ### `strength`
 
-*Code*: `export var strength: float = 0 setget set_strength`
+*Code*: `export var strength := 0.0 setget set_strength`
 
 > Effect strength.  
 ## Methods

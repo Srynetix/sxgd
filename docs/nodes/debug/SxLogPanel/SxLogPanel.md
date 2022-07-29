@@ -13,7 +13,7 @@
 
 ### `max_messages`
 
-*Code*: `export var max_messages: int = 100`
+*Code*: `export var max_messages := 100`
 
 > Max messages to display.  
 ## Public variables

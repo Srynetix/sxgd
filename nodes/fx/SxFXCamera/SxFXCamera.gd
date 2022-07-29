@@ -8,10 +8,10 @@ enum Direction {
     DOWN
 }
 
-export var max_shake_strength: float = 2
-export var shake_ratio: float = 0
+export var max_shake_strength := 2.0
+export var shake_ratio := 0.0
 
-onready var tween: Tween = $Tween
+onready var tween := $Tween as Tween
 
 func _process(delta) -> void:
     _update_shake()

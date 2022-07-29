@@ -7,11 +7,11 @@ tool
 extends Control
 class_name SxBetterBlur
 
-export var strength: float = 0 setget set_strength
+export var strength := 0.0 setget set_strength
 
-onready var step1: ColorRect = $Step1
-onready var step2: ColorRect = $BackBufferCopy/Step2
-onready var copy: BackBufferCopy = $BackBufferCopy
+onready var step1 := $Step1 as ColorRect
+onready var step2 := $BackBufferCopy/Step2 as ColorRect
+onready var copy := $BackBufferCopy as BackBufferCopy
 
 func set_strength(value: float) -> void:
     strength = value

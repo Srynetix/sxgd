@@ -81,4 +81,4 @@
 >   
 > Example:  
 >   var cache := SxLoadCache.new()  
->   var instance: MyScene = cache.instantiate_scene("MyScene")  
+>   var instance := cache.instantiate_scene("MyScene") as MyScene  

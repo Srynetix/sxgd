@@ -7,7 +7,7 @@
 extends CanvasLayer
 class_name SxDebugInfo
 
-onready var _label: RichTextLabel = $MarginContainer/RichTextLabel
+onready var _label := $MarginContainer/RichTextLabel as RichTextLabel
 
 # Get the visibility status.
 func get_visibility() -> bool:

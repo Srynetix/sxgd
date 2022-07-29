@@ -18,12 +18,12 @@
 
 ### `vignette_size`
 
-*Code*: `export var vignette_size: float = 10 setget set_vignette_size`
+*Code*: `export var vignette_size := 10.0 setget set_vignette_size`
 
 > Vignette size.  
 ### `vignette_ratio`
 
-*Code*: `export var vignette_ratio: float = 0.25 setget set_vignette_ratio`
+*Code*: `export var vignette_ratio := 0.25 setget set_vignette_ratio`
 
 > Vignette ratio.  
 ## Methods

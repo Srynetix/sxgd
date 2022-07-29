@@ -1,23 +1,23 @@
 extends Control
 
-onready var background: Control = $Background
-onready var effect_selection: OptionButton = $UI/Margin/Margin/HBox/EffectType/Value
-onready var params: VBoxContainer = $UI/Margin/Margin/HBox/Params
-onready var vignette: SxVignette = $Effects/SxVignette
-onready var shockwave: SxShockwave = $Effects/SxShockwave
-onready var motion_blur: SxMotionBlur = $Effects/SxMotionBlur
-onready var better_blur: SxBetterBlur = $Effects/SxBetterBlur
-onready var texture: Texture = load("res://addons/sxgd/assets/textures/icon.png")
+onready var background := $Background as Control
+onready var effect_selection := $UI/Margin/Margin/HBox/EffectType/Value as OptionButton
+onready var params := $UI/Margin/Margin/HBox/Params as VBoxContainer
+onready var vignette := $Effects/SxVignette as SxVignette
+onready var shockwave := $Effects/SxShockwave as SxShockwave
+onready var motion_blur := $Effects/SxMotionBlur as SxMotionBlur
+onready var better_blur := $Effects/SxBetterBlur as SxBetterBlur
+onready var texture := load("res://addons/sxgd/assets/textures/icon.png") as Texture
 
 var _sprites := Array()
 var _touched := false
 var _last_touched_position := Vector2()
 
 class FloatParamOptions:
-    var step: float = 0.01
-    var min_value: float = 0
-    var max_value: float = 9999
-    var min_size_x: float = 50
+    var step := 0.01
+    var min_value := 0.0
+    var max_value := 9999.0
+    var min_size_x := 50.0
 
     func with_step(value: float) -> FloatParamOptions:
         self.step = value
@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
     var viewport_size := get_viewport_rect().size
 
     for spr in _sprites:
-        var sprite: Sprite = spr
+        var sprite := spr as Sprite
         var position := sprite.position
         var rotation := sprite.rotation_degrees
         var texture_size := sprite.texture.get_size()
@@ -178,7 +178,7 @@ func _pr_float(control: Control, name: String, opts: FloatParamOptions = null) -
         opts = FloatParamOptions.new()
 
     var cap_name := SxText.to_pascal_case(name)
-    var current: float = control.get(name)
+    var current := control.get(name) as float
     var hbox := HBoxContainer.new()
     hbox.name = cap_name
     hbox.size_flags_horizontal = SIZE_EXPAND_FILL
@@ -201,7 +201,7 @@ func _pr_float(control: Control, name: String, opts: FloatParamOptions = null) -
 
 func _pr_vector2(control: Control, name: String, step: float = 0.01, min_size_x: float = 50) -> void:
     var cap_name := SxText.to_pascal_case(name)
-    var current: Vector2 = control.get(name)
+    var current := control.get(name) as Vector2
     var hbox := HBoxContainer.new()
     hbox.name = cap_name
     hbox.size_flags_horizontal = SIZE_EXPAND_FILL
@@ -237,15 +237,15 @@ func _update_shader(obj: Control, name: String, value) -> void:
     obj.set(name, value)
 
 func _animate_shockwave():
-    var x: SpinBox = params.get_node("WaveCenter/VBox/X")
-    var y: SpinBox = params.get_node("WaveCenter/VBox/Y")
+    var x := params.get_node("WaveCenter/VBox/X") as SpinBox
+    var y := params.get_node("WaveCenter/VBox/Y") as SpinBox
     shockwave.start_wave(Vector2(x.value, y.value))
 
 func _on_value_changed(value: float, obj: Control, name: String) -> void:
     _update_shader(obj, name, value)
 
 func _on_value_changed_vector2(value: float, coord: String, obj: Control, name: String) -> void:
-    var current: Vector2 = obj.get(name)
+    var current := obj.get(name) as Vector2
     var param_name := name
 
     if coord == "x":
@@ -259,8 +259,8 @@ func _on_touch_position_update() -> void:
     var effect_name := effect_selection.get_item_text(selected_idx)
 
     if effect_name == "Shockwave":
-        var x: SpinBox = params.get_node("WaveCenter/VBox/X")
-        var y: SpinBox = params.get_node("WaveCenter/VBox/Y")
+        var x := params.get_node("WaveCenter/VBox/X") as SpinBox
+        var y := params.get_node("WaveCenter/VBox/Y") as SpinBox
         x.value = _last_touched_position.x / viewport_size.x
         y.value = 1 - _last_touched_position.y / viewport_size.y
 

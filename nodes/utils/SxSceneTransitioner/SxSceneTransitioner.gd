@@ -5,8 +5,8 @@ class_name SxSceneTransitioner
 # Transition is finished.
 signal animation_finished()
 
-onready var overlay: ColorRect = $Overlay
-onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var overlay := $Overlay as ColorRect
+onready var animation_player := $AnimationPlayer as AnimationPlayer
 
 # Fade current scene to another loaded scene.
 #
@@ -25,7 +25,7 @@ func fade_to_scene(scene: PackedScene) -> void:
 #   SxSceneTransitioner.fade_to_scene_path("res://my_scene.tscn")
 func fade_to_scene_path(scene_path: String) -> void:
     animation_player.play("fade_out")
-    var scene: PackedScene = load(scene_path)
+    var scene := load(scene_path) as PackedScene
     yield(animation_player, "animation_finished")
 
     get_tree().change_scene_to(scene)

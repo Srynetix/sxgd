@@ -15,7 +15,7 @@ class _LogData:
         _static_data["messages"].append(message)
 
     static func pop_messages() -> Array:
-        var messages: Array = _static_data["messages"]
+        var messages := _static_data["messages"] as Array
         _static_data["messages"] = []
         return messages
 
@@ -260,7 +260,7 @@ const DEFAULT_LOG_LEVEL := LogLevel.INFO
 # Example:
 #   var logger := SxLog.get_logger("my_logger")
 static func get_logger(name: String) -> Logger:
-    var loggers: Dictionary = _static_data["loggers"]
+    var loggers := _static_data["loggers"] as Dictionary
     if loggers.has(name):
         return _static_data["loggers"][name]
     else:
@@ -281,7 +281,7 @@ static func pop_messages() -> Array:
 static func configure_log_levels(conf: String) -> void:
     var all_split := conf.split(",")
     for log_conf in all_split:
-        var split: Array = log_conf.split("=")
+        var split := log_conf.split("=") as Array
         var len_split := len(split)
         if len_split == 0:
             continue

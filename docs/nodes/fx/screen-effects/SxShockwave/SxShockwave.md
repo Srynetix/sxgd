@@ -18,19 +18,19 @@
 
 ### `wave_size`
 
-*Code*: `export var wave_size: float = 0 setget set_wave_size`
+*Code*: `export var wave_size := 0.0 setget set_wave_size`
 
 ### `wave_center`
 
-*Code*: `export var wave_center: Vector2 = Vector2.ZERO setget set_wave_center`
+*Code*: `export var wave_center := Vector2.ZERO setget set_wave_center`
 
 ### `force`
 
-*Code*: `export var force: float = 0 setget set_force`
+*Code*: `export var force := 0.0 setget set_force`
 
 ### `thickness`
 
-*Code*: `export var thickness: float = 0 setget set_thickness`
+*Code*: `export var thickness := 0.0 setget set_thickness`
 
 ## Methods
 

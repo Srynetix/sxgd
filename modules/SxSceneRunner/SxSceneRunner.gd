@@ -13,12 +13,12 @@ const SCENE_KEY_RESET := KEY_I
 const SCENE_KEY_PREV := KEY_O
 const SCENE_KEY_NEXT := KEY_P
 
-onready var _current: Node2D = $Current
-onready var _scene_name: Label = $CanvasLayer/Margin/VBox/Text/SceneName
-onready var _back_button: Button = $CanvasLayer/Margin/BackButton
-onready var _previous_btn: Button = $CanvasLayer/Margin/VBox/Margin/Buttons/Previous
-onready var _reset_btn: Button = $CanvasLayer/Margin/VBox/Margin/Buttons/Reset
-onready var _next_btn: Button = $CanvasLayer/Margin/VBox/Margin/Buttons/Next
+onready var _current := $Current as Node2D
+onready var _scene_name := $CanvasLayer/Margin/VBox/Text/SceneName as Label
+onready var _back_button := $CanvasLayer/Margin/BackButton as Button
+onready var _previous_btn := $CanvasLayer/Margin/VBox/Margin/Buttons/Previous as Button
+onready var _reset_btn := $CanvasLayer/Margin/VBox/Margin/Buttons/Reset as Button
+onready var _next_btn := $CanvasLayer/Margin/VBox/Margin/Buttons/Next as Button
 
 var _known_scenes := []
 var _current_scene := 0
@@ -34,7 +34,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
     if event is InputEventKey:
-        var key_event: InputEventKey = event
+        var key_event := event as InputEventKey
         if key_event.pressed:
             if key_event.scancode == SCENE_KEY_NEXT:
                 _load_next_scene()
@@ -81,10 +81,10 @@ func _discover_scenes() -> Array:
     return scenes
 
 func _load_current_scene() -> void:
-    var entry: Array = _known_scenes[_current_scene]
-    var entry_idx: int = entry[0]
-    var entry_name: String = entry[1]
-    var entry_model: PackedScene = entry[2]
+    var entry := _known_scenes[_current_scene] as Array
+    var entry_idx := entry[0] as int
+    var entry_name := entry[1] as String
+    var entry_model := entry[2] as PackedScene
 
     # Clear previous
     for child in _current.get_children():

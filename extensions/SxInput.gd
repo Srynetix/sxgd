@@ -18,7 +18,7 @@ static func get_joystick_movement(action_name: String) -> Vector2:
     var directions := ["left", "right", "up", "down"]
     var forces := [0, 0, 0, 0]
     for i in range(len(directions)):
-        var dir: String = directions[i]
+        var dir := directions[i] as String
         forces[i] = Input.get_action_strength("%s_%s" % [action_name, dir])
 
     var movement := Vector2()

@@ -12,5 +12,5 @@
 
 ### `bbcode`
 
-*Code*: `var bbcode: String = "sxgd-fadein"`
+*Code*: `var bbcode := "sxgd-fadein"`
 

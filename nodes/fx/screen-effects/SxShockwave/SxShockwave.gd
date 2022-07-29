@@ -7,12 +7,12 @@ tool
 extends ColorRect
 class_name SxShockwave
 
-export var wave_size: float = 0 setget set_wave_size
-export var wave_center: Vector2 = Vector2.ZERO setget set_wave_center
-export var force: float = 0 setget set_force
-export var thickness: float = 0 setget set_thickness
+export var wave_size := 0.0 setget set_wave_size
+export var wave_center := Vector2.ZERO setget set_wave_center
+export var force := 0.0 setget set_force
+export var thickness := 0.0 setget set_thickness
 
-onready var tween: Tween = $Tween
+onready var tween := $Tween as Tween
 
 func set_wave_size(value: float) -> void:
     wave_size = value

@@ -18,7 +18,7 @@
 
 ### `strength`
 
-*Code*: `export var strength: float = 0 setget set_strength`
+*Code*: `export var strength := 0.0 setget set_strength`
 
 ## Methods
 

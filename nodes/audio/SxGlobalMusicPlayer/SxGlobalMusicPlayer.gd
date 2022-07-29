@@ -4,7 +4,7 @@
 extends AudioStreamPlayer
 class_name SxGlobalMusicPlayer
 
-onready var tween: Tween = $Tween
+onready var tween := $Tween as Tween
 
 # Global volume in DB
 var global_volume_db: float setget _set_global_volume_db

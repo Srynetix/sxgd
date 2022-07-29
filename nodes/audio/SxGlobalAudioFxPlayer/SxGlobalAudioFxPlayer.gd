@@ -28,7 +28,7 @@ func play(stream_name: String, voice: int = -1) -> void:
         player.play_on_voice(streams[stream_name], voice)
 
 func _ready() -> void:
-    var player_scene: PackedScene = load("res://addons/sxgd/nodes/audio/SxAudioMultiStreamPlayer/SxAudioMultiStreamPlayer.tscn")
+    var player_scene := load("res://addons/sxgd/nodes/audio/SxAudioMultiStreamPlayer/SxAudioMultiStreamPlayer.tscn") as PackedScene
     player = player_scene.instance()
     player.max_voices = max_voices
     player.audio_bus_output = audio_bus_output

@@ -8,11 +8,11 @@ extends ColorRect
 class_name SxVignette
 
 # Vignette size.
-export var vignette_size: float = 10 setget set_vignette_size
+export var vignette_size := 10.0 setget set_vignette_size
 # Vignette ratio.
-export var vignette_ratio: float = 0.25 setget set_vignette_ratio
+export var vignette_ratio := 0.25 setget set_vignette_ratio
 
-onready var tween: Tween = $Tween
+onready var tween := $Tween as Tween
 
 func set_vignette_ratio(value: float) -> void:
     vignette_ratio = value

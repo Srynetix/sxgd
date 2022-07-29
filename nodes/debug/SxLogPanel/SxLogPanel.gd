@@ -3,12 +3,12 @@ extends MarginContainer
 class_name SxLogPanel
 
 # Max messages to display.
-export var max_messages: int = 100
+export var max_messages := 100
 
 var last_message: SxLog.LogMessage = null
 var template: RichTextLabel = null
 
-onready var container: VBoxContainer = $ScrollContainer/VBoxContainer
+onready var container := $ScrollContainer/VBoxContainer as VBoxContainer
 
 func _ready():
     template = container.get_node("Label")
@@ -24,7 +24,7 @@ func toggle():
 
 func _update_text():
     for entry in SxLog.pop_messages():
-        var message: SxLog.LogMessage = entry
+        var message := entry as SxLog.LogMessage
         var logger_name := message.logger_name
         if logger_name == "":
             logger_name = "root"

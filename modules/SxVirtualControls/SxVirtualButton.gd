@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
     if event is InputEventScreenTouch:
-        var touch_event: InputEventScreenTouch = event
+        var touch_event := event as InputEventScreenTouch
         if !touch_event.pressed && touch_event.index == _button_touch_index:
             _button_touch_index = -1
             modulate = SxColor.with_alpha_f(Color.white, INITIAL_OPACITY)

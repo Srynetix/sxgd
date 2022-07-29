@@ -22,7 +22,7 @@ func load_resources():
 #   var cache := SxLoadCache.new()
 #   cache.store_scene("MyScene", "res://my_scene.tscn")
 func store_scene(scene_name: String, scene_path: String) -> void:
-    var scene: PackedScene = load(scene_path)
+    var scene := load(scene_path) as PackedScene
     _cache[scene_name] = scene
     _logger.debug("Caching scene '%s' from path '%s'." % [scene_name, scene_path])
 
@@ -32,7 +32,7 @@ func store_scene(scene_name: String, scene_path: String) -> void:
 #   var cache := SxLoadCache.new()
 #   cache.store_resource("MyResource", "res://my_resource.tscn")
 func store_resource(resource_name: String, resource_path: String) -> void:
-    var resource: Resource = load(resource_path)
+    var resource := load(resource_path) as Resource
     _cache[resource_name] = resource
     _logger.debug("Caching resource '%s' from path '%s'." % [resource_name, resource_path])
 
@@ -76,7 +76,7 @@ func load_resource(resource_name: String) -> Resource:
 #
 # Example:
 #   var cache := SxLoadCache.new()
-#   var instance: MyScene = cache.instantiate_scene("MyScene")
+#   var instance := cache.instantiate_scene("MyScene") as MyScene
 func instantiate_scene(scene_name: String) -> Node:
     var scene := load_scene(scene_name)
     _logger.trace("Instantiating scene '%s'." % scene_name)

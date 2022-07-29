@@ -10,7 +10,7 @@ static func get_shader_param(item: CanvasItem, name: String):
     if material == null:
         logger.error("CanvasItem %s has no material" % item)
     elif material is ShaderMaterial:
-        var shader_material: ShaderMaterial = material
+        var shader_material := material as ShaderMaterial
         return shader_material.get_shader_param(name)
     else:
         logger.error("CanvasItem %s material is not a ShaderMaterial (but %s)" % [item, material])
@@ -26,7 +26,7 @@ static func set_shader_param(item: CanvasItem, name: String, value) -> void:
     if material == null:
         logger.error("CanvasItem %s has no material" % item)
     elif material is ShaderMaterial:
-        var shader_material: ShaderMaterial = material
+        var shader_material := material as ShaderMaterial
         shader_material.set_shader_param(name, value)
     else:
         logger.error("CanvasItem %s material is not a ShaderMaterial (but %s)" % [item, material])

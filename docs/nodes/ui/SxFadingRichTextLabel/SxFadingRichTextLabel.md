@@ -26,17 +26,17 @@
 
 ### `autoplay`
 
-*Code*: `export var autoplay: bool = false`
+*Code*: `export var autoplay := false`
 
 > Autoplay the text animation  
 ### `char_delay`
 
-*Code*: `export var char_delay: float = 0.1`
+*Code*: `export var char_delay := 0.1`
 
 > Delay per character, in seconds  
 ### `fade_out_delay`
 
-*Code*: `export var fade_out_delay: float = 2`
+*Code*: `export var fade_out_delay := 2.0`
 
 > Fade out delay, in seconds  
 ### `text_alignment`

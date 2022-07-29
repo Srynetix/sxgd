@@ -8,9 +8,9 @@ extends ColorRect
 class_name SxMotionBlur
 
 # Rotation angle in degrees.
-export var angle_degrees: float = 0 setget set_angle_degrees
+export var angle_degrees := 0.0 setget set_angle_degrees
 # Effect strength.
-export var strength: float = 0 setget set_strength
+export var strength := 0.0 setget set_strength
 
 func set_strength(value: float) -> void:
     strength = value

@@ -5,18 +5,18 @@ class_name SxFadingRichTextLabel
 enum Alignment { LEFT, RIGHT }
 
 # Autoplay the text animation
-export var autoplay: bool = false
+export var autoplay := false
 # Delay per character, in seconds
-export var char_delay: float = 0.1
+export var char_delay := 0.1
 # Fade out delay, in seconds
-export var fade_out_delay: float = 2
+export var fade_out_delay := 2.0
 # Text alignment
 export(Alignment) var text_alignment := Alignment.LEFT
 
 # Text was completely shown
 signal shown()
 
-onready var _timer: Timer = $Timer
+onready var _timer := $Timer as Timer
 var _tag_regex: RegEx
 var _initial_text: String
 

@@ -4,13 +4,13 @@ extends Button
 class_name SxFAButton
 
 # Icon name
-export var icon_name: String = "anchor" setget _set_icon_name
+export var icon_name := "anchor" setget _set_icon_name
 # Icon size
-export var icon_size: int = 24 setget _set_icon_size
+export var icon_size := 24 setget _set_icon_size
 # Icon color
-export var icon_color: Color = Color.white setget _set_icon_color
+export var icon_color := Color.white setget _set_icon_color
 
-onready var _label: SxFALabel = $SxFALabel
+onready var _label := $SxFALabel as SxFALabel
 
 func _ready():
     _update_label()

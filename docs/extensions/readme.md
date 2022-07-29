@@ -2,6 +2,7 @@
 
 **[◀️ Back](../readme.md)**
 
+- [SxArray](./SxArray.md)
 - [SxBuffer](./SxBuffer.md)
 - [SxColor](./SxColor.md)
 - [SxInput](./SxInput.md)

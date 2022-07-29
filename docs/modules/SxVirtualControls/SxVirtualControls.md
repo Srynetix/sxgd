@@ -28,6 +28,6 @@
 
 ### `display_mode`
 
-*Code*: `export(DisplayMode) var display_mode: int = DisplayMode.OnlyMobile`
+*Code*: `export(DisplayMode) var display_mode := DisplayMode.OnlyMobile as int`
 
 > Controls display mode, defaults to "Only mobile"  

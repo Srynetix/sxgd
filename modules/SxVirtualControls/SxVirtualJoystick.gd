@@ -25,7 +25,7 @@ export var action_axis_down: String
 # Dead zone
 export var dead_zone := 0.3
 
-onready var _head: TextureRect = $Head
+onready var _head := $Head as TextureRect
 
 onready var _initial_head_position := _head.rect_position
 var _joystick_touch_index := -1
@@ -43,7 +43,7 @@ func _ready():
 
 func _input(event: InputEvent):
     if event is InputEventScreenTouch:
-        var touch_event: InputEventScreenTouch = event
+        var touch_event := event as InputEventScreenTouch
         if !touch_event.pressed && touch_event.index == _joystick_touch_index:
             _joystick_touch_index = -1
             _release()
@@ -52,7 +52,7 @@ func _input(event: InputEvent):
             _touch()
 
     elif event is InputEventScreenDrag:
-        var drag_event: InputEventScreenDrag = event
+        var drag_event := event as InputEventScreenDrag
         var base_rect_drag := get_global_rect().grow(2)
         if _joystick_touch_index != -1:  # && base_rect_drag.has_point(drag_event.position):
             var base_position := rect_global_position + rect_size / 2
@@ -105,7 +105,7 @@ func _move(force: Vector2) -> void:
     emit_signal("changed", force)
 
 func _send_joystick_event(axis: int, value: float) -> void:
-    var action_value: String = _action_mapping[axis]
+    var action_value := _action_mapping[axis] as String
     if action_value != "":
         if value > 0:
             Input.action_press(action_value, value)

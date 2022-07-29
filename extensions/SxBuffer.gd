@@ -24,5 +24,5 @@ static func zstd_decompress(array: PoolByteArray) -> PoolByteArray:
 
     var orig_size := buffer.get_64()
     var remaining_data_a := buffer.get_data(buffer.get_size() - buffer.get_position())
-    var compressed: PoolByteArray = remaining_data_a[1]
+    var compressed := remaining_data_a[1] as PoolByteArray
     return compressed.decompress(orig_size, File.COMPRESSION_ZSTD)

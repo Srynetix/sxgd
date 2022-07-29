@@ -18,7 +18,7 @@ enum DisplayMode {
 }
 
 # Controls display mode, defaults to "Only mobile"
-export(DisplayMode) var display_mode: int = DisplayMode.OnlyMobile
+export(DisplayMode) var display_mode := DisplayMode.OnlyMobile as int
 
 func _ready():
     visible = false
