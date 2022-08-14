@@ -8,6 +8,7 @@ import re
 FileDict = Dict[Path, str]
 
 MISSING_VAR_TYPE_INFERENCE_RGX = re.compile(r"var\s+(?P<var>[a-zA-Z0-9-_]+)\s+=")
+TYPE_DECLARATION_WITHOUT_AS_RGX = re.compile(r"var\s+(?P<var>[a-zA-Z0-9-_]+)\s*:\s*(?P<type>[a-zA-Z0-9-_]+)")
 
 @dataclass
 class LintError:
@@ -72,6 +73,7 @@ def check_rules(files: FileDict) -> List[LintError]:
 
     for path, contents in files.items():
         errors.extend(_check_type_inference_file(path, contents))
+        errors.extend(_check_type_declaration_without_as(path, contents))
 
     return errors
 
@@ -88,6 +90,26 @@ def _check_type_inference_file(path: Path, contents: str) -> List[LintError]:
         if match:
             errors.append(LintError(
                 error="Missing type inference",
+                file=path.relative_to(os.getcwd()),
+                lineno=lineno,
+                col=match.start() + 1
+            ))
+
+    return errors
+
+def _check_type_declaration_without_as(path: Path, contents: str) -> List[LintError]:
+    errors = []
+
+    lines = contents.splitlines()
+    for idx, line in enumerate(lines):
+        lineno = idx + 1
+        if line.startswith("#"):
+            continue
+
+        match = TYPE_DECLARATION_WITHOUT_AS_RGX.search(line)
+        if match:
+            errors.append(LintError(
+                error="Type declaration without 'as'",
                 file=path.relative_to(os.getcwd()),
                 lineno=lineno,
                 col=match.start() + 1
