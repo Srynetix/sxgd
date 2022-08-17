@@ -8,7 +8,7 @@ import re
 FileDict = Dict[Path, str]
 
 MISSING_VAR_TYPE_INFERENCE_RGX = re.compile(r"var\s+(?P<var>[a-zA-Z0-9-_]+)\s+=")
-TYPE_DECLARATION_WITHOUT_AS_RGX = re.compile(r"var\s+(?P<var>[a-zA-Z0-9-_]+)\s*:\s*(?P<type>[a-zA-Z0-9-_]+)")
+TYPE_DECLARATION_WITHOUT_AS_RGX = re.compile(r"var\s+(?P<var>[a-zA-Z0-9-_]+)\s*:\s*(?P<type>[a-zA-Z0-9-_]+)\s+=")
 
 @dataclass
 class LintError:

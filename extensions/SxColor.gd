@@ -37,7 +37,7 @@ static func rand_with_alpha_f(alpha: float) -> Color:
         SxMath.rand_range_i(0, 255),
         SxMath.rand_range_i(0, 255),
         SxMath.rand_range_i(0, 255),
-        alpha * 255
+        int(alpha * 255.0)
     )
 
 # Generate a random color with an integer alpha value.

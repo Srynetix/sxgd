@@ -64,7 +64,7 @@ static func list_files_in_directory(path: String, filters: Array) -> Array:
     var directory := Directory.new()
     directory.open(path)
     directory.list_dir_begin()
-    var file_name = directory.get_next()
+    var file_name := directory.get_next()
 
     while file_name != "":
         # Edge case: ignore . & ..
@@ -73,7 +73,7 @@ static func list_files_in_directory(path: String, filters: Array) -> Array:
             continue
 
         var dir_or_file := DirOrFile.Type.DIRECTORY as int
-        var file_path = path
+        var file_path := path
         if !path.ends_with("/"):
             file_path += "/"
         file_path += file_name
@@ -81,7 +81,7 @@ static func list_files_in_directory(path: String, filters: Array) -> Array:
         if directory.file_exists(file_path):
             dir_or_file = DirOrFile.Type.FILE
 
-        var collect = true
+        var collect := true
         if dir_or_file == DirOrFile.Type.FILE:
             if len(filters) > 0:
                 collect = false

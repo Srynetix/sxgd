@@ -36,7 +36,7 @@ static func is_network_enabled(tree: SceneTree) -> bool:
 # Generate a UUID4 string
 static func uuid4() -> String:
     # 16 random bytes with the bytes on index 6 and 8 modified
-    var b = _uuidbin()
+    var b := _uuidbin()
 
     return '%02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x-%02x%02x%02x%02x%02x%02x' % [
         # low
@@ -55,13 +55,13 @@ static func uuid4() -> String:
         b[10], b[11], b[12], b[13], b[14], b[15]
     ]
 
-static func _rand_u8():
+static func _rand_u8() -> int:
     # Randomize every time to minimize the risk of collisions
     randomize()
 
     return randi() % _MODULO_8_BIT
 
-static func _uuidbin():
+static func _uuidbin() -> Array:
     # 16 random bytes with the bytes on index 6 and 8 modified
     return [
         _rand_u8(), _rand_u8(), _rand_u8(), _rand_u8(),

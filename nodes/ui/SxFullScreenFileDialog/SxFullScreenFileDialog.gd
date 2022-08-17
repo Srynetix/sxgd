@@ -34,7 +34,7 @@ onready var _go_up_btn := $MarginContainer/VBoxContainer/Buttons/GoUp as SxFABut
 onready var _filename_lbl := $MarginContainer/VBoxContainer/HBoxContainer2/FileName as LineEdit
 onready var _cancel_btn := $MarginContainer/VBoxContainer/HBoxContainer2/Cancel as Button
 onready var _validate_btn := $MarginContainer/VBoxContainer/HBoxContainer2/Validate as Button
-onready var _confirmation := $Confirmation as FullScreenConfirmationDialog
+onready var _confirmation := $Confirmation as SxFullScreenConfirmationDialog
 
 var _filters := []
 var _shortcuts := []
@@ -96,7 +96,7 @@ func _cancel() -> void:
 
 func _validate() -> void:
     if mode == Mode.SAVE_FILE:
-        var f = File.new()
+        var f := File.new()
         if f.file_exists(_file_selected):
             _confirmation.message = "Are you sure you want to overwrite the file %s?" % _file_selected
             _confirmation.fade_in()
@@ -116,7 +116,7 @@ func _on_files_input(event: InputEvent) -> void:
             _handle_directory_open(_files_list.get_item_at_position(btn_event.position))
             return
 
-    var doubletap_data = _doubletap.process_doubletap(event)
+    var doubletap_data := _doubletap.process_doubletap(event)
     if doubletap_data.result:
         _handle_directory_open(_files_list.get_item_at_position(doubletap_data.position))
 
@@ -150,7 +150,7 @@ func _select_file(item_id: int) -> void:
 
 func _filename_changed(value: String) -> void:
     if mode == Mode.SAVE_FILE:
-        var is_valid = false
+        var is_valid := false
         if len(value.strip_edges()) > 0:
             if len(_filters) > 0:
                 for filter in _filters:
@@ -166,7 +166,7 @@ func _filename_changed(value: String) -> void:
                 _validate_btn.disabled = true
 
 func _update_files() -> void:
-    var files = SxOS.list_files_in_directory(_current_path, _filters)
+    var files := SxOS.list_files_in_directory(_current_path, _filters)
     _files_list.clear()
     _current_files = []
 
