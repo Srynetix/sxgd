@@ -24,7 +24,7 @@ static func range_vec2(from: Vector2, to: Vector2) -> Vector2:
 # Example:
 #   var n := SxRand.chance_bool(75)
 static func chance_bool(chance: int) -> bool:
-    return rand_range_i(0, 100) <= chance
+    return range_i(0, 100) <= chance
 
 # Choose a random value from an array.
 #
