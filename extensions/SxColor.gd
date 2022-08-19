@@ -23,9 +23,9 @@ static func with_alpha_i(color: Color, alpha: int) -> Color:
 #   var c := SxColor.rand()
 static func rand() -> Color:
     return Color8(
-        SxMath.rand_range_i(0, 255),
-        SxMath.rand_range_i(0, 255),
-        SxMath.rand_range_i(0, 255)
+        SxRand.range_i(0, 255),
+        SxRand.range_i(0, 255),
+        SxRand.range_i(0, 255)
     )
 
 # Generate a random color with a float alpha value.
@@ -34,9 +34,9 @@ static func rand() -> Color:
 #   var c := SxColor.rand_with_alpha_f(0.5)
 static func rand_with_alpha_f(alpha: float) -> Color:
     return Color8(
-        SxMath.rand_range_i(0, 255),
-        SxMath.rand_range_i(0, 255),
-        SxMath.rand_range_i(0, 255),
+        SxRand.range_i(0, 255),
+        SxRand.range_i(0, 255),
+        SxRand.range_i(0, 255),
         int(alpha * 255.0)
     )
 
@@ -46,8 +46,8 @@ static func rand_with_alpha_f(alpha: float) -> Color:
 #   var c := SxColor.rand_with_alpha_i(127)
 static func rand_with_alpha_i(alpha: int) -> Color:
     return Color8(
-        SxMath.rand_range_i(0, 255),
-        SxMath.rand_range_i(0, 255),
-        SxMath.rand_range_i(0, 255),
+        SxRand.range_i(0, 255),
+        SxRand.range_i(0, 255),
+        SxRand.range_i(0, 255),
         alpha
     )

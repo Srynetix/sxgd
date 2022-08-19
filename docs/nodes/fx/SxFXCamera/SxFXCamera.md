@@ -44,6 +44,10 @@
 >   camera.viewport_scroll(Vector2(0, 0), Direction.RIGHT)  
 ### `reset_limits`
 
-*Prototype*: `func reset_limits()`
+*Prototype*: `func reset_limits() -> void`
 
 > Reset the camera limits to an arbitrary large number.  
+### `set_limit_from_rect`
+
+*Prototype*: `func set_limit_from_rect(rect: Rect2) -> void`
+

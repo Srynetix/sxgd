@@ -56,12 +56,18 @@ func viewport_scroll(top_left: Vector2, direction: int, speed: float = 0.65, eas
     smoothing_enabled = true
 
 # Reset the camera limits to an arbitrary large number.
-func reset_limits():
+func reset_limits() -> void:
     limit_left = -1000000
     limit_right = 1000000
     limit_top = -1000000
     limit_bottom = 1000000
     smoothing_enabled = false
+
+func set_limit_from_rect(rect: Rect2) -> void:
+    limit_left = rect.position.x
+    limit_right = rect.end.x
+    limit_top = rect.position.y
+    limit_bottom = rect.end.y
 
 func _add_viewport_size_to_position(top_left: Vector2, direction: int) -> Vector2:
     var vp_size := get_viewport_rect().size

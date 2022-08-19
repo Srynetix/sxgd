@@ -30,23 +30,6 @@ static func interpolate_align_with_y(transform: Transform, new_y: Vector3, weigh
     var aligned := align_with_y(transform, new_y)
     return transform.interpolate_with(aligned, weight)
 
-# Generate a random integer between two values.
-#
-# Example:
-#   var n := SxMath.rand_range_i(1, 2)
-static func rand_range_i(from: int, to: int) -> int:
-    return int(rand_range(from, to))
-
-# Generate a random Vector2 between two values for each component.
-#
-# Example:
-#   var n := SxMath.rand_range_vec2(Vector2.ZERO, Vector2.ONE)
-static func rand_range_vec2(from: Vector2, to: Vector2) -> Vector2:
-    return Vector2(
-        rand_range(from.x, to.y),
-        rand_range(from.y, to.y)
-    )
-
 # Map a float value from one set of bounds to another.
 #
 # Example:

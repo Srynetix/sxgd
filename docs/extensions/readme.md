@@ -11,6 +11,8 @@
 - [SxMath](./SxMath.md)
 - [SxNetwork](./SxNetwork.md)
 - [SxOS](./SxOS.md)
+- [SxRand](./SxRand.md)
 - [SxShader](./SxShader.md)
 - [SxText](./SxText.md)
 - [SxTileMap](./SxTileMap.md)
+- [SxUI](./SxUI.md)

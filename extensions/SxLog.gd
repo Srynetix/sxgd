@@ -190,7 +190,7 @@ class Logger:
 
     func _format_log_method(time: float, level: int, method: String, message: String, args: Array = []) -> String:
         var level_str := Utils.level_to_string(level).to_upper()
-        return "[{time}] {[level_str}] [{name}::{method}] {args}".format({
+        return "[{time}] [{level_str}] [{name}::{method}] {args}".format({
             "time": "%0.3f" % time,
             "level_str": level_str,
             "name": name,
@@ -200,7 +200,7 @@ class Logger:
 
     func _format_log_method_network(time: float, level: int, peer_id: int, method: String, message: String, args: Array = []) -> String:
         var level_str := Utils.level_to_string(level).to_upper()
-        return "[{time}] {[level_str}] [{name}::{method}] *{peer_id}* {args}".format({
+        return "[{time}] [{level_str}] [{name}::{method}] *{peer_id}* {args}".format({
             "time": "%0.3f" % time,
             "level_str": level_str,
             "name": name,

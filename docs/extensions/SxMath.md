@@ -34,22 +34,6 @@
 >   
 > Example:  
 >   var xform := SxMath.interpolate_align_with_y(transform, Vector3(1, 1, 1), 0.25)  
-### `rand_range_i`
-
-*Prototype*: `static func rand_range_i(from: int, to: int) -> int`
-
-> Generate a random integer between two values.  
->   
-> Example:  
->   var n := SxMath.rand_range_i(1, 2)  
-### `rand_range_vec2`
-
-*Prototype*: `static func rand_range_vec2(from: Vector2, to: Vector2) -> Vector2`
-
-> Generate a random Vector2 between two values for each component.  
->   
-> Example:  
->   var n := SxMath.rand_range_vec2(Vector2.ZERO, Vector2.ONE)  
 ### `map`
 
 *Prototype*: `static func map(value: float, istart: float, istop: float, ostart: float, ostop: float) -> float`
