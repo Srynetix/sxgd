@@ -286,9 +286,9 @@ static func configure_log_levels(conf: String) -> void:
         if len_split == 0:
             continue
         elif len_split == 1:
-            set_max_log_level("root", Utils.level_from_name(split[0]))
+            set_max_log_level("root", _LogUtils.level_from_name(split[0]))
         elif len_split == 2:
-            set_max_log_level(split[0], Utils.level_from_name(split[0]))
+            set_max_log_level(split[0], _LogUtils.level_from_name(split[0]))
 
 # Set maximum log level for a specific logger.
 #

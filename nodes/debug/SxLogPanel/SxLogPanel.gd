@@ -30,7 +30,7 @@ func _update_text():
             logger_name = "root"
 
         var text := "[b][color=yellow][%0.3f][/color][/b] " % message.time
-        text += "[b][color=yellow][%s][/color][/b] " % SxLog.Utils.level_to_string(message.level).to_upper()
+        text += "[b][color=yellow][%s][/color][/b] " % SxLog._LogUtils.level_to_string(message.level).to_upper()
         text += "[b][color=green][%s][/color][/b] " % message.logger_name
         text += message.message
 
