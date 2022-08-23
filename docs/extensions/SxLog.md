@@ -100,13 +100,13 @@
 
 *Prototype*: `static func pop_messages() -> Array`
 
-## Utils
+## _LogUtils
 
 |    |     |
 |----|-----|
 |*Inherits from*|`Node`|
 
-### Utils, Static methods
+### _LogUtils, Static methods
 
 #### `level_to_string`
 

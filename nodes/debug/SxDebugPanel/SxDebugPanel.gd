@@ -5,7 +5,8 @@ class_name SxDebugPanel
 # Panel type to display.
 enum PanelType {
     DEBUG_INFO,
-    LOG
+    LOG,
+    NODE_TRACER,
 }
 
 # Should the panel be visible on startup?
@@ -13,6 +14,7 @@ export var visible_on_startup := false
 
 onready var main_panel := $Panel as Panel
 onready var log_panel := $Panel/HBoxContainer/Container/SxLogPanel as SxLogPanel
+onready var node_tracer := $Panel/HBoxContainer/Container/NodeTracerSystem as SxNodeTracerSystem
 onready var debug_info := $Panel/SxDebugInfo as SxDebugInfo
 onready var _visible := visible_on_startup
 
@@ -21,6 +23,7 @@ var _current_panel := PanelType.DEBUG_INFO as int
 func _ready():
     debug_info.set_visibility(false)
     main_panel.visible = false
+    node_tracer.visible = false
     log_panel.visible = false
 
     if visible_on_startup:
@@ -54,15 +57,21 @@ func _show_panel(panel_type: int) -> void:
             debug_info.set_visibility(true)
         PanelType.LOG:
             log_panel.visible = true
+        PanelType.NODE_TRACER:
+            node_tracer.visible = true
 
 func _hide_panels() -> void:
     debug_info.set_visibility(false)
     log_panel.visible = false
+    node_tracer.visible = false
 
 func _input(event: InputEvent):
     if event is InputEventKey:
         if event.pressed && event.scancode == KEY_F12:
             toggle_panel()
+
+        elif event.pressed && event.scancode == KEY_F9 && _visible:
+            _show_panel(PanelType.NODE_TRACER)
 
         elif event.pressed && event.scancode == KEY_F10 && _visible:
             _show_panel(PanelType.LOG)

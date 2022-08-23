@@ -33,6 +33,11 @@
 *Prototype*: `static func is_network_master(node: Node) -> bool`
 
 > Check if a node is a network master  
+### `is_network_server`
+
+*Prototype*: `static func is_network_server(tree: SceneTree) -> bool`
+
+> Check if a node is a network server  
 ### `is_network_enabled`
 
 *Prototype*: `static func is_network_enabled(tree: SceneTree) -> bool`

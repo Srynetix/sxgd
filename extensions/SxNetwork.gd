@@ -17,6 +17,10 @@ static func get_sender_nuid(node: Node) -> int:
 
 # Generate a network name from a node name and a UUID
 static func generate_network_name(name: String, guid: String) -> String:
+    # Edge case: if the name and the GUID is the same, just return the name
+    if name == guid:
+        return name
+
     if guid != "":
         return "%s#%s" % [name, guid]
     else:
@@ -28,6 +32,13 @@ static func is_network_master(node: Node) -> bool:
         return true
     else:
         return node.is_network_master()
+
+# Check if a node is a network server
+static func is_network_server(tree: SceneTree) -> bool:
+    if tree.network_peer == null:
+        return true
+    else:
+        return tree.is_network_server()
 
 # Check if a network peer is enabled for a scene tree
 static func is_network_enabled(tree: SceneTree) -> bool:
