@@ -20,7 +20,7 @@
 
 ### `fade_to_scene`
 
-*Prototype*: `func fade_to_scene(scene: PackedScene) -> void`
+*Prototype*: `func fade_to_scene(scene: PackedScene, speed: float = 1) -> void`
 
 > Fade current scene to another loaded scene.  
 >   
@@ -28,7 +28,7 @@
 >   SxSceneTransitioner.fade_to_scene(my_scene)  
 ### `fade_to_scene_path`
 
-*Prototype*: `func fade_to_scene_path(scene_path: String) -> void`
+*Prototype*: `func fade_to_scene_path(scene_path: String, speed: float = 1) -> void`
 
 > Fade current scene to another scene, loaded before the process.  
 >   
@@ -36,7 +36,7 @@
 >   SxSceneTransitioner.fade_to_scene_path("res://my_scene.tscn")  
 ### `fade_to_cached_scene`
 
-*Prototype*: `func fade_to_cached_scene(cache: SxLoadCache, scene_name: String) -> void`
+*Prototype*: `func fade_to_cached_scene(cache: SxLoadCache, scene_name: String, speed: float = 1) -> void`
 
 > Fade current scene to another scene, using a SxLoadCache.  
 >   

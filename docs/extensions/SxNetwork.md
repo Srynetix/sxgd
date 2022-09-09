@@ -23,6 +23,11 @@
 *Prototype*: `static func get_sender_nuid(node: Node) -> int`
 
 > Shortcut to get the sender network unique ID  
+### `is_root`
+
+*Prototype*: `static func is_root(node: Node) -> bool`
+
+> Shortcut to check if the current NUID is root  
 ### `generate_network_name`
 
 *Prototype*: `static func generate_network_name(name: String, guid: String) -> String`
@@ -33,6 +38,11 @@
 *Prototype*: `static func is_network_master(node: Node) -> bool`
 
 > Check if a node is a network master  
+### `get_network_master`
+
+*Prototype*: `static func get_network_master(node: Node) -> int`
+
+> Get a node network master ID  
 ### `is_network_server`
 
 *Prototype*: `static func is_network_server(tree: SceneTree) -> bool`
