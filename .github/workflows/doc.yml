@@ -17,7 +17,7 @@ jobs:
       - name: Build documentation
         run: cd doc && asciidoctor index.adoc
       - name: Cleanup
-        run: rm -rf doc/classes_xml doc/.gitignore doc/.gdignore doc/class.xsd
+        run: rm -rf doc/classes_xml doc/tools doc/.gitignore doc/.gdignore doc/class.xsd && find . -name "*.adoc" -delete
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
