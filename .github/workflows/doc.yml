@@ -16,6 +16,8 @@ jobs:
         run: sudo gem install asciidoctor
       - name: Build documentation
         run: cd doc && asciidoctor index.adoc
+      - name: Cleanup
+        run: rm -rf doc/classes_xml doc/.gitignore doc/.gdignore doc/class.xsd
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
