@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxNode" inherits="Reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Node helpers.
+    </brief_description>
+    <description>
+        Generic node helpers.
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="print_tree_to_string" qualifiers="static">
+            <return type="String" />
+            <argument index="0" name="node" type="Node" />
+            <description>
+                Returns the hierarchy tree from a specific node as a string.
+
+                [source,gdscript]
+                .Example
+                ----
+                var my_node := $MyNode as Node
+                var tree := SxNode.print_tree_to_string(my_node)
+                ----
+            </description>
+        </method>
+        <method name="print_tree_pretty_to_string" qualifiers="static">
+            <return type="String" />
+            <argument index="0" name="node" type="Node" />
+            <description>
+                Returns the "pretty" hierarchy tree from a specific node as a string.
+
+                [source,gdscript]
+                .Example
+                ----
+                var my_node := $MyNode as Node
+                var tree := SxNode.print_tree_pretty_to_string(my_node)
+                ----
+            </description>
+        </method>
+    </methods>
+</class>

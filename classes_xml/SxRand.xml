@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxRand" inherits="Reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Rand methods.
+    </brief_description>
+    <description>
+        Generic rand methods.
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="range_i" qualifiers="static">
+            <return type="int" />
+            <argument index="0" name="from" type="int" />
+            <argument index="1" name="to" type="int" />
+            <description>
+                Generate a random integer between two values.
+
+                [source,gdscript]
+                .Example
+                ----
+                var n := SxRand.range_i(1, 2)
+                ----
+            </description>
+        </method>
+        <method name="range_vec2" qualifiers="static">
+            <return type="Vector2" />
+            <argument index="0" name="from" type="Vector2" />
+            <argument index="1" name="to" type="Vector2" />
+            <description>
+                Generate a random Vector2 between two values for each component.
+
+                [source,gdscript]
+                .Example
+                ----
+                var n := SxRand.range_vec2(Vector2.ZERO, Vector2.ONE)
+                ----
+            </description>
+        </method>
+        <method name="chance_bool" qualifiers="static">
+            <return type="bool" />
+            <argument index="0" name="chance" type="int" />
+            <description>
+                Generate a random boolean following a chance percentage (between 0 and 100).
+
+                [source,gdscript]
+                .Example
+                ----
+                # 75% chance!
+                var n := SxRand.chance_bool(75)
+                ----
+            </description>
+        </method>
+        <method name="choice_array" qualifiers="static">
+            <return type="Variant" />
+            <argument index="0" name="array" type="Array" />
+            <description>
+                Choose a random value from a non-empty array.
+
+                [source,gdscript]
+                .Example
+                ----
+                var v := SxRand.choice_array([1, 2, 3])
+                ----
+            </description>
+        </method>
+    </methods>
+</class>

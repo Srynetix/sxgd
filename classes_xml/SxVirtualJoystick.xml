@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxVirtualJoystick" inherits="TextureRect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Virtual joystick to be included in a &lt;&lt;_sxvirtualcontrols&gt;&gt;.
+    </brief_description>
+    <description>
+        Virtual joystick to be included in a &lt;&lt;_sxvirtualcontrols&gt;&gt;.
+    </description>
+    <tutorials></tutorials>
+    <members>
+        <member name="action_axis_left" type="String">
+            Action to press on axis left.
+        </member>
+        <member name="action_axis_right" type="String">
+            Action to press on axis right.
+        </member>
+        <member name="action_axis_up" type="String">
+            Action to press on axis up.
+        </member>
+        <member name="action_axis_down" type="String">
+            Action to press on axis down.
+        </member>
+        <member name="dead_zone" type="float" default="0.3">
+            Dead zone.
+        </member>
+    </members>
+    <signals>
+        <signal name="changed">
+            <argument index="0" name="movement" type="Vector2" />
+            <description>
+                The joystick value has changed.
+            </description>
+        </signal>
+        <signal name="touched">
+            <description>
+                The button was touched.
+            </description>
+        </signal>
+        <signal name="released">
+            <description>
+                The button was released.
+            </description>
+        </signal>
+    </signals>
+</class>

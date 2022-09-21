@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxGameData" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        A general-purpose in-memory key-value store, to be used through inheritance and autoload.
+    </brief_description>
+    <description>
+        A general-purpose in-memory key-value store, to be used through inheritance and autoload.
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="store_value">
+            <return type="void" />
+            <argument index="0" name="name" type="String" />
+            <argument index="1" name="value" type="Variant" />
+            <argument index="2" name="category" type="String" default="default" />
+            <description>
+                Store value in game data.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                my_data.store_value("key", 123)
+                my_data.store_value("key2", "hello")
+                my_data.store_value("key3", "hello", "my_category")
+                ----
+            </description>
+        </method>
+        <method name="load_value">
+            <return type="Variant" />
+            <argument index="0" name="name" type="String" />
+            <argument index="1" name="orDefault" type="Variant" default="null" />
+            <argument index="2" name="category" type="String" default="default" />
+            <description>
+                Load value from game data.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                var levels = data.load_value("levels", Dictionary())  # returns a new Dictionary if key is missing
+                var levels2 = data.load_value("my_data", Dictionary(), "my_category")
+                ----
+            </description>
+        </method>
+        <method name="store_static_value">
+            <return type="void" />
+            <argument index="0" name="name" type="String" />
+            <argument index="1" name="value" type="Variant" />
+            <argument index="2" name="category" type="String" default="default" />
+            <description>
+                Store static value in game data. +
+                Static data is not persisted to disk.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                my_data.store_static_value("levels", json_levels)
+                my_data.store_static_value("my_data", my_data, "my_category")
+                ----
+            </description>
+        </method>
+        <method name="load_static_value">
+            <return type="Variant" />
+            <argument index="0" name="name" type="String" />
+            <argument index="1" name="orDefault" type="Variant" default="null" />
+            <argument index="2" name="category" type="String" default="default" />
+            <description>
+                Load static value from game data. +
+                Static data is not persisted to disk.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                var levels = data.load_static_value("levels", Dictionary())  # returns a new Dictionary if key is missing
+                var levels2 = data.load_static_value("my_data", Dictionary(), "my_category")
+                ----
+            </description>
+        </method>
+        <method name="store_temporary_value">
+            <return type="void" />
+            <argument index="0" name="name" type="String" />
+            <argument index="1" name="value" type="Variant" />
+            <argument index="2" name="category" type="String" default="default" />
+            <description>
+                Store temporary value in game data. +
+                Temporary data is not persisted to disk.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                my_data.store_temporary_value("foo", "bar")
+                my_data.store_temporary_value("foo", "bar", "my_category")
+                ----
+            </description>
+        </method>
+        <method name="load_temporary_value">
+            <return type="Variant" />
+            <argument index="0" name="name" type="String" />
+            <argument index="1" name="orDefault" type="Variant" default="null" />
+            <argument index="2" name="category" type="String" default="default" />
+            <description>
+                Load temporary value from game data. +
+                Temporary data is not persisted to disk.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                var tmp = data.load_temporary_value("foo")
+                var tmp2 = data.load_temporary_value("foo", "default", "my_category")  # returns the "default" string if key is missing
+                ----
+            </description>
+        </method>
+        <method name="increment">
+            <return type="int" />
+            <argument index="0" name="name" type="String" />
+            <argument index="1" name="category" type="String" default="default" />
+            <description>
+                Increment a key and returns the value. +
+                Starts from 0 if the key does not exist.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                var value := data.increment("key")
+                var value2 := data.increment("key", "my_category")
+                ----
+            </description>
+        </method>
+        <method name="decrement">
+            <return type="int" />
+            <argument index="0" name="name" type="String" />
+            <argument index="1" name="category" type="String" default="default" />
+            <description>
+                Decrement a key and returns the value. +
+                Starts from 0 if the key does not exist.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                var value := data.decrement("key")
+                var value2 := data.decrement("key", "my_category")
+                ----
+            </description>
+        </method>
+        <method name="has_value">
+            <return type="bool" />
+            <argument index="0" name="name" type="String" />
+            <argument index="1" name="category" type="String" default="default" />
+            <description>
+                Test if game data contains a key.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                var exists := data.has_value("key")
+                var exists2 := data.has_value("key", "my_category")
+                ----
+            </description>
+        </method>
+        <method name="remove">
+            <return type="bool" />
+            <argument index="0" name="name" type="String" />
+            <argument index="1" name="category" type="String" default="default" />
+            <description>
+                Remove a key from game data. +
+                Returns `true` if the key was found, `false` if not.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                data.remove("key")
+                data.remove("key", "my_category")
+                ----
+            </description>
+        </method>
+        <method name="persist_to_disk">
+            <return type="void" />
+            <argument index="0" name="path" type="String" default="" />
+            <description>
+                Persist game data to disk at a specific path. +
+                If no path is given to the method, it will uses the `default_file_path` attribute.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                data.persist_to_disk()
+                data.persist_to_disk("user://my_path.dat")
+                ----
+            </description>
+        </method>
+        <method name="load_from_disk">
+            <return type="void" />
+            <argument index="0" name="path" type="String" default="" />
+            <description>
+                Load game data from disk at a specific path. +
+                If no path is given to the method, it will uses the `default_file_path` attribute.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                data.load_from_disk()
+                data.load_from_disk("user://my_path.dat")
+                ----
+            </description>
+        </method>
+        <method name="clear_all">
+            <return type="void" />
+            <description>
+                Clear all non-static data.
+            </description>
+        </method>
+        <method name="clear_category">
+            <return type="void" />
+            <argument index="0" name="category" type="String" />
+            <description>
+                Clear all non-static data for a specific category.
+            </description>
+        </method>
+        <method name="dump_all">
+            <return type="String" />
+            <description>
+                Dump each variable to string.
+            </description>
+        </method>
+        <method name="dump_category">
+            <return type="String" />
+            <argument index="0" name="category" type="String" />
+            <description>
+                Dump each variable to string for a specific category.
+            </description>
+        </method>
+    </methods>
+    <members>
+        <member name="default_file_path" type="String">
+            Default file path used in the `persist_to_disk` and `load_from_disk` methods.
+        </member>
+    </members>
+    <constants></constants>
+</class>

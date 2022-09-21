@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxLoadCache" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        A resource/scene loader, exposing a `load_resources` method to implement through inheritance and autoload.
+    </brief_description>
+    <description>
+        A resource/scene loader, exposing a `load_resources` method to implement through inheritance and autoload. +
+        Useful to load every needed resources at game startup.
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="load_resources">
+            <return type="void" />
+            <description>
+                Load resources in cache.
+                +
+                Should be overriden by child classes.
+            </description>
+        </method>
+        <method name="store_scene">
+            <return type="void" />
+            <argument index="0" name="scene_name" type="String" />
+            <argument index="1" name="scene_path" type="String" />
+            <description>
+                Store a scene in the cache from its path.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                var cache := SxLoadCache.new()
+                cache.store_scene("MyScene", "res://my_scene.tscn")
+                ----
+            </description>
+        </method>
+        <method name="store_resource">
+            <return type="void" />
+            <argument index="0" name="resource_name" type="String" />
+            <argument index="1" name="resource_path" type="String" />
+            <description>
+                Store a resource in the cache from its path.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                var cache := SxLoadCache.new()
+                cache.store_resource("MyResource", "res://my_resource.tres")
+                ----
+            </description>
+        </method>
+        <method name="has_scene">
+            <return type="bool" />
+            <argument index="0" name="scene_name" type="String" />
+            <description>
+                Test if the cache has a specific scene registered.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                var cache := SxLoadCache.new()
+                if cache.has_scene("MyScene"):
+                    print("OK !")
+                ----
+            </description>
+        </method>
+        <method name="has_resource">
+            <return type="bool" />
+            <argument index="0" name="resource_name" type="String" />
+            <description>
+                Test if the cache has a specific resource registered.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                var cache := SxLoadCache.new()
+                if cache.has_resource("MyResource"):
+                    print("OK !")
+                ----
+            </description>
+        </method>
+        <method name="load_scene">
+            <return type="PackedScene" />
+            <argument index="0" name="scene_name" type="String" />
+            <description>
+                Load a stored scene.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                var cache := SxLoadCache.new()
+                var scene := cache.load_scene("MyScene")
+                ----
+            </description>
+        </method>
+        <method name="load_resource">
+            <return type="Resource" />
+            <argument index="0" name="resource_name" type="String" />
+            <description>
+                Load a stored resource.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                var cache := SxLoadCache.new()
+                var resource := cache.load_resource("MyResource")
+                ----
+            </description>
+        </method>
+        <method name="instantiate_scene">
+            <return type="Node" />
+            <argument index="0" name="scene_name" type="String" />
+            <description>
+                Instantiate a stored scene.
+                +
+                [source,gdscript]
+                .Example
+                ----
+                var cache := SxLoadCache.new()
+                var instance := cache.instantiate_scene("MyScene") as MyScene
+                ----
+            </description>
+        </method>
+    </methods>
+    <members>
+    </members>
+    <constants></constants>
+</class>

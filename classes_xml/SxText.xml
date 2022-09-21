@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxText" inherits="Reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Text methods.
+    </brief_description>
+    <description>
+        Generic text methods.
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="to_camel_case" qualifiers="static">
+            <return type="String" />
+            <argument index="0" name="s" type="String" />
+            <description>
+                Convert a text to camel case.
+
+                [source,gdscript]
+                .Example
+                ----
+                var text := SxText.to_camel_case("hello_world")
+                # => text = "helloWorld"
+                ----
+            </description>
+        </method>
+        <method name="to_pascal_case" qualifiers="static">
+            <return type="String" />
+            <argument index="0" name="s" type="String" />
+            <description>
+                Convert a text to Pascal case.
+
+                [source,gdscript]
+                .Example
+                ----
+                var text := SxText.to_pascal_case("hello_world")
+                # => text = "HelloWorld"
+                ----
+            </description>
+        </method>
+    </methods>
+</class>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxFullScreenConfirmationDialog" inherits="SxFullScreenDialog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        A full-screen confirmation dialog, useful for mobile environment.
+    </brief_description>
+    <description>
+        A full-screen confirmation dialog, useful for mobile environment.
+
+        image::images/nodes/SxFullScreenConfirmationDialog.gif[align="center"]
+    </description>
+    <tutorials></tutorials>
+    <members>
+        <member name="message" type="String" default="Are you sure?">
+            Confirmation message.
+        </member>
+    </members>
+    <signals>
+        <signal name="confirmed">
+            <description>
+                On user confirmation.
+            </description>
+        </signal>
+        <signal name="canceled">
+            <description>
+                On user cancellation.
+            </description>
+        </signal>
+    </signals>
+    <constants>
+    </constants>
+</class>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxAudioMultiStreamPlayer" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Audio player with multiple simultaneous voices.
+    </brief_description>
+    <description>
+        An audio player with multiple simultaneous voices, configurable through the `max_voices` parameter.
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="get_voice">
+            <return type="AudioStreamPlayer" />
+            <argument index="0" name="voice" type="int" />
+            <description>
+                Get a voice by index.
+
+                [source,gdscript]
+                .Example
+                ----
+                var my_player := $SxAudioMultiStreamPlayer as SxAudioMultiStreamPlayer
+                var first_voice := my_player.get_voice(0)
+                ----
+            </description>
+        </method>
+        <method name="play">
+            <return type="void" />
+            <argument index="0" name="stream" type="AudioStream" />
+            <description>
+                Play a stream on an auto-selected voice.
+
+                [source,gdscript]
+                .Example
+                ----
+                var my_player := $SxAudioMultiStreamPlayer as SxAudioMultiStreamPlayer
+                my_player.play(my_stream)
+                ----
+            </description>
+        </method>
+        <method name="play_on_player">
+            <return type="void" />
+            <argument index="0" name="stream" type="AudioStream" />
+            <argument index="1" name="player" type="AudioStreamPlayer" />
+            <description>
+                Play a stream on a specific player.
+
+                [source,gdscript]
+                .Example
+                ----
+                var my_player := $SxAudioMultiStreamPlayer as SxAudioMultiStreamPlayer
+                var first_voice := my_player.get_voice(0)
+                my_player.play_on_player(my_stream, first_voice)
+                ----
+            </description>
+        </method>
+        <method name="play_on_voice">
+            <return type="void" />
+            <argument index="0" name="stream" type="AudioStream" />
+            <argument index="1" name="voice" type="int" />
+            <description>
+                Play a stream on a specific voice.
+
+                [source,gdscript]
+                .Example
+                ----
+                var my_player := $SxAudioMultiStreamPlayer as SxAudioMultiStreamPlayer
+                my_player.play_on_voice(my_stream, 0)
+                ----
+            </description>
+        </method>
+    </methods>
+    <members>
+        <member name="max_voices" type="int" default="4">
+            Maximum simultaneous voices.
+        </member>
+        <member name="audio_bus_output" type="String" default="Master">
+            Audio bus output.
+        </member>
+    </members>
+    <constants></constants>
+</class>
