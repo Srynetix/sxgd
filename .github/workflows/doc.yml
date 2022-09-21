@@ -12,10 +12,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Build .adoc files from XML
         run: cd doc && python tools/build_xml_adoc.py --all
+      - name: Install Asciidoctor
+        run: gem install asciidoctor
       - name: Build documentation
-        uses: tonynv/asciidoctor-action@master
-        with:
-          program: "cd ./doc && asciidoctor index.adoc"
+        run: cd doc && asciidoctor index.adoc
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
