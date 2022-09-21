@@ -13,7 +13,7 @@ jobs:
       - name: Build .adoc files from XML
         run: cd doc && python tools/build_xml_adoc.py --all
       - name: Install Asciidoctor
-        run: gem install asciidoctor
+        run: sudo gem install asciidoctor
       - name: Build documentation
         run: cd doc && asciidoctor index.adoc
       - name: Deploy to GitHub Pages 🚀
