@@ -2,4 +2,4 @@
 
 My personal collection of Godot Engine nodes and extensions.
 
-You can view all included stuff in the [documentation](./docs/readme.md) section.
+You can view all included stuff in the [documentation](https://srynetix.github.io/sxgd/).
