@@ -243,6 +243,8 @@ class Context:
         )
 
     def convert_to_adoc(self):
+        os.makedirs(Path(os.getcwd()) / "classes", exist_ok=True)
+
         for path, cdef in self.known_classes.items():
             stream = StringIO()
             writer = ADocWriter(stream=stream, known_names=self.known_names, standard_names=self.standard_names)
