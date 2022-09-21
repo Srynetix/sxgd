@@ -1,0 +1,77 @@
+=== SxMath
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_reference.html#reference[Reference^]*
+
+Math helpers.
+
+Description::
+    Generic math helpers.
+
+[#_sxmath_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_vector3.html#vector3[Vector3^]`
+|`static <<_sxmath_method_lerp_vector3,lerp_vector3>> ( https://docs.godotengine.org/en/stable/classes/class_vector3.html#vector3[Vector3^] from, https://docs.godotengine.org/en/stable/classes/class_vector3.html#vector3[Vector3^] to, https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] weight )`
+|`https://docs.godotengine.org/en/stable/classes/class_transform.html#transform[Transform^]`
+|`static <<_sxmath_method_align_with_y,align_with_y>> ( https://docs.godotengine.org/en/stable/classes/class_transform.html#transform[Transform^] transform, https://docs.godotengine.org/en/stable/classes/class_vector3.html#vector3[Vector3^] new_y )`
+|`https://docs.godotengine.org/en/stable/classes/class_transform.html#transform[Transform^]`
+|`static <<_sxmath_method_interpolate_align_with_y,interpolate_align_with_y>> ( https://docs.godotengine.org/en/stable/classes/class_transform.html#transform[Transform^] transform, https://docs.godotengine.org/en/stable/classes/class_vector3.html#vector3[Vector3^] new_y, https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] weight )`
+|`https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^]`
+|`static <<_sxmath_method_map,map>> ( https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] value, https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] istart, https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] istop, https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] ostart, https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] ostop )`
+|===
+
+[#_sxmath_method_descriptions]
+==== Method Descriptions
+
+[#_sxmath_method_lerp_vector3]
+* `static https://docs.godotengine.org/en/stable/classes/class_vector3.html#vector3[Vector3^] lerp_vector3 ( https://docs.godotengine.org/en/stable/classes/class_vector3.html#vector3[Vector3^] from, https://docs.godotengine.org/en/stable/classes/class_vector3.html#vector3[Vector3^] to, https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] weight )`
++
+Lerp a Vector3 towards another using a floating-point weight.
+
+[source,gdscript]
+.Example
+----
+var vec3 := SxMath.lerp_vector3(vec1, vec2, 0.25)
+----
+
+[#_sxmath_method_align_with_y]
+* `static https://docs.godotengine.org/en/stable/classes/class_transform.html#transform[Transform^] align_with_y ( https://docs.godotengine.org/en/stable/classes/class_transform.html#transform[Transform^] transform, https://docs.godotengine.org/en/stable/classes/class_vector3.html#vector3[Vector3^] new_y )`
++
+Align a transform with a Y vector.
+
+[source,gdscript]
+.Example
+----
+var xform := SxMath.align_with_y(transform, Vector3(1, 1, 1))
+----
+
+[#_sxmath_method_interpolate_align_with_y]
+* `static https://docs.godotengine.org/en/stable/classes/class_transform.html#transform[Transform^] interpolate_align_with_y ( https://docs.godotengine.org/en/stable/classes/class_transform.html#transform[Transform^] transform, https://docs.godotengine.org/en/stable/classes/class_vector3.html#vector3[Vector3^] new_y, https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] weight )`
++
+Align a transform with a Y vector using interpolation.
+
+[source,gdscript]
+.Example
+----
+var xform := SxMath.interpolate_align_with_y(transform, Vector3(1, 1, 1), 0.25)
+----
+
+[#_sxmath_method_map]
+* `static https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] map ( https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] value, https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] istart, https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] istop, https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] ostart, https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] ostop )`
++
+Map a float value from one set of bounds to another.
+
+[source,gdscript]
+.Example
+----
+# Change the value 10 from bounds (0, 10) to bounds (0, 1)
+var n := SxMath.map(10, 0, 10, 0, 1)
+# => n = 1
+
+# Change the value 5 from bounds (0, 10) to bounds (0, 1)
+var n := SxMath.map(5, 0, 10, 0, 1)
+# => n = 0.5
+----
+

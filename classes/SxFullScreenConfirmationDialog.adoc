@@ -1,0 +1,42 @@
+=== SxFullScreenConfirmationDialog
+
+*Inherits: <<_sxfullscreendialog>>*
+
+A full-screen confirmation dialog, useful for mobile environment.
+
+Description::
+    A full-screen confirmation dialog, useful for mobile environment.
+
+image::images/nodes/SxFullScreenConfirmationDialog.gif[align="center"]
+
+[#_sxfullscreenconfirmationdialog_signals]
+==== Signals
+
+[#_sxfullscreenconfirmationdialog_signal_confirmed]
+* `confirmed ()`
++
+On user confirmation.
+
+[#_sxfullscreenconfirmationdialog_signal_canceled]
+* `canceled ()`
++
+On user cancellation.
+
+[#_sxfullscreenconfirmationdialog_properties]
+==== Properties
+
+[cols="1,2,1"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^]`
+|`<<_sxfullscreenconfirmationdialog_member_message,message>>`
+|`Are you sure?`
+|===
+
+[#_sxfullscreenconfirmationdialog_property_descriptions]
+==== Property Descriptions
+
+[#_sxfullscreenconfirmationdialog_member_message]
+* `https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message`
++
+Confirmation message.
+

@@ -1,0 +1,43 @@
+=== SxDoubleTap
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^]*
+
+Double-tap detector.
+
+Description::
+    Double-tap detector, useful for mobile environments.
+
+[#_sxdoubletap_signals]
+==== Signals
+
+[#_sxdoubletap_signal_doubletap]
+* `doubletap ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] touch_idx )`
++
+Event emitted on double-tap.
+
+[#_sxdoubletap_properties]
+==== Properties
+
+[cols="1,2,1"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^]`
+|`<<_sxdoubletap_member_threshold_ms,threshold_ms>>`
+|`200`
+|`https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^]`
+|`<<_sxdoubletap_member_should_process_input,should_process_input>>`
+|`true`
+|===
+
+[#_sxdoubletap_property_descriptions]
+==== Property Descriptions
+
+[#_sxdoubletap_member_threshold_ms]
+* `https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] threshold_ms`
++
+Detection threshold value in milliseconds.
+
+[#_sxdoubletap_member_should_process_input]
+* `https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^] should_process_input`
++
+Disable this if the tap detector should process input or not.
+

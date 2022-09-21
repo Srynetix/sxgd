@@ -1,0 +1,47 @@
+=== SxText
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_reference.html#reference[Reference^]*
+
+Text methods.
+
+Description::
+    Generic text methods.
+
+[#_sxtext_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^]`
+|`static <<_sxtext_method_to_camel_case,to_camel_case>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] s )`
+|`https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^]`
+|`static <<_sxtext_method_to_pascal_case,to_pascal_case>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] s )`
+|===
+
+[#_sxtext_method_descriptions]
+==== Method Descriptions
+
+[#_sxtext_method_to_camel_case]
+* `static https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] to_camel_case ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] s )`
++
+Convert a text to camel case.
+
+[source,gdscript]
+.Example
+----
+var text := SxText.to_camel_case("hello_world")
+# => text = "helloWorld"
+----
+
+[#_sxtext_method_to_pascal_case]
+* `static https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] to_pascal_case ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] s )`
++
+Convert a text to Pascal case.
+
+[source,gdscript]
+.Example
+----
+var text := SxText.to_pascal_case("hello_world")
+# => text = "HelloWorld"
+----
+

@@ -1,0 +1,39 @@
+=== SxBuffer
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_reference.html#reference[Reference^]*
+
+Buffer helpers.
+
+Description::
+    Generic buffer helpers.
+
+[#_sxbuffer_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray[PoolByteArray^]`
+|`static <<_sxbuffer_method_zstd_compress,zstd_compress>> ( https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray[PoolByteArray^] array )`
+|`https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray[PoolByteArray^]`
+|`static <<_sxbuffer_method_zstd_decompress,zstd_decompress>> ( https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray[PoolByteArray^] array )`
+|===
+
+[#_sxbuffer_method_descriptions]
+==== Method Descriptions
+
+[#_sxbuffer_method_zstd_compress]
+* `static https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray[PoolByteArray^] zstd_compress ( https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray[PoolByteArray^] array )`
++
+Compress a byte array using zstd, adding original content size at the beginning.
+
+The content size is needed for Godot to decompress, so the resulting byte array is not valid zstd compressed data.
+To have a valid zstd compressed data, you need to strip the first 64 bits.
+
+[#_sxbuffer_method_zstd_decompress]
+* `static https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray[PoolByteArray^] zstd_decompress ( https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray[PoolByteArray^] array )`
++
+Decompress a byte array generated with `zstd_compress`.
+
+It is not usable with zstd compressed data generated elsewhere,
+because it expects a 64 bit integer at first representing the original data size (needed for Godot).
+

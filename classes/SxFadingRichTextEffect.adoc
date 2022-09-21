@@ -1,0 +1,27 @@
+=== SxFadingRichTextEffect
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_richtexteffect.html#richtexteffect[RichTextEffect^]*
+
+A per-character fade-in effect.
+
+Description::
+    A per-character fade-in effect.
+
+[#_sxfadingrichtexteffect_properties]
+==== Properties
+
+[cols="1,2,1"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^]`
+|`<<_sxfadingrichtexteffect_member_bbcode,bbcode>>`
+|`sxgd-fadein`
+|===
+
+[#_sxfadingrichtexteffect_property_descriptions]
+==== Property Descriptions
+
+[#_sxfadingrichtexteffect_member_bbcode]
+* `https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] bbcode`
++
+Exposed BBCode.
+

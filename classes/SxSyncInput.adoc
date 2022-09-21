@@ -1,0 +1,68 @@
+=== SxSyncInput
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^]*
+
+Synchronized input interface.
+
+Description::
+    Synchronized input interface.
+
+[#_sxsyncinput_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`<<_sxsyncpeerinput>>`
+|`<<_sxsyncinput_method_get_current_input,get_current_input>> ()`
+|`void`
+|`<<_sxsyncinput_method_create_peer_input,create_peer_input>> ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id )`
+|`void`
+|`<<_sxsyncinput_method_remove_peer_input,remove_peer_input>> ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id )`
+|`void`
+|`<<_sxsyncinput_method_update_peer_input_from_json,update_peer_input_from_json>> ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id, https://docs.godotengine.org/en/stable/classes/class_dictionary.html#dictionary[Dictionary^] input )`
+|`https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^]`
+|`<<_sxsyncinput_method_is_action_pressed,is_action_pressed>> ( https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^] source, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] action_name )`
+|`https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^]`
+|`<<_sxsyncinput_method_is_action_just_pressed,is_action_just_pressed>> ( https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^] source, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] action_name )`
+|`https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^]`
+|`<<_sxsyncinput_method_get_action_strength,get_action_strength>> ( https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^] source, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] action_name )`
+|===
+
+[#_sxsyncinput_method_descriptions]
+==== Method Descriptions
+
+[#_sxsyncinput_method_get_current_input]
+* `<<_sxsyncpeerinput>> get_current_input ()`
++
+Get the current player input.
+
+[#_sxsyncinput_method_create_peer_input]
+* `void create_peer_input ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id )`
++
+Create a peer input for a specific peer ID.
+
+[#_sxsyncinput_method_remove_peer_input]
+* `void remove_peer_input ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id )`
++
+Remove a peer input for a specific peer ID.
+
+[#_sxsyncinput_method_update_peer_input_from_json]
+* `void update_peer_input_from_json ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id, https://docs.godotengine.org/en/stable/classes/class_dictionary.html#dictionary[Dictionary^] input )`
++
+Update peer input state from a JSON dict.
+
+[#_sxsyncinput_method_is_action_pressed]
+* `https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^] is_action_pressed ( https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^] source, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] action_name )`
++
+Check if an action is pressed for a specific node (will check its owner sync input).
+
+[#_sxsyncinput_method_is_action_just_pressed]
+* `https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^] is_action_just_pressed ( https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^] source, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] action_name )`
++
+Check if an action is "just pressed" for a specific node (will check its owner sync input).
+
+[#_sxsyncinput_method_get_action_strength]
+* `https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] get_action_strength ( https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^] source, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] action_name )`
++
+Get an action strength for a specific node (will check its owner sync input).
+

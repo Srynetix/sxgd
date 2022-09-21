@@ -1,0 +1,37 @@
+=== SxMotionBlur
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect[ColorRect^]*
+
+A ready-to-use motion blur.
+
+Description::
+    A ready-to-use motion blur.
+
+image::images/nodes/SxMotionBlur.gif[align="center"]
+
+[#_sxmotionblur_properties]
+==== Properties
+
+[cols="1,2,1"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^]`
+|`<<_sxmotionblur_member_angle_degrees,angle_degrees>>`
+|`None`
+|`https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^]`
+|`<<_sxmotionblur_member_strength,strength>>`
+|`None`
+|===
+
+[#_sxmotionblur_property_descriptions]
+==== Property Descriptions
+
+[#_sxmotionblur_member_angle_degrees]
+* `https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] angle_degrees`
++
+Rotation angle in degrees.
+
+[#_sxmotionblur_member_strength]
+* `https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] strength`
++
+Blur strength.
+

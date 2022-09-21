@@ -1,0 +1,67 @@
+=== SxJson
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_reference.html#reference[Reference^]*
+
+JSON helpers.
+
+Description::
+    Generic JSON helpers.
+
+[#_sxjson_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_variant.html#variant[Variant^]`
+|`static <<_sxjson_method_read_json_file,read_json_file>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] path )`
+|`https://docs.godotengine.org/en/stable/classes/class_variant.html#variant[Variant^]`
+|`static <<_sxjson_method_read_json_from_open_file,read_json_from_open_file>> ( https://docs.godotengine.org/en/stable/classes/class_file.html#file[File^] file )`
+|`void`
+|`static <<_sxjson_method_write_json_file,write_json_file>> ( https://docs.godotengine.org/en/stable/classes/class_variant.html#variant[Variant^] json, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] path )`
+|===
+
+[#_sxjson_method_descriptions]
+==== Method Descriptions
+
+[#_sxjson_method_read_json_file]
+* `static https://docs.godotengine.org/en/stable/classes/class_variant.html#variant[Variant^] read_json_file ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] path )`
++
+Read contents from a JSON file at path `path`.
+Errors will be logged in the `SxJson` logger (see SxLog).
+
+[source,gdscript]
+.Example
+----
+# If in this case you know your JSON is in object form, you can cast it to a Dictionary
+var data := SxJson.read_json_file("res://my_json_data.json") as Dictionary
+----
+
+[#_sxjson_method_read_json_from_open_file]
+* `static https://docs.godotengine.org/en/stable/classes/class_variant.html#variant[Variant^] read_json_from_open_file ( https://docs.godotengine.org/en/stable/classes/class_file.html#file[File^] file )`
++
+Read contents from an already opened JSON file.
+Errors will be logged in the `SxJson` logger (see SxLog).
+
+[source,gdscript]
+.Example
+----
+var file := File.new()
+var error := file.open("res://my_json_data.json")
+if error == OK:
+    # Now that the file is opened, you can use the method
+    var json_data = SxJson.read_json_from_open_file(file)
+----
+
+[#_sxjson_method_write_json_file]
+* `static void write_json_file ( https://docs.godotengine.org/en/stable/classes/class_variant.html#variant[Variant^] json, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] path )`
++
+Write JSON data at path `path`.
+Errors will be logged in the `SxJson` logger (see SxLog).
+
+[source,gdscript]
+.Example
+----
+var my_data := {"one": 1}
+SxJson.write_json_file(my_data, "user://my_data.json")
+----
+

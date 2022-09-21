@@ -1,0 +1,86 @@
+=== SxColor
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_reference.html#reference[Reference^]*
+
+Color helpers.
+
+Description::
+    Generic color helpers.
+
+[#_sxcolor_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_color.html#color[Color^]`
+|`static <<_sxcolor_method_with_alpha_f,with_alpha_f>> ( https://docs.godotengine.org/en/stable/classes/class_color.html#color[Color^] color, https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] alpha )`
+|`https://docs.godotengine.org/en/stable/classes/class_color.html#color[Color^]`
+|`static <<_sxcolor_method_with_alpha_i,with_alpha_i>> ( https://docs.godotengine.org/en/stable/classes/class_color.html#color[Color^] color, https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] alpha )`
+|`https://docs.godotengine.org/en/stable/classes/class_color.html#color[Color^]`
+|`static <<_sxcolor_method_rand,rand>> ()`
+|`https://docs.godotengine.org/en/stable/classes/class_color.html#color[Color^]`
+|`static <<_sxcolor_method_rand_with_alpha_f,rand_with_alpha_f>> ( https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] alpha )`
+|`https://docs.godotengine.org/en/stable/classes/class_color.html#color[Color^]`
+|`static <<_sxcolor_method_rand_with_alpha_i,rand_with_alpha_i>> ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] alpha )`
+|===
+
+[#_sxcolor_method_descriptions]
+==== Method Descriptions
+
+[#_sxcolor_method_with_alpha_f]
+* `static https://docs.godotengine.org/en/stable/classes/class_color.html#color[Color^] with_alpha_f ( https://docs.godotengine.org/en/stable/classes/class_color.html#color[Color^] color, https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] alpha )`
++
+Apply a floating-point alpha value on a color (between 0 and 1).
+
+[source,gdscript]
+.Example
+----
+# Creates a semi-transparent "aqua" color
+var c := SxColor.with_alpha_f(Color.aqua, 0.5)
+----
+
+[#_sxcolor_method_with_alpha_i]
+* `static https://docs.godotengine.org/en/stable/classes/class_color.html#color[Color^] with_alpha_i ( https://docs.godotengine.org/en/stable/classes/class_color.html#color[Color^] color, https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] alpha )`
++
+Apply an integer alpha value on a color (between 0 and 255).
+
+[source,gdscript]
+.Example
+----
+# Creates a semi-transparent "aqua" color
+var c := SxColor.with_alpha_i(Color.aqua, 127)
+----
+
+[#_sxcolor_method_rand]
+* `static https://docs.godotengine.org/en/stable/classes/class_color.html#color[Color^] rand ()`
++
+Generate a random color without transparency.
+
+[source,gdscript]
+.Example
+----
+var c := SxColor.rand()
+----
+
+[#_sxcolor_method_rand_with_alpha_f]
+* `static https://docs.godotengine.org/en/stable/classes/class_color.html#color[Color^] rand_with_alpha_f ( https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] alpha )`
++
+Generate a random color with a floating-point alpha value (between 0 and 1).
+
+[source,gdscript]
+.Example
+----
+var c := SxColor.rand_with_alpha_f(0.5)
+----
+
+[#_sxcolor_method_rand_with_alpha_i]
+* `static https://docs.godotengine.org/en/stable/classes/class_color.html#color[Color^] rand_with_alpha_i ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] alpha )`
++
+Generate a random color with a integer alpha value (between 0 and 255).
+
+[source,gdscript]
+.Example
+----
+var c := SxColor.rand_with_alpha_f(0.5)
+----
+

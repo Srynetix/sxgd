@@ -1,0 +1,67 @@
+=== SxFullScreenDialog
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_panel.html#panel[Panel^]*
+
+A full-screen dialog, useful for mobile environment.
+
+Description::
+    A full-screen dialog, useful for mobile environment.
+
+[#_sxfullscreendialog_properties]
+==== Properties
+
+[cols="1,2,1"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^]`
+|`<<_sxfullscreendialog_member_title,title>>`
+|`Dialog title`
+|`https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^]`
+|`<<_sxfullscreendialog_member_autohide,autohide>>`
+|`true`
+|`https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^]`
+|`<<_sxfullscreendialog_member_show_title,show_title>>`
+|`true`
+|===
+
+[#_sxfullscreendialog_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`void`
+|`<<_sxfullscreendialog_method_show,show>> ()`
+|`void`
+|`<<_sxfullscreendialog_method_hide,hide>> ()`
+|===
+
+[#_sxfullscreendialog_property_descriptions]
+==== Property Descriptions
+
+[#_sxfullscreendialog_member_title]
+* `https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] title`
++
+Dialog title.
+
+[#_sxfullscreendialog_member_autohide]
+* `https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^] autohide`
++
+Autohide the dialog on action.
+
+[#_sxfullscreendialog_member_show_title]
+* `https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^] show_title`
++
+Show the dialog title.
+
+[#_sxfullscreendialog_method_descriptions]
+==== Method Descriptions
+
+[#_sxfullscreendialog_method_show]
+* `void show ()`
++
+Show the dialog.
+
+[#_sxfullscreendialog_method_hide]
+* `void hide ()`
++
+Hide the dialog.
+

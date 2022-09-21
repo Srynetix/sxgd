@@ -1,0 +1,77 @@
+=== SxShockwave
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect[ColorRect^]*
+
+An animated shockwave effect.
+
+Description::
+    An animated shockwave effect.
+
+image::images/nodes/SxShockwave.gif[align="center"]
+
+[#_sxshockwave_properties]
+==== Properties
+
+[cols="1,2,1"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^]`
+|`<<_sxshockwave_member_wave_size,wave_size>>`
+|`None`
+|`https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2[Vector2^]`
+|`<<_sxshockwave_member_wave_center,wave_center>>`
+|`None`
+|`https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^]`
+|`<<_sxshockwave_member_force,force>>`
+|`None`
+|`https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^]`
+|`<<_sxshockwave_member_wave_thickness,wave_thickness>>`
+|`None`
+|===
+
+[#_sxshockwave_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`void`
+|`<<_sxshockwave_method_start_wave,start_wave>> ( https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2[Vector2^] position )`
+|`https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^]`
+|`<<_sxshockwave_method_wave_is_running,wave_is_running>> ()`
+|===
+
+[#_sxshockwave_property_descriptions]
+==== Property Descriptions
+
+[#_sxshockwave_member_wave_size]
+* `https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] wave_size`
++
+Wave size.
+
+[#_sxshockwave_member_wave_center]
+* `https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2[Vector2^] wave_center`
++
+Wave center.
+
+[#_sxshockwave_member_force]
+* `https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] force`
++
+Wave force.
+
+[#_sxshockwave_member_wave_thickness]
+* `https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] wave_thickness`
++
+Wave thickness.
+
+[#_sxshockwave_method_descriptions]
+==== Method Descriptions
+
+[#_sxshockwave_method_start_wave]
+* `void start_wave ( https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2[Vector2^] position )`
++
+Start the wave animation at a specific position.
+
+[#_sxshockwave_method_wave_is_running]
+* `https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^] wave_is_running ()`
++
+Check if the wave animation is running.
+

@@ -1,0 +1,60 @@
+=== SxRPCService
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^]*
+
+Main RPC interface.
+
+Description::
+    Main RPC interface.
+
+[#_sxrpcservice_properties]
+==== Properties
+
+[cols="1,2,1"]
+|===
+|`<<_sxclientrpc>>`
+|`<<_sxrpcservice_member_client,client>>`
+|`None`
+|`<<_sxserverrpc>>`
+|`<<_sxrpcservice_member_server,server>>`
+|`None`
+|`<<_sxsyncinput>>`
+|`<<_sxrpcservice_member_sync_input,sync_input>>`
+|`None`
+|===
+
+[#_sxrpcservice_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`<<_sxrpcservice>>`
+|`static <<_sxrpcservice_method_get_from_tree,get_from_tree>> ( https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree[SceneTree^] tree )`
+|===
+
+[#_sxrpcservice_property_descriptions]
+==== Property Descriptions
+
+[#_sxrpcservice_member_client]
+* `<<_sxclientrpc>> client`
++
+Access to the client RPC interface.
+
+[#_sxrpcservice_member_server]
+* `<<_sxserverrpc>> server`
++
+Access to the server RPC interface.
+
+[#_sxrpcservice_member_sync_input]
+* `<<_sxsyncinput>> sync_input`
++
+Access to the synchronized input interface.
+
+[#_sxrpcservice_method_descriptions]
+==== Method Descriptions
+
+[#_sxrpcservice_method_get_from_tree]
+* `static <<_sxrpcservice>> get_from_tree ( https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree[SceneTree^] tree )`
++
+Return the main RPC service for a target SceneTree.
+

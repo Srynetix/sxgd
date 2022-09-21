@@ -1,0 +1,34 @@
+=== SxArray
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_reference.html#reference[Reference^]*
+
+Array helpers.
+
+Description::
+    Generic array helpers.
+
+[#_sxarray_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^]`
+|`static <<_sxarray_method_trim_strings,trim_strings>> ( https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] array )`
+|===
+
+[#_sxarray_method_descriptions]
+==== Method Descriptions
+
+[#_sxarray_method_trim_strings]
+* `static https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] trim_strings ( https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] array )`
++
+Trim whitespace on each strings from a string array.
+
+[source,gdscript]
+.Example
+----
+var strings := ["  a", " b ", "c   "]
+var trimmed_strings := SxArray.trim_strings(strings)
+# => ["a", "b", "c"]
+----
+

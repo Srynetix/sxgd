@@ -1,0 +1,66 @@
+=== SxListenServerPeer
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^]*
+
+Configurable network peer, embedded in a SceneTree: a listen server.
+
+Description::
+    Configurable network peer, embedded in a SceneTree: a listen server.
+
+[#_sxlistenserverpeer_properties]
+==== Properties
+
+[cols="1,2,1"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^]`
+|`<<_sxlistenserverpeer_member_server_port,server_port>>`
+|`None`
+|`https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^]`
+|`<<_sxlistenserverpeer_member_max_players,max_players>>`
+|`None`
+|===
+
+[#_sxlistenserverpeer_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^]`
+|`<<_sxlistenserverpeer_method_get_server_root,get_server_root>> ()`
+|`https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree[SceneTree^]`
+|`<<_sxlistenserverpeer_method_get_server_tree,get_server_tree>> ()`
+|`<<_sxserverpeer>>`
+|`<<_sxlistenserverpeer_method_get_server,get_server>> ()`
+|===
+
+[#_sxlistenserverpeer_property_descriptions]
+==== Property Descriptions
+
+[#_sxlistenserverpeer_member_server_port]
+* `https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] server_port`
++
+Server port.
+
+[#_sxlistenserverpeer_member_max_players]
+* `https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] max_players`
++
+Max players allowed to join.
+
+[#_sxlistenserverpeer_method_descriptions]
+==== Method Descriptions
+
+[#_sxlistenserverpeer_method_get_server_root]
+* `https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^] get_server_root ()`
++
+Get the root node from the inner SceneTree.
+
+[#_sxlistenserverpeer_method_get_server_tree]
+* `https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree[SceneTree^] get_server_tree ()`
++
+Get the inner SceneTree.
+
+[#_sxlistenserverpeer_method_get_server]
+* `<<_sxserverpeer>> get_server ()`
++
+Get the server peer.
+

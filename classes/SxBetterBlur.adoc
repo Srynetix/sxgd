@@ -1,0 +1,29 @@
+=== SxBetterBlur
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_control.html#control[Control^]*
+
+A ready-to-use gaussian blur, compatible with GLES2.
+
+Description::
+    A ready-to-use gaussian blur, compatible with GLES2.
+
+image::images/nodes/SxBetterBlur.gif[align="center"]
+
+[#_sxbetterblur_properties]
+==== Properties
+
+[cols="1,2,1"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^]`
+|`<<_sxbetterblur_member_strength,strength>>`
+|`None`
+|===
+
+[#_sxbetterblur_property_descriptions]
+==== Property Descriptions
+
+[#_sxbetterblur_member_strength]
+* `https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] strength`
++
+Blur strength.
+

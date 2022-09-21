@@ -1,0 +1,80 @@
+=== SxGlobalMusicPlayer
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^]*
+
+A global audio player, used to play sound tracks during the game.
+
+Description::
+    A global audio player, used to play sound tracks, to be used through inheritance as an autoload
+(see <<_sxglobalaudiofxplayer>>).
+
+[#_sxglobalmusicplayer_properties]
+==== Properties
+
+[cols="1,2,1"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^]`
+|`<<_sxglobalmusicplayer_member_global_volume_db,global_volume_db>>`
+|`None`
+|===
+
+[#_sxglobalmusicplayer_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`void`
+|`<<_sxglobalmusicplayer_method_fade_in,fade_in>> ( https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] duration = 0.5 )`
+|`void`
+|`<<_sxglobalmusicplayer_method_fade_out,fade_out>> ( https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] duration = 0.5 )`
+|`void`
+|`<<_sxglobalmusicplayer_method_play_stream,play_stream>> ( https://docs.godotengine.org/en/stable/classes/class_audiostream.html#audiostream[AudioStream^] stream )`
+|===
+
+[#_sxglobalmusicplayer_property_descriptions]
+==== Property Descriptions
+
+[#_sxglobalmusicplayer_member_global_volume_db]
+* `https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] global_volume_db`
++
+Used to query/set the global volume
+
+[#_sxglobalmusicplayer_method_descriptions]
+==== Method Descriptions
+
+[#_sxglobalmusicplayer_method_fade_in]
+* `void fade_in ( https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] duration = 0.5 )`
++
+Apply a "fade in" effect on sound with an optional duration in seconds.
+
+[source,gdscript]
+.Example
+----
+# Suppose we have an instance of `SxGlobalMusicPlayer` as an autoload named `GameGlobalMusicPlayer`.
+GameGlobalMusicPlayer.fade_in()
+----
+
+[#_sxglobalmusicplayer_method_fade_out]
+* `void fade_out ( https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] duration = 0.5 )`
++
+Apply a "fade out" effect on sound with an optional duration in seconds.
+
+[source,gdscript]
+.Example
+----
+# Suppose we have an instance of `SxGlobalMusicPlayer` as an autoload named `GameGlobalMusicPlayer`.
+GameGlobalMusicPlayer.fade_out()
+----
+
+[#_sxglobalmusicplayer_method_play_stream]
+* `void play_stream ( https://docs.godotengine.org/en/stable/classes/class_audiostream.html#audiostream[AudioStream^] stream )`
++
+Play an audio stream.
+
+[source,gdscript]
+.Example
+----
+# Suppose we have an instance of `SxGlobalMusicPlayer` as an autoload named `GameGlobalMusicPlayer`.
+GameGlobalMusicPlayer.play_stream(my_sound)
+----
+

@@ -1,0 +1,53 @@
+=== SxClientPeer
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^]*
+
+Configurable network peer, client side.
+
+Description::
+    Configurable network peer, client side.
+
+[#_sxclientpeer_signals]
+==== Signals
+
+[#_sxclientpeer_signal_connected_to_server]
+* `connected_to_server ()`
++
+On successful connection to the target server.
+
+[#_sxclientpeer_signal_connection_failed]
+* `connection_failed ()`
++
+On failed connection to the target server.
+
+[#_sxclientpeer_signal_players_updated]
+* `players_updated ( https://docs.godotengine.org/en/stable/classes/class_dictionary.html#dictionary[Dictionary^] players )`
++
+On players data update (for example a username change).
+
+[#_sxclientpeer_properties]
+==== Properties
+
+[cols="1,2,1"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^]`
+|`<<_sxclientpeer_member_server_address,server_address>>`
+|`None`
+|`https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^]`
+|`<<_sxclientpeer_member_server_port,server_port>>`
+|`None`
+|===
+
+[#_sxclientpeer_property_descriptions]
+==== Property Descriptions
+
+[#_sxclientpeer_member_server_address]
+* `https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] server_address`
++
+Target server address.
+
+[#_sxclientpeer_member_server_port]
+* `https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] server_port`
++
+Target server port.
+

@@ -1,0 +1,129 @@
+=== SxLoadCache
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^]*
+
+A resource/scene loader, exposing a `load_resources` method to implement through inheritance and autoload.
+
+Description::
+    A resource/scene loader, exposing a `load_resources` method to implement through inheritance and autoload. +
+Useful to load every needed resources at game startup.
+
+[#_sxloadcache_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`void`
+|`<<_sxloadcache_method_load_resources,load_resources>> ()`
+|`void`
+|`<<_sxloadcache_method_store_scene,store_scene>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] scene_name, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] scene_path )`
+|`void`
+|`<<_sxloadcache_method_store_resource,store_resource>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] resource_name, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] resource_path )`
+|`https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^]`
+|`<<_sxloadcache_method_has_scene,has_scene>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] scene_name )`
+|`https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^]`
+|`<<_sxloadcache_method_has_resource,has_resource>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] resource_name )`
+|`https://docs.godotengine.org/en/stable/classes/class_packedscene.html#packedscene[PackedScene^]`
+|`<<_sxloadcache_method_load_scene,load_scene>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] scene_name )`
+|`https://docs.godotengine.org/en/stable/classes/class_resource.html#resource[Resource^]`
+|`<<_sxloadcache_method_load_resource,load_resource>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] resource_name )`
+|`https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^]`
+|`<<_sxloadcache_method_instantiate_scene,instantiate_scene>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] scene_name )`
+|===
+
+[#_sxloadcache_method_descriptions]
+==== Method Descriptions
+
+[#_sxloadcache_method_load_resources]
+* `void load_resources ()`
++
+Load resources in cache.
++
+Should be overriden by child classes.
+
+[#_sxloadcache_method_store_scene]
+* `void store_scene ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] scene_name, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] scene_path )`
++
+Store a scene in the cache from its path.
++
+[source,gdscript]
+.Example
+----
+var cache := SxLoadCache.new()
+cache.store_scene("MyScene", "res://my_scene.tscn")
+----
+
+[#_sxloadcache_method_store_resource]
+* `void store_resource ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] resource_name, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] resource_path )`
++
+Store a resource in the cache from its path.
++
+[source,gdscript]
+.Example
+----
+var cache := SxLoadCache.new()
+cache.store_resource("MyResource", "res://my_resource.tres")
+----
+
+[#_sxloadcache_method_has_scene]
+* `https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^] has_scene ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] scene_name )`
++
+Test if the cache has a specific scene registered.
++
+[source,gdscript]
+.Example
+----
+var cache := SxLoadCache.new()
+if cache.has_scene("MyScene"):
+    print("OK !")
+----
+
+[#_sxloadcache_method_has_resource]
+* `https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^] has_resource ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] resource_name )`
++
+Test if the cache has a specific resource registered.
++
+[source,gdscript]
+.Example
+----
+var cache := SxLoadCache.new()
+if cache.has_resource("MyResource"):
+    print("OK !")
+----
+
+[#_sxloadcache_method_load_scene]
+* `https://docs.godotengine.org/en/stable/classes/class_packedscene.html#packedscene[PackedScene^] load_scene ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] scene_name )`
++
+Load a stored scene.
++
+[source,gdscript]
+.Example
+----
+var cache := SxLoadCache.new()
+var scene := cache.load_scene("MyScene")
+----
+
+[#_sxloadcache_method_load_resource]
+* `https://docs.godotengine.org/en/stable/classes/class_resource.html#resource[Resource^] load_resource ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] resource_name )`
++
+Load a stored resource.
++
+[source,gdscript]
+.Example
+----
+var cache := SxLoadCache.new()
+var resource := cache.load_resource("MyResource")
+----
+
+[#_sxloadcache_method_instantiate_scene]
+* `https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^] instantiate_scene ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] scene_name )`
++
+Instantiate a stored scene.
++
+[source,gdscript]
+.Example
+----
+var cache := SxLoadCache.new()
+var instance := cache.instantiate_scene("MyScene") as MyScene
+----
+

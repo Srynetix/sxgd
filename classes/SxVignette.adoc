@@ -1,0 +1,54 @@
+=== SxVignette
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect[ColorRect^]*
+
+A vignette effect.
+
+Description::
+    A vignette effect.
+
+image::images/nodes/SxVignette.gif[align="center"]
+
+[#_sxvignette_properties]
+==== Properties
+
+[cols="1,2,1"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^]`
+|`<<_sxvignette_member_vignette_size,vignette_size>>`
+|`10.0`
+|`https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^]`
+|`<<_sxvignette_member_vignette_ratio,vignette_ratio>>`
+|`0.25`
+|===
+
+[#_sxvignette_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`void`
+|`<<_sxvignette_method_fade,fade>> ( https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] duration = 1.0 )`
+|===
+
+[#_sxvignette_property_descriptions]
+==== Property Descriptions
+
+[#_sxvignette_member_vignette_size]
+* `https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] vignette_size`
++
+Vignette size.
+
+[#_sxvignette_member_vignette_ratio]
+* `https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] vignette_ratio`
++
+Vignette ratio.
+
+[#_sxvignette_method_descriptions]
+==== Method Descriptions
+
+[#_sxvignette_method_fade]
+* `void fade ( https://docs.godotengine.org/en/stable/classes/class_float.html#float[float^] duration = 1.0 )`
++
+Start a fading animation.
+

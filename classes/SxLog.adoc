@@ -1,0 +1,281 @@
+=== SxLog
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_reference.html#reference[Reference^]*
+
+Log facility.
+
+Description::
+    Generic log facility.
+
+[source,gdscript]
+.Example: MyNode.gd
+----
+extends Node
+
+var logger := SxLog.get_logger("MyNode")
+
+func _ready() -> void:
+    logger.info("Node is ready!")
+
+func boom() -> void:
+    logger.error("Node has exploded!")
+----
+
+[#_sxlog_enumerations]
+==== Enumerations
+
+enum *SxLog.LogLevel*:
+
+* *TRACE = 0* --- Trace log level (lower level).
+* *DEBUG = 1* --- Debug log level.
+* *INFO = 2* --- Info log level.
+* *WARN = 3* --- Warning log level.
+* *ERROR = 4* --- Error log level.
+* *CRITICAL = 5* --- Critical log level (higher level).
+
+[#_sxlog_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`<<_sxlog_logger>>`
+|`static <<_sxlog_method_get_logger,get_logger>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] name )`
+|`void`
+|`static <<_sxlog_method_configure_log_levels,configure_log_levels>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] conf )`
+|`void`
+|`static <<_sxlog_method_set_max_log_level,set_max_log_level>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] name, https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] level )`
+|===
+
+[#_sxlog_method_descriptions]
+==== Method Descriptions
+
+[#_sxlog_method_get_logger]
+* `static <<_sxlog_logger>> get_logger ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] name )`
++
+Get or create a specific logger by its name.
+
+[source,gdscript]
+.Example
+----
+var logger := SxLog.get_logger("MyLogger")
+logger.info("Hello!")
+----
+
+[#_sxlog_method_configure_log_levels]
+* `static void configure_log_levels ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] conf )`
++
+Configure log levels for each loggers using a configuration string.
+
+[source,gdscript]
+.Example
+----
+SxLog.configure_log_levels("info,my_logger=debug")
+# => 1. Default log level for each logger will be "info"
+# => 2. But the "my_logger" logger will have its log level to "debug"
+----
+
+[#_sxlog_method_set_max_log_level]
+* `static void set_max_log_level ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] name, https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] level )`
++
+Set maximum log level for a specific logger name.
+
+[source,gdscript]
+.Example
+----
+SxLog.set_max_log_level("my_logger", SxLog.LogLevel.WARN)
+# => The "my_logger" logger will have its log level to "warn"
+----
+
+
+
+=== SxLog.Logger
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_reference.html#reference[Reference^]*
+
+Description::
+    Single logger handle.
+
+[#_sxlog_logger_properties]
+==== Properties
+
+[cols="1,2,1"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^]`
+|`<<_sxlog_logger_member_name,name>>`
+|`None`
+|`https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^]`
+|`<<_sxlog_logger_member_max_level,max_level>>`
+|`None`
+|`https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^]`
+|`<<_sxlog_logger_member_display_in_console,display_in_console>>`
+|`None`
+|===
+
+[#_sxlog_logger_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`<<_sxlog_logger>>`
+|`<<_sxlog_logger_method_sxlog_logger,SxLog.Logger>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] name, https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] max_level, https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^] display_in_console )`
+|`void`
+|`<<_sxlog_logger_method_set_max_log_level,set_max_log_level>> ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] level )`
+|`void`
+|`<<_sxlog_logger_method_trace,trace>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_debug,debug>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_info,info>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_warn,warn>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_error,error>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_critical,critical>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_trace_m,trace_m>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_debug_m,debug_m>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_info_m,info_m>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_warn_m,warn_m>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_error_m,error_m>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_critical_m,critical_m>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_trace_mn,trace_mn>> ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_debug_mn,debug_mn>> ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_info_mn,info_mn>> ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_warn_mn,warn_mn>> ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_error_mn,error_mn>> ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|`void`
+|`<<_sxlog_logger_method_critical_mn,critical_mn>> ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
+|===
+
+[#_sxlog_logger_property_descriptions]
+==== Property Descriptions
+
+[#_sxlog_logger_member_name]
+* `https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] name`
++
+Name of the logger.
+
+[#_sxlog_logger_member_max_level]
+* `https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] max_level`
++
+Max log level.
+
+[#_sxlog_logger_member_display_in_console]
+* `https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^] display_in_console`
++
+Determine if the logger should display its content in standard console.
+
+[#_sxlog_logger_method_descriptions]
+==== Method Descriptions
+
+[#_sxlog_logger_method_sxlog_logger]
+* `<<_sxlog_logger>> SxLog.Logger ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] name, https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] max_level, https://docs.godotengine.org/en/stable/classes/class_bool.html#bool[bool^] display_in_console )`
++
+Creates a new logger.
+
+[#_sxlog_logger_method_set_max_log_level]
+* `void set_max_log_level ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] level )`
++
+Set max log level for this logger.
+
+[#_sxlog_logger_method_trace]
+* `void trace ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log a trace message.
+
+[#_sxlog_logger_method_debug]
+* `void debug ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log a debug message.
+
+[#_sxlog_logger_method_info]
+* `void info ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log an info message.
+
+[#_sxlog_logger_method_warn]
+* `void warn ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log a warning message.
+
+[#_sxlog_logger_method_error]
+* `void error ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log an error message.
+
+[#_sxlog_logger_method_critical]
+* `void critical ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log a critical message.
+
+[#_sxlog_logger_method_trace_m]
+* `void trace_m ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log a trace message for a specific method name.
+
+[#_sxlog_logger_method_debug_m]
+* `void debug_m ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log a debug message for a specific method name.
+
+[#_sxlog_logger_method_info_m]
+* `void info_m ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log an info message for a specific method name.
+
+[#_sxlog_logger_method_warn_m]
+* `void warn_m ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log a warning message for a specific method name.
+
+[#_sxlog_logger_method_error_m]
+* `void error_m ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log an error message for a specific method name.
+
+[#_sxlog_logger_method_critical_m]
+* `void critical_m ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log a critical message for a specific method name.
+
+[#_sxlog_logger_method_trace_mn]
+* `void trace_mn ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log a trace message for a specific peer ID and a method name.
+
+[#_sxlog_logger_method_debug_mn]
+* `void debug_mn ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log a debug message for a specific peer ID and a method name.
+
+[#_sxlog_logger_method_info_mn]
+* `void info_mn ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log an info message for a specific peer ID and a method name.
+
+[#_sxlog_logger_method_warn_mn]
+* `void warn_mn ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log a warning message for a specific peer ID and a method name.
+
+[#_sxlog_logger_method_error_mn]
+* `void error_mn ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log an error message for a specific peer ID and a method name.
+
+[#_sxlog_logger_method_critical_mn]
+* `void critical_mn ( https://docs.godotengine.org/en/stable/classes/class_int.html#int[int^] peer_id, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] method, https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] message, https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] args )`
++
+Log a critical message for a specific peer ID and a method name.
+

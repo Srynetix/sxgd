@@ -1,0 +1,64 @@
+=== SxCmdLineParser
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^]*
+
+Simple command-line parser.
+
+Description::
+    Simple command-line parser.
++
+Inherit the node as an autoload and handle your custom command-line arguments by redeclaring the method
+`_handle_args`.
+
+[#_sxcmdlineparser_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`void`
+|`<<_sxcmdlineparser_method__handle_args,_handle_args>> ( <<_sxcmdlineparser_args>> args )`
+|===
+
+[#_sxcmdlineparser_method_descriptions]
+==== Method Descriptions
+
+[#_sxcmdlineparser_method__handle_args]
+* `void _handle_args ( <<_sxcmdlineparser_args>> args )`
++
+Override this method to handle command-line arguments.
+
+
+
+=== SxCmdLineParser.Args
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_object.html#object[Object^]*
+
+Description::
+    No description.
+
+[#_sxcmdlineparser_args_properties]
+==== Properties
+
+[cols="1,2,1"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^]`
+|`<<_sxcmdlineparser_args_member_positional,positional>>`
+|`None`
+|`https://docs.godotengine.org/en/stable/classes/class_dictionary.html#dictionary[Dictionary^]`
+|`<<_sxcmdlineparser_args_member_options,options>>`
+|`None`
+|===
+
+[#_sxcmdlineparser_args_property_descriptions]
+==== Property Descriptions
+
+[#_sxcmdlineparser_args_member_positional]
+* `https://docs.godotengine.org/en/stable/classes/class_array.html#array[Array^] positional`
++
+Positional arguments.
+
+[#_sxcmdlineparser_args_member_options]
+* `https://docs.godotengine.org/en/stable/classes/class_dictionary.html#dictionary[Dictionary^] options`
++
+Options.
+

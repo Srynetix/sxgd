@@ -1,0 +1,69 @@
+=== SxNodeTracer
+
+*Inherits: https://docs.godotengine.org/en/stable/classes/class_node.html#node[Node^]*
+
+A tracing node, useful to display debug values.
+
+Description::
+    A tracing node, useful to display debug values.
++
+It is shown through the <<_sxdebugpanel>>, in the "Node tracer" section.
++
+To add a node tracer, just instance a `SxNodeTracer` in your scene, and use the `trace_parameter` function
+to register a parameter with a value (you will need to call it at each value update).
++
+[source,gdscript]
+.Example
+----
+extends Node
+
+# Suppose your node have a SxNodeTracer as a child
+onready var _tracer := $SxNodeTracer as SxNodeTracer
+
+func _ready():
+    # Let's display... the child count?
+    _tracer.trace_parameter("children", len(get_children())
+
+func _process(delta: float) -> void:
+    # And show the node position, updated at each _process call
+    _tracer.trace_parameter("position", position)
+----
+
+[#_sxnodetracer_properties]
+==== Properties
+
+[cols="1,2,1"]
+|===
+|`https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^]`
+|`<<_sxnodetracer_member_title,title>>`
+|`None`
+|===
+
+[#_sxnodetracer_methods]
+==== Methods
+
+[cols="1,2"]
+|===
+|`void`
+|`<<_sxnodetracer_method_trace_parameter,trace_parameter>> ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] name, https://docs.godotengine.org/en/stable/classes/class_variant.html#variant[Variant^] value )`
+|===
+
+[#_sxnodetracer_property_descriptions]
+==== Property Descriptions
+
+[#_sxnodetracer_member_title]
+* `https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] title`
++
+A custom node title, if set. +
+If not set, uses the parent node name.
+
+[#_sxnodetracer_method_descriptions]
+==== Method Descriptions
+
+[#_sxnodetracer_method_trace_parameter]
+* `void trace_parameter ( https://docs.godotengine.org/en/stable/classes/class_string.html#string[String^] name, https://docs.godotengine.org/en/stable/classes/class_variant.html#variant[Variant^] value )`
++
+Create or update a parameter trace, to display through the <<_sxdebugpanel>> node tracer panel.
++
+If you need to continuously update a value, call `trace_parameter` in your node `_process` method.
+
