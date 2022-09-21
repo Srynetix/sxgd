@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxBetterBlur" inherits="Control" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        A ready-to-use gaussian blur, compatible with GLES2.
+    </brief_description>
+    <description>
+        A ready-to-use gaussian blur, compatible with GLES2.
+
+        image::images/nodes/SxBetterBlur.gif[align="center"]
+    </description>
+    <tutorials></tutorials>
+    <methods></methods>
+    <members>
+        <member name="strength" type="float">
+            Blur strength.
+        </member>
+    </members>
+    <constants></constants>
+</class>

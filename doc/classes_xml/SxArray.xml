@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxArray" inherits="Reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Array helpers.
+    </brief_description>
+    <description>
+        Generic array helpers.
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="trim_strings" qualifiers="static">
+            <return type="Array" />
+            <argument index="0" name="array" type="Array" />
+            <description>
+                Trim whitespace on each strings from a string array.
+
+                [source,gdscript]
+                .Example
+                ----
+                var strings := ["  a", " b ", "c   "]
+                var trimmed_strings := SxArray.trim_strings(strings)
+                # => ["a", "b", "c"]
+                ----
+            </description>
+        </method>
+    </methods>
+    <members></members>
+    <constants></constants>
+</class>

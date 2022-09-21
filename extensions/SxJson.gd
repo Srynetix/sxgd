@@ -26,7 +26,7 @@ static func read_json_from_open_file(file: File):
     return Dictionary()
 
 # Write JSON to path `path`.
-static func write_json_file(json, path: String):
+static func write_json_file(json, path: String) -> void:
     var logger := _get_logger()
 
     var f := File.new()

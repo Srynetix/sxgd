@@ -13,7 +13,7 @@ const SCENE_KEY_RESET := KEY_I
 const SCENE_KEY_PREV := KEY_O
 const SCENE_KEY_NEXT := KEY_P
 
-onready var _current := $Current as Node2D
+onready var _current := $Current as Control
 onready var _scene_name := $CanvasLayer/Margin/VBox/Text/SceneName as Label
 onready var _back_button := $CanvasLayer/Margin/BackButton as Button
 onready var _previous_btn := $CanvasLayer/Margin/VBox/Margin/Buttons/Previous as Button

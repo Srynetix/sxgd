@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxColor" inherits="Reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Color helpers.
+    </brief_description>
+    <description>
+        Generic color helpers.
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="with_alpha_f" qualifiers="static">
+            <return type="Color" />
+            <argument index="0" name="color" type="Color" />
+            <argument index="1" name="alpha" type="float" />
+            <description>
+                Apply a floating-point alpha value on a color (between 0 and 1).
+
+                [source,gdscript]
+                .Example
+                ----
+                # Creates a semi-transparent "aqua" color
+                var c := SxColor.with_alpha_f(Color.aqua, 0.5)
+                ----
+            </description>
+        </method>
+        <method name="with_alpha_i" qualifiers="static">
+            <return type="Color" />
+            <argument index="0" name="color" type="Color" />
+            <argument index="1" name="alpha" type="int" />
+            <description>
+                Apply an integer alpha value on a color (between 0 and 255).
+
+                [source,gdscript]
+                .Example
+                ----
+                # Creates a semi-transparent "aqua" color
+                var c := SxColor.with_alpha_i(Color.aqua, 127)
+                ----
+            </description>
+        </method>
+        <method name="rand" qualifiers="static">
+            <return type="Color" />
+            <description>
+                Generate a random color without transparency.
+
+                [source,gdscript]
+                .Example
+                ----
+                var c := SxColor.rand()
+                ----
+            </description>
+        </method>
+        <method name="rand_with_alpha_f" qualifiers="static">
+            <return type="Color" />
+            <argument index="0" name="alpha" type="float" />
+            <description>
+                Generate a random color with a floating-point alpha value (between 0 and 1).
+
+                [source,gdscript]
+                .Example
+                ----
+                var c := SxColor.rand_with_alpha_f(0.5)
+                ----
+            </description>
+        </method>
+        <method name="rand_with_alpha_i" qualifiers="static">
+            <return type="Color" />
+            <argument index="0" name="alpha" type="int" />
+            <description>
+                Generate a random color with a integer alpha value (between 0 and 255).
+
+                [source,gdscript]
+                .Example
+                ----
+                var c := SxColor.rand_with_alpha_f(0.5)
+                ----
+            </description>
+        </method>
+    </methods>
+    <members></members>
+    <constants></constants>
+</class>

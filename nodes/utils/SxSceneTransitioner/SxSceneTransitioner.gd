@@ -12,7 +12,7 @@ onready var animation_player := $AnimationPlayer as AnimationPlayer
 #
 # Example:
 #   SxSceneTransitioner.fade_to_scene(my_scene)
-func fade_to_scene(scene: PackedScene, speed: float = 1) -> void:
+func fade_to_scene(scene: PackedScene, speed: float = 1.0) -> void:
     animation_player.play("fade_out", -1, speed)
     yield(animation_player, "animation_finished")
 
@@ -23,7 +23,7 @@ func fade_to_scene(scene: PackedScene, speed: float = 1) -> void:
 #
 # Example:
 #   SxSceneTransitioner.fade_to_scene_path("res://my_scene.tscn")
-func fade_to_scene_path(scene_path: String, speed: float = 1) -> void:
+func fade_to_scene_path(scene_path: String, speed: float = 1.0) -> void:
     animation_player.play("fade_out", -1, speed)
     var scene := load(scene_path) as PackedScene
     yield(animation_player, "animation_finished")
@@ -35,7 +35,7 @@ func fade_to_scene_path(scene_path: String, speed: float = 1) -> void:
 #
 # Example:
 #   SxSceneTransitioner.fade_to_cached_scene(cache, "MyScene")
-func fade_to_cached_scene(cache: SxLoadCache, scene_name: String, speed: float = 1) -> void:
+func fade_to_cached_scene(cache: SxLoadCache, scene_name: String, speed: float = 1.0) -> void:
     animation_player.play("fade_out", -1, speed)
     var scene := cache.load_scene(scene_name)
     yield(animation_player, "animation_finished")

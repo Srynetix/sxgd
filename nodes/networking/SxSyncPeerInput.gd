@@ -6,7 +6,7 @@ const SETTING_SYNC_PEER_INPUT_ACTIONS = "sxgd/networking/sync_peer_input_actions
 class InputState:
     var pressed := false
     var just_pressed := false
-    var strength := 0
+    var strength := 0.0
 
     func to_json() -> Dictionary:
         return {

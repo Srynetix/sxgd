@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxBuffer" inherits="Reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Buffer helpers.
+    </brief_description>
+    <description>
+        Generic buffer helpers.
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="zstd_compress" qualifiers="static">
+            <return type="PoolByteArray" />
+            <argument index="0" name="array" type="PoolByteArray" />
+            <description>
+                Compress a byte array using zstd, adding original content size at the beginning.
+
+                The content size is needed for Godot to decompress, so the resulting byte array is not valid zstd compressed data.
+                To have a valid zstd compressed data, you need to strip the first 64 bits.
+            </description>
+        </method>
+        <method name="zstd_decompress" qualifiers="static">
+            <return type="PoolByteArray" />
+            <argument index="0" name="array" type="PoolByteArray" />
+            <description>
+                Decompress a byte array generated with `zstd_compress`.
+
+                It is not usable with zstd compressed data generated elsewhere,
+                because it expects a 64 bit integer at first representing the original data size (needed for Godot).
+            </description>
+        </method>
+    </methods>
+    <members></members>
+    <constants></constants>
+</class>

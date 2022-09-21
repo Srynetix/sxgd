@@ -25,9 +25,14 @@ func _init():
     _tag_regex.compile("(?<tag>(\\[\\\\?.*?\\]))")
 
 func _ready():
-    _initial_text = bbcode_text
+    if bbcode_text == "":
+        _initial_text = text
+    else:
+        _initial_text = bbcode_text
 
+    text = ""
     bbcode_text = ""
+
     _timer.connect("timeout", self, "_on_timer_timeout")
 
     if autoplay:

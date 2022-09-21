@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxLog" inherits="Reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Log facility.
+    </brief_description>
+    <description>
+        Generic log facility.
+
+        [source,gdscript]
+        .Example: MyNode.gd
+        ----
+        extends Node
+
+        var logger := SxLog.get_logger("MyNode")
+
+        func _ready() -> void:
+            logger.info("Node is ready!")
+
+        func boom() -> void:
+            logger.error("Node has exploded!")
+        ----
+    </description>
+    <tutorials></tutorials>
+    <classes>
+        <class name="SxLog.Logger" inherits="Reference">
+            <description>
+                Single logger handle.
+            </description>
+            <methods>
+                <method name="SxLog.Logger">
+                    <return type="SxLog.Logger" />
+                    <argument index="0" name="name" type="String" />
+                    <argument index="1" name="max_level" type="int" />
+                    <argument index="2" name="display_in_console" type="bool" />
+                    <description>
+                        Creates a new logger.
+                    </description>
+                </method>
+                <method name="set_max_log_level">
+                    <return type="void" />
+                    <argument index="0" name="level" type="int" />
+                    <description>
+                        Set max log level for this logger.
+                    </description>
+                </method>
+                <method name="trace">
+                    <return type="void" />
+                    <argument index="0" name="message" type="String" />
+                    <argument index="1" name="args" type="Array" />
+                    <description>
+                        Log a trace message.
+                    </description>
+                </method>
+                <method name="debug">
+                    <return type="void" />
+                    <argument index="0" name="message" type="String" />
+                    <argument index="1" name="args" type="Array" />
+                    <description>
+                        Log a debug message.
+                    </description>
+                </method>
+                <method name="info">
+                    <return type="void" />
+                    <argument index="0" name="message" type="String" />
+                    <argument index="1" name="args" type="Array" />
+                    <description>
+                        Log an info message.
+                    </description>
+                </method>
+                <method name="warn">
+                    <return type="void" />
+                    <argument index="0" name="message" type="String" />
+                    <argument index="1" name="args" type="Array" />
+                    <description>
+                        Log a warning message.
+                    </description>
+                </method>
+                <method name="error">
+                    <return type="void" />
+                    <argument index="0" name="message" type="String" />
+                    <argument index="1" name="args" type="Array" />
+                    <description>
+                        Log an error message.
+                    </description>
+                </method>
+                <method name="critical">
+                    <return type="void" />
+                    <argument index="0" name="message" type="String" />
+                    <argument index="1" name="args" type="Array" />
+                    <description>
+                        Log a critical message.
+                    </description>
+                </method>
+                <method name="trace_m">
+                    <return type="void" />
+                    <argument index="0" name="method" type="String" />
+                    <argument index="1" name="message" type="String" />
+                    <argument index="2" name="args" type="Array" />
+                    <description>
+                        Log a trace message for a specific method name.
+                    </description>
+                </method>
+                <method name="debug_m">
+                    <return type="void" />
+                    <argument index="0" name="method" type="String" />
+                    <argument index="1" name="message" type="String" />
+                    <argument index="2" name="args" type="Array" />
+                    <description>
+                        Log a debug message for a specific method name.
+                    </description>
+                </method>
+                <method name="info_m">
+                    <return type="void" />
+                    <argument index="0" name="method" type="String" />
+                    <argument index="1" name="message" type="String" />
+                    <argument index="2" name="args" type="Array" />
+                    <description>
+                        Log an info message for a specific method name.
+                    </description>
+                </method>
+                <method name="warn_m">
+                    <return type="void" />
+                    <argument index="0" name="method" type="String" />
+                    <argument index="1" name="message" type="String" />
+                    <argument index="2" name="args" type="Array" />
+                    <description>
+                        Log a warning message for a specific method name.
+                    </description>
+                </method>
+                <method name="error_m">
+                    <return type="void" />
+                    <argument index="0" name="method" type="String" />
+                    <argument index="1" name="message" type="String" />
+                    <argument index="2" name="args" type="Array" />
+                    <description>
+                        Log an error message for a specific method name.
+                    </description>
+                </method>
+                <method name="critical_m">
+                    <return type="void" />
+                    <argument index="0" name="method" type="String" />
+                    <argument index="1" name="message" type="String" />
+                    <argument index="2" name="args" type="Array" />
+                    <description>
+                        Log a critical message for a specific method name.
+                    </description>
+                </method>
+                <method name="trace_mn">
+                    <return type="void" />
+                    <argument index="0" name="peer_id" type="int" />
+                    <argument index="1" name="method" type="String" />
+                    <argument index="2" name="message" type="String" />
+                    <argument index="3" name="args" type="Array" />
+                    <description>
+                        Log a trace message for a specific peer ID and a method name.
+                    </description>
+                </method>
+                <method name="debug_mn">
+                    <return type="void" />
+                    <argument index="0" name="peer_id" type="int" />
+                    <argument index="1" name="method" type="String" />
+                    <argument index="2" name="message" type="String" />
+                    <argument index="3" name="args" type="Array" />
+                    <description>
+                        Log a debug message for a specific peer ID and a method name.
+                    </description>
+                </method>
+                <method name="info_mn">
+                    <return type="void" />
+                    <argument index="0" name="peer_id" type="int" />
+                    <argument index="1" name="method" type="String" />
+                    <argument index="2" name="message" type="String" />
+                    <argument index="3" name="args" type="Array" />
+                    <description>
+                        Log an info message for a specific peer ID and a method name.
+                    </description>
+                </method>
+                <method name="warn_mn">
+                    <return type="void" />
+                    <argument index="0" name="peer_id" type="int" />
+                    <argument index="1" name="method" type="String" />
+                    <argument index="2" name="message" type="String" />
+                    <argument index="3" name="args" type="Array" />
+                    <description>
+                        Log a warning message for a specific peer ID and a method name.
+                    </description>
+                </method>
+                <method name="error_mn">
+                    <return type="void" />
+                    <argument index="0" name="peer_id" type="int" />
+                    <argument index="1" name="method" type="String" />
+                    <argument index="2" name="message" type="String" />
+                    <argument index="3" name="args" type="Array" />
+                    <description>
+                        Log an error message for a specific peer ID and a method name.
+                    </description>
+                </method>
+                <method name="critical_mn">
+                    <return type="void" />
+                    <argument index="0" name="peer_id" type="int" />
+                    <argument index="1" name="method" type="String" />
+                    <argument index="2" name="message" type="String" />
+                    <argument index="3" name="args" type="Array" />
+                    <description>
+                        Log a critical message for a specific peer ID and a method name.
+                    </description>
+                </method>
+            </methods>
+            <members>
+                <member name="name" type="String">
+                    Name of the logger.
+                </member>
+                <member name="max_level" type="int">
+                    Max log level.
+                </member>
+                <member name="display_in_console" type="bool">
+                    Determine if the logger should display its content in standard console.
+                </member>
+            </members>
+        </class>
+    </classes>
+    <methods>
+        <method name="get_logger" qualifiers="static">
+            <return type="SxLog.Logger" />
+            <argument index="0" name="name" type="String" />
+            <description>
+                Get or create a specific logger by its name.
+
+                [source,gdscript]
+                .Example
+                ----
+                var logger := SxLog.get_logger("MyLogger")
+                logger.info("Hello!")
+                ----
+            </description>
+        </method>
+        <method name="configure_log_levels" qualifiers="static">
+            <return type="void" />
+            <argument index="0" name="conf" type="String" />
+            <description>
+                Configure log levels for each loggers using a configuration string.
+
+                [source,gdscript]
+                .Example
+                ----
+                SxLog.configure_log_levels("info,my_logger=debug")
+                # => 1. Default log level for each logger will be "info"
+                # => 2. But the "my_logger" logger will have its log level to "debug"
+                ----
+            </description>
+        </method>
+        <method name="set_max_log_level" qualifiers="static">
+            <return type="void" />
+            <argument index="0" name="name" type="String" />
+            <argument index="1" name="level" type="int" />
+            <description>
+                Set maximum log level for a specific logger name.
+
+                [source,gdscript]
+                .Example
+                ----
+                SxLog.set_max_log_level("my_logger", SxLog.LogLevel.WARN)
+                # => The "my_logger" logger will have its log level to "warn"
+                ----
+            </description>
+        </method>
+    </methods>
+    <members></members>
+    <constants>
+        <constant name="TRACE" value="0" enum="SxLog.LogLevel">
+            Trace log level (lower level).
+        </constant>
+        <constant name="DEBUG" value="1" enum="SxLog.LogLevel">
+            Debug log level.
+        </constant>
+        <constant name="INFO" value="2" enum="SxLog.LogLevel">
+            Info log level.
+        </constant>
+        <constant name="WARN" value="3" enum="SxLog.LogLevel">
+            Warning log level.
+        </constant>
+        <constant name="ERROR" value="4" enum="SxLog.LogLevel">
+            Error log level.
+        </constant>
+        <constant name="CRITICAL" value="5" enum="SxLog.LogLevel">
+            Critical log level (higher level).
+        </constant>
+    </constants>
+</class>

@@ -56,7 +56,7 @@ func _input(event: InputEvent):
         var base_rect_drag := get_global_rect().grow(2)
         if _joystick_touch_index != -1:  # && base_rect_drag.has_point(drag_event.position):
             var base_position := rect_global_position + rect_size / 2
-            var mouse_base_vec := (drag_event.position - base_position).clamped(base_rect_drag.size.length() / 2)
+            var mouse_base_vec := (drag_event.position - base_position).limit_length(base_rect_drag.size.length() / 2)
             var force := mouse_base_vec / (rect_size / 2)
 
             # Move head

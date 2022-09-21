@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxSyncPeerInput" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Synchronized input interface for a specific peer.
+    </brief_description>
+    <description>
+        Synchronized input interface for a specific peer.
+    </description>
+    <tutorials></tutorials>
+    <classes>
+        <class name="SxSyncPeerInput.InputState" inherits="Object">
+            <members>
+                <member name="pressed" type="bool">
+                    "Pressed" status for an input.
+                </member>
+                <member name="just_pressed" type="bool">
+                    "Just pressed" status for an input.
+                </member>
+                <member name="strength" type="float">
+                    Strength for an input.
+                </member>
+            </members>
+            <methods>
+                <method name="to_json">
+                    <return type="Dictionary" />
+                    <description>
+                        Convert an input state to JSON.
+                    </description>
+                </method>
+                <method name="update_from_json">
+                    <return type="void" />
+                    <argument index="0" name="d" type="Dictionary" />
+                    <description>
+                        Update an input state from JSON data.
+                    </description>
+                </method>
+            </methods>
+        </class>
+    </classes>
+    <methods>
+        <method name="to_json">
+            <return type="Dictionary" />
+            <description>
+                Convert each input state to JSON.
+            </description>
+        </method>
+        <method name="update_from_json">
+            <return type="void" />
+            <argument index="0" name="input" type="Dictionary" />
+            <description>
+                Update each input state from JSON data.
+            </description>
+        </method>
+        <method name="is_action_pressed">
+            <return type="bool" />
+            <argument index="0" name="action_name" type="String" />
+            <description>
+                Check if an action is pressed.
+            </description>
+        </method>
+        <method name="is_action_just_pressed">
+            <return type="bool" />
+            <argument index="0" name="action_name" type="String" />
+            <description>
+                Check if an action is "just pressed".
+            </description>
+        </method>
+        <method name="get_action_strength">
+            <return type="float" />
+            <argument index="0" name="action_name" type="String" />
+            <description>
+                Get an action strength.
+            </description>
+        </method>
+        <method name="query_input">
+            <return type="void" />
+            <description>
+                Update the sync input from local input state.
+            </description>
+        </method>
+    </methods>
+    <members>
+    </members>
+    <signals>
+    </signals>
+    <constants></constants>
+</class>

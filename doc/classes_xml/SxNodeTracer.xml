@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxNodeTracer" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        A tracing node, useful to display debug values.
+    </brief_description>
+    <description>
+        A tracing node, useful to display debug values.
+        +
+        It is shown through the &lt;&lt;_sxdebugpanel&gt;&gt;, in the "Node tracer" section.
+        +
+        To add a node tracer, just instance a `SxNodeTracer` in your scene, and use the `trace_parameter` function
+        to register a parameter with a value (you will need to call it at each value update).
+        +
+        [source,gdscript]
+        .Example
+        ----
+        extends Node
+
+        # Suppose your node have a SxNodeTracer as a child
+        onready var _tracer := $SxNodeTracer as SxNodeTracer
+
+        func _ready():
+            # Let's display... the child count?
+            _tracer.trace_parameter("children", len(get_children())
+
+        func _process(delta: float) -> void:
+            # And show the node position, updated at each _process call
+            _tracer.trace_parameter("position", position)
+        ----
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="trace_parameter">
+            <return type="void" />
+            <argument index="0" name="name" type="String" />
+            <argument index="1" name="value" type="Variant" />
+            <description>
+                Create or update a parameter trace, to display through the &lt;&lt;_sxdebugpanel&gt;&gt; node tracer panel.
+                +
+                If you need to continuously update a value, call `trace_parameter` in your node `_process` method.
+            </description>
+        </method>
+    </methods>
+    <members>
+        <member name="title" type="String">
+            A custom node title, if set. +
+            If not set, uses the parent node name.
+        </member>
+    </members>
+</class>
