@@ -13,7 +13,7 @@ jobs:
       - name: Build documentation
         uses: tonynv/asciidoctor-action@master
         with:
-          program: "asciidoctor -D doc docs/index.adoc"
+          program: "asciidoctor -D doc doc/index.adoc"
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
