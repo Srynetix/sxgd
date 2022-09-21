@@ -244,8 +244,10 @@ class Context:
 
     def convert_to_adoc(self):
         os.makedirs(Path(os.getcwd()) / "classes", exist_ok=True)
+        sorted_paths = sorted(list(self.known_classes.keys()))
 
-        for path, cdef in self.known_classes.items():
+        for path in sorted_paths:
+            cdef = self.known_classes[path]
             stream = StringIO()
             writer = ADocWriter(stream=stream, known_names=self.known_names, standard_names=self.standard_names)
             writer.write_class_def(cdef)
@@ -459,7 +461,7 @@ def generate_index():
     stream = StringIO()
     index_path = Path(os.getcwd()) / "classes" / "index.adoc"
     xml_path = Path(os.getcwd()) / "classes_xml"
-    for xml_file in os.listdir(xml_path):
+    for xml_file in sorted(os.listdir(xml_path)):
         adoc_path = Path(xml_file).with_suffix(".adoc").name
         stream.write(f"include::./{adoc_path}[]\n\n")
         stream.write("'''\n\n")
