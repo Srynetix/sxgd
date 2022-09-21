@@ -10,14 +10,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Make build/ folder
-        run: mkdir ./build && cp -r addons/sxgd/doc/* ./build
       - name: Build documentation
         uses: tonynv/asciidoctor-action@master
         with:
-          program: "cd ./build && asciidoctor index.adoc"
+          program: "asciidoctor -D doc docs/index.adoc"
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           branch: gh-pages
-          folder: build
+          folder: doc
