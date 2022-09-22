@@ -469,7 +469,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_sxcmdlineparser_args">SxCmdLineParser.Args</a></li>
 <li><a href="#_sxcolor">SxColor</a></li>
 <li><a href="#_sxcontainer">SxContainer</a></li>
-<li><a href="#_sxdebugpanel">SxDebugPanel</a></li>
+<li><a href="#_sxdebugtools">SxDebugTools</a></li>
 <li><a href="#_sxdoubletap">SxDoubleTap</a></li>
 <li><a href="#_sxfabutton">SxFAButton</a></li>
 <li><a href="#_sxfafont">SxFAFont</a></li>
@@ -827,7 +827,7 @@ you export <code>.json</code> files, because FontAwesome icon definitions are pa
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a href="#_sxdebugpanel">SxDebugPanel</a></strong>: Useful global debug UI, showing multiple panels:</p>
+<p><strong><a href="#_sxdebugtools">SxDebugTools</a></strong>: Useful global debug UI, showing multiple panels:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -838,6 +838,9 @@ you export <code>.json</code> files, because FontAwesome icon definitions are pa
 </li>
 <li>
 <p>Node tracer: show currently enabled node tracers (see <a href="#_sxnodetracer">SxNodeTracer</a>)</p>
+</li>
+<li>
+<p>Scene tree dumps: show nodes currently in the scene tree, with support for the scene tree embedded in the <a href="#_sxlistenserverpeer">SxListenServerPeer</a> node.</p>
 </li>
 </ul>
 </div>
@@ -1938,18 +1941,18 @@ SxContainer.are_arrays_equal(obj1, obj3)    # =&gt; false</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sxdebugpanel"><a class="anchor" href="#_sxdebugpanel"></a>SxDebugPanel</h3>
+<h3 id="_sxdebugtools"><a class="anchor" href="#_sxdebugtools"></a>SxDebugTools</h3>
 <div class="paragraph">
 <p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_canvaslayer.html#canvaslayer" target="_blank" rel="noopener">CanvasLayer</a></strong></p>
 </div>
 <div class="paragraph">
-<p>Global debug panel, showing debug information.</p>
+<p>Global debug tools, showing debug information.</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Description</dt>
 <dd>
-<p>Global debug panel, showing debug information:</p>
+<p>Global debug tools, showing debug information:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1971,10 +1974,106 @@ SxContainer.are_arrays_equal(obj1, obj3)    # =&gt; false</code></pre>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="images/nodes/SxDebugPanel.gif" alt="SxDebugPanel">
+<img src="images/nodes/SxDebugTools.gif" alt="SxDebugTools">
 </div>
+</div>
+<div class="sect3">
+<h4 id="_sxdebugtools_enumerations"><a class="anchor" href="#_sxdebugtools_enumerations"></a>Enumerations</h4>
+<div class="paragraph">
+<p>enum <strong>SxDebugTools.PanelType</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>DEBUG_INFO = 0</strong> --- Debug info panel.</p>
+</li>
+<li>
+<p><strong>LOG = 1</strong> --- Log panel.</p>
+</li>
+<li>
+<p><strong>NODE_TRACER = 2</strong> --- Node tracer panel.</p>
+</li>
+<li>
+<p><strong>SCENE_TREE_DUMP = 3</strong> --- Scene tree dump panel.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxdebugtools_methods"><a class="anchor" href="#_sxdebugtools_methods"></a>Methods</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxdebugtools_method_show">show</a> ()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxdebugtools_method_hide">hide</a> ()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxdebugtools_method_toggle">toggle</a> ()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxdebugtools_method_show_specific_panel">show_specific_panel</a> ( <a href="#_sxdebugtools">SxDebugTools.PanelType</a> panel_type )</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxdebugtools_method_descriptions"><a class="anchor" href="#_sxdebugtools_method_descriptions"></a>Method Descriptions</h4>
+<div id="_sxdebugtools_method_show" class="ulist">
+<ul>
+<li>
+<p><code>void show ()</code></p>
+<div class="paragraph">
+<p>Show the debug tools.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxdebugtools_method_hide" class="ulist">
+<ul>
+<li>
+<p><code>void hide ()</code></p>
+<div class="paragraph">
+<p>Hide the debug tools.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxdebugtools_method_toggle" class="ulist">
+<ul>
+<li>
+<p><code>void toggle ()</code></p>
+<div class="paragraph">
+<p>Toggle the debug tools visibility.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxdebugtools_method_show_specific_panel" class="ulist">
+<ul>
+<li>
+<p><code>void show_specific_panel ( <a href="#_sxdebugtools">SxDebugTools.PanelType</a> panel_type )</code></p>
+<div class="paragraph">
+<p>Show a specific panel type.</p>
+</div>
+<div class="paragraph">
+<p>If the main panel is hidden, nothing will be shown so you need to also call
+<code>show</code>.</p>
+</div>
+</li>
+</ul>
 </div>
 <hr>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_sxdoubletap"><a class="anchor" href="#_sxdoubletap"></a>SxDoubleTap</h3>
@@ -5287,7 +5386,7 @@ var tree := SxNode.print_tree_pretty_to_string(my_node)</code></pre>
 <dd>
 <p>A tracing node, useful to display debug values.</p>
 <div class="paragraph">
-<p>It is shown through the <a href="#_sxdebugpanel">SxDebugPanel</a>, in the "Node tracer" section.</p>
+<p>It is shown through the <a href="#_sxdebugtools">SxDebugTools</a>, in the "Node tracer" section.</p>
 </div>
 <div class="paragraph">
 <p>To add a node tracer, just instance a <code>SxNodeTracer</code> in your scene, and use the <code>trace_parameter</code> function
@@ -5366,7 +5465,7 @@ If not set, uses the parent node name.</p>
 <li>
 <p><code>void trace_parameter ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> name, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> value )</code></p>
 <div class="paragraph">
-<p>Create or update a parameter trace, to display through the <a href="#_sxdebugpanel">SxDebugPanel</a> node tracer panel.</p>
+<p>Create or update a parameter trace, to display through the <a href="#_sxdebugtools">SxDebugTools</a> node tracer panel.</p>
 </div>
 <div class="paragraph">
 <p>If you need to continuously update a value, call <code>trace_parameter</code> in your node <code>_process</code> method.</p>
@@ -5685,6 +5784,10 @@ The <code>filters</code> argument is used to ignore some patterns.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxrand_method_range_vec2">range_vec2</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> from, <a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> to )</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxrand_method_unit_vec2">unit_vec2</a> ()</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxrand_method_chance_bool">chance_bool</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> chance )</code></p></td>
 </tr>
@@ -5727,6 +5830,22 @@ The <code>filters</code> argument is used to ignore some patterns.</p>
 <div class="title">Example</div>
 <div class="content">
 <pre class="highlight"><code class="language-gdscript" data-lang="gdscript">var n := SxRand.range_vec2(Vector2.ZERO, Vector2.ONE)</code></pre>
+</div>
+</div>
+<div id="_sxrand_method_unit_vec2" class="ulist">
+<ul>
+<li>
+<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> unit_vec2 ()</code></p>
+<div class="paragraph">
+<p>Generate a random unit Vector2.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">var n := SxRand.unit_vec2()</code></pre>
 </div>
 </div>
 <div id="_sxrand_method_chance_bool" class="ulist">
@@ -7850,7 +7969,7 @@ and on joysticks, you can affect 4 actions keys, one for each direction.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-21 21:05:13 UTC
+Last updated 2022-09-22 18:42:50 UTC
 </div>
 </div>
 </body>
