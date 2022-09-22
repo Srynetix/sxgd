@@ -27,9 +27,14 @@ font_data = ExtResource( 1 )
 visible = false
 script = ExtResource( 9 )
 title = "Choose a file ..."
+mode = 0
+shortcuts = [  ]
+file_filter = ""
 
 [node name="SxDoubleTap" parent="." index="0" instance=ExtResource( 6 )]
 should_process_input = false
+
+[node name="Confirmation" parent="." index="2" instance=ExtResource( 5 )]
 
 [node name="Title" parent="MarginContainer/VBoxContainer" index="0"]
 text = "Choose a file ..."
@@ -107,5 +112,3 @@ margin_right = 792.0
 margin_bottom = 41.0
 custom_fonts/font = SubResource( 3 )
 text = "Open"
-
-[node name="Confirmation" parent="." index="2" instance=ExtResource( 5 )]

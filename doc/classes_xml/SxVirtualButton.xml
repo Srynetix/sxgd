@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxVirtualButton" inherits="TextureRect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Virtual button to be included in a &lt;&lt;_sxvirtualcontrols&gt;&gt;.
+    </brief_description>
+    <description>
+        Virtual button to be included in a &lt;&lt;_sxvirtualcontrols&gt;&gt;.
+    </description>
+    <tutorials></tutorials>
+    <members>
+        <member name="action_button" type="String">
+            Action button to press on input.
+        </member>
+    </members>
+    <signals>
+        <signal name="touched">
+            <description>
+                The button was touched.
+            </description>
+        </signal>
+        <signal name="released">
+            <description>
+                The button was released.
+            </description>
+        </signal>
+    </signals>
+</class>

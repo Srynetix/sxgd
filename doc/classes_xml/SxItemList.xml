@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxItemList" inherits="ItemList" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        A touch-compatible ItemList.
+    </brief_description>
+    <description>
+        A touch-compatible ItemList. +
+        From https://github.com/godotengine/godot-proposals/issues/2429
+    </description>
+    <tutorials></tutorials>
+    <classes>
+    </classes>
+    <members>
+    </members>
+    <signals>
+    </signals>
+    <constants>
+    </constants>
+</class>

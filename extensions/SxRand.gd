@@ -19,6 +19,16 @@ static func range_vec2(from: Vector2, to: Vector2) -> Vector2:
         rand_range(from.y, to.y)
     )
 
+# Generate a random unit Vector2.
+#
+# Example:
+#   var n := SxRand.unit_vec2()
+static func unit_vec2() -> Vector2:
+    return Vector2(
+        rand_range(-1, 1),
+        rand_range(-1, 1)
+    ).normalized()
+
 # Generate a random boolean following a chance percentage.
 #
 # Example:

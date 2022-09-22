@@ -1,7 +1,7 @@
 extends SxFullScreenDialog
 class_name SxFullScreenFileDialog
 
-signal cancel()
+signal canceled()
 signal file_selected(file)
 
 signal _item_doubleclicked(file)

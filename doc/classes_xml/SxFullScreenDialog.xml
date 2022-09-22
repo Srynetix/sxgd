@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxFullScreenDialog" inherits="Panel" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        A full-screen dialog, useful for mobile environment.
+    </brief_description>
+    <description>
+        A full-screen dialog, useful for mobile environment.
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="show">
+            <return type="void" />
+            <description>
+                Show the dialog.
+            </description>
+        </method>
+        <method name="hide">
+            <return type="void" />
+            <description>
+                Hide the dialog.
+            </description>
+        </method>
+    </methods>
+    <members>
+        <member name="title" type="String" default="Dialog title">
+            Dialog title.
+        </member>
+        <member name="autohide" type="bool" default="true">
+            Autohide the dialog on action.
+        </member>
+        <member name="show_title" type="bool" default="true">
+            Show the dialog title.
+        </member>
+    </members>
+    <signals>
+    </signals>
+    <constants>
+    </constants>
+</class>

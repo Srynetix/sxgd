@@ -1,0 +1,27 @@
+name: Build documentation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-documentation:
+    name: Build documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build .adoc files from XML
+        run: cd doc && python tools/build_xml_adoc.py --all
+      - name: Install Asciidoctor
+        run: sudo gem install asciidoctor
+      - name: Build documentation
+        run: cd doc && asciidoctor index.adoc
+      - name: Copy documentation
+        run: mkdir build && cp doc/index.html build/ && cp -r doc/images build/
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          branch: gh-pages
+          folder: build

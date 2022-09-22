@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxSyncInput" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Synchronized input interface.
+    </brief_description>
+    <description>
+        Synchronized input interface.
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="get_current_input">
+            <return type="SxSyncPeerInput" />
+            <description>
+                Get the current player input.
+            </description>
+        </method>
+        <method name="create_peer_input">
+            <return type="void" />
+            <argument index="0" name="peer_id" type="int" />
+            <description>
+                Create a peer input for a specific peer ID.
+            </description>
+        </method>
+        <method name="remove_peer_input">
+            <return type="void" />
+            <argument index="0" name="peer_id" type="int" />
+            <description>
+                Remove a peer input for a specific peer ID.
+            </description>
+        </method>
+        <method name="update_peer_input_from_json">
+            <return type="void" />
+            <argument index="0" name="peer_id" type="int" />
+            <argument index="1" name="input" type="Dictionary" />
+            <description>
+                Update peer input state from a JSON dict.
+            </description>
+        </method>
+        <method name="is_action_pressed">
+            <return type="bool" />
+            <argument index="0" name="source" type="Node" />
+            <argument index="1" name="action_name" type="String" />
+            <description>
+                Check if an action is pressed for a specific node (will check its owner sync input).
+            </description>
+        </method>
+        <method name="is_action_just_pressed">
+            <return type="bool" />
+            <argument index="0" name="source" type="Node" />
+            <argument index="1" name="action_name" type="String" />
+            <description>
+                Check if an action is "just pressed" for a specific node (will check its owner sync input).
+            </description>
+        </method>
+        <method name="get_action_strength">
+            <return type="float" />
+            <argument index="0" name="source" type="Node" />
+            <argument index="1" name="action_name" type="String" />
+            <description>
+                Get an action strength for a specific node (will check its owner sync input).
+            </description>
+        </method>
+    </methods>
+    <members>
+    </members>
+    <signals>
+    </signals>
+    <constants></constants>
+</class>

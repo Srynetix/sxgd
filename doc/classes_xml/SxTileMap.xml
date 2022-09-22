@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxTileMap" inherits="Reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Tilemap methods.
+    </brief_description>
+    <description>
+        Generic tilemap methods.
+    </description>
+    <tutorials></tutorials>
+    <classes>
+        <class name="SxTileMap.CellRotationParams" inherits="Node">
+            <description>
+                Helper class representing transpose/flip parameters for a TileMap cell.
+            </description>
+            <members>
+                <member name="transpose" type="bool">
+                    Is the cell transposed?
+                </member>
+                <member name="flip_x" type="bool">
+                    Is the cell flipped on axis X?
+                </member>
+                <member name="flip_y" type="bool">
+                    Is the cell flipped on axis Y?
+                </member>
+            </members>
+            <methods>
+                <method name="from_values" qualifiers="static">
+                    <return type="SxTileMap.CellRotationParams" />
+                    <argument index="0" name="transpose" type="bool" />
+                    <argument index="1" name="flip_x" type="bool" />
+                    <argument index="2" name="flip_y" type="bool" />
+                    <description>
+                        Build rotation params from transpose, flip_x and flip_y parameters.
+                    </description>
+                </method>
+            </methods>
+        </class>
+    </classes>
+    <methods>
+        <method name="get_cell_rotation" qualifiers="static">
+            <return type="float" />
+            <argument index="0" name="tilemap" type="TileMap" />
+            <argument index="1" name="pos" type="Vector2" />
+            <description>
+                Get a specific cell rotation, in radians.
+
+                [source,gdscript]
+                .Example
+                ----
+                var r := SxTileMap.get_cell_rotation(tilemap, Vector2(0, 0))
+                ----
+            </description>
+        </method>
+        <method name="get_cell_rotation_params" qualifiers="static">
+            <return type="SxTileMap.CellRotationParams" />
+            <argument index="0" name="tilemap" type="TileMap" />
+            <argument index="1" name="pos" type="Vector2" />
+            <description>
+                Get a specific cell rotation, in a custom class format.
+
+                [source,gdscript]
+                .Example
+                ----
+                var params := SxTileMap.get_cell_rotation_params(tilemap, Vector2(0, 0))
+                ----
+            </description>
+        </method>
+        <method name="rotation_params_to_angle" qualifiers="static">
+            <return type="float" />
+            <argument index="0" name="params" type="SxTileMap.CellRotationParams" />
+            <description>
+                Convert rotation params to an angle in radians.
+
+                [source,gdscript]
+                .Example
+                ----
+                var params := SxTileMap.get_cell_rotation_params(tilemap, Vector2(0, 0))
+                var angle := SxTileMap.rotation_params_to_angle(params)
+                ----
+            </description>
+        </method>
+        <method name="rotation_degrees_to_params" qualifiers="static">
+            <return type="SxTileMap.CellRotationParams" />
+            <argument index="0" name="angle_degrees" type="int" />
+            <description>
+                Generate cell rotation parameters from an angle in degrees.
+
+                [source,gdscript]
+                .Example
+                ----
+                var params := SxTileMap.rotation_degrees_to_params(90)
+                ----
+            </description>
+        </method>
+        <method name="create_dump" qualifiers="static">
+            <return type="PoolIntArray" />
+            <argument index="0" name="tilemap" type="TileMap" />
+            <description>
+                Create a dump from tilemap contents.
+
+                [source,gdscript]
+                .Example
+                ----
+                var tile_data := SxTileMap.create_dump(tilemap)
+                ----
+            </description>
+        </method>
+        <method name="apply_dump" qualifiers="static">
+            <return type="void" />
+            <argument index="0" name="tilemap" type="TileMap" />
+            <argument index="1" name="array" type="PoolIntArray" />
+            <description>
+                Overwrite tilemap contents with a dump.
+                +
+                Before applying the dump, it will clear all the tilemap contents.
+
+                [source,gdscript]
+                .Example
+                ----
+                SxTileMap.apply_dump(tilemap, my_dump)
+                ----
+            </description>
+        </method>
+    </methods>
+</class>

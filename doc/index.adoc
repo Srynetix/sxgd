@@ -1,0 +1,221 @@
+= sxgd documentation
+Denis BOURGE <bourge.denis@gmail.com>
+:description: Documentation of the sxgd Godot plugin.
+:sectanchors:
+:toc: left
+:toclevels: 2
+:experimental:
+
+Hello and welcome on the main documentation of the `sxgd` plugin. +
+It's also my first attempt at https://docs.asciidoctor.org/asciidoc/latest/document-structure/[AsciiDoc^].
+
+The plugin contains *extensions*, *modules*, and *nodes*.
+
+NOTE: Each class is prefixed by `Sx` for namespacing concerns.
+
+== Installing
+
+The plugin **needs** to be available in the `./addons/sxgd` folder.
+
+If you have Git, it is best installed as a Git submodule, using the following command in your Godot project directory:
+
+[source,bash]
+----
+git clone https://github.com/Srynetix/sxgd ./addons/sxgd
+----
+
+If not, you can directly unzip the plugin code in the `./addons/sxgd` folder.
+
+== Usage
+
+You can use *extensions* by referring to their names, so the following code will work:
+
+[source,gdscript]
+.MyCustomNode.gd
+----
+# A custom node of your project
+extends Node
+
+# Example: use the SxLog facility
+var logger := SxLog.get_logger("MyNode")
+
+func _ready() -> void:
+    # Example: generate a random color with a custom alpha value as a float
+    var my_color := SxColor.rand_with_alpha_f(0.5)
+
+    # Example: generate a random value
+    logger.info(SxRand.range_i(0, 10))
+----
+
+For most nodes and modules, you can directly _drag'n'drop_ them, or _inherit_ them, but there is one thing you can't do: *you can't use them as autoloads*. Well, you can, but _not directly_.
+
+.Global classes and autoloads
+****
+Each `sxgd` class declares a `class_name` attribute, to register them as global classes (needed to avoid importing each file using its path, which is quickly unreliable/unmaintainable).
+
+Due to Godot/GDScript quirks, you cannot give a `class_name` to an autoloaded Node, because autoloads can be accessed globally. So you cannot directly use `sxgd` nodes as autoloads...
+
+*But!* What you can do is: subclass them in a new class, through inheritance, not giving it a `class_name`, and use _this_ node as an autoload. If it's a scene inheritance (with `.tscn` files), use the `New Inherited Scene...` menu from Godot, and if needed, don't forget to replace its script with a inherited script, using an `extends` declaration.
+
+Here is a quick example for the `SxGameData` node (not a scene), useful for most projects (_state handling & persistable key-value store_).
+
+1. Create a specific `GameData.gd` script for your game (personally, I put autoloads in a top-level `autoloads` folder).
+2. In this script, put at the top `extends SxGameData` (it will automatically resolves the path to the original class). In this file to can override anything you want and add new functionalities.
++
+--
+[source,gdscript]
+.GameData.gd
+----
+extends SxGameData
+
+func _ready() -> void:
+    # Note: _logger is a SxLog.Logger exposed in SxGameData.
+    _logger.info("Game data loaded!")
+----
+--
+3. In Godot, in the menu:Project settings[Autoloads] menu, add your `GameData.gd` script as an autoload, with the `Global variable` checkbox enabled.
+4. And that's it! In your game code, you can refer to `GameData` (instead of `SxGameData`) to access your autoload!
+
+Now a second example, using a scene: `SxSceneTransitioner`, useful to fade between game screens.
+
+1. Create a *New Inherited Scene*, and open the node you want to inherit (here `SxSceneTransitioner`, located in `nodes/utils/SxSceneTransitioner/SxSceneTransitioner.tscn`).
+2. Save it to a local folder (if you follow my advice you can put it in a top-level `autoloads` folder), with another name like `GameSceneTransitioner.tscn`.
+3. In Godot, in the menu:Project settings[Autoloads] menu, add your `GameSceneTransitioner.tscn` scene as an autoload, with the `Global variable` checkbox enabled.
+4. And that's it! In your game code, you can refer to `GameSceneTransitioner` to access your autoload!
+****
+
+== Contents
+
+This section contains all of the components included in the plugins, with a short description. Click on the component name to access its specific documentation.
+
+=== Extensions
+
+Static methods and related utilities for any relevant part of Godot Engine.
+
+* *<<_sxarray>>*: Array helpers (_string trimming_, ...).
+* *<<_sxbuffer>>*: Buffer helpers (_zstd compression_, ...).
+* *<<_sxcolor>>*: Color helpers (_applying an alpha value on an existing color_, _generating a random color_, ...).
+* *<<_sxcontainer>>*: Generic container (_Array_, _Dictionary_) helpers (_equality checks_, ...).
+* *<<_sxinput>>*: Input helpers (_extract joystick movement from 4 joystick actions_, ...).
+* *<<_sxjson>>*: JSON helpers (_read file_, _write file_, ...).
+* *<<_sxlog>>*: Log facility (_get/create a logger_, _set a log level_, ...).
+* *<<_sxmath>>*: Additional math functions (_lerp a Vector3_, _align a transform with an axis_, ...).
+* *<<_sxnetwork>>*: Network helpers (_UUID generation_, _network shortcuts_, ...).
+* *<<_sxnode>>*: Generic Node methods (_print tree to string_, ...).
+* *<<_sxos>>*: Generic OS methods (_check if OS is mobile_, _set window size from string_, ...).
+* *<<_sxrand>>*: Additional rand methods (_rand range with ints_, _random choice in array_, ...).
+* *<<_sxshader>>*: Shader helpers (_shortcuts to get/set a shader param_, ...).
+* *<<_sxtext>>*: Text helpers (_case conversion_, ...).
+* *<<_sxtilemap>>*: Tilemap helpers (_get cell rotation_, _dump/restore_, ...).
+* *<<_sxui>>*: Control-related helpers (_get default font_, ...).
+
+=== Modules
+
+Specific modules separated from the rest.
+
+==== FontAwesome icons integration
+
+* *<<_sxfabutton>>*: Ready-to-use `Button` with an integrated *FA* icon.
+* *<<_sxfafont>>*: Font management wrapper around *FA*, useful for specific needs.
+* *<<_sxfalabel>>*: A label which display a *FA* icon.
+
+[WARNING]
+.Don't forget your JSON!
+====
+When using FontAwesome components (any of the `SxFA` components), you need to make sure
+you export `.json` files, because FontAwesome icon definitions are parsed at runtime.
+
+In the menu:Project[Export] menu, add/select your preset and in the menu:Resources[Filters to export non-resource files/folders] section, you need to declare `*.json`.
+====
+
+==== Scene Runner
+
+* *<<_sxscenerunner>>*: Useful as a kind of "test suite" where you can select any scene from a specific folder, with on-screen navigation.
+
+==== Virtual Controls
+
+A customizable virtual control module (includes assets by *Kenney*, and ready-to-use samples):
+
+* *<<_sxvirtualbutton>>*: A simple customizable virtual button.
+* *<<_sxvirtualcontrols>>*: The scene used to organize the controls on the screen.
+* *<<_sxvirtualjoystick>>*: A simple customizable virtual joystick.
+
+=== Nodes
+
+Reusable nodes, organized in multiple categories.
+
+==== Audio
+
+Audio nodes.
+
+* *<<_sxaudiomultistreamplayer>>*: Audio player with multiple simultaneous voices.
+* *<<_sxglobalaudiofxplayer>>*: Autoload-ready multi stream player.
+* *<<_sxglobalmusicplayer>>*: Autoload-ready audio player, useful for music tracks.
+
+==== Debug
+
+Debug nodes.
+
+* *<<_sxdebugtools>>*: Useful global debug UI, showing multiple panels:
+    ** Debug info: shows performance info at the top-left section of the screen
+    ** Log details: scrollable logs (only those printed with <<_sxlog>>, not `print`)
+    ** Node tracer: show currently enabled node tracers (see <<_sxnodetracer>>)
+    ** Scene tree dumps: show nodes currently in the scene tree, with support for the scene tree embedded in the <<_sxlistenserverpeer>> node.
+
+* *<<_sxnodetracer>>*: Node parameter tracing system.
+
+==== FX
+
+Nodes concerning special effects / shaders / particles.
+
+* *Screen effects*: Full-screen effects you can use as nodes.
+    ** *<<_sxbetterblur>>*: A gaussian blur, compatible with GLES2.
+    ** *<<_sxmotionblur>>*: A motion blur.
+    ** *<<_sxshockwave>>*: An animated shockwave effect.
+    ** *<<_sxvignette>>*: A vignette effect.
+* *<<_sxfxcamera>>*: A special camera with FX and animation capabilities.
+
+==== Input
+
+Input nodes.
+
+* *<<_sxdoubletap>>*: Double-tap detector, useful on mobiles.
+
+==== Networking
+
+Networking-related and multiplayer-related nodes.
+
+* *<<_sxclientpeer>>*: A generic client peer implementation.
+* *<<_sxclientrpc>>*: Generic client RPC methods (_synchronized scene spawning_, ...).
+* *<<_sxlistenserverpeer>>*: A ready-to-use listen server, to use a client/server combo on a same game instance.
+* *<<_sxrpcservice>>*: Wraps the client and server RPC methods, and the input synchronization.
+* *<<_sxserverpeer>>*: A generic server peer implementation.
+* *<<_sxserverrpc>>*: Generic server RPC methods (_send input_, _update username_, ...).
+* *<<_sxsyncbarrier>>*: Useful system to wait for all clients to do something.
+* *<<_sxsyncinput>>*: Input synchronization system, using one `SxSyncPeerInput` per connected client.
+* *<<_sxsyncpeerinput>>*: Specific input status for a client (uses the *input map*, configurable with a `ProjectSettings` value)
+
+==== UI
+
+Control-related nodes.
+
+* *<<_sxfadingrichtextlabel>>*: A wrapped `RichTextLabel` with a per-character fade-in effect.
+    ** *<<_sxfadingrichtexteffect>>*: The fade-in effect itself.
+* *<<_sxfullscreenconfirmationdialog>>*: A big confirmation dialog, useful on small screens.
+* *<<_sxfullscreendialog>>*: A big dialog, useful on small screens.
+* *<<_sxfullscreenfiledialog>>*: A big mobile-ready file selection dialog.
+* *<<_sxitemlist>>*: Simple `ItemList` wrapper with scrolling enabled on mobile.
+
+==== Utils
+
+Miscellaneous nodes.
+
+* *<<_sxcmdlineparser>>*: Simple node which handles command-line arguments, needs to be overriden.
+* *<<_sxgamedata>>*: A general-purpose in-memory (and on-disk) key-value store, to be used through inheritance and autoload.
+* *<<_sxloadcache>>*: A resource/scene loader, exposing a `load_resources` method to implement through inheritance and autoload.
+Useful to load every needed resources at game startup.
+* *<<_sxscenetransitioner>>*: A simple scene transition node, with a fade-in/fade-out effect, to be used with inheritance as autoload.
+
+== Classes
+
+include::./classes/index.adoc[]

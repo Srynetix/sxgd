@@ -2,7 +2,7 @@ extends Node
 class_name SxSyncBarrier
 
 enum BarrierJoinStatus {
-    NOT_READY,
+    NOT_READY = 0,
     OK,
     TIMEOUT
 }

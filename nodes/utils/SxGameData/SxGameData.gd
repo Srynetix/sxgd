@@ -168,7 +168,7 @@ func load_from_disk(path: String = "") -> void:
         _logger.error("Could not load game data from path '%s'" % target_path)
 
 # Clear all non-static data.
-func clear() -> void:
+func clear_all() -> void:
     _data.clear()
 
 # Clear all non-static data from category.

@@ -297,33 +297,3 @@ static func configure_log_levels(conf: String) -> void:
 static func set_max_log_level(name: String, level: int) -> void:
     var logger := get_logger(name)
     logger.set_max_log_level(level)
-
-# Show a trace message on the root logger
-static func trace(message: String, args: Array = []) -> void:
-    var root_logger := get_logger("root")
-    root_logger.trace(message, args)
-
-# Show a debug message on the root logger
-static func debug(message: String, args: Array = []) -> void:
-    var root_logger := get_logger("root")
-    root_logger.debug(message, args)
-
-# Show an info message on the root logger
-static func info(message: String, args: Array = []) -> void:
-    var root_logger := get_logger("root")
-    root_logger.info(message, args)
-
-# Show a warn message on the root logger
-static func warn(message: String, args: Array = []) -> void:
-    var root_logger := get_logger("root")
-    root_logger.warn(message, args)
-
-# Show an error message on the root logger
-static func error(message: String, args: Array = []) -> void:
-    var root_logger := get_logger("root")
-    root_logger.error(message, args)
-
-# Show a critical message on the root logger
-static func critical(message: String, args: Array = []) -> void:
-    var root_logger := get_logger("root")
-    root_logger.critical(message, args)

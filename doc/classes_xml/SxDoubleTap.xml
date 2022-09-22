@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxDoubleTap" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Double-tap detector.
+    </brief_description>
+    <description>
+        Double-tap detector, useful for mobile environments.
+    </description>
+    <tutorials></tutorials>
+    <methods></methods>
+    <members>
+        <member name="threshold_ms" type="int" default="200">
+            Detection threshold value in milliseconds.
+        </member>
+        <member name="should_process_input" type="bool" default="true">
+            Disable this if the tap detector should process input or not.
+        </member>
+    </members>
+    <signals>
+        <signal name="doubletap">
+            <argument index="0" name="touch_idx" type="int" />
+            <description>
+                Event emitted on double-tap.
+            </description>
+        </signal>
+    </signals>
+    <constants></constants>
+</class>

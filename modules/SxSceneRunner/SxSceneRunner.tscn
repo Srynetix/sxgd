@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/sxgd/modules/SxSceneRunner/SxSceneRunner.gd" type="Script" id=1]
-[ext_resource path="res://addons/sxgd/assets/fonts/Jost-400-Book.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://addons/sxgd/assets/fonts/Jost-400-Book.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
@@ -9,7 +8,7 @@ size = 24
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 24
@@ -26,39 +25,36 @@ font_data = ExtResource( 3 )
 [node name="SceneRunner" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Current" type="Node2D" parent="."]
+[node name="Current" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Margin" type="MarginContainer" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BackButton" type="Button" parent="CanvasLayer/Margin"]
-margin_left = 784.0
+margin_left = 945.0
 margin_top = 20.0
-margin_right = 1121.0
-margin_bottom = 57.0
+margin_right = 1004.0
+margin_bottom = 61.0
 size_flags_horizontal = 8
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 1 )
@@ -66,18 +62,20 @@ text = "Back"
 
 [node name="VBox" type="VBoxContainer" parent="CanvasLayer/Margin"]
 margin_left = 20.0
-margin_top = 858.0
-margin_right = 1121.0
-margin_bottom = 940.0
+margin_top = 491.0
+margin_right = 1004.0
+margin_bottom = 580.0
+mouse_filter = 2
 size_flags_vertical = 8
 
 [node name="Text" type="HBoxContainer" parent="CanvasLayer/Margin/VBox"]
-margin_right = 1101.0
-margin_bottom = 21.0
+margin_right = 984.0
+margin_bottom = 24.0
+mouse_filter = 2
 
 [node name="SceneName" type="Label" parent="CanvasLayer/Margin/VBox/Text"]
-margin_right = 1101.0
-margin_bottom = 21.0
+margin_right = 984.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 8
 custom_fonts/font = SubResource( 2 )
@@ -85,38 +83,40 @@ text = "[NO SCENE FOUND]"
 align = 2
 
 [node name="Margin" type="MarginContainer" parent="CanvasLayer/Margin/VBox"]
-margin_top = 25.0
-margin_right = 1101.0
-margin_bottom = 82.0
+margin_top = 28.0
+margin_right = 984.0
+margin_bottom = 89.0
+mouse_filter = 2
 custom_constants/margin_right = 10
 custom_constants/margin_top = 20
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 0
 
 [node name="Buttons" type="HBoxContainer" parent="CanvasLayer/Margin/VBox/Margin"]
-margin_left = 10.0
+margin_left = 344.0
 margin_top = 20.0
-margin_right = 1091.0
-margin_bottom = 57.0
+margin_right = 639.0
+margin_bottom = 61.0
+mouse_filter = 2
 size_flags_horizontal = 4
 custom_constants/separation = 32
 
 [node name="Previous" type="Button" parent="CanvasLayer/Margin/VBox/Margin/Buttons"]
-margin_right = 334.0
-margin_bottom = 37.0
+margin_right = 85.0
+margin_bottom = 41.0
 custom_fonts/font = SubResource( 3 )
 text = "< Prev."
 
 [node name="Reset" type="Button" parent="CanvasLayer/Margin/VBox/Margin/Buttons"]
-margin_left = 366.0
-margin_right = 714.0
-margin_bottom = 37.0
+margin_left = 117.0
+margin_right = 182.0
+margin_bottom = 41.0
 custom_fonts/font = SubResource( 4 )
 text = "Reset"
 
 [node name="Next" type="Button" parent="CanvasLayer/Margin/VBox/Margin/Buttons"]
-margin_left = 746.0
-margin_right = 1081.0
-margin_bottom = 37.0
+margin_left = 214.0
+margin_right = 295.0
+margin_bottom = 41.0
 custom_fonts/font = SubResource( 5 )
 text = "Next >"

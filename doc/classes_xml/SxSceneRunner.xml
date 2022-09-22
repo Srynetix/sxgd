@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxSceneRunner" inherits="Control" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Scene runner.
+    </brief_description>
+    <description>
+        Simple scene runner, can be used as a test suite. +
+        Inherit the scene, define a `scene_folder`, then you can navigate scenes.
+
+        image::./images/nodes/SxSceneRunner.gif[align=center]
+    </description>
+    <tutorials></tutorials>
+    <members>
+        <member name="scene_folder" type="String">
+            Folder to scan, containing scenes.
+        </member>
+    </members>
+    <signals>
+        <signal name="scene_loaded">
+            <argument index="0" name="name" type="String" />
+            <description>
+                A scene has been loaded.
+            </description>
+        </signal>
+        <signal name="go_back">
+            <description>
+                A "go-back" navigation request has been made.
+            </description>
+        </signal>
+    </signals>
+</class>

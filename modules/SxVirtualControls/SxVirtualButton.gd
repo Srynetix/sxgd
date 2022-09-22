@@ -5,7 +5,7 @@ class_name SxVirtualButton
 const INITIAL_OPACITY := 0.5
 const TOUCHED_OPACITY := 1.0
 
-# On button touc
+# On button touch
 signal touched()
 # On button release
 signal released()

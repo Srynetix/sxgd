@@ -1,13 +1,13 @@
 tool
-extends Panel
+extends SxFullScreenDialog
 class_name SxFullScreenConfirmationDialog
 
 export(String, MULTILINE) var message := "Are you sure?" setget _set_message
 
 onready var tween := $Tween as Tween
-onready var message_label := $VBoxContainer/Label as Label
-onready var yes_btn := $VBoxContainer/HBoxContainer/Yes as Button
-onready var no_btn := $VBoxContainer/HBoxContainer/No as Button
+onready var message_label := $MarginContainer/VBoxContainer/VBoxContainer/Content as Label
+onready var yes_btn := $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/Yes as Button
+onready var no_btn := $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/No as Button
 
 signal confirmed()
 signal canceled()
@@ -25,20 +25,20 @@ func _ready() -> void:
     no_btn.connect("pressed", self, "_on_no")
 
 func _on_yes() -> void:
-    fade_out()
+    hide()
     emit_signal("confirmed")
 
 func _on_no() -> void:
-    fade_out()
+    hide()
     emit_signal("canceled")
 
-func fade_in() -> void:
+func show() -> void:
     tween.stop_all()
     visible = true
     tween.interpolate_property(self, "modulate", Color.transparent, Color.white, 0.25, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
     tween.start()
 
-func fade_out() -> void:
+func hide() -> void:
     tween.stop_all()
     tween.interpolate_property(self, "modulate", Color.white, Color.transparent, 0.25, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
     tween.start()
