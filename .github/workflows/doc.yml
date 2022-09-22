@@ -2,6 +2,8 @@ name: Build documentation
 
 on:
   push:
+    branches:
+      - main
 
 jobs:
   build-documentation:
