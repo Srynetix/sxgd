@@ -7,6 +7,7 @@ class_name SxSceneRunner
 signal scene_loaded(name)
 signal go_back()
 
+export var show_back_button := true
 export(String, DIR) var scene_folder: String
 
 const SCENE_KEY_RESET := KEY_I
@@ -24,6 +25,9 @@ var _known_scenes := []
 var _current_scene := 0
 
 func _ready() -> void:
+    if !show_back_button:
+        _back_button.hide()
+
     _known_scenes = _discover_scenes()
     _load_first_scene()
 

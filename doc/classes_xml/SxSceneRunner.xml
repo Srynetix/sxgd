@@ -11,6 +11,9 @@
     </description>
     <tutorials></tutorials>
     <members>
+        <member name="show_back_button" type="bool">
+            Show the back button.
+        </member>
         <member name="scene_folder" type="String">
             Folder to scan, containing scenes.
         </member>
