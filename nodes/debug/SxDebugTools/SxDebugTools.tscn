@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/sxgd/nodes/debug/SxLogPanel/SxLogPanel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/sxgd/nodes/debug/SxDebugInfo/SxDebugInfo.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/sxgd/nodes/debug/SxDebugPanel/SxDebugPanel.gd" type="Script" id=3]
+[ext_resource path="res://addons/sxgd/nodes/debug/SxDebugTools/SxDebugTools.gd" type="Script" id=3]
 [ext_resource path="res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf" type="DynamicFontData" id=4]
 [ext_resource path="res://addons/sxgd/assets/fonts/OfficeCodePro-Bold.otf" type="DynamicFontData" id=5]
 [ext_resource path="res://addons/sxgd/nodes/debug/SxNodeTracer/SxNodeTracerSystem.tscn" type="PackedScene" id=6]
@@ -31,7 +31,7 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 4 )
 
-[node name="SxDebugPanel" type="CanvasLayer"]
+[node name="SxDebugTools" type="CanvasLayer"]
 layer = 4
 script = ExtResource( 3 )
 

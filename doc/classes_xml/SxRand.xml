@@ -36,6 +36,18 @@
                 ----
             </description>
         </method>
+        <method name="unit_vec2" qualifiers="static">
+            <return type="Vector2" />
+            <description>
+                Generate a random unit Vector2.
+
+                [source,gdscript]
+                .Example
+                ----
+                var n := SxRand.unit_vec2()
+                ----
+            </description>
+        </method>
         <method name="chance_bool" qualifiers="static">
             <return type="bool" />
             <argument index="0" name="chance" type="int" />

@@ -156,10 +156,12 @@ Audio nodes.
 
 Debug nodes.
 
-* *<<_sxdebugpanel>>*: Useful global debug UI, showing multiple panels:
+* *<<_sxdebugtools>>*: Useful global debug UI, showing multiple panels:
     ** Debug info: shows performance info at the top-left section of the screen
     ** Log details: scrollable logs (only those printed with <<_sxlog>>, not `print`)
     ** Node tracer: show currently enabled node tracers (see <<_sxnodetracer>>)
+    ** Scene tree dumps: show nodes currently in the scene tree, with support for the scene tree embedded in the <<_sxlistenserverpeer>> node.
+
 * *<<_sxnodetracer>>*: Node parameter tracing system.
 
 ==== FX

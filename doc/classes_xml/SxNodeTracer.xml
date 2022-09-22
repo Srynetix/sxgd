@@ -6,7 +6,7 @@
     <description>
         A tracing node, useful to display debug values.
         +
-        It is shown through the &lt;&lt;_sxdebugpanel&gt;&gt;, in the "Node tracer" section.
+        It is shown through the &lt;&lt;_sxdebugtools&gt;&gt;, in the "Node tracer" section.
         +
         To add a node tracer, just instance a `SxNodeTracer` in your scene, and use the `trace_parameter` function
         to register a parameter with a value (you will need to call it at each value update).
@@ -35,7 +35,7 @@
             <argument index="0" name="name" type="String" />
             <argument index="1" name="value" type="Variant" />
             <description>
-                Create or update a parameter trace, to display through the &lt;&lt;_sxdebugpanel&gt;&gt; node tracer panel.
+                Create or update a parameter trace, to display through the &lt;&lt;_sxdebugtools&gt;&gt; node tracer panel.
                 +
                 If you need to continuously update a value, call `trace_parameter` in your node `_process` method.
             </description>

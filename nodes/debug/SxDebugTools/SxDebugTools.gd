@@ -1,6 +1,6 @@
-# Global debug panel, displaying debug info and logs.
+# Global debug tools, displaying debug info and logs.
 extends CanvasLayer
-class_name SxDebugPanel
+class_name SxDebugTools
 
 # Panel type to display.
 enum PanelType {
@@ -30,26 +30,30 @@ func _ready():
     scene_tree_dump.visible = false
 
     if visible_on_startup:
-        show_panel()
+        show()
 
 # Hide the debug panel.
-func hide_panel() -> void:
+func hide() -> void:
     _hide_panels()
     main_panel.visible = false
     _visible = false
 
 # Show the debug panel.
-func show_panel() -> void:
+func show() -> void:
     main_panel.visible = true
     _visible = true
     _show_panel(_current_panel)
 
 # Toggle the debug panel.
-func toggle_panel() -> void:
+func toggle() -> void:
     if _visible:
-        hide_panel()
+        hide()
     else:
-        show_panel()
+        show()
+
+# Show a specific panel.
+func show_specific_panel(panel_type: int) -> void:
+    _show_panel(panel_type)
 
 func _show_panel(panel_type: int) -> void:
     _current_panel = panel_type
@@ -104,7 +108,7 @@ func _hide_panels() -> void:
 func _input(event: InputEvent):
     if event is InputEventKey:
         if event.pressed && event.scancode == KEY_F12:
-            toggle_panel()
+            toggle()
 
         elif event.pressed && event.scancode == KEY_F7 && _visible:
             _show_panel(PanelType.SCENE_TREE_DUMP)

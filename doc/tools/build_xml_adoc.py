@@ -4,15 +4,23 @@ import argparse
 from dataclasses import dataclass
 from io import StringIO
 import sys
-from typing import IO, Any, Dict, List, Optional, Set, Union
+from typing import IO, Any, Dict, List, Optional, Set, TypeVar
 import xml.etree.ElementTree as ET
 import textwrap
 from pathlib import Path
 import os
 
+T = TypeVar("T")
+
 
 def strip_ws(text: str):
     return textwrap.dedent(text).strip()
+
+
+def unwrap(obj: Optional[T]) -> T:
+    if obj is None:
+        raise ValueError(f"Object `{obj}` should not be None")
+    return obj
 
 
 @dataclass
@@ -69,7 +77,7 @@ class Constants:
                     ConstantDef(
                         name=constant.attrib["name"],
                         value=constant.attrib["value"],
-                        description=strip_ws(constant.text)
+                        description=strip_ws(unwrap(constant.text))
                     )
                 )
             else:
@@ -77,7 +85,7 @@ class Constants:
                     ConstantDef(
                         name=constant.attrib["name"],
                         value=constant.attrib["value"],
-                        description=strip_ws(constant.text)
+                        description=strip_ws(unwrap(constant.text))
                     )
                 )
 
@@ -99,7 +107,7 @@ class MemberDef:
         return cls(
             name=element.attrib["name"],
             return_type=element.attrib["type"],
-            description=strip_ws(element.text),
+            description=strip_ws(unwrap(element.text)),
             default_value=element.attrib.get("default")
         )
 
@@ -112,10 +120,14 @@ class SignalDef:
 
     @classmethod
     def parse_signal_def(cls, element: ET.Element):
+        description = unwrap(element.find("description"))
         return cls(
             name=element.attrib["name"],
-            arguments=[ArgumentDef.parse_argument_def(e) for e in element.findall("argument")],
-            description=strip_ws(element.find("description").text)
+            arguments=[
+                ArgumentDef.parse_argument_def(e)
+                for e in element.findall("argument")
+            ],
+            description=strip_ws(unwrap(description.text))
         )
 
 
@@ -132,9 +144,16 @@ class MethodDef:
         return cls(
             name=element.attrib["name"],
             qualifiers=element.attrib.get("qualifiers", None),
-            return_type=element.find("return").attrib["type"],
-            arguments=[ArgumentDef.parse_argument_def(e) for e in element.findall("argument")],
-            description=strip_ws(element.find("description").text)
+            return_type=unwrap(element.find("return")).attrib["type"],
+            arguments=[
+                ArgumentDef.parse_argument_def(e)
+                for e in element.findall("argument")
+            ],
+            description=strip_ws(
+                unwrap(
+                    unwrap(element.find("description")).text
+                )
+            )
         )
 
 
@@ -193,12 +212,12 @@ class ClassDef:
         brief_description = None
         brief_description_node = element.find("brief_description")
         if brief_description_node is not None:
-            brief_description = strip_ws(brief_description_node.text)
+            brief_description = strip_ws(unwrap(brief_description_node.text))
 
         description = "No description."
         description_node = element.find("description")
         if description_node is not None:
-            description = strip_ws(description_node.text)
+            description = strip_ws(unwrap(description_node.text))
 
         return cls(
             name=element.attrib["name"],
@@ -249,7 +268,11 @@ class Context:
         for path in sorted_paths:
             cdef = self.known_classes[path]
             stream = StringIO()
-            writer = ADocWriter(stream=stream, known_names=self.known_names, standard_names=self.standard_names)
+            writer = ADocWriter(
+                stream=stream,
+                known_names=self.known_names,
+                standard_names=self.standard_names
+            )
             writer.write_class_def(cdef)
 
             output_stream = stream.getvalue()
@@ -265,7 +288,13 @@ class Context:
 
 
 class ADocWriter:
-    def __init__(self, *, stream: IO, known_names: Set[str], standard_names: Set[str]):
+    def __init__(
+        self,
+        *,
+        stream: IO,
+        known_names: Set[str],
+        standard_names: Set[str]
+    ):
         self.stream = stream
         self.known_names = known_names
         self.standard_names = standard_names
@@ -291,9 +320,18 @@ class ADocWriter:
         return "_" + "_".join((cdef.name.lower(), section)).replace(".", "_")
 
     def _build_method_hash(self, cdef: ClassDef, method: MethodDef) -> str:
-        return "_" + "_".join((cdef.name.lower(), "method", method.name.lower())).replace(".", "_")
+        return "_" + "_".join(
+            (cdef.name.lower(), "method", method.name.lower())
+        ).replace(".", "_")
 
-    def _build_method_header(self, cdef: ClassDef, method: MethodDef, *, include_type: bool = False, include_link: bool = False) -> str:
+    def _build_method_header(
+        self,
+        cdef: ClassDef,
+        method: MethodDef,
+        *,
+        include_type: bool = False,
+        include_link: bool = False
+    ) -> str:
         stream = StringIO()
         if method.qualifiers:
             stream.write(f"{method.qualifiers} ")
@@ -301,7 +339,9 @@ class ADocWriter:
             stream.write(f"{self._write_type(method.return_type)} ")
 
         if include_link:
-            stream.write(f"<<{self._build_method_hash(cdef, method)},{method.name}>> ")
+            stream.write(
+                f"<<{self._build_method_hash(cdef, method)},{method.name}>> "
+            )
         else:
             stream.write(f"{method.name} ")
 
@@ -309,25 +349,40 @@ class ADocWriter:
         return stream.getvalue()
 
     def _build_member_hash(self, cdef: ClassDef, member: MemberDef) -> str:
-        return "_" + "_".join((cdef.name.lower(), "member", member.name.lower())).replace(".", "_")
+        return "_" + "_".join(
+            (cdef.name.lower(), "member", member.name.lower())
+        ).replace(".", "_")
 
-    def _build_member_header(self, cdef: ClassDef, member: MemberDef, *, include_type: bool = False, include_link: bool = False) -> str:
+    def _build_member_header(
+        self,
+        cdef: ClassDef,
+        member: MemberDef,
+        *,
+        include_type: bool = False,
+        include_link: bool = False
+    ) -> str:
         stream = StringIO()
         if include_type:
             stream.write(f"{self._write_type(member.return_type)} ")
 
         if include_link:
-            stream.write(f"<<{self._build_member_hash(cdef, member)},{member.name}>>")
+            stream.write(
+                f"<<{self._build_member_hash(cdef, member)},{member.name}>>"
+            )
         else:
             stream.write(member.name)
         return stream.getvalue()
 
     def _build_signal_hash(self, cdef: ClassDef, signal: SignalDef) -> str:
-        return "_" + "_".join((cdef.name.lower(), "signal", signal.name.lower())).replace(".", "_")
+        return "_" + "_".join(
+            (cdef.name.lower(), "signal", signal.name.lower())
+        ).replace(".", "_")
 
-    def _build_signal_header(self, cdef: ClassDef, signal: SignalDef) -> str:
+    def _build_signal_header(self, signal: SignalDef) -> str:
         stream = StringIO()
-        stream.write(f"{signal.name} {self._get_arguments_str(signal.arguments)}")
+        stream.write(
+            f"{signal.name} {self._get_arguments_str(signal.arguments)}"
+        )
         return stream.getvalue()
 
     def _get_arguments_str(self, arguments: List[ArgumentDef]) -> str:
@@ -361,57 +416,88 @@ class ADocWriter:
             else:
                 return type
         else:
-            return f"https://docs.godotengine.org/en/stable/classes/class_{type.lower()}.html#{type.lower()}[{type}^]"
+            return (
+                f"https://docs.godotengine.org/en/stable/classes/"
+                f"class_{type.lower()}.html#{type.lower()}[{type}^]"
+            )
 
     def _write_constants(self, cdef: ClassDef, indent: int):
         if cdef.constants.enums:
-            self.stream.write(f"[#{self._build_section_hash(cdef, 'enumerations')}]\n")
+            self.stream.write(
+                f"[#{self._build_section_hash(cdef, 'enumerations')}]\n"
+            )
             self.stream.write(f"{'=' * indent} Enumerations\n\n")
 
             for enum in cdef.constants.enums:
                 self.stream.write(f"enum *{enum.name}*:\n\n")
                 for v in enum.values:
-                    self.stream.write(f"* *{v.name} = {v.value}* --- {v.description}\n")
+                    self.stream.write(
+                        f"* *{v.name} = {v.value}* --- {v.description}\n"
+                    )
                 self.stream.write("\n")
 
         if cdef.constants.constants:
-            self.stream.write(f"[#{self._build_section_hash(cdef, 'constants')}]\n")
+            self.stream.write(
+                f"[#{self._build_section_hash(cdef, 'constants')}]\n"
+            )
             self.stream.write(f"{'=' * indent} Constants\n\n")
             for c in cdef.constants.constants:
-                self.stream.write(f"* *{c.name} = {c.value}* --- {c.description}\n")
+                self.stream.write(
+                    f"* *{c.name} = {c.value}* --- {c.description}\n"
+                )
             self.stream.write("\n")
 
     def _write_methods_table(self, cdef: ClassDef, indent: int):
         if cdef.methods:
-            self.stream.write(f"[#{self._build_section_hash(cdef, 'methods')}]\n")
+            self.stream.write(
+                f"[#{self._build_section_hash(cdef, 'methods')}]\n"
+            )
             self.stream.write(f"{'=' * indent} Methods\n\n")
             self.stream.write("[cols=\"1,2\"]\n")
             self.stream.write("|===\n")
             for method in cdef.methods:
-                self.stream.write(f"|`{self._write_type(method.return_type)}`\n")
-                self.stream.write(f"|`{self._build_method_header(cdef, method, include_link=True)}`\n")
+                self.stream.write(
+                    f"|`{self._write_type(method.return_type)}`\n"
+                )
+                header = self._build_method_header(
+                    cdef, method, include_link=True
+                )
+                self.stream.write(f"|`{header}`\n")
             self.stream.write("|===\n\n")
 
     def _write_members_table(self, cdef: ClassDef, indent: int):
         if cdef.members:
-            self.stream.write(f"[#{self._build_section_hash(cdef, 'properties')}]\n")
+            self.stream.write(
+                f"[#{self._build_section_hash(cdef, 'properties')}]\n"
+            )
             self.stream.write(f"{'=' * indent} Properties\n\n")
             self.stream.write("[cols=\"1,2,1\"]\n")
             self.stream.write("|===\n")
             for member in cdef.members:
-                self.stream.write(f"|`{self._write_type(member.return_type)}`\n")
-                self.stream.write(f"|`{self._build_member_header(cdef, member, include_link=True)}`\n")
+                self.stream.write(
+                    f"|`{self._write_type(member.return_type)}`\n"
+                )
+                header = self._build_member_header(
+                    cdef, member, include_link=True
+                )
+                self.stream.write(f"|`{header}`\n")
                 self.stream.write(f"|`{member.default_value}`\n")
             self.stream.write("|===\n\n")
 
     def _write_members_descriptions(self, cdef: ClassDef, indent: int):
         if cdef.members:
-            self.stream.write(f"[#{self._build_section_hash(cdef, 'property_descriptions')}]\n")
+            sect_hash = self._build_section_hash(cdef, 'property_descriptions')
+            self.stream.write(f"[#{sect_hash}]\n")
             self.stream.write(f"{'=' * indent} Property Descriptions\n\n")
             members_count = len(cdef.members)
             for idx, member in enumerate(cdef.members):
-                self.stream.write(f"[#{self._build_member_hash(cdef, member)}]\n")
-                self.stream.write(f"* `{self._build_member_header(cdef, member, include_type=True)}`\n+\n")
+                self.stream.write(
+                    f"[#{self._build_member_hash(cdef, member)}]\n"
+                )
+                header = self._build_member_header(
+                    cdef, member, include_type=True
+                )
+                self.stream.write(f"* `{header}`\n+\n")
                 self.stream.write(f"{member.description}")
                 if idx != members_count - 1:
                     self.stream.write("\n\n")
@@ -419,12 +505,18 @@ class ADocWriter:
 
     def _write_methods_descriptions(self, cdef: ClassDef, indent: int):
         if cdef.methods:
-            self.stream.write(f"[#{self._build_section_hash(cdef, 'method_descriptions')}]\n")
+            sect_hash = self._build_section_hash(cdef, 'method_descriptions')
+            self.stream.write(f"[#{sect_hash}]\n")
             self.stream.write(f"{'=' * indent} Method Descriptions\n\n")
             methods_count = len(cdef.methods)
             for idx, method in enumerate(cdef.methods):
-                self.stream.write(f"[#{self._build_method_hash(cdef, method)}]\n")
-                self.stream.write(f"* `{self._build_method_header(cdef, method, include_type=True)}`\n+\n")
+                self.stream.write(
+                    f"[#{self._build_method_hash(cdef, method)}]\n"
+                )
+                header = self._build_method_header(
+                    cdef, method, include_type=True
+                )
+                self.stream.write(f"* `{header}`\n+\n")
                 self.stream.write(f"{method.description}")
                 if idx != methods_count - 1:
                     self.stream.write("\n\n")
@@ -432,12 +524,17 @@ class ADocWriter:
 
     def _write_signals_descriptions(self, cdef: ClassDef, indent: int):
         if cdef.signals:
-            self.stream.write(f"[#{self._build_section_hash(cdef, 'signals')}]\n")
+            sect_hash = self._build_section_hash(cdef, 'signals')
+            self.stream.write(f"[#{sect_hash}]\n")
             self.stream.write(f"{'=' * indent} Signals\n\n")
             signals_count = len(cdef.signals)
             for idx, signal in enumerate(cdef.signals):
-                self.stream.write(f"[#{self._build_signal_hash(cdef, signal)}]\n")
-                self.stream.write(f"* `{self._build_signal_header(cdef, signal)}`\n+\n")
+                self.stream.write(
+                    f"[#{self._build_signal_hash(cdef, signal)}]\n"
+                )
+                self.stream.write(
+                    f"* `{self._build_signal_header(signal)}`\n+\n"
+                )
                 self.stream.write(f"{signal.description}")
                 if idx != signals_count - 1:
                     self.stream.write("\n\n")
@@ -472,7 +569,11 @@ def generate_index():
 
 parser = argparse.ArgumentParser(description="Convert XML class to .adoc")
 parser.add_argument("--all", help="build all XML classes", action="store_true")
-parser.add_argument("--index", help="build XML classes index", action="store_true")
+parser.add_argument(
+    "--index",
+    help="build XML classes index",
+    action="store_true"
+)
 
 args = parser.parse_args()
 

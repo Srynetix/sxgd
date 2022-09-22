@@ -32,7 +32,11 @@ func _update_text():
         var text := "[b][color=yellow][%0.3f][/color][/b] " % message.time
         text += "[b][color=yellow][%s][/color][/b] " % SxLog._LogUtils.level_to_string(message.level).to_upper()
         text += "[b][color=green][%s][/color][/b] " % message.logger_name
-        text += message.message
+
+        if message.level == SxLog.LogLevel.ERROR:
+            text += "[color=red]%s[/color]" % message.message
+        else:
+            text += message.message
 
         var block := template.duplicate()
         block.bbcode_text = text
