@@ -131,14 +131,14 @@ custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
 [node name="Title" type="Label" parent="Panel/HBoxContainer/MarginContainer"]
-margin_left = 82.0
+margin_left = 72.0
 margin_top = 10.0
 margin_right = 192.0
 margin_bottom = 31.0
 size_flags_horizontal = 8
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 2 )
-text = "Debug Panel"
+text = "Debug Tools™"
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/MarginContainer"]
 margin_left = 10.0
