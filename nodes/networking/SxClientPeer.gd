@@ -3,6 +3,7 @@ class_name SxClientPeer
 
 signal connected_to_server()
 signal connection_failed()
+signal server_disconnected()
 signal players_updated(players)
 
 var server_address := ""
@@ -59,12 +60,11 @@ func _connected_to_server() -> void:
 
 func _connection_failed() -> void:
     _logger.info_m("_connection_failed", "Connection failed.")
-
     emit_signal("connection_failed")
 
 func _server_disconnected() -> void:
     _logger.error_m("_server_disconnected", "Server disconnected")
-    queue_free()
+    emit_signal("server_disconnected")
 
 func _players_updated(players: Dictionary) -> void:
     _players = players

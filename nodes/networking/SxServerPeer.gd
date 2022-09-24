@@ -31,6 +31,7 @@ var _players := {}
 var _logger := SxLog.get_logger("SxServerPeer")
 var _sync_scene_paths := {}
 var _sync_nodes := {}
+var _quitting := false
 
 func _init() -> void:
     name = "SxServerPeer"
@@ -189,6 +190,12 @@ func remove_synchronized_node(node: Node) -> void:
 
     _get_client().remove_synchronized_node_broadcast(node.get_path())
     node.queue_free()
+
+func is_quitting() -> bool:
+    return _quitting
+
+func set_quit_status(value: bool) -> void:
+    _quitting = value
 
 func _on_player_username_updated(player_id: int, username: String) -> void:
     _players[player_id] = username

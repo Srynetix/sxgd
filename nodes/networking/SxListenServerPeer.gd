@@ -52,3 +52,7 @@ func _input(event: InputEvent) -> void:
 func _exit_tree() -> void:
     _scene_tree.finish()
     _logger.debug_m("_exit_tree", "Listen server exited.")
+
+func _notification(what: int):
+    if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+        _server.set_quit_status(true)

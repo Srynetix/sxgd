@@ -27,6 +27,11 @@
                 On failed connection to the target server.
             </description>
         </signal>
+        <signal name="server_disconnected">
+            <description>
+                On server disconnection.
+            </description>
+        </signal>
         <signal name="players_updated">
             <argument index="0" name="players" type="Dictionary" />
             <description>

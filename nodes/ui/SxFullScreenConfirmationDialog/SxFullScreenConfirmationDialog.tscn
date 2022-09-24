@@ -18,6 +18,10 @@ script = ExtResource( 2 )
 show_title = false
 message = "Are you sure?"
 
+[node name="VBoxContainer" parent="MarginContainer" index="0"]
+margin_right = 1260.0
+margin_bottom = 700.0
+
 [node name="Title" parent="MarginContainer/VBoxContainer" index="0"]
 visible = false
 

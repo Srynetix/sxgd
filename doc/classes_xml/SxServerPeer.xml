@@ -83,6 +83,19 @@
                 Remove a node from the server and the connected clients.
             </description>
         </method>
+        <method name="is_quitting">
+            <return type="bool" />
+            <description>
+                Check if the server is in the shutdown procedure. +
+                It can be useful to cleanup stuff before the server quits.
+            </description>
+        </method>
+        <method name="set_quit_status">
+            <return type="bool" />
+            <description>
+                Change the "quit" status of the server.
+            </description>
+        </method>
     </methods>
     <members>
         <member name="server_port" type="int">

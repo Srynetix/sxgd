@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/sxgd/nodes/ui/SxFullScreenDialog/SxFullScreenDialog.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/sxgd/assets/fonts/Jost-800-Heavy.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://addons/sxgd/nodes/ui/SxFullScreenAcceptDialog/SxFullScreenAcceptDialog.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 2 )
+
+[node name="SxFullScreenAcceptDialog" instance=ExtResource( 1 )]
+visible = false
+script = ExtResource( 3 )
+show_title = false
+message = "Message."
+ok_message = "OK"
+
+[node name="VBoxContainer" parent="MarginContainer" index="0"]
+margin_right = 1260.0
+margin_bottom = 700.0
+
+[node name="Title" parent="MarginContainer/VBoxContainer" index="0"]
+visible = false
+margin_right = 1240.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" index="1"]
+margin_top = 288.0
+margin_right = 1240.0
+margin_bottom = 436.0
+size_flags_vertical = 6
+custom_constants/separation = 48
+
+[node name="Content" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer" index="0"]
+margin_right = 1240.0
+margin_bottom = 47.0
+custom_fonts/font = SubResource( 1 )
+text = "Message."
+align = 1
+valign = 1
+autowrap = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer" index="1"]
+margin_top = 95.0
+margin_right = 1240.0
+margin_bottom = 148.0
+custom_constants/separation = 80
+alignment = 1
+
+[node name="OK" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" index="0"]
+margin_left = 588.0
+margin_right = 651.0
+margin_bottom = 53.0
+custom_fonts/font = SubResource( 2 )
+text = "OK"
+flat = true
