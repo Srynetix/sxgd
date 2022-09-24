@@ -477,6 +477,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_sxfxcamera">SxFXCamera</a></li>
 <li><a href="#_sxfadingrichtexteffect">SxFadingRichTextEffect</a></li>
 <li><a href="#_sxfadingrichtextlabel">SxFadingRichTextLabel</a></li>
+<li><a href="#_sxfullscreenacceptdialog">SxFullScreenAcceptDialog</a></li>
 <li><a href="#_sxfullscreenconfirmationdialog">SxFullScreenConfirmationDialog</a></li>
 <li><a href="#_sxfullscreendialog">SxFullScreenDialog</a></li>
 <li><a href="#_sxfullscreenfiledialog">SxFullScreenFileDialog</a></li>
@@ -1365,6 +1366,16 @@ because it expects a 64 bit integer at first representing the original data size
 <p><code>connection_failed ()</code></p>
 <div class="paragraph">
 <p>On failed connection to the target server.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxclientpeer_signal_server_disconnected" class="ulist">
+<ul>
+<li>
+<p><code>server_disconnected ()</code></p>
+<div class="paragraph">
+<p>On server disconnection.</p>
 </div>
 </li>
 </ul>
@@ -2771,6 +2782,82 @@ It will not automatically replay the animation, even with <code>autoplay</code> 
 label.update_text("Hello!")
 label.fade_in()</code></pre>
 </div>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sxfullscreenacceptdialog"><a class="anchor" href="#_sxfullscreenacceptdialog"></a>SxFullScreenAcceptDialog</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="#_sxfullscreendialog">SxFullScreenDialog</a></strong></p>
+</div>
+<div class="paragraph">
+<p>A full-screen accept dialog, useful for mobile environment.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>A full-screen accept dialog, useful for mobile environment.</p>
+</dd>
+</dl>
+</div>
+<div class="sect3">
+<h4 id="_sxfullscreenacceptdialog_signals"><a class="anchor" href="#_sxfullscreenacceptdialog_signals"></a>Signals</h4>
+<div id="_sxfullscreenacceptdialog_signal_confirmed" class="ulist">
+<ul>
+<li>
+<p><code>confirmed ()</code></p>
+<div class="paragraph">
+<p>On user confirmation.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxfullscreenacceptdialog_properties"><a class="anchor" href="#_sxfullscreenacceptdialog_properties"></a>Properties</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfullscreenacceptdialog_member_message">message</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Message.</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfullscreenacceptdialog_member_ok_message">ok_message</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OK</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxfullscreenacceptdialog_property_descriptions"><a class="anchor" href="#_sxfullscreenacceptdialog_property_descriptions"></a>Property Descriptions</h4>
+<div id="_sxfullscreenacceptdialog_member_message" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> message</code></p>
+<div class="paragraph">
+<p>Message.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfullscreenacceptdialog_member_ok_message" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> ok_message</code></p>
+<div class="paragraph">
+<p>Message for the OK button.</p>
+</div>
+</li>
+</ul>
 </div>
 <hr>
 </div>
@@ -6241,6 +6328,14 @@ GameSceneTransitioner.fade_out()</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxserverpeer_method_remove_synchronized_node">remove_synchronized_node</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node )</code></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxserverpeer_method_is_quitting">is_quitting</a> ()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxserverpeer_method_set_quit_status">set_quit_status</a> ()</code></p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -6328,6 +6423,27 @@ GameSceneTransitioner.fade_out()</code></pre>
 <p><code>void remove_synchronized_node ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node )</code></p>
 <div class="paragraph">
 <p>Remove a node from the server and the connected clients.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxserverpeer_method_is_quitting" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> is_quitting ()</code></p>
+<div class="paragraph">
+<p>Check if the server is in the shutdown procedure.<br>
+It can be useful to cleanup stuff before the server quits.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxserverpeer_method_set_quit_status" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> set_quit_status ()</code></p>
+<div class="paragraph">
+<p>Change the "quit" status of the server.</p>
 </div>
 </li>
 </ul>
@@ -7984,7 +8100,7 @@ and on joysticks, you can affect 4 actions keys, one for each direction.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-22 19:40:26 UTC
+Last updated 2022-09-24 13:03:04 UTC
 </div>
 </div>
 </body>
