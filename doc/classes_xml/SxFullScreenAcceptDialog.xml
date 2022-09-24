@@ -5,6 +5,8 @@
     </brief_description>
     <description>
         A full-screen accept dialog, useful for mobile environment.
+
+        image::images/nodes/SxFullScreenAcceptDialog.gif[align="center"]
     </description>
     <tutorials></tutorials>
     <members>
