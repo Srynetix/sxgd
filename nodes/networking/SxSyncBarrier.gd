@@ -32,12 +32,12 @@ func _ready() -> void:
 
 master func _peer_ready() -> void:
     var peer_id = SxNetwork.get_sender_nuid(self)
-    _logger.info_m("_peer_ready", "Peer %d is ready for barrier %s" % [peer_id, self])
+    _logger.debug_m("_peer_ready", "Peer %d is ready for barrier %s" % [peer_id, self])
     _count += 1
 
 func _validate_ready_peers() -> bool:
     if _count >= len(_server_peer.get_players()):
-        _logger.info_m("_validate_ready_peers", "Everyone is ready for barrier %s." % self)
+        _logger.debug_m("_validate_ready_peers", "Everyone is ready for barrier %s." % self)
         _status = BarrierJoinStatus.OK
         return true
     return false
