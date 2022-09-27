@@ -29,6 +29,9 @@ func _get_server() -> SxServerRPC:
 func _get_client() -> SxClientRPC:
     return SxRPCService.get_from_tree(get_tree()).client
 
+func get_players() -> Dictionary:
+    return _players
+
 func _ready() -> void:
     get_tree().connect("network_peer_connected", self, "_peer_connected")
     get_tree().connect("network_peer_disconnected", self, "_peer_disconnected")

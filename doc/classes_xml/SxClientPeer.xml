@@ -7,7 +7,14 @@
         Configurable network peer, client side.
     </description>
     <tutorials></tutorials>
-    <methods></methods>
+    <methods>
+        <method name="get_players">
+            <return type="Dictionary" />
+            <description>
+                Get known players data.
+            </description>
+        </method>
+    </methods>
     <members>
         <member name="server_address" type="String">
             Target server address.
