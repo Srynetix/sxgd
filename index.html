@@ -1410,6 +1410,11 @@ because it expects a 64 bit integer at first representing the original data size
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxclientpeer_member_server_port">server_port</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxclientpeer_member_use_websockets">use_websockets</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1446,6 +1451,16 @@ because it expects a 64 bit integer at first representing the original data size
 <p><code><a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> server_port</code></p>
 <div class="paragraph">
 <p>Target server port.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxclientpeer_member_use_websockets" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> use_websockets</code></p>
+<div class="paragraph">
+<p>Use a WebSockets client (instead of ENet).</p>
 </div>
 </li>
 </ul>
@@ -4201,6 +4216,11 @@ SxJson.write_json_file(my_data, "user://my_data.json")</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxlistenserverpeer_member_max_players">max_players</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxlistenserverpeer_member_use_websockets">use_websockets</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -4245,6 +4265,16 @@ SxJson.write_json_file(my_data, "user://my_data.json")</code></pre>
 <p><code><a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> max_players</code></p>
 <div class="paragraph">
 <p>Max players allowed to join.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxlistenserverpeer_member_use_websockets" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> use_websockets</code></p>
+<div class="paragraph">
+<p>Use a WebSockets server (instead of ENet).</p>
 </div>
 </li>
 </ul>
@@ -5629,6 +5659,10 @@ If not set, uses the parent node name.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxos_method_is_mobile">is_mobile</a> ()</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxos_method_is_web">is_web</a> ()</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_array.html#array" target="_blank" rel="noopener">Array</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxos_method_list_files_in_directory">list_files_in_directory</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> path, <a href="https://docs.godotengine.org/en/stable/classes/class_array.html#array" target="_blank" rel="noopener">Array</a> filters )</code></p></td>
 </tr>
@@ -5668,6 +5702,23 @@ If not set, uses the parent node name.</p>
 <div class="content">
 <pre class="highlight"><code class="language-gdscript" data-lang="gdscript">if SxOS.is_mobile():
     print("I'm on a mobile!")</code></pre>
+</div>
+</div>
+<div id="_sxos_method_is_web" class="ulist">
+<ul>
+<li>
+<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> is_web ()</code></p>
+<div class="paragraph">
+<p>Detect if the current system is a Web environment.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">if SxOS.is_web():
+    print("I'm on a browser!")</code></pre>
 </div>
 </div>
 <div id="_sxos_method_list_files_in_directory" class="ulist">
@@ -6326,6 +6377,11 @@ GameSceneTransitioner.fade_out()</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxserverpeer_member_use_websockets">use_websockets</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxrpcservice">SxRPCService</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxserverpeer_member_rpc_service">rpc_service</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
@@ -6390,6 +6446,16 @@ GameSceneTransitioner.fade_out()</code></pre>
 <p><code><a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> max_players</code></p>
 <div class="paragraph">
 <p>Max players allowed to join.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxserverpeer_member_use_websockets" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> use_websockets</code></p>
+<div class="paragraph">
+<p>Use a WebSockets server (instead of ENet).</p>
 </div>
 </li>
 </ul>
@@ -8133,7 +8199,7 @@ and on joysticks, you can affect 4 actions keys, one for each direction.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-27 20:09:50 UTC
+Last updated 2022-09-28 12:06:53 UTC
 </div>
 </div>
 </body>
