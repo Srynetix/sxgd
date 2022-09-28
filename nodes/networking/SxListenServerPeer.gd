@@ -1,8 +1,9 @@
 extends Node
 class_name SxListenServerPeer
 
-var server_port := 0
-var max_players := 0
+export var server_port := 0
+export var max_players := 0
+export var use_websockets := false
 
 var _logger := SxLog.get_logger("SxListenServerPeer")
 var _scene_tree: SceneTree
@@ -33,6 +34,7 @@ func _ready() -> void:
     root.add_child(_rpc)
 
     _server = SxServerPeer.new()
+    _server.use_websockets = use_websockets
     _server.server_port = server_port
     _server.max_players = max_players
     _server.rpc_service = _rpc

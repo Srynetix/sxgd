@@ -34,6 +34,9 @@
         <member name="max_players" type="int">
             Max players allowed to join.
         </member>
+        <member name="use_websockets" type="bool">
+            Use a WebSockets server (instead of ENet).
+        </member>
     </members>
     <signals>
     </signals>

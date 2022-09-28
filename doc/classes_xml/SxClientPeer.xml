@@ -22,6 +22,9 @@
         <member name="server_port" type="int">
             Target server port.
         </member>
+        <member name="use_websockets" type="bool">
+            Use a WebSockets client (instead of ENet).
+        </member>
     </members>
     <signals>
         <signal name="connected_to_server">

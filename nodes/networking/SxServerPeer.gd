@@ -5,6 +5,8 @@ signal peer_connected(peer_id)
 signal peer_disconnected(peer_id)
 signal players_updated(players)
 
+export var use_websockets := false
+
 class SxSynchronizedScenePath:
     extends Reference
 
@@ -32,10 +34,12 @@ var _logger := SxLog.get_logger("SxServerPeer")
 var _sync_scene_paths := {}
 var _sync_nodes := {}
 var _quitting := false
+var _ws_server: WebSocketServer
 
 func _init() -> void:
     name = "SxServerPeer"
     _logger.set_max_log_level(SxLog.LogLevel.DEBUG)
+    assert(!SxOS.is_web(), "You can't host a server on Web platforms for now.")
 
 func _get_client() -> SxClientRPC:
     return rpc_service.client
@@ -53,13 +57,22 @@ func _ready() -> void:
     if rpc_service == null:
         rpc_service = SxRPCService.get_from_tree(get_tree())
 
-    var peer = NetworkedMultiplayerENet.new()
-    peer.create_server(server_port, max_players)
-    peer.allow_object_decoding = true
-    get_tree().network_peer = peer
+    if use_websockets:
+        _ws_server = WebSocketServer.new()
+        _ws_server.listen(server_port, PoolStringArray(), true)
+        _ws_server.allow_object_decoding = true
+        get_tree().network_peer = _ws_server
 
-    rpc_service.server.connect("player_username_updated", self, "_on_player_username_updated")
-    _logger.debug_m("_ready", "Server started on port '%d'" % server_port)
+        rpc_service.server.connect("player_username_updated", self, "_on_player_username_updated")
+        _logger.debug_m("_ready", "WebSocket server started on port '%d'" % server_port)
+    else:
+        var peer = NetworkedMultiplayerENet.new()
+        peer.create_server(server_port, max_players)
+        peer.allow_object_decoding = true
+        get_tree().network_peer = peer
+
+        rpc_service.server.connect("player_username_updated", self, "_on_player_username_updated")
+        _logger.debug_m("_ready", "Server started on port '%d'" % server_port)
 
 func _peer_connected(peer_id: int) -> void:
     _logger.debug_m("_peer_connected", "Peer '%d' connected." % peer_id)
@@ -102,6 +115,9 @@ func _physics_process(_delta: float) -> void:
             var data: Dictionary = node.call("_network_send")
             if data != null && len(data) > 0:
                 _get_client().synchronize_node_broadcast(node.get_path(), data)
+
+    if use_websockets:
+        _ws_server.poll()
 
 func spawn_synchronized_scene(parent: NodePath, scene_path: String, owner_peer_id: int = 1, master_configuration: Dictionary = {}) -> Node:
     var uuid := SxNetwork.uuid4()

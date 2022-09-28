@@ -63,6 +63,19 @@
                 ----
             </description>
         </method>
+        <method name="is_web" qualifiers="static">
+            <return type="bool" />
+            <description>
+                Detect if the current system is a Web environment.
+
+                [source,gdscript]
+                .Example
+                ----
+                if SxOS.is_web():
+                    print("I'm on a browser!")
+                ----
+            </description>
+        </method>
         <method name="list_files_in_directory" qualifiers="static">
             <return type="Array" />
             <argument index="0" name="path" type="String" />

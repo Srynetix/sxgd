@@ -23,6 +23,10 @@ static func set_window_size_str(window_size: String) -> void:
 static func is_mobile() -> bool:
     return OS.get_name() in ["Android", "iOS"]
 
+# Detect if the current system is a web environment.
+static func is_web() -> bool:
+    return OS.get_name() in ["HTML5"]
+
 class DirOrFile:
     # Represents a path: a directory or a file
     extends Reference
