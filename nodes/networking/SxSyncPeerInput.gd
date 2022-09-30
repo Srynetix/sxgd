@@ -26,10 +26,12 @@ var _logger := SxLog.get_logger("SxSyncPeerInput")
 
 func _load_known_actions() -> PoolStringArray:
     # Read known actions from ProjectSettings.
-    var conf := ProjectSettings.get(SETTING_SYNC_PEER_INPUT_ACTIONS) as PoolStringArray
-    if len(conf) == 0:
-        push_warning("Using SxSyncPeerInput with no actions defined in %s. Set them in the Project Settings." % SETTING_SYNC_PEER_INPUT_ACTIONS)
-    return conf
+    if ProjectSettings.has_setting(SETTING_SYNC_PEER_INPUT_ACTIONS):
+        var conf := ProjectSettings.get(SETTING_SYNC_PEER_INPUT_ACTIONS) as PoolStringArray
+        if len(conf) != 0:
+            return conf
+    push_warning("Using SxSyncPeerInput with no actions defined in %s. Set them in the Project Settings."  % SETTING_SYNC_PEER_INPUT_ACTIONS)
+    return PoolStringArray()
 
 func _init(peer_id: int = 1) -> void:
     name = "SxSyncPeerInput#%d" % peer_id
