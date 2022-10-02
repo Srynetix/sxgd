@@ -19,6 +19,7 @@ func fade_in(duration: float = 0.5) -> void:
     tween.stop_all()
     tween.interpolate_property(self, "volume_db", -100, global_volume_db, duration)
     tween.start()
+    yield(tween, "tween_all_completed")
 
 # Apply a "fade out" effect on sound with an optional duration in seconds.
 # Duration defaults to 0.5 seconds.
@@ -30,6 +31,7 @@ func fade_out(duration: float = 0.5) -> void:
     tween.stop_all()
     tween.interpolate_property(self, "volume_db", global_volume_db, -100, duration)
     tween.start()
+    yield(tween, "tween_all_completed")
 
 # Plays an audio stream.
 #
