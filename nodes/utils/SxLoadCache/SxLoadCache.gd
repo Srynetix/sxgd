@@ -8,7 +8,7 @@ var _logger := SxLog.get_logger("SxLoadCache")
 
 func _init():
     load_resources()
-    _logger.info("All resources loaded.")
+    _logger.debug("All resources loaded.")
 
 # Load resources in cache.
 #
