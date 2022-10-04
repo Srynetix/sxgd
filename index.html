@@ -475,6 +475,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_sxfafont">SxFAFont</a></li>
 <li><a href="#_sxfalabel">SxFALabel</a></li>
 <li><a href="#_sxfxcamera">SxFXCamera</a></li>
+<li><a href="#_sxfxdissolve">SxFXDissolve</a></li>
+<li><a href="#_sxfxdissolve_2">SxFXDissolve</a></li>
+<li><a href="#_sxfxgrayscale">SxFXGrayscale</a></li>
 <li><a href="#_sxfadingrichtexteffect">SxFadingRichTextEffect</a></li>
 <li><a href="#_sxfadingrichtextlabel">SxFadingRichTextLabel</a></li>
 <li><a href="#_sxfullscreenacceptdialog">SxFullScreenAcceptDialog</a></li>
@@ -2596,6 +2599,195 @@ Make sure you <a href="#_fontawesome_icons_integration">read the docs about JSON
 <p><code>void set_limit_from_rect ( <a href="https://docs.godotengine.org/en/stable/classes/class_rect2.html#rect2" target="_blank" rel="noopener">Rect2</a> rect )</code></p>
 <div class="paragraph">
 <p>Set the camera limits from Rect2 values.</p>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sxfxdissolve"><a class="anchor" href="#_sxfxdissolve"></a>SxFXDissolve</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect" target="_blank" rel="noopener">ColorRect</a></strong></p>
+</div>
+<div class="paragraph">
+<p>A simple chromatic aberration effect.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>A simple chromatic aberration effect.</p>
+</dd>
+</dl>
+</div>
+<div class="sect3">
+<h4 id="_sxfxdissolve_properties"><a class="anchor" href="#_sxfxdissolve_properties"></a>Properties</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxdissolve_member_enabled">enabled</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxdissolve_member_amount">amount</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1.0</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxfxdissolve_property_descriptions"><a class="anchor" href="#_sxfxdissolve_property_descriptions"></a>Property Descriptions</h4>
+<div id="_sxfxdissolve_member_enabled" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> enabled</code></p>
+<div class="paragraph">
+<p>Enable/Disable the effect.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxdissolve_member_amount" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> amount</code></p>
+<div class="paragraph">
+<p>Increase/Decrease the effect force.</p>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sxfxdissolve_2"><a class="anchor" href="#_sxfxdissolve_2"></a>SxFXDissolve</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect" target="_blank" rel="noopener">ColorRect</a></strong></p>
+</div>
+<div class="paragraph">
+<p>A ready-to-use dissolve effect.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>A ready-to-use dissolve effect.</p>
+</dd>
+</dl>
+</div>
+<div class="sect3">
+<h4 id="_sxfxdissolve_properties"><a class="anchor" href="#_sxfxdissolve_properties"></a>Properties</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxdissolve_member_ratio">ratio</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_color.html#color" target="_blank" rel="noopener">Color</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxdissolve_member_replacement_color">replacement_color</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Color(1, 1, 1, 0)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxdissolve_member_noise_period">noise_period</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>64.0</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxfxdissolve_property_descriptions"><a class="anchor" href="#_sxfxdissolve_property_descriptions"></a>Property Descriptions</h4>
+<div id="_sxfxdissolve_member_ratio" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> ratio</code></p>
+<div class="paragraph">
+<p>Effect amount (between 0 and 1).</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxdissolve_member_replacement_color" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_color.html#color" target="_blank" rel="noopener">Color</a> replacement_color</code></p>
+<div class="paragraph">
+<p>Color to use for the dissolved pixels.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxdissolve_member_noise_period" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> noise_period</code></p>
+<div class="paragraph">
+<p>Noise period (~= the noise size).</p>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sxfxgrayscale"><a class="anchor" href="#_sxfxgrayscale"></a>SxFXGrayscale</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect" target="_blank" rel="noopener">ColorRect</a></strong></p>
+</div>
+<div class="paragraph">
+<p>A simple grayscale effect.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>A simple grayscale effect.</p>
+</dd>
+</dl>
+</div>
+<div class="sect3">
+<h4 id="_sxfxgrayscale_properties"><a class="anchor" href="#_sxfxgrayscale_properties"></a>Properties</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxgrayscale_member_ratio">ratio</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0.0</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxfxgrayscale_property_descriptions"><a class="anchor" href="#_sxfxgrayscale_property_descriptions"></a>Property Descriptions</h4>
+<div id="_sxfxgrayscale_member_ratio" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> ratio</code></p>
+<div class="paragraph">
+<p>Effect amount (between 0 and 1).</p>
 </div>
 </li>
 </ul>
@@ -8199,7 +8391,7 @@ and on joysticks, you can affect 4 actions keys, one for each direction.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-10-02 19:49:34 UTC
+Last updated 2022-10-04 06:49:03 UTC
 </div>
 </div>
 </body>
