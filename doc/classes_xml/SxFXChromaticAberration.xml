@@ -5,6 +5,8 @@
     </brief_description>
     <description>
         A simple chromatic aberration effect.
+
+        image::images/nodes/SxFXChromaticAberration.gif[align="center"]
     </description>
     <tutorials></tutorials>
     <methods></methods>

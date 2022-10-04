@@ -5,6 +5,8 @@
     </brief_description>
     <description>
         A simple grayscale effect.
+
+        image::images/nodes/SxFXGrayscale.gif[align="center"]
     </description>
     <tutorials></tutorials>
     <methods></methods>

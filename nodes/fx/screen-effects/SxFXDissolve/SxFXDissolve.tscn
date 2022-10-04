@@ -20,9 +20,8 @@ shader_param/edge_color2 = Color( 0, 0, 0, 1 )
 shader_param/replacement_color = Color( 1, 1, 1, 0 )
 shader_param/noise = SubResource( 12 )
 
-[node name="DissolveFX" type="ColorRect"]
+[node name="SxFXDissolve" type="ColorRect"]
 material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
-noise_period = null

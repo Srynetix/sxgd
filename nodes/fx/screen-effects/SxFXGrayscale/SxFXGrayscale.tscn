@@ -8,7 +8,7 @@ resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/ratio = 0.0
 
-[node name="GrayscaleFX" type="ColorRect"]
+[node name="SxFXGrayscale" type="ColorRect"]
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0

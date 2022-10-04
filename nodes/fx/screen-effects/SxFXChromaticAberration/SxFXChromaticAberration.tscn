@@ -9,7 +9,7 @@ shader = ExtResource( 1 )
 shader_param/apply = true
 shader_param/amount = 1.0
 
-[node name="SxChromaticAberrationFX" type="ColorRect"]
+[node name="SxFXChromaticAberration" type="ColorRect"]
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
