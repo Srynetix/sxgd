@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxFXGrayscale" inherits="ColorRect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        A simple grayscale effect.
+    </brief_description>
+    <description>
+        A simple grayscale effect.
+    </description>
+    <tutorials></tutorials>
+    <methods></methods>
+    <members>
+        <member name="ratio" type="float" default="0.0">
+            Effect amount (between 0 and 1).
+        </member>
+    </members>
+    <constants></constants>
+</class>

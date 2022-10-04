@@ -19,3 +19,7 @@ func set_strength(value: float) -> void:
 func set_angle_degrees(value: float) -> void:
     angle_degrees = value
     SxShader.set_shader_param(self, "angle_degrees", value)
+
+func _ready() -> void:
+    set_strength(strength)
+    set_angle_degrees(angle_degrees)

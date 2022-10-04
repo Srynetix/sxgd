@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/sxgd/nodes/fx/screen-effects/SxFXChromaticAberration/SxFXChromaticAberration.gdshader" type="Shader" id=1]
+[ext_resource path="res://addons/sxgd/nodes/fx/screen-effects/SxFXChromaticAberration/SxFXChromaticAberration.gd" type="Script" id=2]
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/apply = true
+shader_param/amount = 1.0
+
+[node name="SxChromaticAberrationFX" type="ColorRect"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
