@@ -11,7 +11,14 @@ enum Direction {
 export var max_shake_strength := 2.0
 export var shake_ratio := 0.0
 
-onready var tween := $Tween as Tween
+var _tween: Tween
+
+func _ready() -> void:
+    _tween = Tween.new()
+    add_child(_tween)
+
+    anchor_mode = 0
+    current = true
 
 func _process(delta) -> void:
     _update_shake()
@@ -25,12 +32,12 @@ func _update_shake() -> void:
 # Example:
 #   camera.tween_to_position(Vector2(100, 100))
 func tween_to_position(position: Vector2, speed: float = 0.5, zoom_: float = 1, easing: int = Tween.TRANS_QUAD) -> void:
-    tween.stop_all()
-    tween.interpolate_property(self, "global_position", global_position, position, speed, easing, Tween.EASE_IN_OUT)
-    tween.interpolate_property(self, "zoom", zoom, Vector2.ONE * zoom, speed, easing, Tween.EASE_IN_OUT)
-    tween.start()
+    _tween.stop_all()
+    _tween.interpolate_property(self, "global_position", global_position, position, speed, easing, Tween.EASE_IN_OUT)
+    _tween.interpolate_property(self, "zoom", zoom, Vector2.ONE * zoom, speed, easing, Tween.EASE_IN_OUT)
+    _tween.start()
 
-    yield(tween, "tween_all_completed")
+    yield(_tween, "tween_all_completed")
 
 # Apply a viewport scroll effect.
 #
@@ -38,16 +45,16 @@ func tween_to_position(position: Vector2, speed: float = 0.5, zoom_: float = 1, 
 #   camera.viewport_scroll(Vector2(0, 0), Direction.RIGHT)
 func viewport_scroll(top_left: Vector2, direction: int, speed: float = 0.65, easing: int = Tween.TRANS_QUAD) -> void:
     var vp_size := get_viewport_rect().size
-    tween.stop_all()
+    _tween.stop_all()
 
     reset_limits()
     var start_position := top_left + vp_size / 2
     var end_position := _add_viewport_size_to_position(top_left, direction)
     global_position = start_position
 
-    tween.interpolate_property(self, "global_position", start_position, end_position, speed, easing, Tween.EASE_IN_OUT)
-    tween.start()
-    yield(tween, "tween_all_completed")
+    _tween.interpolate_property(self, "global_position", start_position, end_position, speed, easing, Tween.EASE_IN_OUT)
+    _tween.start()
+    yield(_tween, "tween_all_completed")
 
     limit_left = end_position.x - vp_size.x / 2
     limit_right = limit_left + vp_size.x

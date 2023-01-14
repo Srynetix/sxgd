@@ -1,7 +1,7 @@
 extends SxFullScreenDialog
 class_name SxFullScreenFileDialog
 
-signal canceled()
+signal cancelled()
 signal file_selected(file)
 
 signal _item_doubleclicked(file)
@@ -41,6 +41,7 @@ var _shortcuts := []
 var _current_files := []
 var _current_path := "" setget _set_current_path
 var _file_selected := ""
+var _open_delayer: Timer
 
 func _ready() -> void:
     _shortcuts_list.connect("item_selected", self, "_select_shortcut")
@@ -52,6 +53,12 @@ func _ready() -> void:
     _validate_btn.connect("pressed", self, "_validate")
     _confirmation.connect("confirmed", self, "_validate_confirmation")
     connect("_item_doubleclicked", self, "_on_file_doubleclick")
+
+    _open_delayer = Timer.new()
+    _open_delayer.wait_time = 0.25
+    _open_delayer.one_shot = true
+    _open_delayer.autostart = false
+    add_child(_open_delayer)
 
     _filters = SxArray.trim_strings(file_filter.split(","))
 
@@ -90,7 +97,7 @@ func _reset_selected_file() -> void:
     _filename_lbl.text = ""
 
 func _cancel() -> void:
-    emit_signal("cancel")
+    emit_signal("cancelled")
     if autohide:
         hide()
 
@@ -121,8 +128,11 @@ func _on_files_input(event: InputEvent) -> void:
         _handle_directory_open(_files_list.get_item_at_position(doubletap_data.position))
 
 func _handle_directory_open(item_id: int) -> void:
-    if item_id == -1:
+    # The open_delayer is used to prevent fast doubletaps with a mouse
+    if !_open_delayer.is_stopped() || item_id == -1:
         return
+
+    _open_delayer.start()
     emit_signal("_item_doubleclicked", _current_files[item_id])
 
 func _on_file_doubleclick(item: SxOS.DirOrFile):

@@ -10,7 +10,13 @@ export var icon_size := 24 setget _set_icon_size
 # Icon color
 export var icon_color := Color.white setget _set_icon_color
 
-func _enter_tree():
+func _init() -> void:
+    anchor_right = 1.0
+    anchor_bottom = 1.0
+    align = Label.ALIGN_CENTER
+    valign = Label.VALIGN_CENTER
+
+func _ready() -> void:
     _update_font()
     _update_color()
 

@@ -12,10 +12,21 @@ export var icon_color := Color.white setget _set_icon_color
 # Icon rotation
 export var icon_rotation := 0.0 setget _set_icon_rotation
 
-onready var _label := $SxFALabel as SxFALabel
+var _label: SxFALabel
 
-func _ready():
-    _update_label()
+func _init() -> void:
+    if !rect_min_size:
+        rect_min_size = Vector2(64, 64)
+    expand_icon = true
+
+    _label = SxFALabel.new()
+    add_child(_label)
+
+func _ready() -> void:
+    _set_icon_name(icon_name)
+    _set_icon_size(icon_size)
+    _set_icon_color(icon_color)
+    _set_icon_rotation(icon_rotation)
 
 func _set_icon_name(value: String) -> void:
     icon_name = value

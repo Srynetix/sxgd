@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class name="SxGlobalAudioFxPlayer" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+<class name="SxAudioFxPlayer" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
     <brief_description>
         A wrapper around a SxAudioMultiStreamPlayer.
     </brief_description>
@@ -21,8 +21,8 @@
                 [source,gdscript]
                 .Example
                 ----
-                # Suppose we have an instance of `SxGlobalAudioFxPlayer` as an autoload named `GameGlobalAudioFxPlayer`.
-                var first_voice := GameGlobalAudioFxPlayer.get_voice(0)
+                # Suppose we have an instance of `SxAudioFxPlayer` as an autoload named `GameAudioFxPlayer`.
+                var first_voice := GameAudioFxPlayer.get_voice(0)
                 ----
             </description>
         </method>
@@ -37,8 +37,8 @@
                 [source,gdscript]
                 .Example
                 ----
-                # Suppose we have an instance of `SxGlobalAudioFxPlayer` as an autoload named `GameGlobalAudioFxPlayer`.
-                GameGlobalAudioFxPlayer.play("sound_1")
+                # Suppose we have an instance of `SxAudioFxPlayer` as an autoload named `GameAudioFxPlayer`.
+                GameAudioFxPlayer.play("sound_1")
                 ----
             </description>
         </method>

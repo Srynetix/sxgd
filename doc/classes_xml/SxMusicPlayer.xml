@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class name="SxGlobalMusicPlayer" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+<class name="SxMusicPlayer" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
     <brief_description>
-        A global audio player, used to play sound tracks during the game.
+        A music player, used to play sound tracks during the game.
     </brief_description>
     <description>
-        A global audio player, used to play sound tracks, to be used through inheritance as an autoload
-        (see &lt;&lt;_sxglobalaudiofxplayer&gt;&gt;).
+        A music player, used to play sound tracks, to be used through inheritance as an autoload
+        (see &lt;&lt;_sxaudiofxplayer&gt;&gt;).
     </description>
     <tutorials></tutorials>
     <methods>
@@ -18,8 +18,8 @@
                 [source,gdscript]
                 .Example
                 ----
-                # Suppose we have an instance of `SxGlobalMusicPlayer` as an autoload named `GameGlobalMusicPlayer`.
-                GameGlobalMusicPlayer.fade_in()
+                # Suppose we have an instance of `SxMusicPlayer` as an autoload named `GameMusicPlayer`.
+                GameMusicPlayer.fade_in()
                 ----
             </description>
         </method>
@@ -32,8 +32,8 @@
                 [source,gdscript]
                 .Example
                 ----
-                # Suppose we have an instance of `SxGlobalMusicPlayer` as an autoload named `GameGlobalMusicPlayer`.
-                GameGlobalMusicPlayer.fade_out()
+                # Suppose we have an instance of `SxMusicPlayer` as an autoload named `GameMusicPlayer`.
+                GameMusicPlayer.fade_out()
                 ----
             </description>
         </method>
@@ -46,8 +46,8 @@
                 [source,gdscript]
                 .Example
                 ----
-                # Suppose we have an instance of `SxGlobalMusicPlayer` as an autoload named `GameGlobalMusicPlayer`.
-                GameGlobalMusicPlayer.play_stream(my_sound)
+                # Suppose we have an instance of `SxMusicPlayer` as an autoload named `GameMusicPlayer`.
+                GameMusicPlayer.play_stream(my_sound)
                 ----
             </description>
         </method>

@@ -5,7 +5,7 @@
 # - and set it as **autoload**.
 
 extends Node
-class_name SxGlobalAudioFxPlayer
+class_name SxAudioFxPlayer
 
 # Maximum simultaneous voices.
 export(int, 1, 16) var max_voices := 4
@@ -28,8 +28,7 @@ func play(stream_name: String, voice: int = -1) -> void:
         player.play_on_voice(streams[stream_name], voice)
 
 func _ready() -> void:
-    var player_scene := load("res://addons/sxgd/nodes/audio/SxAudioMultiStreamPlayer/SxAudioMultiStreamPlayer.tscn") as PackedScene
-    player = player_scene.instance()
+    player = SxAudioMultiStreamPlayer.new()
     player.max_voices = max_voices
     player.audio_bus_output = audio_bus_output
     add_child(player)

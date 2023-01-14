@@ -149,8 +149,8 @@ Reusable nodes, organized in multiple categories.
 Audio nodes.
 
 * *<<_sxaudiomultistreamplayer>>*: Audio player with multiple simultaneous voices.
-* *<<_sxglobalaudiofxplayer>>*: Autoload-ready multi stream player.
-* *<<_sxglobalmusicplayer>>*: Autoload-ready audio player, useful for music tracks.
+* *<<_sxaudiofxplayer>>*: Autoload-ready multi stream player.
+* *<<_sxmusicplayer>>*: Autoload-ready audio player, useful for music tracks.
 
 ==== Debug
 

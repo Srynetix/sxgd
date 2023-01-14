@@ -2,10 +2,10 @@
 
 [ext_resource path="res://addons/sxgd/assets/fonts/Jost-400-Book.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf" type="DynamicFontData" id=2]
-[ext_resource path="res://addons/sxgd/nodes/ui/SxItemList/SxItemList.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/sxgd/modules/SxFontAwesome/SxFAButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/sxgd/nodes/ui/SxItemList.gd" type="Script" id=3]
+[ext_resource path="res://addons/sxgd/modules/SxFontAwesome/SxFAButton.gd" type="Script" id=4]
 [ext_resource path="res://addons/sxgd/nodes/ui/SxFullScreenConfirmationDialog/SxFullScreenConfirmationDialog.tscn" type="PackedScene" id=5]
-[ext_resource path="res://addons/sxgd/nodes/input/SxDoubleTap/SxDoubleTap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/sxgd/nodes/input/SxDoubleTap.gd" type="Script" id=6]
 [ext_resource path="res://addons/sxgd/nodes/ui/SxFullScreenDialog/SxFullScreenDialog.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/sxgd/nodes/ui/SxFullScreenFileDialog/SxFullScreenFileDialog.gd" type="Script" id=9]
 
@@ -31,7 +31,8 @@ mode = 0
 shortcuts = [  ]
 file_filter = ""
 
-[node name="SxDoubleTap" parent="." index="0" instance=ExtResource( 6 )]
+[node name="SxDoubleTap" parent="." index="0" type="Node"]
+script = ExtResource( 6 )
 should_process_input = false
 
 [node name="Confirmation" parent="." index="2" instance=ExtResource( 5 )]
@@ -54,11 +55,12 @@ custom_fonts/font = SubResource( 1 )
 text = "user://"
 editable = false
 
-[node name="GoUp" parent="MarginContainer/VBoxContainer/Buttons" index="1" instance=ExtResource( 4 )]
+[node name="GoUp" parent="MarginContainer/VBoxContainer/Buttons" index="1" type="Button"]
 margin_left = 744.0
 margin_right = 792.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
+script = ExtResource( 4 )
 icon_name = "arrow-up"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" index="2"]
@@ -68,7 +70,7 @@ margin_bottom = 389.0
 size_flags_vertical = 3
 custom_constants/separation = 20
 
-[node name="Shortcuts" parent="MarginContainer/VBoxContainer/HBoxContainer" index="0" instance=ExtResource( 3 )]
+[node name="Shortcuts" parent="MarginContainer/VBoxContainer/HBoxContainer" index="0" type="ItemList"]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 257.0
@@ -76,8 +78,9 @@ margin_bottom = 286.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 custom_fonts/font = SubResource( 2 )
+script = ExtResource( 3 )
 
-[node name="Files" parent="MarginContainer/VBoxContainer/HBoxContainer" index="1" instance=ExtResource( 3 )]
+[node name="Files" parent="MarginContainer/VBoxContainer/HBoxContainer" index="1" type="ItemList"]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 277.0
@@ -85,6 +88,7 @@ margin_right = 792.0
 margin_bottom = 286.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 2 )
+script = ExtResource( 3 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" index="3"]
 margin_top = 399.0

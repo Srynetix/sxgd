@@ -1,13 +1,12 @@
 # A debug panel showing performance info, shown with the F12 key.
 # When shown, you can reload the current scene with F5 and pause the game with F2.
-#
-# <p align="center">
-#   <img src="../../../../images/nodes/SxDebugInfo.png" alt="capture" />
-# </p>
+tool
 extends CanvasLayer
 class_name SxDebugInfo
 
-onready var _label := $MarginContainer/RichTextLabel as RichTextLabel
+const FONT_DATA := preload("res://addons/sxgd/assets/fonts/Jost-400-Book.ttf")
+
+var _label: RichTextLabel
 
 # Get the visibility status.
 func get_visibility() -> bool:
@@ -16,6 +15,38 @@ func get_visibility() -> bool:
 # Set the visibility status.
 func set_visibility(value: bool) -> void:
     _label.visible = value
+
+func _ready() -> void:
+    pause_mode = PAUSE_MODE_PROCESS
+    layer = 99
+    name = "SxDebugInfo"
+
+    var font := DynamicFont.new()
+    font.size = 12
+    font.outline_size = 1
+    font.outline_color = Color.black
+    font.use_mipmaps = true
+    font.use_filter = true
+    font.font_data = FONT_DATA
+
+    var container := MarginContainer.new()
+    container.anchor_right = 1.0
+    container.anchor_bottom = 1.0
+    container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    container.set("custom_constants/margin_right", 10)
+    container.set("custom_constants/margin_left", 10)
+    container.set("custom_constants/margin_top", 10)
+    container.set("custom_constants/margin_bottom", 10)
+    add_child(container)
+
+    _label = RichTextLabel.new()
+    _label.margin_left = 10.0
+    _label.margin_top = 10.0
+    _label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    _label.set("custom_colors/default_color", Color(1, 0.43, 0.52, 1))
+    _label.set("custom_fonts/normal_font", font)
+    _label.text = "FPS"
+    container.add_child(_label)
 
 func _process(delta):
     if _label.visible:
