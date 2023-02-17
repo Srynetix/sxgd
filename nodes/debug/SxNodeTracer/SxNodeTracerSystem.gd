@@ -61,17 +61,17 @@ func _process(delta: float) -> void:
         else:
             _update_tracer_ui(node, _tracers_ui[node_path])
 
-func _create_tracer_ui(path: String, tracer: SxNodeTracer) -> SxNodeTracerUI:
-    var ui = SxNodeTracerUI.new()
+func _create_tracer_ui(path: String, tracer: SxNodeTracer) -> SxNodeTracerUi:
+    var ui = SxNodeTracerUi.new()
     _tracers_ui[path] = ui
     _grid.add_child(ui)
     _update_tracer_ui(tracer, ui)
     return ui
 
-func _update_tracer_ui(tracer: SxNodeTracer, ui: SxNodeTracerUI) -> void:
+func _update_tracer_ui(tracer: SxNodeTracer, ui: SxNodeTracerUi) -> void:
     ui.update_using_tracer(tracer)
 
-func _remove_tracer_ui(path: String, ui: SxNodeTracerUI) -> void:
+func _remove_tracer_ui(path: String, ui: SxNodeTracerUi) -> void:
     _tracers.erase(path)
     _tracers_ui.erase(path)
     _grid.remove_child(ui)

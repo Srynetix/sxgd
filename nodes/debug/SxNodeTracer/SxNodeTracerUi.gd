@@ -1,5 +1,5 @@
 extends ColorRect
-class_name SxNodeTracerUI
+class_name SxNodeTracerUi
 
 const FONT_DATA = preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
 
