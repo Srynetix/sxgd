@@ -29,8 +29,7 @@ func _ready():
     bold_font.use_filter = true
     bold_font.font_data = BOLD_FONT_DATA
 
-    anchor_right = 1.0
-    anchor_bottom = 1.0
+    set_anchors_and_margins_preset(Control.PRESET_WIDE)
     mouse_filter = Control.MOUSE_FILTER_IGNORE
     size_flags_vertical = Control.SIZE_EXPAND_FILL
     set("custom_constants/margin_right", 10)

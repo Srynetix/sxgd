@@ -1,5 +1,5 @@
 extends Camera2D
-class_name SxFXCamera
+class_name SxFxCamera
 
 enum Direction {
     LEFT = 0,

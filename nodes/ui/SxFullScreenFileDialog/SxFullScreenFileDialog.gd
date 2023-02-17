@@ -30,7 +30,7 @@ onready var _doubletap := $SxDoubleTap as SxDoubleTap
 onready var _shortcuts_list := $MarginContainer/VBoxContainer/HBoxContainer/Shortcuts as SxItemList
 onready var _files_list := $MarginContainer/VBoxContainer/HBoxContainer/Files as SxItemList
 onready var _current_path_lineedit := $MarginContainer/VBoxContainer/Buttons/CurrentPath as LineEdit
-onready var _go_up_btn := $MarginContainer/VBoxContainer/Buttons/GoUp as SxFAButton
+onready var _go_up_btn := $MarginContainer/VBoxContainer/Buttons/GoUp as SxFaButton
 onready var _filename_lbl := $MarginContainer/VBoxContainer/HBoxContainer2/FileName as LineEdit
 onready var _cancel_btn := $MarginContainer/VBoxContainer/HBoxContainer2/Cancel as Button
 onready var _validate_btn := $MarginContainer/VBoxContainer/HBoxContainer2/Validate as Button
@@ -86,7 +86,7 @@ func invalidate() -> void:
     _file_selected = ""
     _validate_btn.disabled = true
 
-func _set_selected_file(file: SxOS.DirOrFile) -> void:
+func _set_selected_file(file: SxOs.DirOrFile) -> void:
     _file_selected = file.path
     _validate_btn.disabled = false
     _filename_lbl.text = file.name
@@ -135,7 +135,7 @@ func _handle_directory_open(item_id: int) -> void:
     _open_delayer.start()
     emit_signal("_item_doubleclicked", _current_files[item_id])
 
-func _on_file_doubleclick(item: SxOS.DirOrFile):
+func _on_file_doubleclick(item: SxOs.DirOrFile):
     if item.is_directory():
         _set_current_path(item.path)
     else:
@@ -152,7 +152,7 @@ func _go_up() -> void:
     _set_current_path(_current_path.get_base_dir())
 
 func _select_file(item_id: int) -> void:
-    var file := _current_files[item_id] as SxOS.DirOrFile
+    var file := _current_files[item_id] as SxOs.DirOrFile
     if file.is_directory():
         _reset_selected_file()
     else:
@@ -176,13 +176,13 @@ func _filename_changed(value: String) -> void:
                 _validate_btn.disabled = true
 
 func _update_files() -> void:
-    var files := SxOS.list_files_in_directory(_current_path, _filters)
+    var files := SxOs.list_files_in_directory(_current_path, _filters)
     _files_list.clear()
     _current_files = []
 
     for file in files:
         _current_files.append(file)
-        if file.type == SxOS.DirOrFile.Type.DIRECTORY:
+        if file.type == SxOs.DirOrFile.Type.DIRECTORY:
             _files_list.add_item(file.name + "/")
         else:
             _files_list.add_item(file.name)

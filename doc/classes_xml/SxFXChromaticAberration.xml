@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class name="SxFXChromaticAberration" inherits="ColorRect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+<class name="SxFxChromaticAberration" inherits="ColorRect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
     <brief_description>
         A simple chromatic aberration effect.
     </brief_description>
     <description>
         A simple chromatic aberration effect.
 
-        image::images/nodes/SxFXChromaticAberration.gif[align="center"]
+        image::images/nodes/SxFxChromaticAberration.gif[align="center"]
     </description>
     <tutorials></tutorials>
     <methods></methods>

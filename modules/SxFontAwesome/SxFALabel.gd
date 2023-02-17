@@ -1,7 +1,7 @@
 # FontAwesome label, used to easily display a FontAwesome icon.
 tool
 extends Label
-class_name SxFALabel
+class_name SxFaLabel
 
 # Icon name
 export var icon_name := "anchor" setget _set_icon_name
@@ -11,8 +11,7 @@ export var icon_size := 24 setget _set_icon_size
 export var icon_color := Color.white setget _set_icon_color
 
 func _init() -> void:
-    anchor_right = 1.0
-    anchor_bottom = 1.0
+    set_anchors_and_margins_preset(Control.PRESET_WIDE)
     align = Label.ALIGN_CENTER
     valign = Label.VALIGN_CENTER
 
@@ -33,9 +32,9 @@ func _set_icon_color(value: Color) -> void:
     _update_color()
 
 func _update_font():
-    var fa_font := SxFAFont.create_fa_font(SxFAFont.Family.Solid, icon_size)
+    var fa_font := SxFaFont.create_fa_font(SxFaFont.Family.Solid, icon_size)
     set("custom_fonts/font", fa_font)
-    var code := SxFAFont.get_icon_code(icon_name)
+    var code := SxFaFont.get_icon_code(icon_name)
     if code != -1:
         text = char(code)
 

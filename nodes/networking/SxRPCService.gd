@@ -1,15 +1,15 @@
 extends Node
-class_name SxRPCService
+class_name SxRpcService
 
-var client: SxClientRPC
-var server: SxServerRPC
+var client: SxClientRpc
+var server: SxServerRpc
 var sync_input: SxSyncInput
 
 func _ready():
-    client = SxClientRPC.new()
+    client = SxClientRpc.new()
     add_child(client)
 
-    server = SxServerRPC.new()
+    server = SxServerRpc.new()
     add_child(server)
 
     sync_input = SxSyncInput.new()
@@ -19,7 +19,7 @@ func _ready():
     server.link_service(self)
 
 static func get_from_tree(tree: SceneTree):
-    var target := tree.root.get_node_or_null("MainRPCService")
+    var target := tree.root.get_node_or_null("MainRpcService")
     if target == null:
-        push_error("Cannot get MainRPCService from current tree %s. Make sure it exists at the location /root/MainRPCService." % tree)
+        push_error("Cannot get MainRpcService from current tree %s. Make sure it exists at the location /root/MainRpcService." % tree)
     return target

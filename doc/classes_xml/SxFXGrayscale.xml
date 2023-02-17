@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class name="SxFXGrayscale" inherits="ColorRect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+<class name="SxFxGrayscale" inherits="ColorRect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
     <brief_description>
         A simple grayscale effect.
     </brief_description>
     <description>
         A simple grayscale effect.
 
-        image::images/nodes/SxFXGrayscale.gif[align="center"]
+        image::images/nodes/SxFxGrayscale.gif[align="center"]
     </description>
     <tutorials></tutorials>
     <methods></methods>

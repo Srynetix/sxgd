@@ -122,7 +122,7 @@ Specific modules separated from the rest.
 [WARNING]
 .Don't forget your JSON!
 ====
-When using FontAwesome components (any of the `SxFA` components), you need to make sure
+When using FontAwesome components (any of the `SxFa` components), you need to make sure
 you export `.json` files, because FontAwesome icon definitions are parsed at runtime.
 
 In the menu:Project[Export] menu, add/select your preset and in the menu:Resources[Filters to export non-resource files/folders] section, you need to declare `*.json`.
@@ -148,9 +148,7 @@ Reusable nodes, organized in multiple categories.
 
 Audio nodes.
 
-* *<<_sxaudiomultistreamplayer>>*: Audio player with multiple simultaneous voices.
-* *<<_sxaudiofxplayer>>*: Autoload-ready multi stream player.
-* *<<_sxmusicplayer>>*: Autoload-ready audio player, useful for music tracks.
+* *<<_sxaudiostreamplayer>>*: "Supercharged" audio player with multiple simultaneous voices.
 
 ==== Debug
 
@@ -169,10 +167,13 @@ Debug nodes.
 Nodes concerning special effects / shaders / particles.
 
 * *Screen effects*: Full-screen effects you can use as nodes.
-    ** *<<_sxbetterblur>>*: A gaussian blur, compatible with GLES2.
-    ** *<<_sxmotionblur>>*: A motion blur.
-    ** *<<_sxshockwave>>*: An animated shockwave effect.
-    ** *<<_sxvignette>>*: A vignette effect.
+    ** *<<_sxfxbetterblur>>*: A gaussian blur, compatible with GLES2.
+    ** *<<_sxfxchromaticaberration>>*: A chromatic aberration effect.
+    ** *<<_sxfxdissolve>>*: A dissolve effect.
+    ** *<<_sxfxgrayscale>>*: A grayscale effect.
+    ** *<<_sxfxmotionblur>>*: A motion blur.
+    ** *<<_sxfxshockwave>>*: An animated shockwave effect.
+    ** *<<_sxfxvignette>>*: A vignette effect.
 * *<<_sxfxcamera>>*: A special camera with FX and animation capabilities.
 
 ==== Input

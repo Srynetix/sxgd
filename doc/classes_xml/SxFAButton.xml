@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class name="SxFAButton" inherits="Button" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+<class name="SxFaButton" inherits="Button" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
     <brief_description>
         FontAwesome button, displaying an icon.
     </brief_description>
@@ -7,7 +7,7 @@
         FontAwesome button, displaying an icon. +
         Make sure you &lt;&lt;_fontawesome_icons_integration,read the docs about JSON&gt;&gt; before using the component.
 
-        image::images/nodes/SxFAButton.gif[align="center"]
+        image::images/nodes/SxFaButton.gif[align="center"]
     </description>
     <tutorials></tutorials>
     <members>

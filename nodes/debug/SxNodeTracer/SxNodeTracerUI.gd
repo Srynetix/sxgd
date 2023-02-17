@@ -15,15 +15,13 @@ func _ready() -> void:
     font.use_filter = true
     font.font_data = FONT_DATA
 
-    anchor_right = 1.0
-    anchor_bottom = 1.0
+    set_anchors_and_margins_preset(Control.PRESET_WIDE)
     size_flags_horizontal = Control.SIZE_EXPAND_FILL
     size_flags_vertical = Control.SIZE_EXPAND_FILL
     color = Color(0, 0, 0, 0.12)
 
     var margin := MarginContainer.new()
-    margin.anchor_right = 1.0
-    margin.anchor_bottom = 1.0
+    margin.set_anchors_and_margins_preset(Control.PRESET_WIDE)
     margin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
     margin.size_flags_vertical = Control.SIZE_EXPAND_FILL
     margin.set("custom_constants/margin_right", 10)

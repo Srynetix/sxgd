@@ -1,5 +1,9 @@
+tool
 extends TextureRect
 class_name SxVirtualJoystick
+
+const BACKGROUND_TEXTURE = preload("res://addons/sxgd/modules/SxVirtualControls/assets/textures/transparentDark/transparentDark05.png")
+const HEAD_TEXTURE = preload("res://addons/sxgd/modules/SxVirtualControls/assets/textures/transparentDark/transparentDark49.png")
 
 # Joystick axis
 enum Axis { Left = 0, Right, Up, Down }
@@ -25,21 +29,47 @@ export var action_axis_down: String
 # Dead zone
 export var dead_zone := 0.3
 
-onready var _head := $Head as TextureRect
-
-onready var _initial_head_position := _head.rect_position
+var _initial_head_position: Vector2
+var _head: TextureRect
 var _joystick_touch_index := -1
 var _action_mapping := {}
 
 func _ready():
     modulate = SxColor.with_alpha_f(Color.white, INITIAL_OPACITY)
-    _head.modulate = SxColor.with_alpha_f(Color.white, INITIAL_OPACITY)
     _action_mapping = {
         Axis.Left: action_axis_left,
         Axis.Right: action_axis_right,
         Axis.Up: action_axis_up,
         Axis.Down: action_axis_down,
     }
+
+    if !rect_min_size:
+        rect_min_size = Vector2(128, 128)
+    if !size_flags_horizontal:
+        size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+    if !size_flags_vertical:
+        size_flags_vertical = Control.SIZE_SHRINK_CENTER
+    texture = BACKGROUND_TEXTURE
+    expand = true
+
+    _head = TextureRect.new()
+    _head.anchor_left = 0.5
+    _head.anchor_top = 0.5
+    _head.anchor_right = 0.5
+    _head.anchor_bottom = 0.5
+    _head.rect_min_size = Vector2(64, 64)
+    _head.margin_left = -_head.rect_min_size.x / 2
+    _head.margin_right = _head.rect_min_size.x / 2
+    _head.margin_top = -_head.rect_min_size.y / 2
+    _head.margin_bottom = _head.rect_min_size.y / 2
+    _head.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+    _head.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+    _head.texture = HEAD_TEXTURE
+    _head.expand = true
+    add_child(_head)
+
+    _initial_head_position = _head.rect_position
+    _head.modulate = SxColor.with_alpha_f(Color.white, INITIAL_OPACITY)
 
 func _input(event: InputEvent):
     if event is InputEventScreenTouch:

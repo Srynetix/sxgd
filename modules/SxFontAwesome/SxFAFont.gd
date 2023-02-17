@@ -1,6 +1,6 @@
 # Font management wrapper around FontAwesome.
 extends Reference
-class_name SxFAFont
+class_name SxFaFont
 
 const FASolidFont: DynamicFontData = preload("res://addons/sxgd/modules/SxFontAwesome/assets/otfs/Font Awesome 6 Free-Solid-900.otf")
 const FARegularFont: DynamicFontData = preload("res://addons/sxgd/modules/SxFontAwesome/assets/otfs/Font Awesome 6 Free-Regular-400.otf")

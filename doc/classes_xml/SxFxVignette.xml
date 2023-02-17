@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class name="SxVignette" inherits="ColorRect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+<class name="SxFxVignette" inherits="ColorRect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
     <brief_description>
         A vignette effect.
     </brief_description>
     <description>
         A vignette effect.
 
-        image::images/nodes/SxVignette.gif[align="center"]
+        image::images/nodes/SxFxVignette.gif[align="center"]
     </description>
     <tutorials></tutorials>
     <methods>

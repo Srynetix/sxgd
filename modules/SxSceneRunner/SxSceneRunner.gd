@@ -4,6 +4,8 @@
 extends Control
 class_name SxSceneRunner
 
+const FONT_DATA = preload("res://addons/sxgd/assets/fonts/Jost-400-Book.ttf")
+
 signal scene_loaded(name)
 signal go_back()
 
@@ -14,19 +16,114 @@ const SCENE_KEY_RESET := KEY_I
 const SCENE_KEY_PREV := KEY_O
 const SCENE_KEY_NEXT := KEY_P
 
-onready var _current := $Current as Control
-onready var _scene_name := $CanvasLayer/Margin/VBox/Text/SceneName as Label
-onready var _back_button := $CanvasLayer/Margin/BackButton as Button
-onready var _previous_btn := $CanvasLayer/Margin/VBox/Margin/Buttons/Previous as Button
-onready var _reset_btn := $CanvasLayer/Margin/VBox/Margin/Buttons/Reset as Button
-onready var _next_btn := $CanvasLayer/Margin/VBox/Margin/Buttons/Next as Button
+var _current: Control
+var _backbutton: Button
+var _scene_name_label: Label
+var _previous_btn: Button
+var _reset_btn: Button
+var _next_btn: Button
 
 var _known_scenes := []
 var _current_scene := 0
 
+func _build_ui() -> void:
+    var font := DynamicFont.new()
+    font.size = 24
+    font.font_data = FONT_DATA
+
+    var smaller_font := DynamicFont.new()
+    smaller_font.font_data = FONT_DATA
+
+    var color_rect := ColorRect.new()
+    color_rect.name = "ColorRect"
+    color_rect.color = Color.black
+    SxUi.set_full_rect_no_mouse(color_rect)
+    add_child(color_rect)
+
+    _current = Control.new()
+    _current.name = "Current"
+    SxUi.set_full_rect_no_mouse(_current)
+    add_child(_current)
+
+    var canvas_layer = CanvasLayer.new()
+    canvas_layer.name = "CanvasLayer"
+    add_child(canvas_layer)
+
+    var margin := MarginContainer.new()
+    margin.name = "Margin"
+    SxUi.set_margin_container_margins(margin, 20)
+    SxUi.set_full_rect_no_mouse(margin)
+    canvas_layer.add_child(margin)
+
+    _backbutton = Button.new()
+    _backbutton.name = "BackButton"
+    _backbutton.size_flags_horizontal = Control.SIZE_SHRINK_END
+    _backbutton.size_flags_vertical = 0
+    _backbutton.set("custom_fonts/font", font)
+    _backbutton.text = "Back"
+    margin.add_child(_backbutton)
+
+    var vbox := VBoxContainer.new()
+    vbox.name = "VBox"
+    vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    vbox.size_flags_vertical = Control.SIZE_SHRINK_END
+    margin.add_child(vbox)
+
+    var text_hbox := HBoxContainer.new()
+    text_hbox.name = "Text"
+    text_hbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    vbox.add_child(text_hbox)
+
+    _scene_name_label = Label.new()
+    _scene_name_label.name = "SceneName"
+    _scene_name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+    _scene_name_label.size_flags_vertical = Control.SIZE_SHRINK_END
+    _scene_name_label.set("custom_fonts/font", smaller_font)
+    _scene_name_label.text = "[NO SCENE FOUND]"
+    _scene_name_label.align = Label.ALIGN_RIGHT
+    text_hbox.add_child(_scene_name_label)
+
+    var inner_margin := MarginContainer.new()
+    inner_margin.name = "Margin"
+    inner_margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    inner_margin.set("custom_constants/margin_right", 10)
+    inner_margin.set("custom_constants/margin_top", 20)
+    inner_margin.set("custom_constants/margin_left", 10)
+    inner_margin.set("custom_constants/margin_bottom", 0)
+    vbox.add_child(inner_margin)
+
+    var buttons := HBoxContainer.new()
+    buttons.name = "Buttons"
+    buttons.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    buttons.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+    buttons.set("custom_constants/separation", 32)
+    inner_margin.add_child(buttons)
+
+    _previous_btn = Button.new()
+    _previous_btn.name = "Previous"
+    _previous_btn.set("custom_fonts/font", font)
+    _previous_btn.text = "< Prev."
+    buttons.add_child(_previous_btn)
+
+    _reset_btn = Button.new()
+    _reset_btn.name = "Reset"
+    _reset_btn.set("custom_fonts/font", font)
+    _reset_btn.text = "Reset"
+    buttons.add_child(_reset_btn)
+
+    _next_btn = Button.new()
+    _next_btn.name = "Next"
+    _next_btn.set("custom_fonts/font", font)
+    _next_btn.text = "Next >"
+    buttons.add_child(_next_btn)
+
+    SxUi.set_full_rect_no_mouse(self)
+
 func _ready() -> void:
+    _build_ui()
+
     if !show_back_button:
-        _back_button.hide()
+        _backbutton.hide()
 
     _known_scenes = _discover_scenes()
     _load_first_scene()
@@ -34,7 +131,7 @@ func _ready() -> void:
     _previous_btn.connect("pressed", self, "_load_prev_scene")
     _reset_btn.connect("pressed", self, "_load_current_scene")
     _next_btn.connect("pressed", self, "_load_next_scene")
-    _back_button.connect("pressed", self, "_go_back")
+    _backbutton.connect("pressed", self, "_go_back")
 
 func _input(event: InputEvent) -> void:
     if event is InputEventKey:
@@ -55,7 +152,7 @@ func _notification(what: int) -> void:
 
 func _load_first_scene() -> void:
     if len(_known_scenes) == 0:
-        _scene_name.text = "[NO SCENE FOUND]"
+        _scene_name_label.text = "[NO SCENE FOUND]"
         return
 
     _load_current_scene()
@@ -96,7 +193,7 @@ func _load_current_scene() -> void:
 
     # Load instance
     var instance := entry_model.instance()
-    _scene_name.text = str(entry_idx) + " - " + entry_name + "\n" + str(entry_idx) + "/" + str(len(_known_scenes))
+    _scene_name_label.text = str(entry_idx) + " - " + entry_name + "\n" + str(entry_idx) + "/" + str(len(_known_scenes))
     _current.add_child(instance)
     emit_signal("scene_loaded", entry_name)
 
@@ -115,5 +212,5 @@ func _load_prev_scene() -> void:
     _load_current_scene()
 
 func _go_back():
-    _back_button.mouse_filter = MOUSE_FILTER_IGNORE
+    _backbutton.mouse_filter = MOUSE_FILTER_IGNORE
     emit_signal("go_back")

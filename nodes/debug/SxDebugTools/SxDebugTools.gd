@@ -55,8 +55,7 @@ func _build_ui() -> void:
     _main_panel = Panel.new()
     _main_panel.name = "Panel"
     _main_panel.self_modulate = Color(0, 0, 0, 0.58)
-    _main_panel.anchor_right = 1.0
-    _main_panel.anchor_bottom = 1.0
+    _main_panel.set_anchors_and_margins_preset(Control.PRESET_WIDE)
     _main_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
     add_child(_main_panel)
 
@@ -65,8 +64,7 @@ func _build_ui() -> void:
 
     var hbox_container := HBoxContainer.new()
     hbox_container.name = "HBox"
-    hbox_container.anchor_right = 1.0
-    hbox_container.anchor_bottom = 1.0
+    hbox_container.set_anchors_and_margins_preset(Control.PRESET_WIDE)
     hbox_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
     _main_panel.add_child(hbox_container)
 
@@ -84,8 +82,7 @@ func _build_ui() -> void:
 
     _scene_tree_dump = MarginContainer.new()
     _scene_tree_dump.name = "SceneTreeDumpContainer"
-    _scene_tree_dump.anchor_right = 1.0
-    _scene_tree_dump.anchor_bottom = 1.0
+    _scene_tree_dump.set_anchors_and_margins_preset(Control.PRESET_WIDE)
     _scene_tree_dump.set("custom_constants/margin_right", 20)
     _scene_tree_dump.set("custom_constants/margin_top", 20)
     _scene_tree_dump.set("custom_constants/margin_left", 20)

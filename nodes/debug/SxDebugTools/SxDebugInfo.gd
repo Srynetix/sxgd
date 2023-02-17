@@ -30,8 +30,7 @@ func _ready() -> void:
     font.font_data = FONT_DATA
 
     var container := MarginContainer.new()
-    container.anchor_right = 1.0
-    container.anchor_bottom = 1.0
+    container.set_anchors_and_margins_preset(Control.PRESET_WIDE)
     container.mouse_filter = Control.MOUSE_FILTER_IGNORE
     container.set("custom_constants/margin_right", 10)
     container.set("custom_constants/margin_left", 10)

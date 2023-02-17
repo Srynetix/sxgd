@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class name="SxFXDissolve" inherits="ColorRect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+<class name="SxFxDissolve" inherits="ColorRect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
     <brief_description>
         A ready-to-use dissolve effect.
     </brief_description>
     <description>
         A ready-to-use dissolve effect.
 
-        image::images/nodes/SxFXDissolve.gif[align="center"]
+        image::images/nodes/SxFxDissolve.gif[align="center"]
     </description>
     <tutorials></tutorials>
     <methods></methods>

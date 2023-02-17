@@ -5,9 +5,7 @@
 #
 # On buttons, you can affect an action key (mapped in the Input Map),
 # and on joysticks, you can affect 4 actions keys, one for each direction.
-#
-# You have 3 samples at your disposal in the [samples](../../../../sxgd/modules/SxVirtualControls/samples) folder.
-
+tool
 extends Control
 class_name SxVirtualControls
 
@@ -22,7 +20,10 @@ export(DisplayMode) var display_mode := DisplayMode.OnlyMobile as int
 
 func _ready():
     visible = false
-    if display_mode == DisplayMode.OnlyMobile && SxOS.is_mobile():
+    if display_mode == DisplayMode.OnlyMobile && SxOs.is_mobile():
         visible = true
     elif display_mode == DisplayMode.Always:
         visible = true
+
+    set_anchors_and_margins_preset(Control.PRESET_WIDE)
+    mouse_filter = Control.MOUSE_FILTER_IGNORE

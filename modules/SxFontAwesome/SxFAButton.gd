@@ -1,7 +1,7 @@
 # FontAwesome button, displaying an icon.
 tool
 extends Button
-class_name SxFAButton
+class_name SxFaButton
 
 # Icon name
 export var icon_name := "anchor" setget _set_icon_name
@@ -12,14 +12,14 @@ export var icon_color := Color.white setget _set_icon_color
 # Icon rotation
 export var icon_rotation := 0.0 setget _set_icon_rotation
 
-var _label: SxFALabel
+var _label: SxFaLabel
 
 func _init() -> void:
     if !rect_min_size:
         rect_min_size = Vector2(64, 64)
     expand_icon = true
 
-    _label = SxFALabel.new()
+    _label = SxFaLabel.new()
     add_child(_label)
 
 func _ready() -> void:

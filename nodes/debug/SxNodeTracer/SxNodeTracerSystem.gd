@@ -18,8 +18,7 @@ func _ready() -> void:
     font.font_data = FONT_DATA
 
     name = "SxNodeTracerSystem"
-    anchor_right = 1.0
-    anchor_bottom = 1.0
+    set_anchors_and_margins_preset(Control.PRESET_WIDE)
 
     var vbox_container := VBoxContainer.new()
     vbox_container.set("custom_constants/separation", 0)

@@ -1,15 +1,15 @@
 extends Node
-class_name SxClientRPC
+class_name SxClientRpc
 
-var _logger := SxLog.get_logger("SxClientRPC")
-var _service: Node  # SxRPCService
+var _logger := SxLog.get_logger("SxClientRpc")
+var _service: Node  # SxRpcService
 
 signal spawned_from_server(node)
 signal removed_from_server(node)
 signal players_updated(players)
 
 func _init():
-    name = "SxClientRPC"
+    name = "SxClientRpc"
     _logger.set_max_log_level(SxLog.LogLevel.DEBUG)
 
 func link_service(service: Node) -> void:

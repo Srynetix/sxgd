@@ -14,8 +14,7 @@ func _ready() -> void:
 
     _overlay = ColorRect.new()
     _overlay.name = "Overlay"
-    _overlay.anchor_right = 1.0
-    _overlay.anchor_bottom = 1.0
+    _overlay.set_anchors_and_margins_preset(Control.PRESET_WIDE)
     _overlay.color = COLOR_TRANSPARENT_BLACK
     _overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
     add_child(_overlay)

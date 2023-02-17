@@ -22,18 +22,18 @@ var _last_input_data := {}
 func _init() -> void:
     name = "SxClientPeer"
     _logger.set_max_log_level(SxLog.LogLevel.DEBUG)
-    if SxOS.is_web():
+    if SxOs.is_web():
         # Force WebSockets on HTML5
         use_websockets = true
 
 func _get_sync_input() -> SxSyncInput:
-    return SxRPCService.get_from_tree(get_tree()).sync_input
+    return SxRpcService.get_from_tree(get_tree()).sync_input
 
-func _get_server() -> SxServerRPC:
-    return SxRPCService.get_from_tree(get_tree()).server
+func _get_server() -> SxServerRpc:
+    return SxRpcService.get_from_tree(get_tree()).server
 
-func _get_client() -> SxClientRPC:
-    return SxRPCService.get_from_tree(get_tree()).client
+func _get_client() -> SxClientRpc:
+    return SxRpcService.get_from_tree(get_tree()).client
 
 func get_players() -> Dictionary:
     return _players

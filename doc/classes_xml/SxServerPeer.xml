@@ -107,7 +107,7 @@
         <member name="use_websockets" type="bool">
             Use a WebSockets server (instead of ENet).
         </member>
-        <member name="rpc_service" type="SxRPCService">
+        <member name="rpc_service" type="SxRpcService">
             Access to the RPC service.
         </member>
     </members>

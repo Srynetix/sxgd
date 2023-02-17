@@ -1,12 +1,12 @@
 # Helper methods around core functions
 extends Reference
-class_name SxOS
+class_name SxOs
 
 # Set the window size from a WIDTHxHEIGHT string.
 #
 # Example:
 # ```gdscript
-# SxOS.set_window_size_str("1280x720")
+# SxOs.set_window_size_str("1280x720")
 # ```
 static func set_window_size_str(window_size: String) -> void:
     var sz_split := window_size.split("x")
@@ -17,7 +17,7 @@ static func set_window_size_str(window_size: String) -> void:
 #
 # Example:
 # ```gdscript
-# if SxOS.is_mobile():
+# if SxOs.is_mobile():
 #   print("Mobile !")
 # ```
 static func is_mobile() -> bool:

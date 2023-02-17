@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class name="SxRPCService" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+<class name="SxRpcService" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
     <brief_description>
         Main RPC interface.
     </brief_description>
@@ -9,7 +9,7 @@
     <tutorials></tutorials>
     <methods>
         <method name="get_from_tree" qualifiers="static">
-            <return type="SxRPCService" />
+            <return type="SxRpcService" />
             <argument index="0" name="tree" type="SceneTree" />
             <description>
                 Return the main RPC service for a target SceneTree.
@@ -17,10 +17,10 @@
         </method>
     </methods>
     <members>
-        <member name="client" type="SxClientRPC">
+        <member name="client" type="SxClientRpc">
             Access to the client RPC interface.
         </member>
-        <member name="server" type="SxServerRPC">
+        <member name="server" type="SxServerRpc">
             Access to the server RPC interface.
         </member>
         <member name="sync_input" type="SxSyncInput">
