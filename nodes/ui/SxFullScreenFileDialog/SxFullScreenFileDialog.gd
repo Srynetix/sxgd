@@ -22,19 +22,22 @@ enum Mode {
     SAVE_FILE = 1
 }
 
+const BASE_FONT_DATA = preload("res://addons/sxgd/assets/fonts/Jost-400-Book.ttf")
+const CODE_FONT_DATA = preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
+
 export(Mode) var mode := Mode.OPEN_FILE
 export(Array, Dictionary) var shortcuts := []
 export var file_filter := ""
 
-onready var _doubletap := $SxDoubleTap as SxDoubleTap
-onready var _shortcuts_list := $MarginContainer/VBoxContainer/HBoxContainer/Shortcuts as SxItemList
-onready var _files_list := $MarginContainer/VBoxContainer/HBoxContainer/Files as SxItemList
-onready var _current_path_lineedit := $MarginContainer/VBoxContainer/Buttons/CurrentPath as LineEdit
-onready var _go_up_btn := $MarginContainer/VBoxContainer/Buttons/GoUp as SxFaButton
-onready var _filename_lbl := $MarginContainer/VBoxContainer/HBoxContainer2/FileName as LineEdit
-onready var _cancel_btn := $MarginContainer/VBoxContainer/HBoxContainer2/Cancel as Button
-onready var _validate_btn := $MarginContainer/VBoxContainer/HBoxContainer2/Validate as Button
-onready var _confirmation := $Confirmation as SxFullScreenConfirmationDialog
+var _doubletap: SxDoubleTap
+var _confirmation: SxFullScreenConfirmationDialog
+var _current_path_lineedit: LineEdit
+var _go_up_btn: SxFaButton
+var _shortcuts_list: SxItemList
+var _files_list: SxItemList
+var _filename_lbl: LineEdit
+var _cancel_btn: Button
+var _validate_btn: Button
 
 var _filters := []
 var _shortcuts := []
@@ -43,7 +46,80 @@ var _current_path := "" setget _set_current_path
 var _file_selected := ""
 var _open_delayer: Timer
 
+func _build_ui_file() -> void:
+    var font := DynamicFont.new()
+    font.size = 24
+    font.font_data = BASE_FONT_DATA
+
+    var code_font := DynamicFont.new()
+    code_font.size = 24
+    code_font.font_data = CODE_FONT_DATA
+
+    _doubletap = SxDoubleTap.new()
+    _doubletap.should_process_input = false
+    add_child(_doubletap)
+
+    _confirmation = SxFullScreenConfirmationDialog.new()
+    add_child(_confirmation)
+
+    var buttons := HBoxContainer.new()
+    buttons.set("custom_contants/separation", 10)
+    buttons.alignment = HBoxContainer.ALIGN_END
+    _vbox_container.add_child(buttons)
+
+    _current_path_lineedit = LineEdit.new()
+    _current_path_lineedit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+    _current_path_lineedit.set("custom_fonts/font", font)
+    _current_path_lineedit.text = "user://"
+    _current_path_lineedit.editable = false
+    buttons.add_child(_current_path_lineedit)
+
+    _go_up_btn = SxFaButton.new()
+    _go_up_btn.icon_name = "arrow-up"
+    buttons.add_child(_go_up_btn)
+
+    var hbox_container := HBoxContainer.new()
+    hbox_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
+    hbox_container.set("custom_constants/separation", 20)
+    _vbox_container.add_child(hbox_container)
+
+    _shortcuts_list = SxItemList.new()
+    _shortcuts_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+    _shortcuts_list.size_flags_stretch_ratio = 0.5
+    _shortcuts_list.set("custom_fonts/font", code_font)
+    hbox_container.add_child(_shortcuts_list)
+
+    _files_list = SxItemList.new()
+    _files_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+    _files_list.set("custom_fonts/font", code_font)
+    hbox_container.add_child(_files_list)
+
+    var hbox_container2 := HBoxContainer.new()
+    hbox_container2.set("custom_constants/separation", 10)
+    hbox_container2.alignment = HBoxContainer.ALIGN_END
+    _vbox_container.add_child(hbox_container2)
+
+    _filename_lbl = LineEdit.new()
+    _filename_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+    _filename_lbl.set("custom_fonts/font", font)
+    hbox_container2.add_child(_filename_lbl)
+
+    _cancel_btn = Button.new()
+    _cancel_btn.set("custom_fonts/font", font)
+    _cancel_btn.text = "Cancel"
+    hbox_container2.add_child(_cancel_btn)
+
+    _validate_btn = Button.new()
+    _validate_btn.set("custom_fonts/font", font)
+    _validate_btn.text = "Open"
+    hbox_container2.add_child(_validate_btn)
+
 func _ready() -> void:
+    _build_ui_file()
+
+    visible = false
+    _set_dialog_title("Choose file ...")
+
     _shortcuts_list.connect("item_selected", self, "_select_shortcut")
     _files_list.connect("gui_input", self, "_on_files_input")
     _files_list.connect("item_selected", self, "_select_file")
