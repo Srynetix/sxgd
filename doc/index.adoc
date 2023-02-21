@@ -55,9 +55,9 @@ Each `sxgd` class declares a `class_name` attribute, to register them as global 
 
 Due to Godot/GDScript quirks, you cannot give a `class_name` to an autoloaded Node, because autoloads can be accessed globally. So you cannot directly use `sxgd` nodes as autoloads...
 
-*But!* What you can do is: subclass them in a new class, through inheritance, not giving it a `class_name`, and use _this_ node as an autoload. If it's a scene inheritance (with `.tscn` files), use the `New Inherited Scene...` menu from Godot, and if needed, don't forget to replace its script with a inherited script, using an `extends` declaration.
+*But!* What you can do is: subclass them in a new class, through inheritance, not giving it a `class_name`, and use _this_ node as an autoload.
 
-Here is a quick example for the `SxGameData` node (not a scene), useful for most projects (_state handling & persistable key-value store_).
+Here is a quick example for the `SxGameData` node, useful for most projects (_state handling & persistable key-value store_).
 
 1. Create a specific `GameData.gd` script for your game (personally, I put autoloads in a top-level `autoloads` folder).
 2. In this script, put at the top `extends SxGameData` (it will automatically resolves the path to the original class). In this file to can override anything you want and add new functionalities.
@@ -76,12 +76,11 @@ func _ready() -> void:
 3. In Godot, in the menu:Project settings[Autoloads] menu, add your `GameData.gd` script as an autoload, with the `Global variable` checkbox enabled.
 4. And that's it! In your game code, you can refer to `GameData` (instead of `SxGameData`) to access your autoload!
 
-Now a second example, using a scene: `SxSceneTransitioner`, useful to fade between game screens.
+Now a second example, `SxSceneTransitioner`, useful to fade between game screens.
 
-1. Create a *New Inherited Scene*, and open the node you want to inherit (here `SxSceneTransitioner`, located in `nodes/utils/SxSceneTransitioner/SxSceneTransitioner.tscn`).
-2. Save it to a local folder (if you follow my advice you can put it in a top-level `autoloads` folder), with another name like `GameSceneTransitioner.tscn`.
-3. In Godot, in the menu:Project settings[Autoloads] menu, add your `GameSceneTransitioner.tscn` scene as an autoload, with the `Global variable` checkbox enabled.
-4. And that's it! In your game code, you can refer to `GameSceneTransitioner` to access your autoload!
+1. Create a new `GameSceneTransitioner.gd` script, and extend `SxSceneTransitioner`.
+2. In Godot, in the menu:Project settings[Autoloads] menu, add your `GameSceneTransitioner.gd` script as an autoload, with the `Global variable` checkbox enabled.
+3. And that's it! In your game code, you can refer to `GameSceneTransitioner` to access your autoload!
 ****
 
 == Contents
@@ -115,9 +114,9 @@ Specific modules separated from the rest.
 
 ==== FontAwesome icons integration
 
-* *<<_sxfabutton>>*: Ready-to-use `Button` with an integrated *FA* icon.
-* *<<_sxfafont>>*: Font management wrapper around *FA*, useful for specific needs.
-* *<<_sxfalabel>>*: A label which display a *FA* icon.
+* *<<_sxfabutton>>*: Ready-to-use `Button` with an integrated *FontAwesome* icon.
+* *<<_sxfafont>>*: Font management wrapper around *FontAwesome*, useful for specific needs.
+* *<<_sxfalabel>>*: A label which display a *FontAwesome* icon.
 
 [WARNING]
 .Don't forget your JSON!

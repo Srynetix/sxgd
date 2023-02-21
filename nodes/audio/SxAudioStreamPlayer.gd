@@ -16,10 +16,7 @@ export var streams := {}
 var _players := Array()
 var _player_data := {}
 
-# Play a stream on an automatically selected voice.
-#
-# Example:
-#   player.play_stream(my_stream)
+# Play an audio stream on an automatically selected voice.
 func play_stream(stream: AudioStream) -> void:
     var available := _find_available_player()
     if available != null:
@@ -27,10 +24,12 @@ func play_stream(stream: AudioStream) -> void:
     else:
         _play_stream_on_player(stream, _find_oldest_active_player())
 
-# Play a stored stream by key on an automatically selected voice.
-#
-# Example:
-#   player.play_stream(my_stream)
+# Play an audio stream on a specific voice.
+func play_stream_on_voice(stream: AudioStream, voice: int) -> void:
+    var player := _players[voice] as AudioStreamPlayer
+    _play_stream_on_player(stream, player)
+
+# Play a stored audio stream by key on an automatically selected voice.
 func play_key(key: String) -> void:
     var stream := streams.get(key) as AudioStream
     if !stream:
@@ -39,10 +38,7 @@ func play_key(key: String) -> void:
 
     play_stream(stream)
 
-# Play a stored stream by key on a specific selected voice.
-#
-# Example:
-#   player.play_stream(my_stream)
+# Play a stored audio stream by key on a specific voice.
 func play_key_on_voice(key: String, voice: int) -> void:
     var stream := streams.get(key) as AudioStream
     if !stream:
@@ -51,16 +47,7 @@ func play_key_on_voice(key: String, voice: int) -> void:
 
     play_stream_on_voice(stream, voice)
 
-# Play a stream on a specific voice.
-#
-# Example:
-#   player.play_stream_on_voice(my_sound, 0)
-func play_stream_on_voice(stream: AudioStream, voice: int) -> void:
-    var player := _players[voice] as AudioStreamPlayer
-    _play_stream_on_player(stream, player)
-
 # Apply a "fade in" effect on sound with an optional duration in seconds.
-# Duration defaults to 0.5 seconds.
 func fade_in_on_voice(voice: int, duration: float = 0.5) -> void:
     var player := _players[voice] as AudioStreamPlayer
     var last_tweaked_volume := _player_data[player]["volume_db"] as float
