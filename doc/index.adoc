@@ -118,15 +118,6 @@ Specific modules separated from the rest.
 * *<<_sxfafont>>*: Font management wrapper around *FontAwesome*, useful for specific needs.
 * *<<_sxfalabel>>*: A label which display a *FontAwesome* icon.
 
-[WARNING]
-.Don't forget your JSON!
-====
-When using FontAwesome components (any of the `SxFa` components), you need to make sure
-you export `.json` files, because FontAwesome icon definitions are parsed at runtime.
-
-In the menu:Project[Export] menu, add/select your preset and in the menu:Resources[Filters to export non-resource files/folders] section, you need to declare `*.json`.
-====
-
 ==== Scene Runner
 
 * *<<_sxscenerunner>>*: Useful as a kind of "test suite" where you can select any scene from a specific folder, with on-screen navigation.

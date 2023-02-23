@@ -5,6 +5,8 @@ class_name SxFaFont
 const FASolidFont: DynamicFontData = preload("res://addons/sxgd/modules/SxFontAwesome/assets/otfs/Font Awesome 6 Free-Solid-900.otf")
 const FARegularFont: DynamicFontData = preload("res://addons/sxgd/modules/SxFontAwesome/assets/otfs/Font Awesome 6 Free-Regular-400.otf")
 
+const SxFaJsonData = preload("res://addons/sxgd/modules/SxFontAwesome/SxFaJsonData.gd")
+
 # Font family
 enum Family {
     Solid,
@@ -54,9 +56,10 @@ static func _get_definition() -> Dictionary:
     return _CACHED_DATA["definition"]
 
 static func _load_definition() -> Dictionary:
-    var f := File.new()
-    f.open("res://addons/sxgd/modules/SxFontAwesome/assets/metadata/icons.json", File.READ)
-    var result := JSON.parse(f.get_as_text())
-    return result.result
+    return SxFaJsonData.DATA
+    # var f := File.new()
+    # f.open("res://addons/sxgd/modules/SxFontAwesome/assets/metadata/icons.json", File.READ)
+    # var result := JSON.parse(f.get_as_text())
+    # return result.result
 
 
