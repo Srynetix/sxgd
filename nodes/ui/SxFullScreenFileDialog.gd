@@ -11,8 +11,8 @@ class PathShortcut:
     var path: String
 
     func _init(name_: String, path_: String):
-         name = name_
-         path = path_
+        name = name_
+        path = path_
 
     static func from_dict(d: Dictionary) -> PathShortcut:
         return PathShortcut.new(d["name"], d["path"])
