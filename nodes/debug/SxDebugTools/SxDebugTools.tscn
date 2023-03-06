@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://addons/sxgd/nodes/debug/SxLogPanel/SxLogPanel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/sxgd/nodes/debug/SxDebugInfo/SxDebugInfo.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://addons/sxgd/assets/fonts/OfficeCodePro-Bold.otf" type="DynamicFontData" id=5]
 [ext_resource path="res://addons/sxgd/nodes/debug/SxNodeTracer/SxNodeTracerSystem.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/sxgd/assets/fonts/Inconsolata-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://addons/sxgd/nodes/debug/SxDebugConsole/SxDebugConsole.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=2]
 use_mipmaps = true
@@ -49,8 +50,8 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="Container" type="Control" parent="Panel/HBoxContainer"]
-margin_right = 818.0
-margin_bottom = 600.0
+margin_right = 1074.0
+margin_bottom = 720.0
 mouse_filter = 2
 size_flags_horizontal = 3
 
@@ -71,25 +72,25 @@ custom_constants/margin_bottom = 20
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/Container/SceneTreeDump"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 798.0
-margin_bottom = 580.0
+margin_right = 1054.0
+margin_bottom = 700.0
 
 [node name="Local" type="VBoxContainer" parent="Panel/HBoxContainer/Container/SceneTreeDump/HBoxContainer"]
-margin_right = 778.0
-margin_bottom = 560.0
+margin_right = 1034.0
+margin_bottom = 680.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Title" type="Label" parent="Panel/HBoxContainer/Container/SceneTreeDump/HBoxContainer/Local"]
-margin_right = 778.0
+margin_right = 1034.0
 margin_bottom = 21.0
 custom_fonts/font = SubResource( 2 )
 text = "Local tree"
 
 [node name="Tree" type="Tree" parent="Panel/HBoxContainer/Container/SceneTreeDump/HBoxContainer/Local"]
 margin_top = 25.0
-margin_right = 778.0
-margin_bottom = 560.0
+margin_right = 1034.0
+margin_bottom = 680.0
 size_flags_vertical = 3
 custom_constants/draw_guides = 0
 custom_constants/draw_relationship_lines = 1
@@ -120,10 +121,12 @@ custom_constants/draw_relationship_lines = 1
 custom_fonts/font = SubResource( 4 )
 custom_styles/bg = SubResource( 5 )
 
+[node name="DebugConsole" parent="Panel/HBoxContainer/Container" instance=ExtResource( 8 )]
+
 [node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer"]
-margin_left = 822.0
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_left = 1078.0
+margin_right = 1280.0
+margin_bottom = 720.0
 mouse_filter = 2
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
@@ -142,13 +145,14 @@ text = "Debug Tools™"
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/MarginContainer"]
 margin_left = 10.0
-margin_top = 498.0
+margin_top = 599.0
 margin_right = 192.0
-margin_bottom = 590.0
+margin_bottom = 710.0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 custom_fonts/font = SubResource( 1 )
-text = "F7 - Show scene tree dumps
+text = "F6 - Show console
+F7 - Show scene tree dumps
 F9 - Show node traces
 F10 - Show logs
 F11 - Show stats

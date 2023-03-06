@@ -22,7 +22,7 @@ func _set_noise_period(value: float) -> void:
 
 func _get_material() -> ShaderMaterial:
     if material == null:
-        yield(self, "_ready")
+        yield(self, "ready")
 
     return material as ShaderMaterial
 

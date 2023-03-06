@@ -8,19 +8,23 @@ enum PanelType {
     LOG,
     NODE_TRACER,
     SCENE_TREE_DUMP,
+    CONSOLE,
 }
 
 # Should the panel be visible on startup?
 export var visible_on_startup := false
+export(PanelType) var panel_on_startup := PanelType.DEBUG_INFO
 
 onready var main_panel := $Panel as Panel
 onready var log_panel := $Panel/HBoxContainer/Container/SxLogPanel as SxLogPanel
 onready var node_tracer := $Panel/HBoxContainer/Container/NodeTracerSystem as SxNodeTracerSystem
 onready var scene_tree_dump := $Panel/HBoxContainer/Container/SceneTreeDump as MarginContainer
+onready var debug_console := $Panel/HBoxContainer/Container/DebugConsole as SxDebugConsole
 onready var debug_info := $Panel/SxDebugInfo as SxDebugInfo
 onready var _visible := visible_on_startup
+onready var _current_panel := panel_on_startup as int
 
-var _current_panel := PanelType.DEBUG_INFO as int
+var _previous_mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _ready():
     debug_info.set_visibility(false)
@@ -28,6 +32,7 @@ func _ready():
     node_tracer.visible = false
     log_panel.visible = false
     scene_tree_dump.visible = false
+    debug_console.visible = false
 
     if visible_on_startup:
         show()
@@ -37,9 +42,12 @@ func hide() -> void:
     _hide_panels()
     main_panel.visible = false
     _visible = false
+    Input.mouse_mode = _previous_mouse_mode
 
 # Show the debug panel.
 func show() -> void:
+    _previous_mouse_mode = Input.mouse_mode
+    Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
     main_panel.visible = true
     _visible = true
     _show_panel(_current_panel)
@@ -68,6 +76,8 @@ func _show_panel(panel_type: int) -> void:
             node_tracer.visible = true
         PanelType.SCENE_TREE_DUMP:
             _show_scene_tree_dump()
+        PanelType.CONSOLE:
+            debug_console.visible = true
 
 func _show_scene_tree_dump() -> void:
     scene_tree_dump.visible = true
@@ -104,11 +114,15 @@ func _hide_panels() -> void:
     log_panel.visible = false
     node_tracer.visible = false
     scene_tree_dump.visible = false
+    debug_console.visible = false
 
 func _input(event: InputEvent):
     if event is InputEventKey:
         if event.pressed && event.scancode == KEY_F12:
             toggle()
+
+        elif event.pressed && event.scancode == KEY_F6 && _visible:
+            _show_panel(PanelType.CONSOLE)
 
         elif event.pressed && event.scancode == KEY_F7 && _visible:
             _show_panel(PanelType.SCENE_TREE_DUMP)
