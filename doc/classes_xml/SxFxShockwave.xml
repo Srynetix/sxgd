@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxFxShockwave" inherits="ColorRect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        An animated shockwave effect.
+    </brief_description>
+    <description>
+        An animated shockwave effect.
+
+        image::images/nodes/SxFxShockwave.gif[align="center"]
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="start_wave">
+            <return type="void" />
+            <argument index="0" name="position" type="Vector2" />
+            <description>
+                Start the wave animation at a specific position.
+            </description>
+        </method>
+        <method name="wave_is_running">
+            <return type="bool" />
+            <description>
+                Check if the wave animation is running.
+            </description>
+        </method>
+    </methods>
+    <members>
+        <member name="wave_size" type="float">
+            Wave size.
+        </member>
+        <member name="wave_center" type="Vector2">
+            Wave center.
+        </member>
+        <member name="force" type="float">
+            Wave force.
+        </member>
+        <member name="wave_thickness" type="float">
+            Wave thickness.
+        </member>
+    </members>
+    <constants></constants>
+</class>

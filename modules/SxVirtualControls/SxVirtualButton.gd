@@ -2,6 +2,8 @@ tool
 extends TextureRect
 class_name SxVirtualButton
 
+const BACKGROUND = preload("res://addons/sxgd/modules/SxVirtualControls/assets/textures/transparentDark/transparentDark09.png")
+
 const INITIAL_OPACITY := 0.5
 const TOUCHED_OPACITY := 1.0
 
@@ -14,6 +16,18 @@ signal released()
 export var action_button: String
 
 var _button_touch_index := -1
+
+func _init() -> void:
+    if !rect_min_size:
+        rect_min_size = Vector2(64, 64)
+    if !size_flags_horizontal:
+        size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+    if !size_flags_vertical:
+        size_flags_vertical = Control.SIZE_SHRINK_CENTER
+    if !texture:
+        texture = BACKGROUND
+
+    expand = true
 
 func _ready() -> void:
     modulate = SxColor.with_alpha_f(Color.white, INITIAL_OPACITY)

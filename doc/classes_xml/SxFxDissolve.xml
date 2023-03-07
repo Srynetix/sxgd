@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxFxDissolve" inherits="ColorRect" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        A ready-to-use dissolve effect.
+    </brief_description>
+    <description>
+        A ready-to-use dissolve effect.
+
+        image::images/nodes/SxFxDissolve.gif[align="center"]
+    </description>
+    <tutorials></tutorials>
+    <methods></methods>
+    <members>
+        <member name="ratio" type="float" default="0">
+            Effect amount (between 0 and 1).
+        </member>
+        <member name="replacement_color" type="Color" default="Color(1, 1, 1, 0)">
+            Color to use for the dissolved pixels.
+        </member>
+        <member name="noise_period" type="float" default="64.0">
+            Noise period (~= the noise size).
+        </member>
+    </members>
+    <constants></constants>
+</class>

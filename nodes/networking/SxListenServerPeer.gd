@@ -29,8 +29,8 @@ func _ready() -> void:
     var root := _scene_tree.root
     root.render_target_update_mode = Viewport.UPDATE_DISABLED
 
-    var _rpc = SxRPCService.new()
-    _rpc.name = "MainRPCService"
+    var _rpc = SxRpcService.new()
+    _rpc.name = "MainRpcService"
     root.add_child(_rpc)
 
     _server = SxServerPeer.new()

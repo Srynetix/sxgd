@@ -27,7 +27,7 @@ class SxSynchronizedScenePath:
 
 var server_port := 0
 var max_players := 0
-var rpc_service: SxRPCService
+var rpc_service: SxRpcService
 
 var _players := {}
 var _logger := SxLog.get_logger("SxServerPeer")
@@ -39,9 +39,9 @@ var _ws_server: WebSocketServer
 func _init() -> void:
     name = "SxServerPeer"
     _logger.set_max_log_level(SxLog.LogLevel.DEBUG)
-    assert(!SxOS.is_web(), "You can't host a server on Web platforms for now.")
+    assert(!SxOs.is_web(), "You can't host a server on Web platforms for now.")
 
-func _get_client() -> SxClientRPC:
+func _get_client() -> SxClientRpc:
     return rpc_service.client
 
 func _get_sync_input() -> SxSyncInput:
@@ -55,7 +55,7 @@ func _ready() -> void:
     get_tree().connect("network_peer_disconnected", self, "_peer_disconnected")
 
     if rpc_service == null:
-        rpc_service = SxRPCService.get_from_tree(get_tree())
+        rpc_service = SxRpcService.get_from_tree(get_tree())
 
     if use_websockets:
         _ws_server = WebSocketServer.new()

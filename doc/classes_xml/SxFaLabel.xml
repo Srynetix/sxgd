@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxFaLabel" inherits="Label" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        FontAwesome label, used to easily display a FontAwesome icon.
+    </brief_description>
+    <description>
+        FontAwesome label, used to easily display a FontAwesome icon. +
+        Make sure you &lt;&lt;_fontawesome_icons_integration,read the docs about JSON&gt;&gt; before using the component.
+    </description>
+    <tutorials></tutorials>
+    <members>
+        <member name="icon_name" type="String" default="anchor">
+            Icon name.
+        </member>
+        <member name="icon_size" type="int" default="24">
+            Icon size.
+        </member>
+        <member name="icon_color" type="Color" default="#ffffff">
+            Icon color.
+        </member>
+    </members>
+    <constants></constants>
+</class>

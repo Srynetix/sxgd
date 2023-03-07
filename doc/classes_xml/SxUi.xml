@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxUi" inherits="Reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        UI methods.
+    </brief_description>
+    <description>
+        Generic UI methods.
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="get_default_font" qualifiers="static">
+            <return type="Font" />
+            <description>
+                Get the default Godot font.
+            </description>
+        </method>
+        <method name="set_full_rect_no_mouse" qualifiers="static">
+            <return type="void" />
+            <argument index="0" name="node" type="Control" />
+            <description>
+                Apply a "Wide" anchors and margin preset to a Control node, with an "Ignore" mouse filter.
+            </description>
+        </method>
+        <method name="set_margin_container_margins" qualifiers="static">
+            <return type="void" />
+            <argument index="0" name="node" type="MarginContainer" />
+            <argument index="1" name="value" type="float" />
+            <description>
+                Apply an uniform margin on all sides for a MarginContainer.
+            </description>
+        </method>
+    </methods>
+</class>
