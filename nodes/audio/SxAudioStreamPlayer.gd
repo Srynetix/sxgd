@@ -12,6 +12,8 @@ export(int, 1, 16) var max_voices := 4
 export var audio_bus_output := "Master"
 # Audio streams to play
 export var streams := {}
+# Initial volume for each audio players
+export var initial_volume_db := 0.0
 
 var _players := Array()
 var _player_data := {}
@@ -75,6 +77,9 @@ func get_volume_on_voice(voice: int) -> float:
     var player := _players[voice] as AudioStreamPlayer
     return player.volume_db
 
+func get_voice(voice: int) -> AudioStreamPlayer:
+    return _players[voice] as AudioStreamPlayer
+
 func _play_stream_on_player(stream: AudioStream, player: AudioStreamPlayer) -> void:
     player.stop()
     player.stream = stream
@@ -104,10 +109,11 @@ func _find_oldest_active_player() -> AudioStreamPlayer:
 func _ready() -> void:
     for i in range(max_voices):
         var player := AudioStreamPlayer.new()
+        player.volume_db = initial_volume_db
         add_child(player)
 
         player.bus = audio_bus_output
         _players.append(player)
         _player_data[player] = {
-            "volume_db": 0
+            "volume_db": player.volume_db
         }
