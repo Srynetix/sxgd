@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.18">
 <meta name="description" content="Documentation of the sxgd Godot plugin.">
 <meta name="author" content="Denis BOURGE">
 <title>sxgd documentation</title>
@@ -86,10 +86,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -460,24 +460,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_classes">Classes</a>
 <ul class="sectlevel2">
 <li><a href="#_sxarray">SxArray</a></li>
-<li><a href="#_sxaudiomultistreamplayer">SxAudioMultiStreamPlayer</a></li>
-<li><a href="#_sxbetterblur">SxBetterBlur</a></li>
+<li><a href="#_sxaudiostreamplayer">SxAudioStreamPlayer</a></li>
 <li><a href="#_sxbuffer">SxBuffer</a></li>
 <li><a href="#_sxclientpeer">SxClientPeer</a></li>
-<li><a href="#_sxclientrpc">SxClientRPC</a></li>
+<li><a href="#_sxclientrpc">SxClientRpc</a></li>
 <li><a href="#_sxcmdlineparser">SxCmdLineParser</a></li>
 <li><a href="#_sxcmdlineparser_args">SxCmdLineParser.Args</a></li>
 <li><a href="#_sxcolor">SxColor</a></li>
 <li><a href="#_sxcontainer">SxContainer</a></li>
 <li><a href="#_sxdebugtools">SxDebugTools</a></li>
 <li><a href="#_sxdoubletap">SxDoubleTap</a></li>
-<li><a href="#_sxfabutton">SxFAButton</a></li>
-<li><a href="#_sxfafont">SxFAFont</a></li>
-<li><a href="#_sxfalabel">SxFALabel</a></li>
-<li><a href="#_sxfxcamera">SxFXCamera</a></li>
-<li><a href="#_sxfxchromaticaberration">SxFXChromaticAberration</a></li>
-<li><a href="#_sxfxdissolve">SxFXDissolve</a></li>
-<li><a href="#_sxfxgrayscale">SxFXGrayscale</a></li>
+<li><a href="#_sxfabutton">SxFaButton</a></li>
+<li><a href="#_sxfafont">SxFaFont</a></li>
+<li><a href="#_sxfalabel">SxFaLabel</a></li>
 <li><a href="#_sxfadingrichtexteffect">SxFadingRichTextEffect</a></li>
 <li><a href="#_sxfadingrichtextlabel">SxFadingRichTextLabel</a></li>
 <li><a href="#_sxfullscreenacceptdialog">SxFullScreenAcceptDialog</a></li>
@@ -485,9 +480,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_sxfullscreendialog">SxFullScreenDialog</a></li>
 <li><a href="#_sxfullscreenfiledialog">SxFullScreenFileDialog</a></li>
 <li><a href="#_sxfullscreenfiledialog_pathshortcut">SxFullScreenFileDialog.PathShortcut</a></li>
+<li><a href="#_sxfxbetterblur">SxFxBetterBlur</a></li>
+<li><a href="#_sxfxcamera">SxFxCamera</a></li>
+<li><a href="#_sxfxchromaticaberration">SxFxChromaticAberration</a></li>
+<li><a href="#_sxfxdissolve">SxFxDissolve</a></li>
+<li><a href="#_sxfxgrayscale">SxFxGrayscale</a></li>
+<li><a href="#_sxfxmotionblur">SxFxMotionBlur</a></li>
+<li><a href="#_sxfxshockwave">SxFxShockwave</a></li>
+<li><a href="#_sxfxvignette">SxFxVignette</a></li>
 <li><a href="#_sxgamedata">SxGameData</a></li>
-<li><a href="#_sxglobalaudiofxplayer">SxGlobalAudioFxPlayer</a></li>
-<li><a href="#_sxglobalmusicplayer">SxGlobalMusicPlayer</a></li>
 <li><a href="#_sxinput">SxInput</a></li>
 <li><a href="#_sxitemlist">SxItemList</a></li>
 <li><a href="#_sxjson">SxJson</a></li>
@@ -496,21 +497,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_sxlog">SxLog</a></li>
 <li><a href="#_sxlog_logger">SxLog.Logger</a></li>
 <li><a href="#_sxmath">SxMath</a></li>
-<li><a href="#_sxmotionblur">SxMotionBlur</a></li>
+<li><a href="#_sxmusicplayer">SxMusicPlayer</a></li>
 <li><a href="#_sxnetwork">SxNetwork</a></li>
 <li><a href="#_sxnode">SxNode</a></li>
 <li><a href="#_sxnodetracer">SxNodeTracer</a></li>
-<li><a href="#_sxos">SxOS</a></li>
-<li><a href="#_sxos_dirorfile">SxOS.DirOrFile</a></li>
-<li><a href="#_sxrpcservice">SxRPCService</a></li>
+<li><a href="#_sxos">SxOs</a></li>
+<li><a href="#_sxos_dirorfile">SxOs.DirOrFile</a></li>
 <li><a href="#_sxrand">SxRand</a></li>
+<li><a href="#_sxrpcservice">SxRpcService</a></li>
 <li><a href="#_sxscenerunner">SxSceneRunner</a></li>
 <li><a href="#_sxscenetransitioner">SxSceneTransitioner</a></li>
 <li><a href="#_sxserverpeer">SxServerPeer</a></li>
 <li><a href="#_sxserverpeer_sxsynchronizedscenepath">SxServerPeer.SxSynchronizedScenePath</a></li>
-<li><a href="#_sxserverrpc">SxServerRPC</a></li>
+<li><a href="#_sxserverrpc">SxServerRpc</a></li>
 <li><a href="#_sxshader">SxShader</a></li>
-<li><a href="#_sxshockwave">SxShockwave</a></li>
 <li><a href="#_sxsyncbarrier">SxSyncBarrier</a></li>
 <li><a href="#_sxsyncinput">SxSyncInput</a></li>
 <li><a href="#_sxsyncpeerinput">SxSyncPeerInput</a></li>
@@ -518,8 +518,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_sxtext">SxText</a></li>
 <li><a href="#_sxtilemap">SxTileMap</a></li>
 <li><a href="#_sxtilemap_cellrotationparams">SxTileMap.CellRotationParams</a></li>
-<li><a href="#_sxui">SxUI</a></li>
-<li><a href="#_sxvignette">SxVignette</a></li>
+<li><a href="#_sxui">SxUi</a></li>
 <li><a href="#_sxvirtualbutton">SxVirtualButton</a></li>
 <li><a href="#_sxvirtualcontrols">SxVirtualControls</a></li>
 <li><a href="#_sxvirtualjoystick">SxVirtualJoystick</a></li>
@@ -607,10 +606,10 @@ func _ready() -&gt; void:
 <p>Due to Godot/GDScript quirks, you cannot give a <code>class_name</code> to an autoloaded Node, because autoloads can be accessed globally. So you cannot directly use <code>sxgd</code> nodes as autoloads&#8230;&#8203;</p>
 </div>
 <div class="paragraph">
-<p><strong>But!</strong> What you can do is: subclass them in a new class, through inheritance, not giving it a <code>class_name</code>, and use <em>this</em> node as an autoload. If it&#8217;s a scene inheritance (with <code>.tscn</code> files), use the <code>New Inherited Scene&#8230;&#8203;</code> menu from Godot, and if needed, don&#8217;t forget to replace its script with a inherited script, using an <code>extends</code> declaration.</p>
+<p><strong>But!</strong> What you can do is: subclass them in a new class, through inheritance, not giving it a <code>class_name</code>, and use <em>this</em> node as an autoload.</p>
 </div>
 <div class="paragraph">
-<p>Here is a quick example for the <code>SxGameData</code> node (not a scene), useful for most projects (<em>state handling &amp; persistable key-value store</em>).</p>
+<p>Here is a quick example for the <code>SxGameData</code> node, useful for most projects (<em>state handling &amp; persistable key-value store</em>).</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -643,18 +642,15 @@ func _ready() -&gt; void:
 </ol>
 </div>
 <div class="paragraph">
-<p>Now a second example, using a scene: <code>SxSceneTransitioner</code>, useful to fade between game screens.</p>
+<p>Now a second example, <code>SxSceneTransitioner</code>, useful to fade between game screens.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create a <strong>New Inherited Scene</strong>, and open the node you want to inherit (here <code>SxSceneTransitioner</code>, located in <code>nodes/utils/SxSceneTransitioner/SxSceneTransitioner.tscn</code>).</p>
+<p>Create a new <code>GameSceneTransitioner.gd</code> script, and extend <code>SxSceneTransitioner</code>.</p>
 </li>
 <li>
-<p>Save it to a local folder (if you follow my advice you can put it in a top-level <code>autoloads</code> folder), with another name like <code>GameSceneTransitioner.tscn</code>.</p>
-</li>
-<li>
-<p>In Godot, in the <span class="menuseq"><b class="menu">Project settings</b>&#160;<b class="caret">&#8250;</b> <b class="menuitem">Autoloads</b></span> menu, add your <code>GameSceneTransitioner.tscn</code> scene as an autoload, with the <code>Global variable</code> checkbox enabled.</p>
+<p>In Godot, in the <span class="menuseq"><b class="menu">Project settings</b>&#160;<b class="caret">&#8250;</b> <b class="menuitem">Autoloads</b></span> menu, add your <code>GameSceneTransitioner.gd</code> script as an autoload, with the <code>Global variable</code> checkbox enabled.</p>
 </li>
 <li>
 <p>And that&#8217;s it! In your game code, you can refer to <code>GameSceneTransitioner</code> to access your autoload!</p>
@@ -709,7 +705,7 @@ func _ready() -&gt; void:
 <p><strong><a href="#_sxnode">SxNode</a></strong>: Generic Node methods (<em>print tree to string</em>, &#8230;&#8203;).</p>
 </li>
 <li>
-<p><strong><a href="#_sxos">SxOS</a></strong>: Generic OS methods (<em>check if OS is mobile</em>, <em>set window size from string</em>, &#8230;&#8203;).</p>
+<p><strong><a href="#_sxos">SxOs</a></strong>: Generic OS methods (<em>check if OS is mobile</em>, <em>set window size from string</em>, &#8230;&#8203;).</p>
 </li>
 <li>
 <p><strong><a href="#_sxrand">SxRand</a></strong>: Additional rand methods (<em>rand range with ints</em>, <em>random choice in array</em>, &#8230;&#8203;).</p>
@@ -724,7 +720,7 @@ func _ready() -&gt; void:
 <p><strong><a href="#_sxtilemap">SxTileMap</a></strong>: Tilemap helpers (<em>get cell rotation</em>, <em>dump/restore</em>, &#8230;&#8203;).</p>
 </li>
 <li>
-<p><strong><a href="#_sxui">SxUI</a></strong>: Control-related helpers (<em>get default font</em>, &#8230;&#8203;).</p>
+<p><strong><a href="#_sxui">SxUi</a></strong>: Control-related helpers (<em>get default font</em>, &#8230;&#8203;).</p>
 </li>
 </ul>
 </div>
@@ -739,34 +735,15 @@ func _ready() -&gt; void:
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a href="#_sxfabutton">SxFAButton</a></strong>: Ready-to-use <code>Button</code> with an integrated <strong>FA</strong> icon.</p>
+<p><strong><a href="#_sxfabutton">SxFaButton</a></strong>: Ready-to-use <code>Button</code> with an integrated <strong>FontAwesome</strong> icon.</p>
 </li>
 <li>
-<p><strong><a href="#_sxfafont">SxFAFont</a></strong>: Font management wrapper around <strong>FA</strong>, useful for specific needs.</p>
+<p><strong><a href="#_sxfafont">SxFaFont</a></strong>: Font management wrapper around <strong>FontAwesome</strong>, useful for specific needs.</p>
 </li>
 <li>
-<p><strong><a href="#_sxfalabel">SxFALabel</a></strong>: A label which display a <strong>FA</strong> icon.</p>
+<p><strong><a href="#_sxfalabel">SxFaLabel</a></strong>: A label which display a <strong>FontAwesome</strong> icon.</p>
 </li>
 </ul>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
-<div class="title">Don&#8217;t forget your JSON!</div>
-<div class="paragraph">
-<p>When using FontAwesome components (any of the <code>SxFA</code> components), you need to make sure
-you export <code>.json</code> files, because FontAwesome icon definitions are parsed at runtime.</p>
-</div>
-<div class="paragraph">
-<p>In the <span class="menuseq"><b class="menu">Project</b>&#160;<b class="caret">&#8250;</b> <b class="menuitem">Export</b></span> menu, add/select your preset and in the <span class="menuseq"><b class="menu">Resources</b>&#160;<b class="caret">&#8250;</b> <b class="menuitem">Filters to export non-resource files/folders</b></span> section, you need to declare <code>*.json</code>.</p>
-</div>
-</td>
-</tr>
-</table>
 </div>
 </div>
 <div class="sect3">
@@ -812,13 +789,7 @@ you export <code>.json</code> files, because FontAwesome icon definitions are pa
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a href="#_sxaudiomultistreamplayer">SxAudioMultiStreamPlayer</a></strong>: Audio player with multiple simultaneous voices.</p>
-</li>
-<li>
-<p><strong><a href="#_sxglobalaudiofxplayer">SxGlobalAudioFxPlayer</a></strong>: Autoload-ready multi stream player.</p>
-</li>
-<li>
-<p><strong><a href="#_sxglobalmusicplayer">SxGlobalMusicPlayer</a></strong>: Autoload-ready audio player, useful for music tracks.</p>
+<p><strong><a href="#_sxaudiostreamplayer">SxAudioStreamPlayer</a></strong>: "Supercharged" audio player with multiple simultaneous voices.</p>
 </li>
 </ul>
 </div>
@@ -867,22 +838,31 @@ you export <code>.json</code> files, because FontAwesome icon definitions are pa
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a href="#_sxbetterblur">SxBetterBlur</a></strong>: A gaussian blur, compatible with GLES2.</p>
+<p><strong><a href="#_sxfxbetterblur">SxFxBetterBlur</a></strong>: A gaussian blur, compatible with GLES2.</p>
 </li>
 <li>
-<p><strong><a href="#_sxmotionblur">SxMotionBlur</a></strong>: A motion blur.</p>
+<p><strong><a href="#_sxfxchromaticaberration">SxFxChromaticAberration</a></strong>: A chromatic aberration effect.</p>
 </li>
 <li>
-<p><strong><a href="#_sxshockwave">SxShockwave</a></strong>: An animated shockwave effect.</p>
+<p><strong><a href="#_sxfxdissolve">SxFxDissolve</a></strong>: A dissolve effect.</p>
 </li>
 <li>
-<p><strong><a href="#_sxvignette">SxVignette</a></strong>: A vignette effect.</p>
+<p><strong><a href="#_sxfxgrayscale">SxFxGrayscale</a></strong>: A grayscale effect.</p>
+</li>
+<li>
+<p><strong><a href="#_sxfxmotionblur">SxFxMotionBlur</a></strong>: A motion blur.</p>
+</li>
+<li>
+<p><strong><a href="#_sxfxshockwave">SxFxShockwave</a></strong>: An animated shockwave effect.</p>
+</li>
+<li>
+<p><strong><a href="#_sxfxvignette">SxFxVignette</a></strong>: A vignette effect.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong><a href="#_sxfxcamera">SxFXCamera</a></strong>: A special camera with FX and animation capabilities.</p>
+<p><strong><a href="#_sxfxcamera">SxFxCamera</a></strong>: A special camera with FX and animation capabilities.</p>
 </li>
 </ul>
 </div>
@@ -911,19 +891,19 @@ you export <code>.json</code> files, because FontAwesome icon definitions are pa
 <p><strong><a href="#_sxclientpeer">SxClientPeer</a></strong>: A generic client peer implementation.</p>
 </li>
 <li>
-<p><strong><a href="#_sxclientrpc">SxClientRPC</a></strong>: Generic client RPC methods (<em>synchronized scene spawning</em>, &#8230;&#8203;).</p>
+<p><strong><a href="#_sxclientrpc">SxClientRpc</a></strong>: Generic client RPC methods (<em>synchronized scene spawning</em>, &#8230;&#8203;).</p>
 </li>
 <li>
 <p><strong><a href="#_sxlistenserverpeer">SxListenServerPeer</a></strong>: A ready-to-use listen server, to use a client/server combo on a same game instance.</p>
 </li>
 <li>
-<p><strong><a href="#_sxrpcservice">SxRPCService</a></strong>: Wraps the client and server RPC methods, and the input synchronization.</p>
+<p><strong><a href="#_sxrpcservice">SxRpcService</a></strong>: Wraps the client and server RPC methods, and the input synchronization.</p>
 </li>
 <li>
 <p><strong><a href="#_sxserverpeer">SxServerPeer</a></strong>: A generic server peer implementation.</p>
 </li>
 <li>
-<p><strong><a href="#_sxserverrpc">SxServerRPC</a></strong>: Generic server RPC methods (<em>send input</em>, <em>update username</em>, &#8230;&#8203;).</p>
+<p><strong><a href="#_sxserverrpc">SxServerRpc</a></strong>: Generic server RPC methods (<em>send input</em>, <em>update username</em>, &#8230;&#8203;).</p>
 </li>
 <li>
 <p><strong><a href="#_sxsyncbarrier">SxSyncBarrier</a></strong>: Useful system to wait for all clients to do something.</p>
@@ -1053,7 +1033,7 @@ var trimmed_strings := SxArray.trim_strings(strings)
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sxaudiomultistreamplayer"><a class="anchor" href="#_sxaudiomultistreamplayer"></a>SxAudioMultiStreamPlayer</h3>
+<h3 id="_sxaudiostreamplayer"><a class="anchor" href="#_sxaudiostreamplayer"></a>SxAudioStreamPlayer</h3>
 <div class="paragraph">
 <p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a></strong></p>
 </div>
@@ -1069,7 +1049,7 @@ var trimmed_strings := SxArray.trim_strings(strings)
 </dl>
 </div>
 <div class="sect3">
-<h4 id="_sxaudiomultistreamplayer_properties"><a class="anchor" href="#_sxaudiomultistreamplayer_properties"></a>Properties</h4>
+<h4 id="_sxaudiostreamplayer_properties"><a class="anchor" href="#_sxaudiostreamplayer_properties"></a>Properties</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1079,19 +1059,24 @@ var trimmed_strings := SxArray.trim_strings(strings)
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiomultistreamplayer_member_max_voices">max_voices</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiostreamplayer_member_max_voices">max_voices</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>4</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiomultistreamplayer_member_audio_bus_output">audio_bus_output</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiostreamplayer_member_audio_bus_output">audio_bus_output</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Master</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_dictionary.html#dictionary" target="_blank" rel="noopener">Dictionary</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiostreamplayer_member_streams">streams</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{}</code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_sxaudiomultistreamplayer_methods"><a class="anchor" href="#_sxaudiomultistreamplayer_methods"></a>Methods</h4>
+<h4 id="_sxaudiostreamplayer_methods"><a class="anchor" href="#_sxaudiostreamplayer_methods"></a>Methods</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1099,27 +1084,43 @@ var trimmed_strings := SxArray.trim_strings(strings)
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer.html#audiostreamplayer" target="_blank" rel="noopener">AudioStreamPlayer</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiomultistreamplayer_method_get_voice">get_voice</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice )</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiostreamplayer_method_play_stream">play_stream</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_audiostream.html#audiostream" target="_blank" rel="noopener">AudioStream</a> stream )</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiomultistreamplayer_method_play">play</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_audiostream.html#audiostream" target="_blank" rel="noopener">AudioStream</a> stream )</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiostreamplayer_method_play_stream_on_voice">play_stream_on_voice</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> key, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice )</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiomultistreamplayer_method_play_on_player">play_on_player</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_audiostream.html#audiostream" target="_blank" rel="noopener">AudioStream</a> stream, <a href="https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer.html#audiostreamplayer" target="_blank" rel="noopener">AudioStreamPlayer</a> player )</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiostreamplayer_method_play_key">play_key</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> key )</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiomultistreamplayer_method_play_on_voice">play_on_voice</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_audiostream.html#audiostream" target="_blank" rel="noopener">AudioStream</a> stream, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice )</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiostreamplayer_method_play_key_on_voice">play_key_on_voice</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> key, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice )</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiostreamplayer_method_fade_in_on_voice">fade_in_on_voice</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 0.5 )</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiostreamplayer_method_fade_out_on_voice">fade_out_on_voice</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 0.5 )</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiostreamplayer_method_set_volume_on_voice">set_volume_on_voice</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> volume )</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxaudiostreamplayer_method_get_volume_on_voice">get_volume_on_voice</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice )</code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_sxaudiomultistreamplayer_property_descriptions"><a class="anchor" href="#_sxaudiomultistreamplayer_property_descriptions"></a>Property Descriptions</h4>
-<div id="_sxaudiomultistreamplayer_member_max_voices" class="ulist">
+<h4 id="_sxaudiostreamplayer_property_descriptions"><a class="anchor" href="#_sxaudiostreamplayer_property_descriptions"></a>Property Descriptions</h4>
+<div id="_sxaudiostreamplayer_member_max_voices" class="ulist">
 <ul>
 <li>
 <p><code><a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> max_voices</code></p>
@@ -1129,7 +1130,7 @@ var trimmed_strings := SxArray.trim_strings(strings)
 </li>
 </ul>
 </div>
-<div id="_sxaudiomultistreamplayer_member_audio_bus_output" class="ulist">
+<div id="_sxaudiostreamplayer_member_audio_bus_output" class="ulist">
 <ul>
 <li>
 <p><code><a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> audio_bus_output</code></p>
@@ -1139,127 +1140,95 @@ var trimmed_strings := SxArray.trim_strings(strings)
 </li>
 </ul>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_sxaudiomultistreamplayer_method_descriptions"><a class="anchor" href="#_sxaudiomultistreamplayer_method_descriptions"></a>Method Descriptions</h4>
-<div id="_sxaudiomultistreamplayer_method_get_voice" class="ulist">
+<div id="_sxaudiostreamplayer_member_streams" class="ulist">
 <ul>
 <li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer.html#audiostreamplayer" target="_blank" rel="noopener">AudioStreamPlayer</a> get_voice ( <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice )</code></p>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_dictionary.html#dictionary" target="_blank" rel="noopener">Dictionary</a> streams</code></p>
 <div class="paragraph">
-<p>Get a voice by index.</p>
+<p>Audio streams to play, indexed by name.</p>
 </div>
 </li>
 </ul>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">var my_player := $SxAudioMultiStreamPlayer as SxAudioMultiStreamPlayer
-var first_voice := my_player.get_voice(0)</code></pre>
-</div>
-</div>
-<div id="_sxaudiomultistreamplayer_method_play" class="ulist">
-<ul>
-<li>
-<p><code>void play ( <a href="https://docs.godotengine.org/en/stable/classes/class_audiostream.html#audiostream" target="_blank" rel="noopener">AudioStream</a> stream )</code></p>
-<div class="paragraph">
-<p>Play a stream on an auto-selected voice.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">var my_player := $SxAudioMultiStreamPlayer as SxAudioMultiStreamPlayer
-my_player.play(my_stream)</code></pre>
-</div>
-</div>
-<div id="_sxaudiomultistreamplayer_method_play_on_player" class="ulist">
-<ul>
-<li>
-<p><code>void play_on_player ( <a href="https://docs.godotengine.org/en/stable/classes/class_audiostream.html#audiostream" target="_blank" rel="noopener">AudioStream</a> stream, <a href="https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer.html#audiostreamplayer" target="_blank" rel="noopener">AudioStreamPlayer</a> player )</code></p>
-<div class="paragraph">
-<p>Play a stream on a specific player.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">var my_player := $SxAudioMultiStreamPlayer as SxAudioMultiStreamPlayer
-var first_voice := my_player.get_voice(0)
-my_player.play_on_player(my_stream, first_voice)</code></pre>
-</div>
-</div>
-<div id="_sxaudiomultistreamplayer_method_play_on_voice" class="ulist">
-<ul>
-<li>
-<p><code>void play_on_voice ( <a href="https://docs.godotengine.org/en/stable/classes/class_audiostream.html#audiostream" target="_blank" rel="noopener">AudioStream</a> stream, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice )</code></p>
-<div class="paragraph">
-<p>Play a stream on a specific voice.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">var my_player := $SxAudioMultiStreamPlayer as SxAudioMultiStreamPlayer
-my_player.play_on_voice(my_stream, 0)</code></pre>
-</div>
-</div>
-<hr>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_sxbetterblur"><a class="anchor" href="#_sxbetterblur"></a>SxBetterBlur</h3>
-<div class="paragraph">
-<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_control.html#control" target="_blank" rel="noopener">Control</a></strong></p>
-</div>
-<div class="paragraph">
-<p>A ready-to-use gaussian blur, compatible with GLES2.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Description</dt>
-<dd>
-<p>A ready-to-use gaussian blur, compatible with GLES2.</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/nodes/SxBetterBlur.gif" alt="SxBetterBlur">
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sxbetterblur_properties"><a class="anchor" href="#_sxbetterblur_properties"></a>Properties</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 50%;">
-<col style="width: 25%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxbetterblur_member_strength">strength</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxbetterblur_property_descriptions"><a class="anchor" href="#_sxbetterblur_property_descriptions"></a>Property Descriptions</h4>
-<div id="_sxbetterblur_member_strength" class="ulist">
+<h4 id="_sxaudiostreamplayer_method_descriptions"><a class="anchor" href="#_sxaudiostreamplayer_method_descriptions"></a>Method Descriptions</h4>
+<div id="_sxaudiostreamplayer_method_play_stream" class="ulist">
 <ul>
 <li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> strength</code></p>
+<p><code>void play_stream ( <a href="https://docs.godotengine.org/en/stable/classes/class_audiostream.html#audiostream" target="_blank" rel="noopener">AudioStream</a> stream )</code></p>
 <div class="paragraph">
-<p>Blur strength.</p>
+<p>Play an audio stream on an auto-selected voice.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxaudiostreamplayer_method_play_stream_on_voice" class="ulist">
+<ul>
+<li>
+<p><code>void play_stream_on_voice ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> key, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice )</code></p>
+<div class="paragraph">
+<p>Play an audio stream on a specific voice.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxaudiostreamplayer_method_play_key" class="ulist">
+<ul>
+<li>
+<p><code>void play_key ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> key )</code></p>
+<div class="paragraph">
+<p>Play a stored audio stream by key on an auto-selected voice.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxaudiostreamplayer_method_play_key_on_voice" class="ulist">
+<ul>
+<li>
+<p><code>void play_key_on_voice ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> key, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice )</code></p>
+<div class="paragraph">
+<p>Play a stored audio stream by key on a specific voice.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxaudiostreamplayer_method_fade_in_on_voice" class="ulist">
+<ul>
+<li>
+<p><code>void fade_in_on_voice ( <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 0.5 )</code></p>
+<div class="paragraph">
+<p>Apply a "fade in" effect on a voice for a duration in seconds.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxaudiostreamplayer_method_fade_out_on_voice" class="ulist">
+<ul>
+<li>
+<p><code>void fade_out_on_voice ( <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 0.5 )</code></p>
+<div class="paragraph">
+<p>Apply a "fade out" effect on a voice for a duration in seconds.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxaudiostreamplayer_method_set_volume_on_voice" class="ulist">
+<ul>
+<li>
+<p><code>void set_volume_on_voice ( <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> volume )</code></p>
+<div class="paragraph">
+<p>Set the volume on a specific voice.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxaudiostreamplayer_method_get_volume_on_voice" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> get_volume_on_voice ( <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice )</code></p>
+<div class="paragraph">
+<p>Get the volume on a specific voice.</p>
 </div>
 </li>
 </ul>
@@ -1485,7 +1454,7 @@ because it expects a 64 bit integer at first representing the original data size
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sxclientrpc"><a class="anchor" href="#_sxclientrpc"></a>SxClientRPC</h3>
+<h3 id="_sxclientrpc"><a class="anchor" href="#_sxclientrpc"></a>SxClientRpc</h3>
 <div class="paragraph">
 <p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a></strong></p>
 </div>
@@ -2209,7 +2178,7 @@ SxContainer.are_arrays_equal(obj1, obj3)    # =&gt; false</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sxfabutton"><a class="anchor" href="#_sxfabutton"></a>SxFAButton</h3>
+<h3 id="_sxfabutton"><a class="anchor" href="#_sxfabutton"></a>SxFaButton</h3>
 <div class="paragraph">
 <p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_button.html#button" target="_blank" rel="noopener">Button</a></strong></p>
 </div>
@@ -2227,7 +2196,7 @@ Make sure you <a href="#_fontawesome_icons_integration">read the docs about JSON
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="images/nodes/SxFAButton.gif" alt="SxFAButton">
+<img src="images/nodes/SxFaButton.gif" alt="SxFaButton">
 </div>
 </div>
 <div class="sect3">
@@ -2308,7 +2277,7 @@ Make sure you <a href="#_fontawesome_icons_integration">read the docs about JSON
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sxfafont"><a class="anchor" href="#_sxfafont"></a>SxFAFont</h3>
+<h3 id="_sxfafont"><a class="anchor" href="#_sxfafont"></a>SxFaFont</h3>
 <div class="paragraph">
 <p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_reference.html#reference" target="_blank" rel="noopener">Reference</a></strong></p>
 </div>
@@ -2373,7 +2342,7 @@ If not, it will be created.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sxfalabel"><a class="anchor" href="#_sxfalabel"></a>SxFALabel</h3>
+<h3 id="_sxfalabel"><a class="anchor" href="#_sxfalabel"></a>SxFaLabel</h3>
 <div class="paragraph">
 <p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_label.html#label" target="_blank" rel="noopener">Label</a></strong></p>
 </div>
@@ -2444,365 +2413,6 @@ Make sure you <a href="#_fontawesome_icons_integration">read the docs about JSON
 <p><code><a href="https://docs.godotengine.org/en/stable/classes/class_color.html#color" target="_blank" rel="noopener">Color</a> icon_color</code></p>
 <div class="paragraph">
 <p>Icon color.</p>
-</div>
-</li>
-</ul>
-</div>
-<hr>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_sxfxcamera"><a class="anchor" href="#_sxfxcamera"></a>SxFXCamera</h3>
-<div class="paragraph">
-<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_camera2d.html#camera2d" target="_blank" rel="noopener">Camera2D</a></strong></p>
-</div>
-<div class="paragraph">
-<p>A custom 2D camera with included effects.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Description</dt>
-<dd>
-<p>A custom 2D camera with included effects.</p>
-</dd>
-</dl>
-</div>
-<div class="sect3">
-<h4 id="_sxfxcamera_enumerations"><a class="anchor" href="#_sxfxcamera_enumerations"></a>Enumerations</h4>
-<div class="paragraph">
-<p>enum <strong>SxFXCamera.Direction</strong>:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>LEFT = 0</strong> --- Left direction.</p>
-</li>
-<li>
-<p><strong>RIGHT = 1</strong> --- Right direction.</p>
-</li>
-<li>
-<p><strong>UP = 2</strong> --- Up direction.</p>
-</li>
-<li>
-<p><strong>DOWN = 3</strong> --- Down direction.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sxfxcamera_properties"><a class="anchor" href="#_sxfxcamera_properties"></a>Properties</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 50%;">
-<col style="width: 25%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxcamera_member_max_shake_strength">max_shake_strength</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>2.0</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxcamera_member_shake_ratio">shake_ratio</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0.0</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxfxcamera_methods"><a class="anchor" href="#_sxfxcamera_methods"></a>Methods</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxcamera_method_tween_to_position">tween_to_position</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> position, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> speed = 0.5, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> zoom = 1, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> easing = Tween.TRANS_QUAD )</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxcamera_method_viewport_scroll">viewport_scroll</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> top_left, <a href="#_sxfxcamera">SxFXCamera.Direction</a> direction, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> speed = 0.65, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> easing = Tween.TRANS_QUAD )</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxcamera_method_reset_limits">reset_limits</a> ()</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxcamera_method_set_limit_from_rect">set_limit_from_rect</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_rect2.html#rect2" target="_blank" rel="noopener">Rect2</a> rect )</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxfxcamera_property_descriptions"><a class="anchor" href="#_sxfxcamera_property_descriptions"></a>Property Descriptions</h4>
-<div id="_sxfxcamera_member_max_shake_strength" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> max_shake_strength</code></p>
-<div class="paragraph">
-<p>Max screen shake strength.</p>
-</div>
-</li>
-</ul>
-</div>
-<div id="_sxfxcamera_member_shake_ratio" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> shake_ratio</code></p>
-<div class="paragraph">
-<p>Shake ratio.</p>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sxfxcamera_method_descriptions"><a class="anchor" href="#_sxfxcamera_method_descriptions"></a>Method Descriptions</h4>
-<div id="_sxfxcamera_method_tween_to_position" class="ulist">
-<ul>
-<li>
-<p><code>void tween_to_position ( <a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> position, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> speed = 0.5, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> zoom = 1, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> easing = Tween.TRANS_QUAD )</code></p>
-<div class="paragraph">
-<p>Tween the camera to a specific position.</p>
-</div>
-</li>
-</ul>
-</div>
-<div id="_sxfxcamera_method_viewport_scroll" class="ulist">
-<ul>
-<li>
-<p><code>void viewport_scroll ( <a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> top_left, <a href="#_sxfxcamera">SxFXCamera.Direction</a> direction, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> speed = 0.65, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> easing = Tween.TRANS_QUAD )</code></p>
-<div class="paragraph">
-<p>Play a viewport scroll effect (quickly scroll to the "next screen").</p>
-</div>
-</li>
-</ul>
-</div>
-<div id="_sxfxcamera_method_reset_limits" class="ulist">
-<ul>
-<li>
-<p><code>void reset_limits ()</code></p>
-<div class="paragraph">
-<p>Reset the camera limits to arbitrary large values.</p>
-</div>
-</li>
-</ul>
-</div>
-<div id="_sxfxcamera_method_set_limit_from_rect" class="ulist">
-<ul>
-<li>
-<p><code>void set_limit_from_rect ( <a href="https://docs.godotengine.org/en/stable/classes/class_rect2.html#rect2" target="_blank" rel="noopener">Rect2</a> rect )</code></p>
-<div class="paragraph">
-<p>Set the camera limits from Rect2 values.</p>
-</div>
-</li>
-</ul>
-</div>
-<hr>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_sxfxchromaticaberration"><a class="anchor" href="#_sxfxchromaticaberration"></a>SxFXChromaticAberration</h3>
-<div class="paragraph">
-<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect" target="_blank" rel="noopener">ColorRect</a></strong></p>
-</div>
-<div class="paragraph">
-<p>A simple chromatic aberration effect.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Description</dt>
-<dd>
-<p>A simple chromatic aberration effect.</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/nodes/SxFXChromaticAberration.gif" alt="SxFXChromaticAberration">
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sxfxchromaticaberration_properties"><a class="anchor" href="#_sxfxchromaticaberration_properties"></a>Properties</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 50%;">
-<col style="width: 25%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxchromaticaberration_member_enabled">enabled</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxchromaticaberration_member_amount">amount</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1.0</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxfxchromaticaberration_property_descriptions"><a class="anchor" href="#_sxfxchromaticaberration_property_descriptions"></a>Property Descriptions</h4>
-<div id="_sxfxchromaticaberration_member_enabled" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> enabled</code></p>
-<div class="paragraph">
-<p>Enable/Disable the effect.</p>
-</div>
-</li>
-</ul>
-</div>
-<div id="_sxfxchromaticaberration_member_amount" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> amount</code></p>
-<div class="paragraph">
-<p>Increase/Decrease the effect force.</p>
-</div>
-</li>
-</ul>
-</div>
-<hr>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_sxfxdissolve"><a class="anchor" href="#_sxfxdissolve"></a>SxFXDissolve</h3>
-<div class="paragraph">
-<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect" target="_blank" rel="noopener">ColorRect</a></strong></p>
-</div>
-<div class="paragraph">
-<p>A ready-to-use dissolve effect.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Description</dt>
-<dd>
-<p>A ready-to-use dissolve effect.</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/nodes/SxFXDissolve.gif" alt="SxFXDissolve">
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sxfxdissolve_properties"><a class="anchor" href="#_sxfxdissolve_properties"></a>Properties</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 50%;">
-<col style="width: 25%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxdissolve_member_ratio">ratio</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_color.html#color" target="_blank" rel="noopener">Color</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxdissolve_member_replacement_color">replacement_color</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Color(1, 1, 1, 0)</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxdissolve_member_noise_period">noise_period</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>64.0</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxfxdissolve_property_descriptions"><a class="anchor" href="#_sxfxdissolve_property_descriptions"></a>Property Descriptions</h4>
-<div id="_sxfxdissolve_member_ratio" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> ratio</code></p>
-<div class="paragraph">
-<p>Effect amount (between 0 and 1).</p>
-</div>
-</li>
-</ul>
-</div>
-<div id="_sxfxdissolve_member_replacement_color" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_color.html#color" target="_blank" rel="noopener">Color</a> replacement_color</code></p>
-<div class="paragraph">
-<p>Color to use for the dissolved pixels.</p>
-</div>
-</li>
-</ul>
-</div>
-<div id="_sxfxdissolve_member_noise_period" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> noise_period</code></p>
-<div class="paragraph">
-<p>Noise period (~= the noise size).</p>
-</div>
-</li>
-</ul>
-</div>
-<hr>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_sxfxgrayscale"><a class="anchor" href="#_sxfxgrayscale"></a>SxFXGrayscale</h3>
-<div class="paragraph">
-<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect" target="_blank" rel="noopener">ColorRect</a></strong></p>
-</div>
-<div class="paragraph">
-<p>A simple grayscale effect.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Description</dt>
-<dd>
-<p>A simple grayscale effect.</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/nodes/SxFXGrayscale.gif" alt="SxFXGrayscale">
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sxfxgrayscale_properties"><a class="anchor" href="#_sxfxgrayscale_properties"></a>Properties</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 50%;">
-<col style="width: 25%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxgrayscale_member_ratio">ratio</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0.0</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxfxgrayscale_property_descriptions"><a class="anchor" href="#_sxfxgrayscale_property_descriptions"></a>Property Descriptions</h4>
-<div id="_sxfxgrayscale_member_ratio" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> ratio</code></p>
-<div class="paragraph">
-<p>Effect amount (between 0 and 1).</p>
 </div>
 </li>
 </ul>
@@ -3552,6 +3162,722 @@ Uses <a href="#_sxitemlist">SxItemList</a> and <a href="#_sxdoubletap">SxDoubleT
 </div>
 </div>
 <div class="sect2">
+<h3 id="_sxfxbetterblur"><a class="anchor" href="#_sxfxbetterblur"></a>SxFxBetterBlur</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_control.html#control" target="_blank" rel="noopener">Control</a></strong></p>
+</div>
+<div class="paragraph">
+<p>A ready-to-use gaussian blur, compatible with GLES2.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>A ready-to-use gaussian blur, compatible with GLES2.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/nodes/SxFxBetterBlur.gif" alt="SxFxBetterBlur">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxfxbetterblur_properties"><a class="anchor" href="#_sxfxbetterblur_properties"></a>Properties</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxbetterblur_member_strength">strength</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxfxbetterblur_property_descriptions"><a class="anchor" href="#_sxfxbetterblur_property_descriptions"></a>Property Descriptions</h4>
+<div id="_sxfxbetterblur_member_strength" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> strength</code></p>
+<div class="paragraph">
+<p>Blur strength.</p>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sxfxcamera"><a class="anchor" href="#_sxfxcamera"></a>SxFxCamera</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_camera2d.html#camera2d" target="_blank" rel="noopener">Camera2D</a></strong></p>
+</div>
+<div class="paragraph">
+<p>A custom 2D camera with included effects.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>A custom 2D camera with included effects.</p>
+</dd>
+</dl>
+</div>
+<div class="sect3">
+<h4 id="_sxfxcamera_enumerations"><a class="anchor" href="#_sxfxcamera_enumerations"></a>Enumerations</h4>
+<div class="paragraph">
+<p>enum <strong>SxFxCamera.Direction</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>LEFT = 0</strong> --- Left direction.</p>
+</li>
+<li>
+<p><strong>RIGHT = 1</strong> --- Right direction.</p>
+</li>
+<li>
+<p><strong>UP = 2</strong> --- Up direction.</p>
+</li>
+<li>
+<p><strong>DOWN = 3</strong> --- Down direction.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxfxcamera_properties"><a class="anchor" href="#_sxfxcamera_properties"></a>Properties</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxcamera_member_max_shake_strength">max_shake_strength</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>2.0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxcamera_member_shake_ratio">shake_ratio</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0.0</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxfxcamera_methods"><a class="anchor" href="#_sxfxcamera_methods"></a>Methods</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxcamera_method_tween_to_position">tween_to_position</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> position, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> speed = 0.5, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> zoom = 1, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> easing = Tween.TRANS_QUAD )</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxcamera_method_viewport_scroll">viewport_scroll</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> top_left, <a href="#_sxfxcamera">SxFxCamera.Direction</a> direction, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> speed = 0.65, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> easing = Tween.TRANS_QUAD )</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxcamera_method_reset_limits">reset_limits</a> ()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxcamera_method_set_limit_from_rect">set_limit_from_rect</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_rect2.html#rect2" target="_blank" rel="noopener">Rect2</a> rect )</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxfxcamera_property_descriptions"><a class="anchor" href="#_sxfxcamera_property_descriptions"></a>Property Descriptions</h4>
+<div id="_sxfxcamera_member_max_shake_strength" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> max_shake_strength</code></p>
+<div class="paragraph">
+<p>Max screen shake strength.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxcamera_member_shake_ratio" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> shake_ratio</code></p>
+<div class="paragraph">
+<p>Shake ratio.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxfxcamera_method_descriptions"><a class="anchor" href="#_sxfxcamera_method_descriptions"></a>Method Descriptions</h4>
+<div id="_sxfxcamera_method_tween_to_position" class="ulist">
+<ul>
+<li>
+<p><code>void tween_to_position ( <a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> position, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> speed = 0.5, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> zoom = 1, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> easing = Tween.TRANS_QUAD )</code></p>
+<div class="paragraph">
+<p>Tween the camera to a specific position.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxcamera_method_viewport_scroll" class="ulist">
+<ul>
+<li>
+<p><code>void viewport_scroll ( <a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> top_left, <a href="#_sxfxcamera">SxFxCamera.Direction</a> direction, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> speed = 0.65, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> easing = Tween.TRANS_QUAD )</code></p>
+<div class="paragraph">
+<p>Play a viewport scroll effect (quickly scroll to the "next screen").</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxcamera_method_reset_limits" class="ulist">
+<ul>
+<li>
+<p><code>void reset_limits ()</code></p>
+<div class="paragraph">
+<p>Reset the camera limits to arbitrary large values.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxcamera_method_set_limit_from_rect" class="ulist">
+<ul>
+<li>
+<p><code>void set_limit_from_rect ( <a href="https://docs.godotengine.org/en/stable/classes/class_rect2.html#rect2" target="_blank" rel="noopener">Rect2</a> rect )</code></p>
+<div class="paragraph">
+<p>Set the camera limits from Rect2 values.</p>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sxfxchromaticaberration"><a class="anchor" href="#_sxfxchromaticaberration"></a>SxFxChromaticAberration</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect" target="_blank" rel="noopener">ColorRect</a></strong></p>
+</div>
+<div class="paragraph">
+<p>A simple chromatic aberration effect.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>A simple chromatic aberration effect.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/nodes/SxFxChromaticAberration.gif" alt="SxFxChromaticAberration">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxfxchromaticaberration_properties"><a class="anchor" href="#_sxfxchromaticaberration_properties"></a>Properties</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxchromaticaberration_member_enabled">enabled</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxchromaticaberration_member_amount">amount</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1.0</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxfxchromaticaberration_property_descriptions"><a class="anchor" href="#_sxfxchromaticaberration_property_descriptions"></a>Property Descriptions</h4>
+<div id="_sxfxchromaticaberration_member_enabled" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> enabled</code></p>
+<div class="paragraph">
+<p>Enable/Disable the effect.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxchromaticaberration_member_amount" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> amount</code></p>
+<div class="paragraph">
+<p>Increase/Decrease the effect force.</p>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sxfxdissolve"><a class="anchor" href="#_sxfxdissolve"></a>SxFxDissolve</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect" target="_blank" rel="noopener">ColorRect</a></strong></p>
+</div>
+<div class="paragraph">
+<p>A ready-to-use dissolve effect.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>A ready-to-use dissolve effect.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/nodes/SxFxDissolve.gif" alt="SxFxDissolve">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxfxdissolve_properties"><a class="anchor" href="#_sxfxdissolve_properties"></a>Properties</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxdissolve_member_ratio">ratio</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_color.html#color" target="_blank" rel="noopener">Color</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxdissolve_member_replacement_color">replacement_color</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Color(1, 1, 1, 0)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxdissolve_member_noise_period">noise_period</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>64.0</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxfxdissolve_property_descriptions"><a class="anchor" href="#_sxfxdissolve_property_descriptions"></a>Property Descriptions</h4>
+<div id="_sxfxdissolve_member_ratio" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> ratio</code></p>
+<div class="paragraph">
+<p>Effect amount (between 0 and 1).</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxdissolve_member_replacement_color" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_color.html#color" target="_blank" rel="noopener">Color</a> replacement_color</code></p>
+<div class="paragraph">
+<p>Color to use for the dissolved pixels.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxdissolve_member_noise_period" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> noise_period</code></p>
+<div class="paragraph">
+<p>Noise period (~= the noise size).</p>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sxfxgrayscale"><a class="anchor" href="#_sxfxgrayscale"></a>SxFxGrayscale</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect" target="_blank" rel="noopener">ColorRect</a></strong></p>
+</div>
+<div class="paragraph">
+<p>A simple grayscale effect.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>A simple grayscale effect.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/nodes/SxFxGrayscale.gif" alt="SxFxGrayscale">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxfxgrayscale_properties"><a class="anchor" href="#_sxfxgrayscale_properties"></a>Properties</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxgrayscale_member_ratio">ratio</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0.0</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxfxgrayscale_property_descriptions"><a class="anchor" href="#_sxfxgrayscale_property_descriptions"></a>Property Descriptions</h4>
+<div id="_sxfxgrayscale_member_ratio" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> ratio</code></p>
+<div class="paragraph">
+<p>Effect amount (between 0 and 1).</p>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sxfxmotionblur"><a class="anchor" href="#_sxfxmotionblur"></a>SxFxMotionBlur</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect" target="_blank" rel="noopener">ColorRect</a></strong></p>
+</div>
+<div class="paragraph">
+<p>A ready-to-use motion blur.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>A ready-to-use motion blur.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/nodes/SxFxMotionBlur.gif" alt="SxFxMotionBlur">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxfxmotionblur_properties"><a class="anchor" href="#_sxfxmotionblur_properties"></a>Properties</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxmotionblur_member_angle_degrees">angle_degrees</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxmotionblur_member_strength">strength</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxfxmotionblur_property_descriptions"><a class="anchor" href="#_sxfxmotionblur_property_descriptions"></a>Property Descriptions</h4>
+<div id="_sxfxmotionblur_member_angle_degrees" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> angle_degrees</code></p>
+<div class="paragraph">
+<p>Rotation angle in degrees.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxmotionblur_member_strength" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> strength</code></p>
+<div class="paragraph">
+<p>Blur strength.</p>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sxfxshockwave"><a class="anchor" href="#_sxfxshockwave"></a>SxFxShockwave</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect" target="_blank" rel="noopener">ColorRect</a></strong></p>
+</div>
+<div class="paragraph">
+<p>An animated shockwave effect.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>An animated shockwave effect.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/nodes/SxFxShockwave.gif" alt="SxFxShockwave">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxfxshockwave_properties"><a class="anchor" href="#_sxfxshockwave_properties"></a>Properties</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxshockwave_member_wave_size">wave_size</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxshockwave_member_wave_center">wave_center</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxshockwave_member_force">force</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxshockwave_member_wave_thickness">wave_thickness</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxfxshockwave_methods"><a class="anchor" href="#_sxfxshockwave_methods"></a>Methods</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxshockwave_method_start_wave">start_wave</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> position )</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxshockwave_method_wave_is_running">wave_is_running</a> ()</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxfxshockwave_property_descriptions"><a class="anchor" href="#_sxfxshockwave_property_descriptions"></a>Property Descriptions</h4>
+<div id="_sxfxshockwave_member_wave_size" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> wave_size</code></p>
+<div class="paragraph">
+<p>Wave size.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxshockwave_member_wave_center" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> wave_center</code></p>
+<div class="paragraph">
+<p>Wave center.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxshockwave_member_force" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> force</code></p>
+<div class="paragraph">
+<p>Wave force.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxshockwave_member_wave_thickness" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> wave_thickness</code></p>
+<div class="paragraph">
+<p>Wave thickness.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxfxshockwave_method_descriptions"><a class="anchor" href="#_sxfxshockwave_method_descriptions"></a>Method Descriptions</h4>
+<div id="_sxfxshockwave_method_start_wave" class="ulist">
+<ul>
+<li>
+<p><code>void start_wave ( <a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> position )</code></p>
+<div class="paragraph">
+<p>Start the wave animation at a specific position.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxshockwave_method_wave_is_running" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> wave_is_running ()</code></p>
+<div class="paragraph">
+<p>Check if the wave animation is running.</p>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sxfxvignette"><a class="anchor" href="#_sxfxvignette"></a>SxFxVignette</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect" target="_blank" rel="noopener">ColorRect</a></strong></p>
+</div>
+<div class="paragraph">
+<p>A vignette effect.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>A vignette effect.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/nodes/SxFxVignette.gif" alt="SxFxVignette">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxfxvignette_properties"><a class="anchor" href="#_sxfxvignette_properties"></a>Properties</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxvignette_member_vignette_size">vignette_size</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>10.0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxvignette_member_vignette_ratio">vignette_ratio</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0.25</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxfxvignette_methods"><a class="anchor" href="#_sxfxvignette_methods"></a>Methods</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxfxvignette_method_fade">fade</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 1.0 )</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxfxvignette_property_descriptions"><a class="anchor" href="#_sxfxvignette_property_descriptions"></a>Property Descriptions</h4>
+<div id="_sxfxvignette_member_vignette_size" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> vignette_size</code></p>
+<div class="paragraph">
+<p>Vignette size.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxfxvignette_member_vignette_ratio" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> vignette_ratio</code></p>
+<div class="paragraph">
+<p>Vignette ratio.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxfxvignette_method_descriptions"><a class="anchor" href="#_sxfxvignette_method_descriptions"></a>Method Descriptions</h4>
+<div id="_sxfxvignette_method_fade" class="ulist">
+<ul>
+<li>
+<p><code>void fade ( <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 1.0 )</code></p>
+<div class="paragraph">
+<p>Start a fading animation.</p>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_sxgamedata"><a class="anchor" href="#_sxgamedata"></a>SxGameData</h3>
 <div class="paragraph">
 <p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a></strong></p>
@@ -3927,280 +4253,6 @@ data.load_from_disk("user://my_path.dat")</code></pre>
 </div>
 </li>
 </ul>
-</div>
-<hr>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_sxglobalaudiofxplayer"><a class="anchor" href="#_sxglobalaudiofxplayer"></a>SxGlobalAudioFxPlayer</h3>
-<div class="paragraph">
-<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a></strong></p>
-</div>
-<div class="paragraph">
-<p>A wrapper around a SxAudioMultiStreamPlayer.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Description</dt>
-<dd>
-<p>A wrapper around a SxAudioMultiStreamPlayer, to be used through inheritance as an autoload, which means:</p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Inherit the node in your game,</p>
-</li>
-<li>
-<p>Configure the <code>streams</code> parameter,</p>
-</li>
-<li>
-<p>And set it as <strong>autoload</strong>.</p>
-</li>
-</ol>
-</div>
-</dd>
-</dl>
-</div>
-<div class="sect3">
-<h4 id="_sxglobalaudiofxplayer_properties"><a class="anchor" href="#_sxglobalaudiofxplayer_properties"></a>Properties</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 50%;">
-<col style="width: 25%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxglobalaudiofxplayer_member_max_voices">max_voices</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>4</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxglobalaudiofxplayer_member_audio_bus_output">audio_bus_output</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Master</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_dictionary.html#dictionary" target="_blank" rel="noopener">Dictionary</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxglobalaudiofxplayer_member_streams">streams</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{}</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxglobalaudiofxplayer_methods"><a class="anchor" href="#_sxglobalaudiofxplayer_methods"></a>Methods</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer.html#audiostreamplayer" target="_blank" rel="noopener">AudioStreamPlayer</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxglobalaudiofxplayer_method_get_voice">get_voice</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice )</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxglobalaudiofxplayer_method_play">play</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> stream_name, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice = -1 )</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxglobalaudiofxplayer_property_descriptions"><a class="anchor" href="#_sxglobalaudiofxplayer_property_descriptions"></a>Property Descriptions</h4>
-<div id="_sxglobalaudiofxplayer_member_max_voices" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> max_voices</code></p>
-<div class="paragraph">
-<p>Maximum simultaneous voices.</p>
-</div>
-</li>
-</ul>
-</div>
-<div id="_sxglobalaudiofxplayer_member_audio_bus_output" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> audio_bus_output</code></p>
-<div class="paragraph">
-<p>Audio bus output.</p>
-</div>
-</li>
-</ul>
-</div>
-<div id="_sxglobalaudiofxplayer_member_streams" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_dictionary.html#dictionary" target="_blank" rel="noopener">Dictionary</a> streams</code></p>
-<div class="paragraph">
-<p>Audio streams to play, indexed by name.</p>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sxglobalaudiofxplayer_method_descriptions"><a class="anchor" href="#_sxglobalaudiofxplayer_method_descriptions"></a>Method Descriptions</h4>
-<div id="_sxglobalaudiofxplayer_method_get_voice" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer.html#audiostreamplayer" target="_blank" rel="noopener">AudioStreamPlayer</a> get_voice ( <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice )</code></p>
-<div class="paragraph">
-<p>Get a voice by index.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript"># Suppose we have an instance of `SxGlobalAudioFxPlayer` as an autoload named `GameGlobalAudioFxPlayer`.
-var first_voice := GameGlobalAudioFxPlayer.get_voice(0)</code></pre>
-</div>
-</div>
-<div id="_sxglobalaudiofxplayer_method_play" class="ulist">
-<ul>
-<li>
-<p><code>void play ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> stream_name, <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> voice = -1 )</code></p>
-<div class="paragraph">
-<p>Play a stream on an auto-selected voice, or a specific voice.<br>
-If the voice is set to <code>-1</code>, it will automatically select a voice.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript"># Suppose we have an instance of `SxGlobalAudioFxPlayer` as an autoload named `GameGlobalAudioFxPlayer`.
-GameGlobalAudioFxPlayer.play("sound_1")</code></pre>
-</div>
-</div>
-<hr>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_sxglobalmusicplayer"><a class="anchor" href="#_sxglobalmusicplayer"></a>SxGlobalMusicPlayer</h3>
-<div class="paragraph">
-<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a></strong></p>
-</div>
-<div class="paragraph">
-<p>A global audio player, used to play sound tracks during the game.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Description</dt>
-<dd>
-<p>    A global audio player, used to play sound tracks, to be used through inheritance as an autoload
-(see <a href="#_sxglobalaudiofxplayer">SxGlobalAudioFxPlayer</a>).</p>
-</dd>
-</dl>
-</div>
-<div class="sect3">
-<h4 id="_sxglobalmusicplayer_properties"><a class="anchor" href="#_sxglobalmusicplayer_properties"></a>Properties</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 50%;">
-<col style="width: 25%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxglobalmusicplayer_member_global_volume_db">global_volume_db</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxglobalmusicplayer_methods"><a class="anchor" href="#_sxglobalmusicplayer_methods"></a>Methods</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxglobalmusicplayer_method_fade_in">fade_in</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 0.5 )</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxglobalmusicplayer_method_fade_out">fade_out</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 0.5 )</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxglobalmusicplayer_method_play_stream">play_stream</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_audiostream.html#audiostream" target="_blank" rel="noopener">AudioStream</a> stream )</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxglobalmusicplayer_property_descriptions"><a class="anchor" href="#_sxglobalmusicplayer_property_descriptions"></a>Property Descriptions</h4>
-<div id="_sxglobalmusicplayer_member_global_volume_db" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> global_volume_db</code></p>
-<div class="paragraph">
-<p>Used to query/set the global volume</p>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sxglobalmusicplayer_method_descriptions"><a class="anchor" href="#_sxglobalmusicplayer_method_descriptions"></a>Method Descriptions</h4>
-<div id="_sxglobalmusicplayer_method_fade_in" class="ulist">
-<ul>
-<li>
-<p><code>void fade_in ( <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 0.5 )</code></p>
-<div class="paragraph">
-<p>Apply a "fade in" effect on sound with an optional duration in seconds.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript"># Suppose we have an instance of `SxGlobalMusicPlayer` as an autoload named `GameGlobalMusicPlayer`.
-GameGlobalMusicPlayer.fade_in()</code></pre>
-</div>
-</div>
-<div id="_sxglobalmusicplayer_method_fade_out" class="ulist">
-<ul>
-<li>
-<p><code>void fade_out ( <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 0.5 )</code></p>
-<div class="paragraph">
-<p>Apply a "fade out" effect on sound with an optional duration in seconds.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript"># Suppose we have an instance of `SxGlobalMusicPlayer` as an autoload named `GameGlobalMusicPlayer`.
-GameGlobalMusicPlayer.fade_out()</code></pre>
-</div>
-</div>
-<div id="_sxglobalmusicplayer_method_play_stream" class="ulist">
-<ul>
-<li>
-<p><code>void play_stream ( <a href="https://docs.godotengine.org/en/stable/classes/class_audiostream.html#audiostream" target="_blank" rel="noopener">AudioStream</a> stream )</code></p>
-<div class="paragraph">
-<p>Play an audio stream.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript"># Suppose we have an instance of `SxGlobalMusicPlayer` as an autoload named `GameGlobalMusicPlayer`.
-GameGlobalMusicPlayer.play_stream(my_sound)</code></pre>
-</div>
 </div>
 <hr>
 </div>
@@ -5346,28 +5398,24 @@ var n := SxMath.map(5, 0, 10, 0, 1)
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sxmotionblur"><a class="anchor" href="#_sxmotionblur"></a>SxMotionBlur</h3>
+<h3 id="_sxmusicplayer"><a class="anchor" href="#_sxmusicplayer"></a>SxMusicPlayer</h3>
 <div class="paragraph">
-<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect" target="_blank" rel="noopener">ColorRect</a></strong></p>
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a></strong></p>
 </div>
 <div class="paragraph">
-<p>A ready-to-use motion blur.</p>
+<p>A music player, used to play sound tracks during the game.</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Description</dt>
 <dd>
-<p>A ready-to-use motion blur.</p>
+<p>    A music player, used to play sound tracks, to be used through inheritance as an autoload
+(see <a href="#_sxaudiofxplayer">[_sxaudiofxplayer]</a>).</p>
 </dd>
 </dl>
 </div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/nodes/SxMotionBlur.gif" alt="SxMotionBlur">
-</div>
-</div>
 <div class="sect3">
-<h4 id="_sxmotionblur_properties"><a class="anchor" href="#_sxmotionblur_properties"></a>Properties</h4>
+<h4 id="_sxmusicplayer_properties"><a class="anchor" href="#_sxmusicplayer_properties"></a>Properties</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -5377,38 +5425,100 @@ var n := SxMath.map(5, 0, 10, 0, 1)
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxmotionblur_member_angle_degrees">angle_degrees</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxmotionblur_member_strength">strength</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxmusicplayer_member_global_volume_db">global_volume_db</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_sxmotionblur_property_descriptions"><a class="anchor" href="#_sxmotionblur_property_descriptions"></a>Property Descriptions</h4>
-<div id="_sxmotionblur_member_angle_degrees" class="ulist">
+<h4 id="_sxmusicplayer_methods"><a class="anchor" href="#_sxmusicplayer_methods"></a>Methods</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxmusicplayer_method_fade_in">fade_in</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 0.5 )</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxmusicplayer_method_fade_out">fade_out</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 0.5 )</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxmusicplayer_method_play_stream">play_stream</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_audiostream.html#audiostream" target="_blank" rel="noopener">AudioStream</a> stream )</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxmusicplayer_property_descriptions"><a class="anchor" href="#_sxmusicplayer_property_descriptions"></a>Property Descriptions</h4>
+<div id="_sxmusicplayer_member_global_volume_db" class="ulist">
 <ul>
 <li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> angle_degrees</code></p>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> global_volume_db</code></p>
 <div class="paragraph">
-<p>Rotation angle in degrees.</p>
+<p>Used to query/set the global volume</p>
 </div>
 </li>
 </ul>
 </div>
-<div id="_sxmotionblur_member_strength" class="ulist">
+</div>
+<div class="sect3">
+<h4 id="_sxmusicplayer_method_descriptions"><a class="anchor" href="#_sxmusicplayer_method_descriptions"></a>Method Descriptions</h4>
+<div id="_sxmusicplayer_method_fade_in" class="ulist">
 <ul>
 <li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> strength</code></p>
+<p><code>void fade_in ( <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 0.5 )</code></p>
 <div class="paragraph">
-<p>Blur strength.</p>
+<p>Apply a "fade in" effect on sound with an optional duration in seconds.</p>
 </div>
 </li>
 </ul>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlight"><code class="language-gdscript" data-lang="gdscript"># Suppose we have an instance of `SxMusicPlayer` as an autoload named `GameMusicPlayer`.
+GameMusicPlayer.fade_in()</code></pre>
+</div>
+</div>
+<div id="_sxmusicplayer_method_fade_out" class="ulist">
+<ul>
+<li>
+<p><code>void fade_out ( <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 0.5 )</code></p>
+<div class="paragraph">
+<p>Apply a "fade out" effect on sound with an optional duration in seconds.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlight"><code class="language-gdscript" data-lang="gdscript"># Suppose we have an instance of `SxMusicPlayer` as an autoload named `GameMusicPlayer`.
+GameMusicPlayer.fade_out()</code></pre>
+</div>
+</div>
+<div id="_sxmusicplayer_method_play_stream" class="ulist">
+<ul>
+<li>
+<p><code>void play_stream ( <a href="https://docs.godotengine.org/en/stable/classes/class_audiostream.html#audiostream" target="_blank" rel="noopener">AudioStream</a> stream )</code></p>
+<div class="paragraph">
+<p>Play an audio stream.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlight"><code class="language-gdscript" data-lang="gdscript"># Suppose we have an instance of `SxMusicPlayer` as an autoload named `GameMusicPlayer`.
+GameMusicPlayer.play_stream(my_sound)</code></pre>
+</div>
 </div>
 <hr>
 </div>
@@ -5834,7 +5944,7 @@ If not set, uses the parent node name.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sxos"><a class="anchor" href="#_sxos"></a>SxOS</h3>
+<h3 id="_sxos"><a class="anchor" href="#_sxos"></a>SxOs</h3>
 <div class="paragraph">
 <p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_reference.html#reference" target="_blank" rel="noopener">Reference</a></strong></p>
 </div>
@@ -5891,7 +6001,7 @@ If not set, uses the parent node name.</p>
 <div class="listingblock">
 <div class="title">Example</div>
 <div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">SxOS.set_window_size_str("1280x720")</code></pre>
+<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">SxOs.set_window_size_str("1280x720")</code></pre>
 </div>
 </div>
 <div id="_sxos_method_is_mobile" class="ulist">
@@ -5907,7 +6017,7 @@ If not set, uses the parent node name.</p>
 <div class="listingblock">
 <div class="title">Example</div>
 <div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">if SxOS.is_mobile():
+<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">if SxOs.is_mobile():
     print("I'm on a mobile!")</code></pre>
 </div>
 </div>
@@ -5924,7 +6034,7 @@ If not set, uses the parent node name.</p>
 <div class="listingblock">
 <div class="title">Example</div>
 <div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">if SxOS.is_web():
+<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">if SxOs.is_web():
     print("I'm on a browser!")</code></pre>
 </div>
 </div>
@@ -5937,7 +6047,7 @@ If not set, uses the parent node name.</p>
 The <code>filters</code> argument is used to ignore some patterns.</p>
 </div>
 <div class="paragraph">
-<p>It returns an array of <a href="#_sxos_dirorfile">SxOS.DirOrFile</a>.</p>
+<p>It returns an array of <a href="#_sxos_dirorfile">SxOs.DirOrFile</a>.</p>
 </div>
 </li>
 </ul>
@@ -5945,13 +6055,13 @@ The <code>filters</code> argument is used to ignore some patterns.</p>
 <div class="listingblock">
 <div class="title">Example</div>
 <div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">var files_and_dirs = SxOS.list_files_in_directory("user://my_folder", []):</code></pre>
+<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">var files_and_dirs = SxOs.list_files_in_directory("user://my_folder", []):</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sxos_dirorfile"><a class="anchor" href="#_sxos_dirorfile"></a>SxOS.DirOrFile</h3>
+<h3 id="_sxos_dirorfile"><a class="anchor" href="#_sxos_dirorfile"></a>SxOs.DirOrFile</h3>
 <div class="paragraph">
 <p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_reference.html#reference" target="_blank" rel="noopener">Reference</a></strong></p>
 </div>
@@ -5966,7 +6076,7 @@ The <code>filters</code> argument is used to ignore some patterns.</p>
 <div class="sect3">
 <h4 id="_sxos_dirorfile_enumerations"><a class="anchor" href="#_sxos_dirorfile_enumerations"></a>Enumerations</h4>
 <div class="paragraph">
-<p>enum <strong>SxOS.DirOrFile.Type</strong>:</p>
+<p>enum <strong>SxOs.DirOrFile.Type</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -6016,112 +6126,6 @@ The <code>filters</code> argument is used to ignore some patterns.</p>
 <p><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> is_directory ()</code></p>
 <div class="paragraph">
 <p>Check if the path is a file.</p>
-</div>
-</li>
-</ul>
-</div>
-<hr>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_sxrpcservice"><a class="anchor" href="#_sxrpcservice"></a>SxRPCService</h3>
-<div class="paragraph">
-<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a></strong></p>
-</div>
-<div class="paragraph">
-<p>Main RPC interface.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Description</dt>
-<dd>
-<p>Main RPC interface.</p>
-</dd>
-</dl>
-</div>
-<div class="sect3">
-<h4 id="_sxrpcservice_properties"><a class="anchor" href="#_sxrpcservice_properties"></a>Properties</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 50%;">
-<col style="width: 25%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxclientrpc">SxClientRPC</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxrpcservice_member_client">client</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxserverrpc">SxServerRPC</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxrpcservice_member_server">server</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxsyncinput">SxSyncInput</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxrpcservice_member_sync_input">sync_input</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxrpcservice_methods"><a class="anchor" href="#_sxrpcservice_methods"></a>Methods</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxrpcservice">SxRPCService</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxrpcservice_method_get_from_tree">get_from_tree</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree" target="_blank" rel="noopener">SceneTree</a> tree )</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxrpcservice_property_descriptions"><a class="anchor" href="#_sxrpcservice_property_descriptions"></a>Property Descriptions</h4>
-<div id="_sxrpcservice_member_client" class="ulist">
-<ul>
-<li>
-<p><code><a href="#_sxclientrpc">SxClientRPC</a> client</code></p>
-<div class="paragraph">
-<p>Access to the client RPC interface.</p>
-</div>
-</li>
-</ul>
-</div>
-<div id="_sxrpcservice_member_server" class="ulist">
-<ul>
-<li>
-<p><code><a href="#_sxserverrpc">SxServerRPC</a> server</code></p>
-<div class="paragraph">
-<p>Access to the server RPC interface.</p>
-</div>
-</li>
-</ul>
-</div>
-<div id="_sxrpcservice_member_sync_input" class="ulist">
-<ul>
-<li>
-<p><code><a href="#_sxsyncinput">SxSyncInput</a> sync_input</code></p>
-<div class="paragraph">
-<p>Access to the synchronized input interface.</p>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sxrpcservice_method_descriptions"><a class="anchor" href="#_sxrpcservice_method_descriptions"></a>Method Descriptions</h4>
-<div id="_sxrpcservice_method_get_from_tree" class="ulist">
-<ul>
-<li>
-<p><code>static <a href="#_sxrpcservice">SxRPCService</a> get_from_tree ( <a href="https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree" target="_blank" rel="noopener">SceneTree</a> tree )</code></p>
-<div class="paragraph">
-<p>Return the main RPC service for a target SceneTree.</p>
 </div>
 </li>
 </ul>
@@ -6258,6 +6262,112 @@ var n := SxRand.chance_bool(75)</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-gdscript" data-lang="gdscript">var v := SxRand.choice_array([1, 2, 3])</code></pre>
 </div>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sxrpcservice"><a class="anchor" href="#_sxrpcservice"></a>SxRpcService</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a></strong></p>
+</div>
+<div class="paragraph">
+<p>Main RPC interface.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>Main RPC interface.</p>
+</dd>
+</dl>
+</div>
+<div class="sect3">
+<h4 id="_sxrpcservice_properties"><a class="anchor" href="#_sxrpcservice_properties"></a>Properties</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxclientrpc">SxClientRpc</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxrpcservice_member_client">client</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxserverrpc">SxServerRpc</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxrpcservice_member_server">server</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxsyncinput">SxSyncInput</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxrpcservice_member_sync_input">sync_input</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxrpcservice_methods"><a class="anchor" href="#_sxrpcservice_methods"></a>Methods</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxrpcservice">SxRpcService</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxrpcservice_method_get_from_tree">get_from_tree</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree" target="_blank" rel="noopener">SceneTree</a> tree )</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxrpcservice_property_descriptions"><a class="anchor" href="#_sxrpcservice_property_descriptions"></a>Property Descriptions</h4>
+<div id="_sxrpcservice_member_client" class="ulist">
+<ul>
+<li>
+<p><code><a href="#_sxclientrpc">SxClientRpc</a> client</code></p>
+<div class="paragraph">
+<p>Access to the client RPC interface.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxrpcservice_member_server" class="ulist">
+<ul>
+<li>
+<p><code><a href="#_sxserverrpc">SxServerRpc</a> server</code></p>
+<div class="paragraph">
+<p>Access to the server RPC interface.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxrpcservice_member_sync_input" class="ulist">
+<ul>
+<li>
+<p><code><a href="#_sxsyncinput">SxSyncInput</a> sync_input</code></p>
+<div class="paragraph">
+<p>Access to the synchronized input interface.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxrpcservice_method_descriptions"><a class="anchor" href="#_sxrpcservice_method_descriptions"></a>Method Descriptions</h4>
+<div id="_sxrpcservice_method_get_from_tree" class="ulist">
+<ul>
+<li>
+<p><code>static <a href="#_sxrpcservice">SxRpcService</a> get_from_tree ( <a href="https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree" target="_blank" rel="noopener">SceneTree</a> tree )</code></p>
+<div class="paragraph">
+<p>Return the main RPC service for a target SceneTree.</p>
+</div>
+</li>
+</ul>
 </div>
 <hr>
 </div>
@@ -6589,7 +6699,7 @@ GameSceneTransitioner.fade_out()</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxrpcservice">SxRPCService</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxrpcservice">SxRpcService</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxserverpeer_member_rpc_service">rpc_service</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
 </tr>
@@ -6670,7 +6780,7 @@ GameSceneTransitioner.fade_out()</code></pre>
 <div id="_sxserverpeer_member_rpc_service" class="ulist">
 <ul>
 <li>
-<p><code><a href="#_sxrpcservice">SxRPCService</a> rpc_service</code></p>
+<p><code><a href="#_sxrpcservice">SxRpcService</a> rpc_service</code></p>
 <div class="paragraph">
 <p>Access to the RPC service.</p>
 </div>
@@ -6877,7 +6987,7 @@ It can be useful to cleanup stuff before the server quits.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sxserverrpc"><a class="anchor" href="#_sxserverrpc"></a>SxServerRPC</h3>
+<h3 id="_sxserverrpc"><a class="anchor" href="#_sxserverrpc"></a>SxServerRpc</h3>
 <div class="paragraph">
 <p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a></strong></p>
 </div>
@@ -7037,146 +7147,6 @@ It can be useful to cleanup stuff before the server quits.</p>
 <div class="content">
 <pre class="highlight"><code class="language-gdscript" data-lang="gdscript">SxShader.set_shader_param($MyNode, "ratio", 0.25)</code></pre>
 </div>
-</div>
-<hr>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_sxshockwave"><a class="anchor" href="#_sxshockwave"></a>SxShockwave</h3>
-<div class="paragraph">
-<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect" target="_blank" rel="noopener">ColorRect</a></strong></p>
-</div>
-<div class="paragraph">
-<p>An animated shockwave effect.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Description</dt>
-<dd>
-<p>An animated shockwave effect.</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/nodes/SxShockwave.gif" alt="SxShockwave">
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sxshockwave_properties"><a class="anchor" href="#_sxshockwave_properties"></a>Properties</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 50%;">
-<col style="width: 25%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxshockwave_member_wave_size">wave_size</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxshockwave_member_wave_center">wave_center</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxshockwave_member_force">force</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxshockwave_member_wave_thickness">wave_thickness</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>None</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxshockwave_methods"><a class="anchor" href="#_sxshockwave_methods"></a>Methods</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxshockwave_method_start_wave">start_wave</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> position )</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxshockwave_method_wave_is_running">wave_is_running</a> ()</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxshockwave_property_descriptions"><a class="anchor" href="#_sxshockwave_property_descriptions"></a>Property Descriptions</h4>
-<div id="_sxshockwave_member_wave_size" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> wave_size</code></p>
-<div class="paragraph">
-<p>Wave size.</p>
-</div>
-</li>
-</ul>
-</div>
-<div id="_sxshockwave_member_wave_center" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> wave_center</code></p>
-<div class="paragraph">
-<p>Wave center.</p>
-</div>
-</li>
-</ul>
-</div>
-<div id="_sxshockwave_member_force" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> force</code></p>
-<div class="paragraph">
-<p>Wave force.</p>
-</div>
-</li>
-</ul>
-</div>
-<div id="_sxshockwave_member_wave_thickness" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> wave_thickness</code></p>
-<div class="paragraph">
-<p>Wave thickness.</p>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sxshockwave_method_descriptions"><a class="anchor" href="#_sxshockwave_method_descriptions"></a>Method Descriptions</h4>
-<div id="_sxshockwave_method_start_wave" class="ulist">
-<ul>
-<li>
-<p><code>void start_wave ( <a href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#vector2" target="_blank" rel="noopener">Vector2</a> position )</code></p>
-<div class="paragraph">
-<p>Start the wave animation at a specific position.</p>
-</div>
-</li>
-</ul>
-</div>
-<div id="_sxshockwave_method_wave_is_running" class="ulist">
-<ul>
-<li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> wave_is_running ()</code></p>
-<div class="paragraph">
-<p>Check if the wave animation is running.</p>
-</div>
-</li>
-</ul>
 </div>
 <hr>
 </div>
@@ -7968,7 +7938,7 @@ var angle := SxTileMap.rotation_params_to_angle(params)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sxui"><a class="anchor" href="#_sxui"></a>SxUI</h3>
+<h3 id="_sxui"><a class="anchor" href="#_sxui"></a>SxUi</h3>
 <div class="paragraph">
 <p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_reference.html#reference" target="_blank" rel="noopener">Reference</a></strong></p>
 </div>
@@ -7995,6 +7965,14 @@ var angle := SxTileMap.rotation_params_to_angle(params)</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_font.html#font" target="_blank" rel="noopener">Font</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxui_method_get_default_font">get_default_font</a> ()</code></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxui_method_set_full_rect_no_mouse">set_full_rect_no_mouse</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_control.html#control" target="_blank" rel="noopener">Control</a> node )</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxui_method_set_margin_container_margins">set_margin_container_margins</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_margincontainer.html#margincontainer" target="_blank" rel="noopener">MarginContainer</a> node, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> value )</code></p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -8010,98 +7988,22 @@ var angle := SxTileMap.rotation_params_to_angle(params)</code></pre>
 </li>
 </ul>
 </div>
-<hr>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_sxvignette"><a class="anchor" href="#_sxvignette"></a>SxVignette</h3>
-<div class="paragraph">
-<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#colorrect" target="_blank" rel="noopener">ColorRect</a></strong></p>
-</div>
-<div class="paragraph">
-<p>A vignette effect.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Description</dt>
-<dd>
-<p>A vignette effect.</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/nodes/SxVignette.gif" alt="SxVignette">
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sxvignette_properties"><a class="anchor" href="#_sxvignette_properties"></a>Properties</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 50%;">
-<col style="width: 25%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxvignette_member_vignette_size">vignette_size</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>10.0</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxvignette_member_vignette_ratio">vignette_ratio</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0.25</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxvignette_methods"><a class="anchor" href="#_sxvignette_methods"></a>Methods</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxvignette_method_fade">fade</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 1.0 )</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxvignette_property_descriptions"><a class="anchor" href="#_sxvignette_property_descriptions"></a>Property Descriptions</h4>
-<div id="_sxvignette_member_vignette_size" class="ulist">
+<div id="_sxui_method_set_full_rect_no_mouse" class="ulist">
 <ul>
 <li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> vignette_size</code></p>
+<p><code>static void set_full_rect_no_mouse ( <a href="https://docs.godotengine.org/en/stable/classes/class_control.html#control" target="_blank" rel="noopener">Control</a> node )</code></p>
 <div class="paragraph">
-<p>Vignette size.</p>
+<p>Apply a "Wide" anchors and margin preset to a Control node, with an "Ignore" mouse filter.</p>
 </div>
 </li>
 </ul>
 </div>
-<div id="_sxvignette_member_vignette_ratio" class="ulist">
+<div id="_sxui_method_set_margin_container_margins" class="ulist">
 <ul>
 <li>
-<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> vignette_ratio</code></p>
+<p><code>static void set_margin_container_margins ( <a href="https://docs.godotengine.org/en/stable/classes/class_margincontainer.html#margincontainer" target="_blank" rel="noopener">MarginContainer</a> node, <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> value )</code></p>
 <div class="paragraph">
-<p>Vignette ratio.</p>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sxvignette_method_descriptions"><a class="anchor" href="#_sxvignette_method_descriptions"></a>Method Descriptions</h4>
-<div id="_sxvignette_method_fade" class="ulist">
-<ul>
-<li>
-<p><code>void fade ( <a href="https://docs.godotengine.org/en/stable/classes/class_float.html#float" target="_blank" rel="noopener">float</a> duration = 1.0 )</code></p>
-<div class="paragraph">
-<p>Start a fading animation.</p>
+<p>Apply an uniform margin on all sides for a MarginContainer.</p>
 </div>
 </li>
 </ul>
@@ -8406,7 +8308,7 @@ and on joysticks, you can affect 4 actions keys, one for each direction.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-10-04 07:41:04 UTC
+Last updated 2023-03-07 07:32:09 UTC
 </div>
 </div>
 </body>
