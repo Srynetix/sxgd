@@ -17,9 +17,6 @@ func _ready() -> void:
     _tween = Tween.new()
     add_child(_tween)
 
-    anchor_mode = 0
-    current = true
-
 func _process(delta) -> void:
     _update_shake()
 
