@@ -9,7 +9,8 @@
         * Debug info: shows performance info at the top-left section of the screen
         * Log details: scrollable logs (only those printed with &lt;&lt;_sxlog&gt;&gt;, not print)
         * Node tracer: show currently enabled node tracers (see &lt;&lt;_sxnodetracer&gt;&gt;)
-        * Scene tree dumps: show nodes currently in the scene tree, with support for the scene tree embedded in the &lt;&lt;_sxlistenserverpeer&gt;&gt; node.
+        * Scene tree dumps: show nodes currently in the scene tree, with support for the scene tree embedded in the &lt;&lt;_sxlistenserverpeer&gt;&gt; node
+        * In-game console: execute commands to interact with the game (see &lt;&lt;_sxdebugconsole&gt;&gt;)
 
         image::images/nodes/SxDebugTools.gif[align="center"]
     </description>

@@ -23,7 +23,7 @@ func _ready() -> void:
 
     var font := DynamicFont.new()
     font.size = 12
-    font.outline_size = 1
+    font.outline_size = 2
     font.outline_color = Color.black
     font.use_mipmaps = true
     font.use_filter = true
