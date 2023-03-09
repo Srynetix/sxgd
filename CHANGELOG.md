@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Unreleased
 
+### Added
+
+- SxDebugConsole: Interactive in-game console you can use to live edit values and nodes
+- SxCVars: Simple console vars system, compatible with the SxDebugConsole
+
 ### Fixes
 
 - SxFxCamera: Do not force set "anchor mode" and "current" 
