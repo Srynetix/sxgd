@@ -10,3 +10,5 @@ func _gui_input(event):
             emit_signal("history_up")
         elif event.pressed && event.physical_scancode == KEY_DOWN:
             emit_signal("history_down")
+
+        accept_event()
