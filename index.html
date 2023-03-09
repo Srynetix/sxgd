@@ -462,12 +462,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_sxarray">SxArray</a></li>
 <li><a href="#_sxaudiostreamplayer">SxAudioStreamPlayer</a></li>
 <li><a href="#_sxbuffer">SxBuffer</a></li>
+<li><a href="#_sxcvars">SxCVars</a></li>
 <li><a href="#_sxclientpeer">SxClientPeer</a></li>
 <li><a href="#_sxclientrpc">SxClientRpc</a></li>
 <li><a href="#_sxcmdlineparser">SxCmdLineParser</a></li>
 <li><a href="#_sxcmdlineparser_args">SxCmdLineParser.Args</a></li>
 <li><a href="#_sxcolor">SxColor</a></li>
 <li><a href="#_sxcontainer">SxContainer</a></li>
+<li><a href="#_sxdebugconsole">SxDebugConsole</a></li>
 <li><a href="#_sxdebugtools">SxDebugTools</a></li>
 <li><a href="#_sxdoubletap">SxDoubleTap</a></li>
 <li><a href="#_sxfabutton">SxFaButton</a></li>
@@ -817,6 +819,9 @@ func _ready() -&gt; void:
 <li>
 <p>Scene tree dumps: show nodes currently in the scene tree, with support for the scene tree embedded in the <a href="#_sxlistenserverpeer">SxListenServerPeer</a> node.</p>
 </li>
+<li>
+<p>In-game console: execute commands to interact with the game (see <a href="#_sxdebugconsole">SxDebugConsole</a>).</p>
+</li>
 </ul>
 </div>
 </li>
@@ -958,6 +963,9 @@ func _ready() -&gt; void:
 <ul>
 <li>
 <p><strong><a href="#_sxcmdlineparser">SxCmdLineParser</a></strong>: Simple node which handles command-line arguments, needs to be overriden.</p>
+</li>
+<li>
+<p><strong><a href="#_sxcvars">SxCVars</a></strong>: Console variables, pluggable in the <a href="#_sxdebugconsole">SxDebugConsole</a>.</p>
 </li>
 <li>
 <p><strong><a href="#_sxgamedata">SxGameData</a></strong>: A general-purpose in-memory (and on-disk) key-value store, to be used through inheritance and autoload.</p>
@@ -1329,6 +1337,115 @@ To have a valid zstd compressed data, you need to strip the first 64 bits.</p>
 <div class="paragraph">
 <p>It is not usable with zstd compressed data generated elsewhere,
 because it expects a 64 bit integer at first representing the original data size (needed for Godot).</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sxcvars"><a class="anchor" href="#_sxcvars"></a>SxCVars</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a></strong></p>
+</div>
+<div class="paragraph">
+<p>Console vars.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>Console vars, a dynamic key-value store bindable to the <a href="#_sxdebugconsole">SxDebugConsole</a>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>It&#8217;s a little special to use, so here&#8217;s a quick tutorial to implement custom CVars.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a new script (as an autoload), inheriting from SxCVars.</p>
+</li>
+<li>
+<p>Create a class, extending from <strong>Object</strong>, with your list of variables as attributes.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">extends SxCVars
+
+# Declare your class containing your console vars.
+class _Vars:
+    extends Object
+
+    var test_boolean := false
+    var test_string := "hello"
+    var test_integer := 1
+    var test_float := 2.5
+
+func _init() -&gt; void:
+    # This line will register the vars
+    _vars = _Vars.new()
+
+    # This line will bind the SxDebugConsole with the vars so you can use
+    # cvar_list / cvar_set / cvar_get commands
+    SxDebugConsole.bind_cvars(self)</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxcvars_methods"><a class="anchor" href="#_sxcvars_methods"></a>Methods</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxcvars_method_get_cvar">get_cvar</a> ()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxcvars_method_set_cvar">set_cvar</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> name, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> value )</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#_sxcvars_method_print_cvars">print_cvars</a> ()</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxcvars_method_descriptions"><a class="anchor" href="#_sxcvars_method_descriptions"></a>Method Descriptions</h4>
+<div id="_sxcvars_method_get_cvar" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> get_cvar ()</code></p>
+<div class="paragraph">
+<p>Get a console variable value.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxcvars_method_set_cvar" class="ulist">
+<ul>
+<li>
+<p><code>void set_cvar ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> name, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> value )</code></p>
+<div class="paragraph">
+<p>Set a console variable from its name and a value.</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="_sxcvars_method_print_cvars" class="ulist">
+<ul>
+<li>
+<p><code><a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> print_cvars ()</code></p>
+<div class="paragraph">
+<p>Build a list of each known CVars with their values.</p>
+</div>
+</li>
+</ul>
 </div>
 <hr>
 </div>
@@ -1996,6 +2113,57 @@ SxContainer.are_arrays_equal(obj1, obj3)    # =&gt; false</code></pre>
 </div>
 </div>
 <div class="sect2">
+<h3 id="_sxdebugconsole"><a class="anchor" href="#_sxdebugconsole"></a>SxDebugConsole</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_margincontainer.html#margincontainer" target="_blank" rel="noopener">MarginContainer</a></strong></p>
+</div>
+<div class="paragraph">
+<p>Interactive in-game console.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>Interactive in-game console.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/nodes/SxDebugConsole.gif" alt="SxDebugConsole">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sxdebugconsole_methods"><a class="anchor" href="#_sxdebugconsole_methods"></a>Methods</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxdebugconsole_method_bind_cvars">bind_cvars</a> ( <a href="#_sxcvars">SxCVars</a> vars )</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxdebugconsole_method_descriptions"><a class="anchor" href="#_sxdebugconsole_method_descriptions"></a>Method Descriptions</h4>
+<div id="_sxdebugconsole_method_bind_cvars" class="ulist">
+<ul>
+<li>
+<p><code>static void bind_cvars ( <a href="#_sxcvars">SxCVars</a> vars )</code></p>
+<div class="paragraph">
+<p>Bind a <a href="#_sxcvars">SxCVars</a> instance to allow the console to manipulate console vars.</p>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_sxdebugtools"><a class="anchor" href="#_sxdebugtools"></a>SxDebugTools</h3>
 <div class="paragraph">
 <p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_canvaslayer.html#canvaslayer" target="_blank" rel="noopener">CanvasLayer</a></strong></p>
@@ -2020,7 +2188,10 @@ SxContainer.are_arrays_equal(obj1, obj3)    # =&gt; false</code></pre>
 <p>Node tracer: show currently enabled node tracers (see <a href="#_sxnodetracer">SxNodeTracer</a>)</p>
 </li>
 <li>
-<p>Scene tree dumps: show nodes currently in the scene tree, with support for the scene tree embedded in the <a href="#_sxlistenserverpeer">SxListenServerPeer</a> node.</p>
+<p>Scene tree dumps: show nodes currently in the scene tree, with support for the scene tree embedded in the <a href="#_sxlistenserverpeer">SxListenServerPeer</a> node</p>
+</li>
+<li>
+<p>In-game console: execute commands to interact with the game (see <a href="#_sxdebugconsole">SxDebugConsole</a>)</p>
 </li>
 </ul>
 </div>
@@ -8337,7 +8508,7 @@ and on joysticks, you can affect 4 actions keys, one for each direction.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-03-08 11:23:42 UTC
+Last updated 2023-03-09 13:18:17 UTC
 </div>
 </div>
 </body>
