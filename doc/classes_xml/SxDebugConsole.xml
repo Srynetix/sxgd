@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxDebugConsole" inherits="MarginContainer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Interactive in-game console.
+    </brief_description>
+    <description>
+        Interactive in-game console.
+
+        image::images/nodes/SxDebugConsole.gif[align="center"]
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="bind_cvars" qualifiers="static">
+            <return type="void" />
+            <argument index="0" name="vars" type="SxCVars" />
+            <description>
+                Bind a &lt;&lt;_sxcvars&gt;&gt; instance to allow the console to manipulate console vars.
+            </description>
+        </method>
+    </methods>
+    <members></members>
+    <constants></constants>
+</class>

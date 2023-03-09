@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="SxCVars" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../class.xsd">
+    <brief_description>
+        Console vars.
+    </brief_description>
+    <description>
+        Console vars, a dynamic key-value store bindable to the &lt;&lt;_sxdebugconsole&gt;&gt;.
+
+        It's a little special to use, so here's a quick tutorial to implement custom CVars.
+
+        1. Create a new script (as an autoload), inheriting from SxCVars.
+        2. Create a class, extending from *Object*, with your list of variables as attributes.
+        
+        [source,gdscript]
+        ----
+        extends SxCVars
+
+        # Declare your class containing your console vars.
+        class _Vars:
+            extends Object
+
+            var test_boolean := false
+            var test_string := "hello"
+            var test_integer := 1
+            var test_float := 2.5
+
+        func _init() -&gt; void:
+            # This line will register the vars
+            _vars = _Vars.new()
+
+            # This line will bind the SxDebugConsole with the vars so you can use
+            # cvar_list / cvar_set / cvar_get commands
+            SxDebugConsole.bind_cvars(self)
+        ----
+    </description>
+    <tutorials></tutorials>
+    <methods>
+        <method name="get_cvar">
+            <return type="Variant" />
+            <description>
+                Get a console variable value.
+            </description>
+        </method>
+        <method name="set_cvar">
+            <return type="void" />
+            <argument index="0" name="name" type="String" />
+            <argument index="0" name="value" type="Variant" />
+            <description>
+                Set a console variable from its name and a value.
+            </description>
+        </method>
+        <method name="print_cvars">
+            <return type="String" />
+            <description>
+                Build a list of each known CVars with their values.
+            </description>
+        </method>
+    </methods>
+</class>

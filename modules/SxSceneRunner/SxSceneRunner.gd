@@ -133,7 +133,7 @@ func _ready() -> void:
     _next_btn.connect("pressed", self, "_load_next_scene")
     _backbutton.connect("pressed", self, "_go_back")
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
     if event is InputEventKey:
         var key_event := event as InputEventKey
         if key_event.pressed:

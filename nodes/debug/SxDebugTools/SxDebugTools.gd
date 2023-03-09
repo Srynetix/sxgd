@@ -12,19 +12,24 @@ enum PanelType {
     LOG,
     NODE_TRACER,
     SCENE_TREE_DUMP,
+    CONSOLE,
 }
 
 # Should the panel be visible on startup?
 export var visible_on_startup := false
+export(PanelType) var panel_on_startup := PanelType.DEBUG_INFO
 
 onready var _visible := visible_on_startup
+onready var _current_panel := panel_on_startup as int
 
 var _main_panel: Panel
 var _log_panel: SxLogPanel
 var _node_tracer: SxNodeTracerSystem
 var _scene_tree_dump: MarginContainer
+var _debug_console: SxDebugConsole
 var _debug_info: SxDebugInfo
-var _current_panel := PanelType.DEBUG_INFO as int
+
+var _previous_mouse_mode := Input.MOUSE_MODE_VISIBLE as int
 
 func _build_ui() -> void:
     var bold_font := DynamicFont.new()
@@ -76,6 +81,9 @@ func _build_ui() -> void:
 
     _log_panel = SxLogPanel.new()
     container.add_child(_log_panel)
+
+    _debug_console = SxDebugConsole.new()
+    container.add_child(_debug_console)
 
     _node_tracer = SxNodeTracerSystem.new()
     container.add_child(_node_tracer)
@@ -159,7 +167,8 @@ func _build_ui() -> void:
     right_label.size_flags_vertical = Control.SIZE_SHRINK_END
     right_label.set("custom_fonts/font", normal_font)
     right_label.text = (
-        "F7 - Show scene tree dumps\n"
+        "F6 - Show console\n"
+        + "F7 - Show scene tree dumps\n"
         + "F9 - Show node traces\n"
         + "F10 - Show logs\n"
         + "F11 - Show stats\n"
@@ -174,6 +183,7 @@ func _ready() -> void:
     _main_panel.visible = false
     _node_tracer.visible = false
     _log_panel.visible = false
+    _debug_console.visible = false
     _scene_tree_dump.visible = false
 
     if visible_on_startup:
@@ -184,12 +194,15 @@ func hide() -> void:
     _hide_panels()
     _main_panel.visible = false
     _visible = false
+    Input.mouse_mode = _previous_mouse_mode
 
 # Show the debug panel.
 func show() -> void:
+    _previous_mouse_mode = Input.mouse_mode
     _main_panel.visible = true
     _visible = true
     _show_panel(_current_panel)
+    Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 # Toggle the debug panel.
 func toggle() -> void:
@@ -215,6 +228,8 @@ func _show_panel(panel_type: int) -> void:
             _node_tracer.visible = true
         PanelType.SCENE_TREE_DUMP:
             _show_scene_tree_dump()
+        PanelType.CONSOLE:
+            _debug_console.visible = true
 
 func _show_scene_tree_dump() -> void:
     _scene_tree_dump.visible = true
@@ -251,11 +266,15 @@ func _hide_panels() -> void:
     _log_panel.visible = false
     _node_tracer.visible = false
     _scene_tree_dump.visible = false
+    _debug_console.visible = false
 
 func _input(event: InputEvent):
     if event is InputEventKey:
         if event.pressed && event.scancode == KEY_F12:
             toggle()
+
+        elif event.pressed && event.scancode == KEY_F6 && _visible:
+            _show_panel(PanelType.CONSOLE)
 
         elif event.pressed && event.scancode == KEY_F7 && _visible:
             _show_panel(PanelType.SCENE_TREE_DUMP)

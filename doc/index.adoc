@@ -149,6 +149,7 @@ Debug nodes.
     ** Log details: scrollable logs (only those printed with <<_sxlog>>, not `print`)
     ** Node tracer: show currently enabled node tracers (see <<_sxnodetracer>>)
     ** Scene tree dumps: show nodes currently in the scene tree, with support for the scene tree embedded in the <<_sxlistenserverpeer>> node.
+    ** In-game console: execute commands to interact with the game (see <<_sxdebugconsole>>).
 
 * *<<_sxnodetracer>>*: Node parameter tracing system.
 
@@ -202,6 +203,7 @@ Control-related nodes.
 Miscellaneous nodes.
 
 * *<<_sxcmdlineparser>>*: Simple node which handles command-line arguments, needs to be overriden.
+* *<<_sxcvars>>*: Console variables, pluggable in the <<_sxdebugconsole>>.
 * *<<_sxgamedata>>*: A general-purpose in-memory (and on-disk) key-value store, to be used through inheritance and autoload.
 * *<<_sxloadcache>>*: A resource/scene loader, exposing a `load_resources` method to implement through inheritance and autoload.
 Useful to load every needed resources at game startup.
