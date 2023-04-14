@@ -1,18 +1,17 @@
-extends Reference
+extends Object
 class_name SxUi
 
-const _FONT_CACHE := {}
-
 static func get_default_font() -> Font:
-    if _FONT_CACHE.has("default"):
-        return _FONT_CACHE["default"]
+    SxAttr.setup_static_attribute("SxUi", "default_font", null)
+    if SxAttr.has_static_attribute("SxUi", "default_font"):
+        return SxAttr.get_static_attribute("SxUi", "default_font")
 
-    var font := Control.new().get_font("font")
-    _FONT_CACHE["default"] = font
+    var font := Control.new().get_theme_default_font()
+    SxAttr.setup_static_attribute("SxUi", "default_font", font)
     return font
 
 static func set_full_rect_no_mouse(node: Control) -> void:
-    node.set_anchors_and_margins_preset(Control.PRESET_WIDE)
+    node.set_anchors_and_margins_preset(Control.PRESET_FULL_RECT)
     node.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 static func set_margin_container_margins(node: MarginContainer, value: float) -> void:

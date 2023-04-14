@@ -1,4 +1,4 @@
-extends Reference
+extends Object
 class_name SxTileMap
 
 # Helper class representing transpose/flip parameters for a TileMap cell
@@ -29,9 +29,10 @@ static func get_cell_rotation(tilemap: TileMap, pos: Vector2) -> float:
 static func get_cell_rotation_params(tilemap: TileMap, pos: Vector2) -> CellRotationParams:
     var x := int(pos.x)
     var y := int(pos.y)
-    var transposed := tilemap.is_cell_transposed(x, y)
-    var flip_x := tilemap.is_cell_x_flipped(x, y)
-    var flip_y := tilemap.is_cell_y_flipped(x, y)
+    var data := tilemap.get_cell_tile_data(0, Vector2i(x, y))
+    var transposed := data.transpose
+    var flip_x := data.flip_h
+    var flip_y := data.flip_v
 
     return CellRotationParams.from_values(transposed, flip_x, flip_y)
 
@@ -72,10 +73,10 @@ static func rotation_degrees_to_params(angle_degrees: int) -> CellRotationParams
         return CellRotationParams.from_values(false, false, false)
 
 # Create a dump from tilemap contents.
-static func create_dump(tilemap: TileMap) -> PoolIntArray:
+static func create_dump(tilemap: TileMap) -> PackedInt32Array:
     return tilemap.get("tile_data")
 
 # Overwrite tilemap contents with a dump.
-static func apply_dump(tilemap: TileMap, array: PoolIntArray) -> void:
+static func apply_dump(tilemap: TileMap, array: PackedInt32Array) -> void:
     tilemap.clear()
     tilemap.set("tile_data", array)

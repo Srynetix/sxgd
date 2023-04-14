@@ -1,4 +1,4 @@
-extends Reference
+extends Object
 class_name SxMath
 
 # Lerp a Vector3 towards another using weight.
@@ -16,7 +16,7 @@ static func lerp_vector3(from: Vector3, to: Vector3, weight: float) -> Vector3:
 #
 # Example:
 #   var xform := SxMath.align_with_y(transform, Vector3(1, 1, 1))
-static func align_with_y(transform: Transform, new_y: Vector3) -> Transform:
+static func align_with_y(transform: Transform3D, new_y: Vector3) -> Transform3D:
     transform.basis.y = new_y
     transform.basis.x = -transform.basis.z.cross(new_y)
     transform.basis = transform.basis.orthonormalized()
@@ -26,7 +26,7 @@ static func align_with_y(transform: Transform, new_y: Vector3) -> Transform:
 #
 # Example:
 #   var xform := SxMath.interpolate_align_with_y(transform, Vector3(1, 1, 1), 0.25)
-static func interpolate_align_with_y(transform: Transform, new_y: Vector3, weight: float) -> Transform:
+static func interpolate_align_with_y(transform: Transform3D, new_y: Vector3, weight: float) -> Transform3D:
     var aligned := align_with_y(transform, new_y)
     return transform.interpolate_with(aligned, weight)
 

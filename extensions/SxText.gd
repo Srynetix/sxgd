@@ -1,4 +1,4 @@
-extends Reference
+extends Object
 class_name SxText
 
 # Convert a text to camel case.

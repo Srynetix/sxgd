@@ -8,7 +8,7 @@ signal players_updated(players)
 export var use_websockets := false
 
 class SxSynchronizedScenePath:
-    extends Reference
+    extends Object
 
     var guid: String
     var name: String

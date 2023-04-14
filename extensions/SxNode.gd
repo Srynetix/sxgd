@@ -1,5 +1,5 @@
 # Global node utilities
-extends Reference
+extends Object
 class_name SxNode
 
 static func print_tree_to_string(node: Node) -> String:

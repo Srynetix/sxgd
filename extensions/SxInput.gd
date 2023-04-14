@@ -1,4 +1,4 @@
-extends Reference
+extends Object
 class_name SxInput
 
 # Get the joystick movement as a `Vector2` from four joystick actions in the `Input Map`.

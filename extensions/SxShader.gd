@@ -1,4 +1,4 @@
-extends Reference
+extends Object
 class_name SxShader
 
 # Get a shader param from a canvas item.

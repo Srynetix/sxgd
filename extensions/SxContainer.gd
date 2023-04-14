@@ -1,4 +1,4 @@
-extends Reference
+extends Object
 class_name SxContainer
 
 static func are_values_equal(v1, v2) -> bool:

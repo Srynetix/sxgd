@@ -2,7 +2,7 @@
 #
 # UUID generation was extracted from https://github.com/binogure-studio/godot-uuid/blob/master/uuid.gd
 
-extends Reference
+extends Object
 class_name SxNetwork
 
 const _MODULO_8_BIT = 256
