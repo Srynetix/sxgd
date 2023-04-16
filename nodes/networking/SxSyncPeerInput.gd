@@ -73,7 +73,7 @@ func get_action_strength(action_name: String) -> float:
         return 0.0
 
 func query_input() -> void:
-    if SxNetwork.is_multiplayer_authority(self):
+    if SxNetwork.is_multiplayer_authority(self, NodePath("")):
         for action in _actions:
             _input_state[action].pressed = Input.is_action_pressed(action)
             _input_state[action].just_pressed = Input.is_action_just_pressed(action)
@@ -87,4 +87,4 @@ func _trace_input() -> void:
             break
 
     if should_trace:
-        _logger.debug_mn(SxNetwork.get_nuid(self), "_trace_input", "%s" % _input_state)
+        _logger.debug_mn(SxNetwork.get_nuid(self, NodePath("")), "_trace_input", "%s" % _input_state)

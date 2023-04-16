@@ -28,6 +28,7 @@ class SxSynchronizedScenePath:
 var server_port := 0
 var max_players := 0
 var rpc_service: SxRpcService
+var multiplayer_node_path := NodePath("")
 
 var _players := {}
 var _logger := SxLog.get_logger("SxServerPeer")
@@ -51,28 +52,28 @@ func get_players() -> Dictionary:
     return _players
 
 func _ready() -> void:
-    get_tree().peer_connected.connect(_peer_connected)
-    get_tree().peer_disconnected.connect(_peer_disconnected)
+    var multiplayer_api := get_tree().get_multiplayer(multiplayer_node_path) as SceneMultiplayer
+    multiplayer_api.peer_connected.connect(_peer_connected)
+    multiplayer_api.peer_disconnected.connect(_peer_disconnected)
+    multiplayer_api.allow_object_decoding = true
 
     if rpc_service == null:
         rpc_service = SxRpcService.get_from_tree(get_tree())
 
     if use_websockets:
         _ws_server = WebSocketMultiplayerPeer.new()
-        _ws_server.create_server(server_port, )
-        _ws_server.allow_object_decoding = true
-        get_tree().network_peer = _ws_server
+        _ws_server.create_server(server_port)
+        multiplayer_api.multiplayer_peer = _ws_server
 
         rpc_service.server.player_username_updated.connect(_on_player_username_updated)
-        _logger.debug_m("_ready", "WebSocket server started on port '%d'" % server_port)
+        _logger.debug_m("_ready", "WebSocket server started on port %d (root path: %s)" % [server_port, multiplayer_api.root_path])
     else:
         var peer = ENetMultiplayerPeer.new()
         peer.create_server(server_port, max_players)
-        peer.allow_object_decoding = true
-        get_tree().network_peer = peer
+        multiplayer_api.multiplayer_peer = peer
 
         rpc_service.server.player_username_updated.connect(_on_player_username_updated)
-        _logger.debug_m("_ready", "Server started on port '%d'" % server_port)
+        _logger.debug_m("_ready", "Server started on port %d (root path: %s)" % [server_port, multiplayer_api.root_path])
 
 func _peer_connected(peer_id: int) -> void:
     _logger.debug_m("_peer_connected", "Peer '%d' connected." % peer_id)

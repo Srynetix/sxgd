@@ -199,10 +199,10 @@ func toggle() -> void:
         show_tools()
 
 # Show a specific panel.
-func show_specific_panel(panel_type: int) -> void:
+func show_specific_panel(panel_type: PanelType) -> void:
     _show_panel(panel_type)
 
-func _show_panel(panel_type: int) -> void:
+func _show_panel(panel_type: PanelType) -> void:
     _current_panel = panel_type
     _hide_panels()
 
@@ -231,8 +231,7 @@ func _show_scene_tree_dump() -> void:
     if listen_server_peer != null:
         ls_container.visible = true
         var peer := listen_server_peer as SxListenServerPeer
-        var tree := peer.get_server_tree()
-        _build_node_tree(ls_tree, tree.root)
+        _build_node_tree(ls_tree, peer)
 
 func _build_node_tree(tree: Tree, node: Node) -> void:
     tree.clear()
