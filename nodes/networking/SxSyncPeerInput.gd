@@ -73,7 +73,7 @@ func get_action_strength(action_name: String) -> float:
         return 0.0
 
 func query_input() -> void:
-    if SxNetwork.is_network_master(self):
+    if SxNetwork.is_multiplayer_authority(self):
         for action in _actions:
             _input_state[action].pressed = Input.is_action_pressed(action)
             _input_state[action].just_pressed = Input.is_action_just_pressed(action)

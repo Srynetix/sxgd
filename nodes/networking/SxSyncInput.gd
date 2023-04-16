@@ -33,7 +33,7 @@ func is_action_pressed(source: Node, action_name: String) -> bool:
     if !SxNetwork.is_network_enabled(get_tree()):
         return Input.is_action_pressed(action_name)
     else:
-        var source_id = source.get_network_master()
+        var source_id = source.get_multiplayer_authority()
         if source_id == 1:
             # Do not handle server input
             return false
@@ -48,7 +48,7 @@ func is_action_just_pressed(source: Node, action_name: String) -> bool:
     if !SxNetwork.is_network_enabled(get_tree()):
         return Input.is_action_just_pressed(action_name)
     else:
-        var source_id = source.get_network_master()
+        var source_id = source.get_multiplayer_authority()
         if source_id == 1:
             # Do not handle server input
             return false
@@ -62,7 +62,7 @@ func get_action_strength(source: Node, action_name: String) -> float:
     if !SxNetwork.is_network_enabled(get_tree()):
         return Input.get_action_strength(action_name)
     else:
-        var source_id = source.get_network_master()
+        var source_id = source.get_multiplayer_authority()
         if source_id == 1:
             # Do not handle server input
             return 0.0

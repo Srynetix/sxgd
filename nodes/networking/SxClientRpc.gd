@@ -61,15 +61,15 @@ func _pong() -> void:
 @rpc("any_peer")
 func _spawn_synchronized_scene(parent: NodePath, name: String, scene_path: String, guid: String, owner_peer_id: int, master_configuration: Dictionary) -> void:
     var parent_node = get_node(parent)
-    var child_node = load(scene_path).instance()
+    var child_node = load(scene_path).instantiate()
     child_node.name = SxNetwork.generate_network_name(name, guid)
-    child_node.set_network_master(owner_peer_id)
+    child_node.set_multiplayer_authority(owner_peer_id)
     parent_node.add_child(child_node)
 
     for key in master_configuration:
         var node_path: String = key
         var owner: int = master_configuration[key]
-        child_node.get_node(node_path).set_network_master(owner)
+        child_node.get_node(node_path).set_multiplayer_authority(owner)
 
     var my_id = SxNetwork.get_nuid(self)
     _logger.debug_mn(my_id, "_spawn_synchronized_scene", "Spawned scene '%s' at parent '%s' with GUID '%s' and owner '%d'." % [scene_path, parent, guid, owner_peer_id])

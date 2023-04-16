@@ -172,7 +172,7 @@ func _reset_selected_file() -> void:
     _filename_lbl.text = ""
 
 func _cancel() -> void:
-    emit_signal("cancelled")
+    emit_signal(cancelled.get_name())
     if autohide:
         hide_dialog()
 

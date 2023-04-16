@@ -9,11 +9,11 @@ const _MODULO_8_BIT = 256
 
 # Shortcut to get the network unique ID
 static func get_nuid(node: Node) -> int:
-    return node.get_tree().get_network_unique_id()
+    return node.get_tree().get_unique_id()
 
 # Shortcut to get the sender network unique ID
 static func get_sender_nuid(node: Node) -> int:
-    return node.get_tree().get_rpc_sender_id()
+    return node.get_tree().get_remote_sender_id()
 
 # Shortcut to check if the current NUID is root
 static func is_root(node: Node) -> bool:
@@ -31,25 +31,25 @@ static func generate_network_name(name: String, guid: String) -> String:
         return name
 
 # Check if a node is a network master
-static func is_network_master(node: Node) -> bool:
+static func is_multiplayer_authority(node: Node) -> bool:
     if node.get_tree().network_peer == null:
         return true
     else:
-        return node.is_network_master()
+        return node.is_multiplayer_authority()
 
 # Get a node network master ID
-static func get_network_master(node: Node) -> int:
+static func get_multiplayer_authority(node: Node) -> int:
     if node.get_tree().network_peer == null:
         return 1
     else:
-        return node.get_network_master()
+        return node.get_multiplayer_authority()
 
 # Check if a node is a network server
-static func is_network_server(tree: SceneTree) -> bool:
+static func is_server(tree: SceneTree) -> bool:
     if tree.network_peer == null:
         return true
     else:
-        return tree.is_network_server()
+        return tree.is_server()
 
 # Check if a network peer is enabled for a scene tree
 static func is_network_enabled(tree: SceneTree) -> bool:

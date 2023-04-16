@@ -6,9 +6,9 @@ signal connection_failed()
 signal server_disconnected()
 signal players_updated(players)
 
-export var use_websockets := false
-export var server_address := ""
-export var server_port := 0
+@export var use_websockets := false
+@export var server_address := ""
+@export var server_port := 0
 
 var _ws_client: WebSocketClient
 var _players := {}
@@ -39,21 +39,21 @@ func get_players() -> Dictionary:
     return _players
 
 func _ready() -> void:
-    get_tree().connect("network_peer_connected", self, "_peer_connected")
-    get_tree().connect("network_peer_disconnected", self, "_peer_disconnected")
-    get_tree().connect("connected_to_server", self, "_connected_to_server")
-    get_tree().connect("connection_failed", self, "_connection_failed")
-    get_tree().connect("server_disconnected", self, "_server_disconnected")
-    _get_client().connect("players_updated", self, "_players_updated")
+    get_tree().peer_connected.connect(_peer_connected)
+    get_tree().peer_disconnected.connect(_peer_disconnected)
+    get_tree().connected_to_server.connect(_connected_to_server)
+    get_tree().connection_failed.connect(_connection_failed)
+    get_tree().server_disconnected.connect(_server_disconnected)
+    _get_client().players_updated.connect(_players_updated)
 
     if use_websockets:
         _ws_client = WebSocketClient.new()
-        _ws_client.connect_to_url("ws://%s:%d" % [server_address, server_port], PoolStringArray(), true)
+        _ws_client.connect_to_url("ws://%s:%d" % [server_address, server_port], PackedStringArray(), true)
         _ws_client.allow_object_decoding = true
         get_tree().network_peer = _ws_client
         _logger.debug_m("_ready", "WebSocket ClientPeer is ready")
     else:
-        var peer = NetworkedMultiplayerENet.new()
+        var peer = ENetMultiplayerPeer.new()
         peer.create_client(server_address, server_port)
         peer.allow_object_decoding = true
         get_tree().network_peer = peer
