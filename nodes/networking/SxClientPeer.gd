@@ -10,7 +10,7 @@ signal players_updated(players)
 @export var server_address := ""
 @export var server_port := 0
 
-var _ws_client: WebSocketClient
+var _ws_client: WebSocketMultiplayerPeer
 var _players := {}
 var _logger := SxLog.get_logger("SxClientPeer")
 var _input_acc := 0.0
@@ -47,8 +47,8 @@ func _ready() -> void:
     _get_client().players_updated.connect(_players_updated)
 
     if use_websockets:
-        _ws_client = WebSocketClient.new()
-        _ws_client.connect_to_url("ws://%s:%d" % [server_address, server_port], PackedStringArray(), true)
+        _ws_client = WebSocketMultiplayerPeer.new()
+        _ws_client.create_client("ws://%s:%d" % [server_address, server_port])
         _ws_client.allow_object_decoding = true
         get_tree().network_peer = _ws_client
         _logger.debug_m("_ready", "WebSocket ClientPeer is ready")

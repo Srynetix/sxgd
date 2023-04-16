@@ -28,7 +28,7 @@ func _ready() -> void:
         rpc_id(1, "_peer_ready")
         queue_free()
     else:
-        _startup_time = OS.get_system_time_secs()
+        _startup_time = Time.get_ticks_msec() / 1000
 
 @rpc("any_peer") func _peer_ready() -> void:
     var peer_id = SxNetwork.get_sender_nuid(self)
@@ -43,7 +43,7 @@ func _validate_ready_peers() -> bool:
     return false
 
 func await_peers() -> void:
-    var elapsed_time := OS.get_system_time_secs() - _startup_time
+    var elapsed_time := Time.get_ticks_msec() / 1000 - _startup_time
     while elapsed_time < _timeout:
         if _validate_ready_peers():
             queue_free()

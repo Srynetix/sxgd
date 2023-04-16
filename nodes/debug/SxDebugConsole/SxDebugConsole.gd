@@ -151,7 +151,8 @@ func _print_help() -> String:
 - motd: Show the initial message.
 - scene_reload: Reload the current scene.
 - set: Set a parameter value from a node (args: nodepath parameter value).
-- show: Get node information (args: nodepath)."""
+- show: Get node information (args: nodepath).
+- tree: Show node tree."""
 
 func _process_command(command: String) -> String:
     _add_history(command)
@@ -185,6 +186,8 @@ func _process_command(command: String) -> String:
             return _cmd_set(args.args)
         "show":
             return _cmd_show(args.args)
+        "tree":
+            return _cmd_tree()
     return "Unknown command: %s" % command
 
 func _parse_command(command: String) -> _Args:
@@ -221,10 +224,28 @@ func _cmd_show(args: PackedStringArray) -> String:
         return _cmd_error("'show' should take one argument: the 'nodepath'.")
 
     var nodepath := args[0] as String
-    var node = get_node_or_null(nodepath)
+    var node := get_node_or_null(nodepath)
     if !node:
         return _error_unknown_node(nodepath)
-    return str(node)
+
+    var node_name = str(node)
+    var output = "Node: " + node_name + "\n" + "Props: " + "\n"
+    var node_props = node.get_property_list()
+
+    for prop in node_props:
+        var usage = prop["usage"]
+        if usage & PROPERTY_USAGE_GROUP != 0:
+            continue
+        if usage & PROPERTY_USAGE_CATEGORY != 0:
+            continue
+        if usage & PROPERTY_USAGE_INTERNAL != 0:
+            continue
+        if usage & PROPERTY_USAGE_SUBGROUP != 0:
+            continue
+
+        output += " - " + prop["name"] + " = " + str(node.get(prop["name"])) + " (" + str(prop["usage"]) + ")\n"
+
+    return output
 
 func _cmd_set(args: PackedStringArray) -> String:
     if len(args) != 3:
@@ -350,3 +371,6 @@ func _cmd_call(args: PackedStringArray) -> String:
         i += 1
 
     return str(node.callv(args[1], remaining_args))
+
+func _cmd_tree() -> String:
+    return SxNode.print_tree_pretty_to_string(get_tree().root)
