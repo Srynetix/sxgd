@@ -1,7 +1,7 @@
 extends Object
 class_name SxContainer
 
-static func are_values_equal(v1, v2) -> bool:
+static func are_values_equal(v1: Variant, v2: Variant) -> bool:
     var v1_type := typeof(v1)
     var v2_type := typeof(v2)
     if v1_type != v2_type:

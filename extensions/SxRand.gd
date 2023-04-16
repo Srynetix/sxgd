@@ -40,5 +40,5 @@ static func chance_bool(chance: int) -> bool:
 #
 # Example:
 #   var v = SxRand.choice_array(75)
-static func choice_array(array: Array):
+static func choice_array(array: Array) -> Variant:
     return array[range_i(0, len(array))]

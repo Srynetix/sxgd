@@ -1,9 +1,9 @@
 extends Node
 class_name SxListenServerPeer
 
-export var server_port := 0
-export var max_players := 0
-export var use_websockets := false
+@export var server_port := 0
+@export var max_players := 0
+@export var use_websockets := false
 
 var _logger := SxLog.get_logger("SxListenServerPeer")
 var _scene_tree: SceneTree
@@ -27,7 +27,7 @@ func _ready() -> void:
     _scene_tree.init()
 
     var root := _scene_tree.root
-    root.render_target_update_mode = Viewport.UPDATE_DISABLED
+    # root.render_target_update_mode = Viewport.UPDATE_DISABLED
 
     var _rpc = SxRpcService.new()
     _rpc.name = "MainRpcService"
@@ -56,5 +56,5 @@ func _exit_tree() -> void:
     _logger.debug_m("_exit_tree", "Listen server exited.")
 
 func _notification(what: int):
-    if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+    if what == NOTIFICATION_WM_CLOSE_REQUEST:
         _server.set_quit_status(true)

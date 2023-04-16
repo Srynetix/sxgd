@@ -7,16 +7,18 @@ enum LogLevel { TRACE, DEBUG, INFO, WARN, ERROR, CRITICAL }
 
 class _LogData:
     static func get_messages() -> Array:
-        SxAttr.setup_static_attribute("SxLog::_LogData", "messages", [])
-        return SxAttr.get_static_attribute("SxLog::_LogData", "messages")
+        SxAttr.setup_static_attribute("SxLog_LogData", "messages", [])
+        return SxAttr.get_static_attribute("SxLog_LogData", "messages")
 
     static func add_message(message: LogMessage) -> void:
-        var arr := SxAttr.get_static_attribute("SxLog::_LogData", "messages") as Array
+        SxAttr.setup_static_attribute("SxLog_LogData", "messages", [])
+        var arr := SxAttr.get_static_attribute("SxLog_LogData", "messages") as Array
         arr.append(message)
 
     static func pop_messages() -> Array:
-        var msg := SxAttr.get_static_attribute("SxLog::_LogData", "messages") as Array
-        SxAttr.set_static_attribute("SxLog::_LogData", "messages", [])
+        SxAttr.setup_static_attribute("SxLog_LogData", "messages", [])
+        var msg := SxAttr.get_static_attribute("SxLog_LogData", "messages") as Array
+        SxAttr.set_static_attribute("SxLog_LogData", "messages", [])
         return msg
 
 class _LogUtils:

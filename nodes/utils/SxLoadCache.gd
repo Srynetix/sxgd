@@ -13,7 +13,7 @@ func _init():
 # Load resources in cache.
 #
 # Should be overriden by child classes.
-func load_resources():
+func load_resources() -> void:
     pass
 
 # Store a scene in the cache from its path.

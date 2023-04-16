@@ -5,7 +5,7 @@ signal peer_connected(peer_id)
 signal peer_disconnected(peer_id)
 signal players_updated(players)
 
-export var use_websockets := false
+@export var use_websockets := false
 
 class SxSynchronizedScenePath:
     extends Object
@@ -34,7 +34,7 @@ var _logger := SxLog.get_logger("SxServerPeer")
 var _sync_scene_paths := {}
 var _sync_nodes := {}
 var _quitting := false
-var _ws_server: WebSocketServer
+var _ws_server: WebSocketMultiplayerPeer
 
 func _init() -> void:
     name = "SxServerPeer"
@@ -51,27 +51,27 @@ func get_players() -> Dictionary:
     return _players
 
 func _ready() -> void:
-    get_tree().connect("network_peer_connected", self, "_peer_connected")
-    get_tree().connect("network_peer_disconnected", self, "_peer_disconnected")
+    get_tree().network_peer_connected.connect(_peer_connected)
+    get_tree().network_peer_disconnected.connect(_peer_disconnected)
 
     if rpc_service == null:
         rpc_service = SxRpcService.get_from_tree(get_tree())
 
     if use_websockets:
-        _ws_server = WebSocketServer.new()
-        _ws_server.listen(server_port, PoolStringArray(), true)
+        _ws_server = WebSocketMultiplayerPeer.new()
+        _ws_server.create_server(server_port, )
         _ws_server.allow_object_decoding = true
         get_tree().network_peer = _ws_server
 
-        rpc_service.server.connect("player_username_updated", self, "_on_player_username_updated")
+        rpc_service.server.player_username_updated.connect(_on_player_username_updated)
         _logger.debug_m("_ready", "WebSocket server started on port '%d'" % server_port)
     else:
-        var peer = NetworkedMultiplayerENet.new()
+        var peer = ENetMultiplayerPeer.new()
         peer.create_server(server_port, max_players)
         peer.allow_object_decoding = true
         get_tree().network_peer = peer
 
-        rpc_service.server.connect("player_username_updated", self, "_on_player_username_updated")
+        rpc_service.server.player_username_updated.connect(_on_player_username_updated)
         _logger.debug_m("_ready", "Server started on port '%d'" % server_port)
 
 func _peer_connected(peer_id: int) -> void:
@@ -123,7 +123,7 @@ func spawn_synchronized_scene(parent: NodePath, scene_path: String, owner_peer_i
     var uuid := SxNetwork.uuid4()
     var parent_node := get_node(parent)
     var packed_scene: PackedScene = load(scene_path)
-    var child_node := packed_scene.instance()
+    var child_node := packed_scene.instantiate()
     child_node.name = uuid
     child_node.set_network_master(owner_peer_id)
     parent_node.add_child(child_node)
@@ -149,7 +149,7 @@ func spawn_synchronized_scene(parent: NodePath, scene_path: String, owner_peer_i
 func spawn_synchronized_named_scene(parent: NodePath, scene_path: String, scene_name: String, owner_peer_id: int = 1, master_configuration: Dictionary = {}) -> Node:
     var parent_node := get_node(parent)
     var packed_scene: PackedScene = load(scene_path)
-    var child_node := packed_scene.instance()
+    var child_node := packed_scene.instantiate()
     child_node.name = scene_name
     child_node.set_network_master(owner_peer_id)
     parent_node.add_child(child_node)
@@ -176,7 +176,7 @@ func spawn_synchronized_scene_mapped(parent: NodePath, name: String, server_scen
     var uuid := SxNetwork.uuid4()
     var parent_node := get_node(parent)
     var packed_scene: PackedScene = load(server_scene_path)
-    var child_node := packed_scene.instance()
+    var child_node := packed_scene.instantiate()
     child_node.name = SxNetwork.generate_network_name(name, uuid)
     child_node.set_network_master(owner_peer_id)
     parent_node.add_child(child_node)

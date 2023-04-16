@@ -1,4 +1,4 @@
-tool
+@tool
 extends TextureRect
 class_name SxVirtualButton
 
@@ -13,13 +13,13 @@ signal touched()
 signal released()
 
 # Action button
-export var action_button: String
+@export var action_button: String
 
 var _button_touch_index := -1
 
 func _init() -> void:
-    if !rect_min_size:
-        rect_min_size = Vector2(64, 64)
+    if custom_minimum_size == Vector2.ZERO:
+        custom_minimum_size = Vector2(64, 64)
     if !size_flags_horizontal:
         size_flags_horizontal = Control.SIZE_SHRINK_CENTER
     if !size_flags_vertical:
@@ -27,22 +27,22 @@ func _init() -> void:
     if !texture:
         texture = BACKGROUND
 
-    expand = true
+    expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 
 func _ready() -> void:
-    modulate = SxColor.with_alpha_f(Color.white, INITIAL_OPACITY)
+    modulate = SxColor.with_alpha_f(Color.WHITE, INITIAL_OPACITY)
 
 func _input(event: InputEvent) -> void:
     if event is InputEventScreenTouch:
         var touch_event := event as InputEventScreenTouch
         if !touch_event.pressed && touch_event.index == _button_touch_index:
             _button_touch_index = -1
-            modulate = SxColor.with_alpha_f(Color.white, INITIAL_OPACITY)
+            modulate = SxColor.with_alpha_f(Color.WHITE, INITIAL_OPACITY)
             _send_button_event(false)
             emit_signal("released")
         elif _button_touch_index == -1 && touch_event.pressed && get_global_rect().has_point(touch_event.position):
             _button_touch_index = touch_event.index
-            modulate = SxColor.with_alpha_f(Color.white, TOUCHED_OPACITY)
+            modulate = SxColor.with_alpha_f(Color.WHITE, TOUCHED_OPACITY)
             _send_button_event(true)
             emit_signal("touched")
 

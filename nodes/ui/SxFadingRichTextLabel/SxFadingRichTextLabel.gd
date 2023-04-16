@@ -1,20 +1,20 @@
 # A wrapped RichTextLabel with a per-character fade-in effect.
-tool
+@tool
 extends RichTextLabel
 class_name SxFadingRichTextLabel
 
-const EFFECT = preload("res://addons/sxgd/nodes/ui/SxFadingRichTextLabel/SxFadingRichTextEffect.tres")
+const effect := preload("res://addons/sxgd/nodes/ui/SxFadingRichTextLabel/SxFadingRichTextEffect.tres")
 
 enum Alignment { LEFT, RIGHT }
 
 # Autoplay the text animation
-export var autoplay := false
+@export var autoplay := false
 # Delay per character, in seconds
-export var char_delay := 0.1
+@export var char_delay := 0.1
 # Fade out delay, in seconds
-export var fade_out_delay := 2.0
+@export var fade_out_delay := 2.0
 # Text alignment
-export(Alignment) var text_alignment := Alignment.LEFT
+@export var text_alignment := Alignment.LEFT
 
 # Text was completely shown
 signal shown()
@@ -27,32 +27,31 @@ func _init():
     _tag_regex = RegEx.new()
     _tag_regex.compile("(?<tag>(\\[\\\\?.*?\\]))")
 
-    if !rect_min_size:
-        rect_min_size = Vector2(500, 0)
+    if custom_minimum_size == Vector2(0, 0):
+        custom_minimum_size = Vector2(500, 0)
 
     mouse_filter = Control.MOUSE_FILTER_IGNORE
     bbcode_enabled = true
     scroll_active = false
-    custom_effects = [EFFECT]
+    custom_effects = [effect]
 
     _timer = Timer.new()
     _timer.one_shot = true
     add_child(_timer)
 
 func _ready():
-    if bbcode_text == "":
+    if text == "":
         _initial_text = text
     else:
-        _initial_text = bbcode_text
+        _initial_text = text
 
-    if Engine.editor_hint:
+    if Engine.is_editor_hint():
         if text_alignment == Alignment.RIGHT:
-            bbcode_text = "[right]%s[/right]" % bbcode_text
+            text = "[right]%s[/right]" % text
         return
 
     text = ""
-    bbcode_text = ""
-    _timer.connect("timeout", self, "_on_timer_timeout")
+    _timer.timeout.connect(_on_timer_timeout)
 
     if autoplay:
         fade_in()
@@ -73,7 +72,7 @@ func fade_in() -> void:
     if text_alignment == Alignment.RIGHT:
         new_bbcode = "[right]{text}[/right]".format({"text": new_bbcode})
 
-    bbcode_text = new_bbcode
+    text = new_bbcode
 
     _timer.stop()
     _timer.wait_time = total_delay
@@ -87,12 +86,12 @@ func fade_in() -> void:
 #   label.fade_in()
 func update_text(text: String) -> void:
     _initial_text = text
-    bbcode_text = ""
+    text = ""
     _timer.stop()
 
 func _strip_tags(s: String) -> String:
     return _tag_regex.sub(s, "")
 
 func _on_timer_timeout():
-    bbcode_text = ""
+    text = ""
     emit_signal("shown")

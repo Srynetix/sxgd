@@ -1,29 +1,29 @@
-tool
+@tool
 extends ColorRect
 class_name SxFxGrayscale
 
-const SHADER = preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxGrayscale/SxFxGrayscale.gdshader")
+const shader := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxGrayscale/SxFxGrayscale.gdshader")
 
-export var ratio := 0.0 setget _set_ratio
+@export var ratio := 0.0 : set = _set_ratio
 
 func _set_ratio(value: float) -> void:
     ratio = clamp(value, 0, 1)
 
-    if !Engine.editor_hint:
+    if !Engine.is_editor_hint():
         if material == null:
-            yield(self, "ready")
-        _get_material().set_shader_param("ratio", ratio)
+            await self.ready
+        _get_material().set_shader_parameter("ratio", ratio)
 
 func _get_material() -> ShaderMaterial:
     return material as ShaderMaterial
 
 func _ready() -> void:
-    set_anchors_and_margins_preset(Control.PRESET_WIDE)
-    color = Color.transparent
+    set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+    color = Color.TRANSPARENT
 
-    if !Engine.editor_hint:
+    if !Engine.is_editor_hint():
         var shader_material := ShaderMaterial.new()
-        shader_material.shader = SHADER
+        shader_material.shader = shader
         material = shader_material
 
         _set_ratio(ratio)

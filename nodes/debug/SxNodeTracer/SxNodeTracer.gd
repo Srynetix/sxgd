@@ -3,7 +3,7 @@ class_name SxNodeTracer
 
 const NONAME = "__noname__"
 
-export var title: String
+@export var title: String
 
 var parameters := {}
 

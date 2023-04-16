@@ -14,7 +14,7 @@ func _ready() -> void:
 
     _overlay = ColorRect.new()
     _overlay.name = "Overlay"
-    _overlay.set_anchors_and_margins_preset(Control.PRESET_WIDE)
+    _overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
     _overlay.color = COLOR_TRANSPARENT_BLACK
     _overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
     add_child(_overlay)
@@ -24,16 +24,16 @@ func _tween_fade_out(duration: float, interpolation: int) -> void:
     _overlay.mouse_filter = Control.MOUSE_FILTER_STOP
 
     var tween = create_tween()
-    tween.tween_property(_overlay, "color", Color.black, duration).set_trans(interpolation)
-    yield(tween, "finished")
+    tween.tween_property(_overlay, "color", Color.BLACK, duration).set_trans(interpolation)
+    await tween.finished
 
 func _tween_fade_in(duration: float, interpolation: int) -> void:
-    _overlay.color = Color.black
+    _overlay.color = Color.BLACK
     _overlay.mouse_filter = Control.MOUSE_FILTER_STOP
 
     var tween = create_tween()
     tween.tween_property(_overlay, "color", COLOR_TRANSPARENT_BLACK, duration).set_trans(interpolation)
-    yield(tween, "finished")
+    await tween.finished
 
     _overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
@@ -42,41 +42,39 @@ func _tween_fade_in(duration: float, interpolation: int) -> void:
 # Example:
 #   SxSceneTransitioner.fade_to_scene(my_scene)
 func fade_to_scene(scene: PackedScene, duration: float = 1.0, interpolation: int = Tween.TRANS_LINEAR) -> void:
-    yield(_tween_fade_out(duration, interpolation), "completed")
+    await _tween_fade_out(duration, interpolation)
 
-    get_tree().change_scene_to(scene)
-    yield(_tween_fade_in(duration, interpolation), "completed")
+    get_tree().change_scene_to_packed(scene)
+    await _tween_fade_in(duration, interpolation)
 
 # Fade current scene to another scene, loaded before the process.
 #
 # Example:
 #   SxSceneTransitioner.fade_to_scene_path("res://my_scene.tscn")
 func fade_to_scene_path(scene_path: String, duration: float = 1.0, interpolation: int = Tween.TRANS_LINEAR) -> void:
-    var coro = _tween_fade_out(duration, interpolation)
     var scene := load(scene_path) as PackedScene
-    yield(coro, "completed")
+    await _tween_fade_out(duration, interpolation)
 
-    get_tree().change_scene_to(scene)
-    yield(_tween_fade_in(duration, interpolation), "completed")
+    get_tree().change_scene_to_packed(scene)
+    await _tween_fade_in(duration, interpolation)
 
 # Fade current scene to another scene, using a SxLoadCache.
 #
 # Example:
 #   SxSceneTransitioner.fade_to_cached_scene(cache, "MyScene")
 func fade_to_cached_scene(cache: SxLoadCache, scene_name: String, duration: float = 1.0, interpolation: int = Tween.TRANS_LINEAR) -> void:
-    var coro = _tween_fade_out(duration, interpolation)
     var scene := cache.load_scene(scene_name)
-    yield(coro, "completed")
+    await _tween_fade_out(duration, interpolation)
 
-    get_tree().change_scene_to(scene)
-    yield(_tween_fade_in(duration, interpolation), "completed")
+    get_tree().change_scene_to_packed(scene)
+    await _tween_fade_in(duration, interpolation)
 
 # Apply a "fade out" effect.
 #
 # Example:
 #   SxSceneTransitioner.fade_out()
 func fade_out(duration: float = 1.0, interpolation: int = Tween.TRANS_LINEAR) -> void:
-    yield(_tween_fade_out(duration, interpolation), "completed")
+    await _tween_fade_out(duration, interpolation)
     emit_signal("finished")
 
 # Apply a "fade in" effect.
@@ -84,5 +82,5 @@ func fade_out(duration: float = 1.0, interpolation: int = Tween.TRANS_LINEAR) ->
 # Example:
 #   SxSceneTransitioner.fade_in()
 func fade_in(duration: float = 1.0, interpolation: int = Tween.TRANS_LINEAR) -> void:
-    yield(_tween_fade_in(duration, interpolation), "completed")
+    await _tween_fade_in(duration, interpolation)
     emit_signal("finished")

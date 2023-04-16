@@ -8,12 +8,6 @@
     </description>
     <tutorials></tutorials>
     <methods>
-        <method name="get_default_font" qualifiers="static">
-            <return type="Font" />
-            <description>
-                Get the default Godot font.
-            </description>
-        </method>
         <method name="set_full_rect_no_mouse" qualifiers="static">
             <return type="void" />
             <argument index="0" name="node" type="Control" />

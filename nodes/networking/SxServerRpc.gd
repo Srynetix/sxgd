@@ -32,18 +32,18 @@ func update_player_username(username: String) -> void:
 
 # Master network methods
 
-master func _send_input(input: Dictionary) -> void:
+@rpc("any_peer") func _send_input(input: Dictionary) -> void:
     var peer_id := SxNetwork.get_sender_nuid(self)
     _get_sync_input().update_peer_input_from_json(peer_id, input)
 
-master func _ping() -> void:
+@rpc("any_peer") func _ping() -> void:
     var my_id := SxNetwork.get_nuid(self)
     var peer_id := SxNetwork.get_sender_nuid(self)
 
     _logger.debug_mn(my_id, "_ping", "Ping request received from peer '%d'." % peer_id)
     _get_client().pong(peer_id)
 
-master func _update_player_username(username: String) -> void:
+@rpc("any_peer") func _update_player_username(username: String) -> void:
     var my_id := SxNetwork.get_nuid(self)
     var peer_id := SxNetwork.get_sender_nuid(self)
     _logger.debug_mn(my_id, "_update_player_username", "Player %d updated its username to %s." % [peer_id, username])

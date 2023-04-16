@@ -8,20 +8,16 @@ enum Direction {
     DOWN
 }
 
-export var max_shake_strength := 2.0
-export var shake_ratio := 0.0
+@export var max_shake_strength := 2.0
+@export var shake_ratio := 0.0
 
 var _tween: Tween
-
-func _ready() -> void:
-    _tween = Tween.new()
-    add_child(_tween)
 
 func _process(delta) -> void:
     _update_shake()
 
 func _update_shake() -> void:
-    var coef := rand_range(-1, 1) * max_shake_strength * shake_ratio
+    var coef := randf_range(-1, 1) * max_shake_strength * shake_ratio
     offset = Vector2(coef, coef)
 
 # Tween to a specific position
@@ -29,12 +25,14 @@ func _update_shake() -> void:
 # Example:
 #   camera.tween_to_position(Vector2(100, 100))
 func tween_to_position(position: Vector2, speed: float = 0.5, zoom_: float = 1, easing: int = Tween.TRANS_QUAD) -> void:
-    _tween.stop_all()
-    _tween.interpolate_property(self, "global_position", global_position, position, speed, easing, Tween.EASE_IN_OUT)
-    _tween.interpolate_property(self, "zoom", zoom, Vector2.ONE * zoom, speed, easing, Tween.EASE_IN_OUT)
-    _tween.start()
+    if _tween:
+        _tween.kill()
+    _tween = get_tree().create_tween()
 
-    yield(_tween, "tween_all_completed")
+    _tween.tween_property(self, "global_position", position, speed).from(global_position).set_trans(easing).set_ease(Tween.EASE_IN_OUT)
+    _tween.tween_property(self, "zoom", Vector2.ONE * zoom, speed).from(zoom).set_trans(easing).set_ease(Tween.EASE_IN_OUT)
+
+    await _tween.finished
 
 # Apply a viewport scroll effect.
 #
@@ -42,22 +40,23 @@ func tween_to_position(position: Vector2, speed: float = 0.5, zoom_: float = 1, 
 #   camera.viewport_scroll(Vector2(0, 0), Direction.RIGHT)
 func viewport_scroll(top_left: Vector2, direction: int, speed: float = 0.65, easing: int = Tween.TRANS_QUAD) -> void:
     var vp_size := get_viewport_rect().size
-    _tween.stop_all()
 
     reset_limits()
     var start_position := top_left + vp_size / 2
     var end_position := _add_viewport_size_to_position(top_left, direction)
     global_position = start_position
 
-    _tween.interpolate_property(self, "global_position", start_position, end_position, speed, easing, Tween.EASE_IN_OUT)
-    _tween.start()
-    yield(_tween, "tween_all_completed")
+    if _tween:
+        _tween.kill()
+    _tween = get_tree().create_tween()
+    _tween.tween_property(self, "global_position", end_position, speed).from(start_position).set_trans(easing).set_ease(Tween.EASE_IN_OUT)
+    await _tween.finished
 
     limit_left = end_position.x - vp_size.x / 2
     limit_right = limit_left + vp_size.x
     limit_top = end_position.y - vp_size.y / 2
     limit_bottom = limit_top + vp_size.y
-    smoothing_enabled = true
+    position_smoothing_enabled = true
 
 # Reset the camera limits to an arbitrary large number.
 func reset_limits() -> void:
@@ -65,7 +64,7 @@ func reset_limits() -> void:
     limit_right = 1000000
     limit_top = -1000000
     limit_bottom = 1000000
-    smoothing_enabled = false
+    position_smoothing_enabled = false
 
 func set_limit_from_rect(rect: Rect2) -> void:
     limit_left = rect.position.x

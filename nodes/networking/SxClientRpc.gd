@@ -34,7 +34,7 @@ func spawn_synchronized_scene_broadcast(parent: NodePath, name: String, scene_pa
     rpc("_spawn_synchronized_scene", parent, name, scene_path, guid, owner_peer_id, master_configuration)
 
 func synchronize_node_broadcast(path: NodePath, data: Dictionary) -> void:
-    rpc_unreliable("_synchronize_node", path, data)
+    rpc("_synchronize_node", path, data)
 
 func remove_synchronized_node_on(peer_id: int, path: NodePath) -> void:
     var my_id = SxNetwork.get_nuid(self)
@@ -53,11 +53,13 @@ func synchronize_players_broadcast(players: Dictionary) -> void:
 
 # Local network methods
 
-remote func _pong() -> void:
+@rpc("any_peer")
+func _pong() -> void:
     var my_id = SxNetwork.get_nuid(self)
     _logger.debug_mn(my_id, "_pong", "Pong received from server!")
 
-remote func _spawn_synchronized_scene(parent: NodePath, name: String, scene_path: String, guid: String, owner_peer_id: int, master_configuration: Dictionary) -> void:
+@rpc("any_peer")
+func _spawn_synchronized_scene(parent: NodePath, name: String, scene_path: String, guid: String, owner_peer_id: int, master_configuration: Dictionary) -> void:
     var parent_node = get_node(parent)
     var child_node = load(scene_path).instance()
     child_node.name = SxNetwork.generate_network_name(name, guid)
@@ -74,12 +76,12 @@ remote func _spawn_synchronized_scene(parent: NodePath, name: String, scene_path
 
     emit_signal("spawned_from_server", child_node)
 
-remote func _synchronize_node(path: NodePath, data: Dictionary) -> void:
+@rpc("any_peer", "unreliable") func _synchronize_node(path: NodePath, data: Dictionary) -> void:
     var node := get_node(path)
     if node.has_method("_network_receive"):
         node.call("_network_receive", data)
 
-remote func _remove_synchronized_node(path: NodePath) -> void:
+@rpc("any_peer") func _remove_synchronized_node(path: NodePath) -> void:
     var my_id := SxNetwork.get_nuid(self)
     var node := get_node_or_null(path)
     if node != null:
@@ -90,7 +92,7 @@ remote func _remove_synchronized_node(path: NodePath) -> void:
 
     emit_signal("removed_from_server", node)
 
-remote func _synchronize_players(players: Dictionary) -> void:
+@rpc("any_peer") func _synchronize_players(players: Dictionary) -> void:
     var my_id := SxNetwork.get_nuid(self)
     _logger.debug_mn(my_id, "_synchronize_players", "Players updated: '%s'" % players)
     emit_signal("players_updated", players)

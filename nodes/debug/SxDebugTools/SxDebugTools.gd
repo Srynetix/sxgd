@@ -2,9 +2,9 @@
 extends CanvasLayer
 class_name SxDebugTools
 
-const NORMAL_FONT_DATA = preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
-const BOLD_FONT_DATA = preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Bold.otf")
-const CODE_FONT_DATA = preload("res://addons/sxgd/assets/fonts/Inconsolata-Regular.ttf")
+const normal_font := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
+const bold_font := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Bold.otf")
+const code_font := preload("res://addons/sxgd/assets/fonts/Inconsolata-Regular.ttf")
 
 # Panel type to display.
 enum PanelType {
@@ -16,11 +16,11 @@ enum PanelType {
 }
 
 # Should the panel be visible on startup?
-export var visible_on_startup := false
-export(PanelType) var panel_on_startup := PanelType.DEBUG_INFO
+@export var visible_on_startup := false
+@export var panel_on_startup := PanelType.DEBUG_INFO
 
-onready var _visible := visible_on_startup
-onready var _current_panel := panel_on_startup as int
+@onready var _visible := visible_on_startup
+@onready var _current_panel := panel_on_startup
 
 var _main_panel: Panel
 var _log_panel: SxLogPanel
@@ -32,35 +32,13 @@ var _debug_info: SxDebugInfo
 var _previous_mouse_mode := Input.MOUSE_MODE_VISIBLE as int
 
 func _build_ui() -> void:
-    var bold_font := DynamicFont.new()
-    bold_font.use_mipmaps = true
-    bold_font.use_filter = true
-    bold_font.font_data = BOLD_FONT_DATA
-
-    var code_font := DynamicFont.new()
-    code_font.size = 13
-    code_font.outline_size = 1
-    code_font.outline_color = Color.black
-    code_font.use_mipmaps = true
-    code_font.use_filter = true
-    code_font.font_data = CODE_FONT_DATA
-
-    var normal_font := DynamicFont.new()
-    normal_font.size = 12
-    normal_font.outline_size = 1
-    normal_font.outline_color = Color.black
-    normal_font.use_mipmaps = true
-    normal_font.use_filter = true
-    normal_font.font_data = NORMAL_FONT_DATA
-
     var box := StyleBoxEmpty.new()
 
     layer = 4
 
     _main_panel = Panel.new()
     _main_panel.name = "Panel"
-    _main_panel.self_modulate = Color(0, 0, 0, 0.58)
-    _main_panel.set_anchors_and_margins_preset(Control.PRESET_WIDE)
+    _main_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
     _main_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
     add_child(_main_panel)
 
@@ -69,7 +47,7 @@ func _build_ui() -> void:
 
     var hbox_container := HBoxContainer.new()
     hbox_container.name = "HBox"
-    hbox_container.set_anchors_and_margins_preset(Control.PRESET_WIDE)
+    hbox_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
     hbox_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
     _main_panel.add_child(hbox_container)
 
@@ -90,11 +68,11 @@ func _build_ui() -> void:
 
     _scene_tree_dump = MarginContainer.new()
     _scene_tree_dump.name = "SceneTreeDumpContainer"
-    _scene_tree_dump.set_anchors_and_margins_preset(Control.PRESET_WIDE)
-    _scene_tree_dump.set("custom_constants/margin_right", 20)
-    _scene_tree_dump.set("custom_constants/margin_top", 20)
-    _scene_tree_dump.set("custom_constants/margin_left", 20)
-    _scene_tree_dump.set("custom_constants/margin_bottom", 20)
+    _scene_tree_dump.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+    _scene_tree_dump.add_theme_constant_override("margin_right", 20)
+    _scene_tree_dump.add_theme_constant_override("margin_top", 20)
+    _scene_tree_dump.add_theme_constant_override("margin_left", 20)
+    _scene_tree_dump.add_theme_constant_override("margin_bottom", 20)
     container.add_child(_scene_tree_dump)
 
     var scene_tree_hbox_container := HBoxContainer.new()
@@ -109,17 +87,20 @@ func _build_ui() -> void:
 
     var local_scene_tree_title := Label.new()
     local_scene_tree_title.name = "Title"
-    local_scene_tree_title.set("custom_fonts/font", bold_font)
+    local_scene_tree_title.add_theme_font_override("font", bold_font)
     local_scene_tree_title.text = "Local tree"
     local_scene_tree_container.add_child(local_scene_tree_title)
 
     var local_scene_tree := Tree.new()
     local_scene_tree.name = "Tree"
     local_scene_tree.size_flags_vertical = Control.SIZE_EXPAND_FILL
-    local_scene_tree.set("custom_constants/draw_guides", 0)
-    local_scene_tree.set("custom_constants/draw_relationship_lines", 1)
-    local_scene_tree.set("custom_fonts/font", code_font)
-    local_scene_tree.set("custom_styles/bg", box)
+    local_scene_tree.add_theme_constant_override("draw_guides", 0)
+    local_scene_tree.add_theme_constant_override("draw_relationship_lines", 1)
+    local_scene_tree.add_theme_font_override("font", code_font)
+    local_scene_tree.add_theme_font_size_override("font_size", 13)
+    local_scene_tree.add_theme_color_override("font_outline_color", Color.BLACK)
+    local_scene_tree.add_theme_constant_override("outline_size", 2)
+    local_scene_tree.add_theme_stylebox_override("panel", box)
     local_scene_tree_container.add_child(local_scene_tree)
 
     var listenserver_scene_tree_container := VBoxContainer.new()
@@ -131,33 +112,36 @@ func _build_ui() -> void:
 
     var listenserver_scene_tree_title := Label.new()
     listenserver_scene_tree_title.name = "Title"
-    listenserver_scene_tree_title.set("custom_fonts/font", bold_font)
+    listenserver_scene_tree_title.add_theme_font_override("font", bold_font)
     listenserver_scene_tree_title.text = "Listen server tree"
     listenserver_scene_tree_container.add_child(listenserver_scene_tree_title)
 
     var listenserver_scene_tree := Tree.new()
     listenserver_scene_tree.name = "Tree"
     listenserver_scene_tree.size_flags_vertical = Control.SIZE_EXPAND_FILL
-    listenserver_scene_tree.set("custom_constants/draw_guides", 0)
-    listenserver_scene_tree.set("custom_constants/draw_relationship_lines", 1)
-    listenserver_scene_tree.set("custom_fonts/font", code_font)
-    listenserver_scene_tree.set("custom_styles/bg", box)
+    listenserver_scene_tree.add_theme_constant_override("draw_guides", 0)
+    listenserver_scene_tree.add_theme_constant_override("draw_relationship_lines", 1)
+    listenserver_scene_tree.add_theme_font_override("font", code_font)
+    listenserver_scene_tree.add_theme_font_size_override("font_size", 13)
+    listenserver_scene_tree.add_theme_color_override("font_outline_color", Color.BLACK)
+    listenserver_scene_tree.add_theme_constant_override("outline_size", 2)
+    listenserver_scene_tree.add_theme_stylebox_override("panel", box)
     listenserver_scene_tree_container.add_child(listenserver_scene_tree)
 
     var right_container := MarginContainer.new()
     right_container.name = "RightContainer"
     right_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
-    right_container.set("custom_constants/margin_right", 10)
-    right_container.set("custom_constants/margin_top", 10)
-    right_container.set("custom_constants/margin_left", 10)
-    right_container.set("custom_constants/margin_bottom", 10)
+    right_container.add_theme_constant_override("margin_right", 10)
+    right_container.add_theme_constant_override("margin_top", 10)
+    right_container.add_theme_constant_override("margin_left", 10)
+    right_container.add_theme_constant_override("margin_bottom", 10)
     hbox_container.add_child(right_container)
 
     var right_title := Label.new()
     right_title.name = "Title"
     right_title.size_flags_horizontal = Control.SIZE_SHRINK_END
     right_title.size_flags_vertical = 0
-    right_title.set("custom_fonts/font", bold_font)
+    right_title.add_theme_font_override("font", bold_font)
     right_title.text = "Debug Tools™"
     right_container.add_child(right_title)
 
@@ -165,7 +149,10 @@ func _build_ui() -> void:
     right_label.name = "Instructions"
     right_label.size_flags_horizontal = Control.SIZE_SHRINK_END
     right_label.size_flags_vertical = Control.SIZE_SHRINK_END
-    right_label.set("custom_fonts/font", normal_font)
+    right_label.add_theme_font_override("font", normal_font)
+    right_label.add_theme_color_override("font_outline_color", Color.BLACK)
+    right_label.add_theme_constant_override("outline_size", 3)
+    right_label.add_theme_font_size_override("font_size", 12)
     right_label.text = (
         "F6 - Show console\n"
         + "F7 - Show scene tree dumps\n"
@@ -187,17 +174,17 @@ func _ready() -> void:
     _scene_tree_dump.visible = false
 
     if visible_on_startup:
-        show()
+        show_tools()
 
 # Hide the debug panel.
-func hide() -> void:
+func hide_tools() -> void:
     _hide_panels()
     _main_panel.visible = false
     _visible = false
     Input.mouse_mode = _previous_mouse_mode
 
 # Show the debug panel.
-func show() -> void:
+func show_tools() -> void:
     _previous_mouse_mode = Input.mouse_mode
     _main_panel.visible = true
     _visible = true
@@ -207,9 +194,9 @@ func show() -> void:
 # Toggle the debug panel.
 func toggle() -> void:
     if _visible:
-        hide()
+        hide_tools()
     else:
-        show()
+        show_tools()
 
 # Show a specific panel.
 func show_specific_panel(panel_type: int) -> void:
@@ -240,7 +227,7 @@ func _show_scene_tree_dump() -> void:
 
     # Check for a listen server
     ls_container.visible = false
-    var listen_server_peer := get_tree().root.find_node("SxListenServerPeer", true, false)
+    var listen_server_peer := get_tree().root.find_child("SxListenServerPeer", true, false) as Node
     if listen_server_peer != null:
         ls_container.visible = true
         var peer := listen_server_peer as SxListenServerPeer
@@ -270,26 +257,26 @@ func _hide_panels() -> void:
 
 func _input(event: InputEvent):
     if event is InputEventKey:
-        if event.pressed && event.scancode == KEY_F12:
+        if event.pressed && event.keycode == KEY_F12:
             toggle()
 
-        elif event.pressed && event.scancode == KEY_F6 && _visible:
+        elif event.pressed && event.keycode == KEY_F6 && _visible:
             _show_panel(PanelType.CONSOLE)
 
-        elif event.pressed && event.scancode == KEY_F7 && _visible:
+        elif event.pressed && event.keycode == KEY_F7 && _visible:
             _show_panel(PanelType.SCENE_TREE_DUMP)
 
-        elif event.pressed && event.scancode == KEY_F9 && _visible:
+        elif event.pressed && event.keycode == KEY_F9 && _visible:
             _show_panel(PanelType.NODE_TRACER)
 
-        elif event.pressed && event.scancode == KEY_F10 && _visible:
+        elif event.pressed && event.keycode == KEY_F10 && _visible:
             _show_panel(PanelType.LOG)
 
-        elif event.pressed && event.scancode == KEY_F11 && _visible:
+        elif event.pressed && event.keycode == KEY_F11 && _visible:
             _show_panel(PanelType.DEBUG_INFO)
 
-        elif event.pressed && event.scancode == KEY_F5 && _visible:
+        elif event.pressed && event.keycode == KEY_F5 && _visible:
             get_tree().reload_current_scene()
 
-        elif event.pressed && event.scancode == KEY_F2 && _visible:
+        elif event.pressed && event.keycode == KEY_F2 && _visible:
             get_tree().paused = !get_tree().paused

@@ -5,14 +5,14 @@ static func _get_logger() -> SxLog.Logger:
     return SxLog.get_logger("SxJson")
 
 # Read JSON file at path `path`.
-static func read_json_file(path: String):
+static func read_json_file(path: String) -> Variant:
     var logger := _get_logger()
 
     var f := FileAccess.open(path, FileAccess.READ)
     logger.debug("Reading JSON data from path '%s'." % path)
     return read_json_from_open_file(f)
 
-static func read_json_from_open_file(file: FileAccess):
+static func read_json_from_open_file(file: FileAccess) -> Variant:
     var logger := _get_logger()
     var json := JSON.new()
     var error := json.parse(file.get_as_text())
@@ -22,7 +22,7 @@ static func read_json_from_open_file(file: FileAccess):
     return Dictionary()
 
 # Write JSON to path `path`.
-static func write_json_file(json, path: String) -> void:
+static func write_json_file(json: Variant, path: String) -> void:
     var logger := _get_logger()
 
     var f := FileAccess.open(path, FileAccess.WRITE)

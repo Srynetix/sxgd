@@ -1,7 +1,7 @@
 extends MarginContainer
 class_name SxNodeTracerSystem
 
-const FONT_DATA = preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Bold.otf")
+const font := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Bold.otf")
 
 var _tracers := {}
 var _tracers_ui := {}
@@ -10,18 +10,11 @@ var _logger := SxLog.get_logger("SxNodeTracerSystem")
 var _grid: GridContainer
 
 func _ready() -> void:
-    var font := DynamicFont.new()
-    font.size = 18
-    font.outline_size = 1
-    font.outline_color = Color.black
-    font.use_filter = true
-    font.font_data = FONT_DATA
-
     name = "SxNodeTracerSystem"
-    set_anchors_and_margins_preset(Control.PRESET_WIDE)
+    set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
     var vbox_container := VBoxContainer.new()
-    vbox_container.set("custom_constants/separation", 0)
+    vbox_container.add_theme_constant_override("separation", 0)
     add_child(vbox_container)
 
     var margin_container := MarginContainer.new()
@@ -29,17 +22,20 @@ func _ready() -> void:
 
     var title := Label.new()
     title.size_flags_vertical = 0
-    title.set("custom_fonts/font", font)
+    title.add_theme_font_override("font", font)
+    title.add_theme_font_size_override("font_size", 18)
+    title.add_theme_constant_override("outline_size", 3)
+    title.add_theme_color_override("font_outline_color", Color.BLACK)
     title.text = " Node Tracer"
     margin_container.add_child(title)
 
     var margin_container2 := MarginContainer.new()
     margin_container2.size_flags_horizontal = Control.SIZE_EXPAND_FILL
     margin_container2.size_flags_vertical = Control.SIZE_EXPAND_FILL
-    margin_container2.set("custom_constants/margin_right", 5)
-    margin_container2.set("custom_constants/margin_top", 5)
-    margin_container2.set("custom_constants/margin_left", 5)
-    margin_container2.set("custom_constants/margin_bottom", 5)
+    margin_container2.add_theme_constant_override("margin_right", 5)
+    margin_container2.add_theme_constant_override("margin_top", 5)
+    margin_container2.add_theme_constant_override("margin_left", 5)
+    margin_container2.add_theme_constant_override("margin_bottom", 5)
     vbox_container.add_child(margin_container2)
 
     _grid = GridContainer.new()
@@ -57,7 +53,7 @@ func _process(delta: float) -> void:
             _logger.debug_m("_process", "Registering NodeTracer '%s'." % tracer.title)
             _tracers[node_path] = node
             var ui := _create_tracer_ui(node_path, node)
-            node.connect("tree_exiting", self, "_remove_tracer_ui", [node_path, ui])
+            node.tree_exiting.connect(_remove_tracer_ui.bind(node_path, ui))
         else:
             _update_tracer_ui(node, _tracers_ui[node_path])
 
