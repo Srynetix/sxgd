@@ -16,7 +16,7 @@
             <argument index="1" name="attribute" type="String" />
             <argument index="2" name="value" type="Variant" />
             <description>
-                Set a static attribute for a specific namespace & attribute name.
+                Set a static attribute for a specific namespace and attribute name.
 
                 [source,gdscript]
                 .Example
