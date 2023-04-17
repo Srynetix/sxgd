@@ -460,6 +460,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_classes">Classes</a>
 <ul class="sectlevel2">
 <li><a href="#_sxarray">SxArray</a></li>
+<li><a href="#_sxshader">SxShader</a></li>
 <li><a href="#_sxaudiostreamplayer">SxAudioStreamPlayer</a></li>
 <li><a href="#_sxbuffer">SxBuffer</a></li>
 <li><a href="#_sxcvars">SxCVars</a></li>
@@ -512,7 +513,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_sxserverpeer">SxServerPeer</a></li>
 <li><a href="#_sxserverpeer_sxsynchronizedscenepath">SxServerPeer.SxSynchronizedScenePath</a></li>
 <li><a href="#_sxserverrpc">SxServerRpc</a></li>
-<li><a href="#_sxshader">SxShader</a></li>
+<li><a href="#_sxshader_2">SxShader</a></li>
 <li><a href="#_sxsyncbarrier">SxSyncBarrier</a></li>
 <li><a href="#_sxsyncinput">SxSyncInput</a></li>
 <li><a href="#_sxsyncpeerinput">SxSyncPeerInput</a></li>
@@ -678,6 +679,9 @@ func _ready() -&gt; void:
 <ul>
 <li>
 <p><strong><a href="#_sxarray">SxArray</a></strong>: Array helpers (<em>string trimming</em>, &#8230;&#8203;).</p>
+</li>
+<li>
+<p><strong><a href="#_sxattr">[_sxattr]</a></strong>: Static attribute helpers, for the lack of static attributes in GDScript.</p>
 </li>
 <li>
 <p><strong><a href="#_sxbuffer">SxBuffer</a></strong>: Buffer helpers (<em>zstd compression</em>, &#8230;&#8203;).</p>
@@ -1041,6 +1045,129 @@ var trimmed_strings := SxArray.trim_strings(strings)
 </div>
 </div>
 <div class="sect2">
+<h3 id="_sxshader"><a class="anchor" href="#_sxshader"></a>SxShader</h3>
+<div class="paragraph">
+<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_reference.html#reference" target="_blank" rel="noopener">Reference</a></strong></p>
+</div>
+<div class="paragraph">
+<p>Atribute methods.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>Static attribute handling.</p>
+<div class="paragraph">
+<p>Used for the lack of support for static attributes in GDScript. This class piggybacks on Engine.set_meta/Engine.get_meta.</p>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect3">
+<h4 id="_sxshader_methods"><a class="anchor" href="#_sxshader_methods"></a>Methods</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxshader_method_set_static_attribute">set_static_attribute</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> value )</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxshader_method_setup_static_attribute">setup_static_attribute</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> value )</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxshader_method_has_static_attribute">has_static_attribute</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute )</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxshader_method_get_static_attribute">get_static_attribute</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> default = null )</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_sxshader_method_descriptions"><a class="anchor" href="#_sxshader_method_descriptions"></a>Method Descriptions</h4>
+<div id="_sxshader_method_set_static_attribute" class="ulist">
+<ul>
+<li>
+<p><code>static void set_static_attribute ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> value )</code></p>
+<div class="paragraph">
+<p>Set a static attribute for a specific namespace and attribute name.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">SxAttr.set_static_attribute("MyNamespace", "foo", "bar")</code></pre>
+</div>
+</div>
+<div id="_sxshader_method_setup_static_attribute" class="ulist">
+<ul>
+<li>
+<p><code>static void setup_static_attribute ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> value )</code></p>
+<div class="paragraph">
+<p>Setup a static attribute, mostly used to set default values.</p>
+</div>
+<div class="paragraph">
+<p>If the attribute already exists, this method will not do anything.
+To override the attribute, use <code>set_static_attribute</code> instead.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">SxAttr.setup_static_attribute("MyNamespace", "foo", "default")</code></pre>
+</div>
+</div>
+<div id="_sxshader_method_has_static_attribute" class="ulist">
+<ul>
+<li>
+<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> has_static_attribute ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute )</code></p>
+<div class="paragraph">
+<p>Check if the static attribute exists.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">if SxAttr.has_static_attribute("MyNamespace", "foo"):
+    print("OK !")</code></pre>
+</div>
+</div>
+<div id="_sxshader_method_get_static_attribute" class="ulist">
+<ul>
+<li>
+<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> get_static_attribute ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> default = null )</code></p>
+<div class="paragraph">
+<p>Get a static attribute value.</p>
+</div>
+<div class="paragraph">
+<p>Return a default value if it does not exist.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">var my_value := SxAttr.get_static_attribute("MyNamespace", "foo", "bar") as String</code></pre>
+</div>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_sxaudiostreamplayer"><a class="anchor" href="#_sxaudiostreamplayer"></a>SxAudioStreamPlayer</h3>
 <div class="paragraph">
 <p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a></strong></p>
@@ -1298,12 +1425,12 @@ var trimmed_strings := SxArray.trim_strings(strings)
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray" target="_blank" rel="noopener">PoolByteArray</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxbuffer_method_zstd_compress">zstd_compress</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray" target="_blank" rel="noopener">PoolByteArray</a> array )</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_packedbytearray.html#packedbytearray" target="_blank" rel="noopener">PackedByteArray</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxbuffer_method_zstd_compress">zstd_compress</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_packedbytearray.html#packedbytearray" target="_blank" rel="noopener">PackedByteArray</a> array )</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray" target="_blank" rel="noopener">PoolByteArray</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxbuffer_method_zstd_decompress">zstd_decompress</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray" target="_blank" rel="noopener">PoolByteArray</a> array )</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_packedbytearray.html#packedbytearray" target="_blank" rel="noopener">PackedByteArray</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxbuffer_method_zstd_decompress">zstd_decompress</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_packedbytearray.html#packedbytearray" target="_blank" rel="noopener">PackedByteArray</a> array )</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -1313,7 +1440,7 @@ var trimmed_strings := SxArray.trim_strings(strings)
 <div id="_sxbuffer_method_zstd_compress" class="ulist">
 <ul>
 <li>
-<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray" target="_blank" rel="noopener">PoolByteArray</a> zstd_compress ( <a href="https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray" target="_blank" rel="noopener">PoolByteArray</a> array )</code></p>
+<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_packedbytearray.html#packedbytearray" target="_blank" rel="noopener">PackedByteArray</a> zstd_compress ( <a href="https://docs.godotengine.org/en/stable/classes/class_packedbytearray.html#packedbytearray" target="_blank" rel="noopener">PackedByteArray</a> array )</code></p>
 <div class="paragraph">
 <p>Compress a byte array using zstd, adding original content size at the beginning.</p>
 </div>
@@ -1327,7 +1454,7 @@ To have a valid zstd compressed data, you need to strip the first 64 bits.</p>
 <div id="_sxbuffer_method_zstd_decompress" class="ulist">
 <ul>
 <li>
-<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray" target="_blank" rel="noopener">PoolByteArray</a> zstd_decompress ( <a href="https://docs.godotengine.org/en/stable/classes/class_poolbytearray.html#poolbytearray" target="_blank" rel="noopener">PoolByteArray</a> array )</code></p>
+<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_packedbytearray.html#packedbytearray" target="_blank" rel="noopener">PackedByteArray</a> zstd_decompress ( <a href="https://docs.godotengine.org/en/stable/classes/class_packedbytearray.html#packedbytearray" target="_blank" rel="noopener">PackedByteArray</a> array )</code></p>
 <div class="paragraph">
 <p>Decompress a byte array generated with <code>zstd_compress</code>.</p>
 </div>
@@ -5749,15 +5876,15 @@ GameMusicPlayer.play_stream(my_sound)</code></pre>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxnetwork_method_get_nuid">get_nuid</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node )</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxnetwork_method_get_nuid">get_nuid</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node, <a href="https://docs.godotengine.org/en/stable/classes/class_nodepath.html#nodepath" target="_blank" rel="noopener">NodePath</a> multiplayer_node_path )</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxnetwork_method_get_sender_nuid">get_sender_nuid</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node )</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxnetwork_method_get_sender_nuid">get_sender_nuid</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node, <a href="https://docs.godotengine.org/en/stable/classes/class_nodepath.html#nodepath" target="_blank" rel="noopener">NodePath</a> multiplayer_node_path )</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxnetwork_method_is_root">is_root</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node )</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxnetwork_method_is_root">is_root</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node, <a href="https://docs.godotengine.org/en/stable/classes/class_nodepath.html#nodepath" target="_blank" rel="noopener">NodePath</a> multiplayer_node_path )</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a></code></p></td>
@@ -5765,19 +5892,19 @@ GameMusicPlayer.play_stream(my_sound)</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxnetwork_method_is_network_master">is_network_master</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node )</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxnetwork_method_is_multiplayer_authority">is_multiplayer_authority</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node, <a href="https://docs.godotengine.org/en/stable/classes/class_nodepath.html#nodepath" target="_blank" rel="noopener">NodePath</a> multiplayer_node_path )</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxnetwork_method_get_network_master">get_network_master</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node )</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxnetwork_method_get_multiplayer_authority">get_multiplayer_authority</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node, <a href="https://docs.godotengine.org/en/stable/classes/class_nodepath.html#nodepath" target="_blank" rel="noopener">NodePath</a> multiplayer_node_path )</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxnetwork_method_is_network_server">is_network_server</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree" target="_blank" rel="noopener">SceneTree</a> tree )</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxnetwork_method_is_server">is_server</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree" target="_blank" rel="noopener">SceneTree</a> tree, <a href="https://docs.godotengine.org/en/stable/classes/class_nodepath.html#nodepath" target="_blank" rel="noopener">NodePath</a> multiplayer_node_path )</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxnetwork_method_is_network_enabled">is_network_enabled</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree" target="_blank" rel="noopener">SceneTree</a> tree )</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxnetwork_method_is_network_enabled">is_network_enabled</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree" target="_blank" rel="noopener">SceneTree</a> tree, <a href="https://docs.godotengine.org/en/stable/classes/class_nodepath.html#nodepath" target="_blank" rel="noopener">NodePath</a> multiplayer_node_path )</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a></code></p></td>
@@ -5791,7 +5918,7 @@ GameMusicPlayer.play_stream(my_sound)</code></pre>
 <div id="_sxnetwork_method_get_nuid" class="ulist">
 <ul>
 <li>
-<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> get_nuid ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node )</code></p>
+<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> get_nuid ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node, <a href="https://docs.godotengine.org/en/stable/classes/class_nodepath.html#nodepath" target="_blank" rel="noopener">NodePath</a> multiplayer_node_path )</code></p>
 <div class="paragraph">
 <p>Shortcut to get the network unique ID for the scene tree which contains the target node.</p>
 </div>
@@ -5806,13 +5933,13 @@ extends Node
 
 func _ready() -&gt; void:
     # Get the current network ID
-    var my_id := SxNetwork.get_nuid(self)</code></pre>
+    var my_id := SxNetwork.get_nuid(self, NodePath(""))</code></pre>
 </div>
 </div>
 <div id="_sxnetwork_method_get_sender_nuid" class="ulist">
 <ul>
 <li>
-<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> get_sender_nuid ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node )</code></p>
+<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> get_sender_nuid ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node, <a href="https://docs.godotengine.org/en/stable/classes/class_nodepath.html#nodepath" target="_blank" rel="noopener">NodePath</a> multiplayer_node_path )</code></p>
 <div class="paragraph">
 <p>Shortcut to get the sender network unique ID for the scene tree which contains the target node.</p>
 </div>
@@ -5825,15 +5952,15 @@ func _ready() -&gt; void:
 <pre class="highlight"><code class="language-gdscript" data-lang="gdscript"># Script for a random node
 extends Node
 
-master func _on_master_call():
+@rpc func _on_master_call():
     # Get the sender network ID
-    var sender_id := SxNetwork.get_sender_nuid(self)</code></pre>
+    var sender_id := SxNetwork.get_sender_nuid(self, NodePath(""))</code></pre>
 </div>
 </div>
 <div id="_sxnetwork_method_is_root" class="ulist">
 <ul>
 <li>
-<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> is_root ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node )</code></p>
+<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> is_root ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node, <a href="https://docs.godotengine.org/en/stable/classes/class_nodepath.html#nodepath" target="_blank" rel="noopener">NodePath</a> multiplayer_node_path )</code></p>
 <div class="paragraph">
 <p>Shortcut to check if the current network unique ID is the number 1.</p>
 </div>
@@ -5846,9 +5973,9 @@ master func _on_master_call():
 <pre class="highlight"><code class="language-gdscript" data-lang="gdscript"># Script for a random node
 extends Node
 
-remote func _on_remote_call():
+@rpc func _on_remote_call():
     # Am I root?
-    if SxNetwork.is_root(self):
+    if SxNetwork.is_root(self, NodePath("")):
         print("Yay!")</code></pre>
 </div>
 </div>
@@ -5873,12 +6000,12 @@ var name = SxNetwork.generate_network_name("60b9798a-e989-4a74-8b78-d2fe544fcca2
 # =&gt; name = "60b9798a-e989-4a74-8b78-d2fe544fcca2"</code></pre>
 </div>
 </div>
-<div id="_sxnetwork_method_is_network_master" class="ulist">
+<div id="_sxnetwork_method_is_multiplayer_authority" class="ulist">
 <ul>
 <li>
-<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> is_network_master ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node )</code></p>
+<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> is_multiplayer_authority ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node, <a href="https://docs.godotengine.org/en/stable/classes/class_nodepath.html#nodepath" target="_blank" rel="noopener">NodePath</a> multiplayer_node_path )</code></p>
 <div class="paragraph">
-<p>Check if a node is a network master.
+<p>Check if a node is a multiplayer authority.
 If there is no network peer setup, it will not raise an error, it will return true.</p>
 </div>
 </li>
@@ -5888,16 +6015,16 @@ If there is no network peer setup, it will not raise an error, it will return tr
 <div class="title">Example</div>
 <div class="content">
 <pre class="highlight"><code class="language-gdscript" data-lang="gdscript">func _ready() -&gt; void:
-    if SxNetwork.is_network_master(self):
+    if SxNetwork.is_multiplayer_authority(self, NodePath("")):
         print("I have the control!")</code></pre>
 </div>
 </div>
-<div id="_sxnetwork_method_get_network_master" class="ulist">
+<div id="_sxnetwork_method_get_multiplayer_authority" class="ulist">
 <ul>
 <li>
-<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> get_network_master ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node )</code></p>
+<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_int.html#int" target="_blank" rel="noopener">int</a> get_multiplayer_authority ( <a href="https://docs.godotengine.org/en/stable/classes/class_node.html#node" target="_blank" rel="noopener">Node</a> node, <a href="https://docs.godotengine.org/en/stable/classes/class_nodepath.html#nodepath" target="_blank" rel="noopener">NodePath</a> multiplayer_node_path )</code></p>
 <div class="paragraph">
-<p>Get the network master ID for a target node.
+<p>Get the multiplayer authority ID for a target node.
 If there is no network peer setup, it will not raise an error, it will return 1 (for root).</p>
 </div>
 </li>
@@ -5907,15 +6034,15 @@ If there is no network peer setup, it will not raise an error, it will return 1 
 <div class="title">Example</div>
 <div class="content">
 <pre class="highlight"><code class="language-gdscript" data-lang="gdscript">func _ready() -&gt; void:
-    var master_id := SxNetwork.get_network_master(self)</code></pre>
+    var master_id := SxNetwork.get_multiplayer_authority(self, NodePath(""))</code></pre>
 </div>
 </div>
-<div id="_sxnetwork_method_is_network_server" class="ulist">
+<div id="_sxnetwork_method_is_server" class="ulist">
 <ul>
 <li>
-<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> is_network_server ( <a href="https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree" target="_blank" rel="noopener">SceneTree</a> tree )</code></p>
+<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> is_server ( <a href="https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree" target="_blank" rel="noopener">SceneTree</a> tree, <a href="https://docs.godotengine.org/en/stable/classes/class_nodepath.html#nodepath" target="_blank" rel="noopener">NodePath</a> multiplayer_node_path )</code></p>
 <div class="paragraph">
-<p>Check if the target tree is a network server.
+<p>Check if the target tree is a server.
 If there is no network peer setup, it will not raise an error, it will return true.</p>
 </div>
 </li>
@@ -5925,13 +6052,13 @@ If there is no network peer setup, it will not raise an error, it will return tr
 <div class="title">Example</div>
 <div class="content">
 <pre class="highlight"><code class="language-gdscript" data-lang="gdscript">func _ready() -&gt; void:
-    var is_server := SxNetwork.is_network_server(get_tree())</code></pre>
+    var is_server := SxNetwork.is_server(get_tree(), NodePath(""))</code></pre>
 </div>
 </div>
 <div id="_sxnetwork_method_is_network_enabled" class="ulist">
 <ul>
 <li>
-<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> is_network_enabled ( <a href="https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree" target="_blank" rel="noopener">SceneTree</a> tree )</code></p>
+<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> is_network_enabled ( <a href="https://docs.godotengine.org/en/stable/classes/class_scenetree.html#scenetree" target="_blank" rel="noopener">SceneTree</a> tree, <a href="https://docs.godotengine.org/en/stable/classes/class_nodepath.html#nodepath" target="_blank" rel="noopener">NodePath</a> multiplayer_node_path )</code></p>
 <div class="paragraph">
 <p>Check if the target tree has a network peer enabled.</p>
 </div>
@@ -5942,7 +6069,7 @@ If there is no network peer setup, it will not raise an error, it will return tr
 <div class="title">Example</div>
 <div class="content">
 <pre class="highlight"><code class="language-gdscript" data-lang="gdscript">func _ready() -&gt; void:
-    var is_network_peer_on := SxNetwork.is_network_enabled(get_tree())</code></pre>
+    var is_network_peer_on := SxNetwork.is_network_enabled(get_tree(), NodePath(""))</code></pre>
 </div>
 </div>
 <div id="_sxnetwork_method_uuid4" class="ulist">
@@ -7274,7 +7401,7 @@ It can be useful to cleanup stuff before the server quits.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sxshader"><a class="anchor" href="#_sxshader"></a>SxShader</h3>
+<h3 id="_sxshader_2"><a class="anchor" href="#_sxshader_2"></a>SxShader</h3>
 <div class="paragraph">
 <p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_reference.html#reference" target="_blank" rel="noopener">Reference</a></strong></p>
 </div>
@@ -7299,21 +7426,21 @@ It can be useful to cleanup stuff before the server quits.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxshader_method_get_shader_param">get_shader_param</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_canvasitem.html#canvasitem" target="_blank" rel="noopener">CanvasItem</a> item, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> name )</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxshader_method_get_shader_parameter">get_shader_parameter</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_canvasitem.html#canvasitem" target="_blank" rel="noopener">CanvasItem</a> item, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> name )</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxshader_method_set_shader_param">set_shader_param</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_canvasitem.html#canvasitem" target="_blank" rel="noopener">CanvasItem</a> item, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> name, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> value )</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxshader_method_set_shader_parameter">set_shader_parameter</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_canvasitem.html#canvasitem" target="_blank" rel="noopener">CanvasItem</a> item, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> name, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> value )</code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
 <h4 id="_sxshader_method_descriptions"><a class="anchor" href="#_sxshader_method_descriptions"></a>Method Descriptions</h4>
-<div id="_sxshader_method_get_shader_param" class="ulist">
+<div id="_sxshader_method_get_shader_parameter" class="ulist">
 <ul>
 <li>
-<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> get_shader_param ( <a href="https://docs.godotengine.org/en/stable/classes/class_canvasitem.html#canvasitem" target="_blank" rel="noopener">CanvasItem</a> item, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> name )</code></p>
+<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> get_shader_parameter ( <a href="https://docs.godotengine.org/en/stable/classes/class_canvasitem.html#canvasitem" target="_blank" rel="noopener">CanvasItem</a> item, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> name )</code></p>
 <div class="paragraph">
 <p>Get a shader param from a canvas item.</p>
 </div>
@@ -7329,10 +7456,10 @@ It can be useful to cleanup stuff before the server quits.</p>
 <pre class="highlight"><code class="language-gdscript" data-lang="gdscript">var param := SxShader.get_shader_param($MyNode, "ratio") as float</code></pre>
 </div>
 </div>
-<div id="_sxshader_method_set_shader_param" class="ulist">
+<div id="_sxshader_method_set_shader_parameter" class="ulist">
 <ul>
 <li>
-<p><code>static void set_shader_param ( <a href="https://docs.godotengine.org/en/stable/classes/class_canvasitem.html#canvasitem" target="_blank" rel="noopener">CanvasItem</a> item, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> name, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> value )</code></p>
+<p><code>static void set_shader_parameter ( <a href="https://docs.godotengine.org/en/stable/classes/class_canvasitem.html#canvasitem" target="_blank" rel="noopener">CanvasItem</a> item, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> name, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> value )</code></p>
 <div class="paragraph">
 <p>Set a shader param on a canvas item.</p>
 </div>
@@ -8162,10 +8289,6 @@ var angle := SxTileMap.rotation_params_to_angle(params)</code></pre>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_font.html#font" target="_blank" rel="noopener">Font</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxui_method_get_default_font">get_default_font</a> ()</code></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxui_method_set_full_rect_no_mouse">set_full_rect_no_mouse</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_control.html#control" target="_blank" rel="noopener">Control</a> node )</code></p></td>
 </tr>
@@ -8178,16 +8301,6 @@ var angle := SxTileMap.rotation_params_to_angle(params)</code></pre>
 </div>
 <div class="sect3">
 <h4 id="_sxui_method_descriptions"><a class="anchor" href="#_sxui_method_descriptions"></a>Method Descriptions</h4>
-<div id="_sxui_method_get_default_font" class="ulist">
-<ul>
-<li>
-<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_font.html#font" target="_blank" rel="noopener">Font</a> get_default_font ()</code></p>
-<div class="paragraph">
-<p>Get the default Godot font.</p>
-</div>
-</li>
-</ul>
-</div>
 <div id="_sxui_method_set_full_rect_no_mouse" class="ulist">
 <ul>
 <li>
@@ -8508,7 +8621,7 @@ and on joysticks, you can affect 4 actions keys, one for each direction.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-03-09 13:18:17 UTC
+Last updated 2023-04-17 18:43:02 UTC
 </div>
 </div>
 </body>
