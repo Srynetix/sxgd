@@ -8,7 +8,7 @@
     </description>
     <tutorials></tutorials>
     <methods>
-        <method name="get_shader_param" qualifiers="static">
+        <method name="get_shader_parameter" qualifiers="static">
             <return type="Variant" />
             <argument index="0" name="item" type="CanvasItem" />
             <argument index="1" name="name" type="String" />
@@ -24,7 +24,7 @@
                 ----
             </description>
         </method>
-        <method name="set_shader_param" qualifiers="static">
+        <method name="set_shader_parameter" qualifiers="static">
             <return type="void" />
             <argument index="0" name="item" type="CanvasItem" />
             <argument index="1" name="name" type="String" />
