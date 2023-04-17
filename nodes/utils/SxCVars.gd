@@ -1,19 +1,17 @@
 extends Node
 class_name SxCVars
 
-const SENTINEL = Object()
-
 class _Vars:
     extends Object
 
     var sample := ""
 
-var _vars := _Vars.new()
+var _vars = _Vars.new()
 
-func get_cvar(name: String):
+func get_cvar(name: String) -> Variant:
     return _vars.get(name)
 
-func set_cvar(name: String, value):
+func set_cvar(name: String, value: Variant) -> void:
     _vars.set(name, value)
 
 func print_cvars() -> String:

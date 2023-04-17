@@ -1,5 +1,5 @@
 # Helper methods around core functions
-extends Reference
+extends Object
 class_name SxOs
 
 # Set the window size from a WIDTHxHEIGHT string.
@@ -11,7 +11,7 @@ class_name SxOs
 static func set_window_size_str(window_size: String) -> void:
     var sz_split := window_size.split("x")
     var sz_vec := Vector2(int(sz_split[0]), int(sz_split[1]))
-    OS.set_window_size(sz_vec)
+    DisplayServer.window_set_size(sz_vec)
 
 # Detect if the current system is a mobile environment.
 #
@@ -29,7 +29,7 @@ static func is_web() -> bool:
 
 class DirOrFile:
     # Represents a path: a directory or a file
-    extends Reference
+    extends Object
 
     enum Type {
         DIRECTORY = 0,
@@ -65,8 +65,7 @@ class DirOrFile:
 # List all files in a directory.
 static func list_files_in_directory(path: String, filters: Array) -> Array:
     var files := []
-    var directory := Directory.new()
-    directory.open(path)
+    var directory := DirAccess.open(path)
     directory.list_dir_begin()
     var file_name := directory.get_next()
 

@@ -9,8 +9,8 @@
     <tutorials></tutorials>
     <methods>
         <method name="zstd_compress" qualifiers="static">
-            <return type="PoolByteArray" />
-            <argument index="0" name="array" type="PoolByteArray" />
+            <return type="PackedByteArray" />
+            <argument index="0" name="array" type="PackedByteArray" />
             <description>
                 Compress a byte array using zstd, adding original content size at the beginning.
 
@@ -19,8 +19,8 @@
             </description>
         </method>
         <method name="zstd_decompress" qualifiers="static">
-            <return type="PoolByteArray" />
-            <argument index="0" name="array" type="PoolByteArray" />
+            <return type="PackedByteArray" />
+            <argument index="0" name="array" type="PackedByteArray" />
             <description>
                 Decompress a byte array generated with `zstd_compress`.
 

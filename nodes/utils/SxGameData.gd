@@ -16,7 +16,7 @@ var default_file_path := "user://save.dat"
 # Example:
 #   data.store_static_value("levels", json_levels)
 #   data.store_static_value("my_data", my_data, "my_category")
-func store_static_value(name: String, value, category: String = "default") -> void:
+func store_static_value(name: String, value: Variant, category: String = "default") -> void:
     _logger.debug("Storing static value '%s' in key '%s' [category: %s]." % [value, name, category])
     _set_value(_static_data, name, category, value)
 
@@ -26,7 +26,7 @@ func store_static_value(name: String, value, category: String = "default") -> vo
 # Example:
 #   var levels = data.load_static_value("levels", Dictionary())
 #   var levels = data.load_static_value("my_data", Dictionary(), "my_category")
-func load_static_value(name: String, orDefault = null, category: String = "default"):
+func load_static_value(name: String, orDefault: Variant = null, category: String = "default") -> Variant:
     if _has_value(_static_data, name, category):
         var value = _get_value(_static_data, name, category, null)
         _logger.debug("Loading stored static value '%s' from key '%s' [category: %s]." % [value, name, category])
@@ -41,7 +41,7 @@ func load_static_value(name: String, orDefault = null, category: String = "defau
 # Example:
 #   data.store_temporary_value("foo", "bar")
 #   data.store_temporary_value("foo", "bar", "my_category")
-func store_temporary_value(name: String, value, category: String = "default") -> void:
+func store_temporary_value(name: String, value: Variant, category: String = "default") -> void:
     _logger.debug("Storing temporary value '%s' in key '%s' [category: %s]." % [value, name, category])
     _set_value(_temporary_data, name, category, value)
 
@@ -51,7 +51,7 @@ func store_temporary_value(name: String, value, category: String = "default") ->
 # Example:
 #   var levels = data.load_temporary_value("foo", "bar")
 #   var levels = data.load_temporary_value("foo", "bar", "my_category")
-func load_temporary_value(name: String, orDefault = null, category: String = "default"):
+func load_temporary_value(name: String, orDefault: Variant = null, category: String = "default") -> Variant:
     if _has_value(_temporary_data, name, category):
         var value = _get_value(_temporary_data, name, category, null)
         _logger.debug("Loading stored temporary value '%s' from key '%s' [category: %s]." % [value, name, category])
@@ -66,7 +66,7 @@ func load_temporary_value(name: String, orDefault = null, category: String = "de
 #   data.store_value("key", 123)
 #   data.store_value("key2", "hello")
 #   data.store_value("key3", "hello", "my_category")
-func store_value(name: String, value, category: String = "default") -> void:
+func store_value(name: String, value: Variant, category: String = "default") -> void:
     _logger.debug("Storing value '%s' in key '%s' [category: %s]." % [value, name, category])
     _set_value(_data, name, category, value)
 
@@ -76,7 +76,7 @@ func store_value(name: String, value, category: String = "default") -> void:
 #   var d1 = data.load_value("key")
 #   var d2 = data.load_value("key", 123)  # returns 123 if key is missing
 #   var d2 = data.load_value("key2", 123, "my_category")
-func load_value(name: String, orDefault = null, category: String = "default"):
+func load_value(name: String, orDefault: Variant = null, category: String = "default") -> Variant:
     if has_value(name, category):
         var value = _get_value(_data, name, category, null)
         _logger.debug("Loading stored value '%s' from key '%s' [category: %s]." % [value, name, category])
@@ -138,14 +138,9 @@ func persist_to_disk(path: String = "") -> void:
     if path != "":
         target_path = path
 
-    var f := File.new()
-    var error := f.open(target_path, File.WRITE)
-    if error == OK:
-        f.store_line(JSON.print(_data))
-        f.close()
-        _logger.debug("Game data persisted to path '%s'." % target_path)
-    else:
-        _logger.error("Could not persist data to path '%s' (error: %s)" % [target_path, error])
+    var f := FileAccess.open(target_path, FileAccess.WRITE)
+    f.store_line(JSON.stringify(_data))
+    _logger.debug("Game data persisted to path '%s'." % target_path)
 
 # Load game data from disk at a specific path.
 #
@@ -156,16 +151,15 @@ func load_from_disk(path: String = "") -> void:
     if path != "":
         target_path = path
 
-    var f := File.new()
-    var error := f.open(target_path, File.READ)
-    if error == OK:
-        _data = JSON.parse(f.get_as_text()).result
-        _logger.debug("Game data loaded from path '%s'" % target_path)
-    elif error == ERR_FILE_NOT_FOUND:
+    if !FileAccess.file_exists(target_path):
         _logger.debug("Missing saved game data, will create at path '%s'" % target_path)
         persist_to_disk(target_path)
     else:
-        _logger.error("Could not load game data from path '%s'" % target_path)
+        var file := FileAccess.open(target_path, FileAccess.READ)
+        var json := JSON.new()
+        json.parse(file.get_as_text())
+        _data = json.data
+        _logger.debug("Game data loaded from path '%s'" % target_path)
 
 # Clear all non-static data.
 func clear_all() -> void:
@@ -178,11 +172,11 @@ func clear_category(category: String) -> void:
 # Dump each variable from a specific category.
 func dump_category(category: String) -> String:
     var cat := _get_or_create_category(_data, category)
-    return JSON.print(cat, "", true)
+    return JSON.stringify(cat, "", true)
 
 # Dump all variables.
 func dump_all() -> String:
-    return JSON.print(_data, "", true)
+    return JSON.stringify(_data, "", true)
 
 func _clear_category(d: Dictionary, category: String) -> void:
     if d.has(category):

@@ -13,7 +13,7 @@ func _init():
 # Load resources in cache.
 #
 # Should be overriden by child classes.
-func load_resources():
+func load_resources() -> void:
     pass
 
 # Store a scene in the cache from its path.
@@ -80,4 +80,4 @@ func load_resource(resource_name: String) -> Resource:
 func instantiate_scene(scene_name: String) -> Node:
     var scene := load_scene(scene_name)
     _logger.trace("Instantiating scene '%s'." % scene_name)
-    return scene.instance()
+    return scene.instantiate()

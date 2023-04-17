@@ -24,18 +24,18 @@ var _input_state := {}
 var _actions := []
 var _logger := SxLog.get_logger("SxSyncPeerInput")
 
-func _load_known_actions() -> PoolStringArray:
+func _load_known_actions() -> PackedStringArray:
     # Read known actions from ProjectSettings.
     if ProjectSettings.has_setting(SETTING_SYNC_PEER_INPUT_ACTIONS):
-        var conf := ProjectSettings.get(SETTING_SYNC_PEER_INPUT_ACTIONS) as PoolStringArray
+        var conf := ProjectSettings.get(SETTING_SYNC_PEER_INPUT_ACTIONS) as PackedStringArray
         if len(conf) != 0:
             return conf
     push_warning("Using SxSyncPeerInput with no actions defined in %s. Set them in the Project Settings."  % SETTING_SYNC_PEER_INPUT_ACTIONS)
-    return PoolStringArray()
+    return PackedStringArray()
 
 func _init(peer_id: int = 1) -> void:
     name = "SxSyncPeerInput#%d" % peer_id
-    set_network_master(peer_id)
+    set_multiplayer_authority(peer_id)
     _actions = _load_known_actions()
 
     for action in _actions:
@@ -73,7 +73,7 @@ func get_action_strength(action_name: String) -> float:
         return 0.0
 
 func query_input() -> void:
-    if SxNetwork.is_network_master(self):
+    if SxNetwork.is_multiplayer_authority(self, NodePath("")):
         for action in _actions:
             _input_state[action].pressed = Input.is_action_pressed(action)
             _input_state[action].just_pressed = Input.is_action_just_pressed(action)
@@ -87,4 +87,4 @@ func _trace_input() -> void:
             break
 
     if should_trace:
-        _logger.debug_mn(SxNetwork.get_nuid(self), "_trace_input", "%s" % _input_state)
+        _logger.debug_mn(SxNetwork.get_nuid(self, NodePath("")), "_trace_input", "%s" % _input_state)

@@ -11,6 +11,7 @@
         <method name="get_nuid" qualifiers="static">
             <return type="int" />
             <argument index="0" name="node" type="Node" />
+            <argument index="1" name="multiplayer_node_path" type="NodePath" />
             <description>
                 Shortcut to get the network unique ID for the scene tree which contains the target node.
 
@@ -22,13 +23,14 @@
 
                 func _ready() -> void:
                     # Get the current network ID
-                    var my_id := SxNetwork.get_nuid(self)
+                    var my_id := SxNetwork.get_nuid(self, NodePath(""))
                 ----
             </description>
         </method>
         <method name="get_sender_nuid" qualifiers="static">
             <return type="int" />
             <argument index="0" name="node" type="Node" />
+            <argument index="1" name="multiplayer_node_path" type="NodePath" />
             <description>
                 Shortcut to get the sender network unique ID for the scene tree which contains the target node.
 
@@ -38,15 +40,16 @@
                 # Script for a random node
                 extends Node
 
-                master func _on_master_call():
+                @rpc func _on_master_call():
                     # Get the sender network ID
-                    var sender_id := SxNetwork.get_sender_nuid(self)
+                    var sender_id := SxNetwork.get_sender_nuid(self, NodePath(""))
                 ----
             </description>
         </method>
         <method name="is_root" qualifiers="static">
             <return type="bool" />
             <argument index="0" name="node" type="Node" />
+            <argument index="1" name="multiplayer_node_path" type="NodePath" />
             <description>
                 Shortcut to check if the current network unique ID is the number 1.
 
@@ -56,9 +59,9 @@
                 # Script for a random node
                 extends Node
 
-                remote func _on_remote_call():
+                @rpc func _on_remote_call():
                     # Am I root?
-                    if SxNetwork.is_root(self):
+                    if SxNetwork.is_root(self, NodePath("")):
                         print("Yay!")
                 ----
             </description>
@@ -82,55 +85,59 @@
                 ----
             </description>
         </method>
-        <method name="is_network_master" qualifiers="static">
+        <method name="is_multiplayer_authority" qualifiers="static">
             <return type="bool" />
             <argument index="0" name="node" type="Node" />
+            <argument index="1" name="multiplayer_node_path" type="NodePath" />
             <description>
-                Check if a node is a network master.
+                Check if a node is a multiplayer authority.
                 If there is no network peer setup, it will not raise an error, it will return true.
 
                 [source,gdscript]
                 .Example
                 ----
                 func _ready() -> void:
-                    if SxNetwork.is_network_master(self):
+                    if SxNetwork.is_multiplayer_authority(self, NodePath("")):
                         print("I have the control!")
                 ----
             </description>
         </method>
-        <method name="get_network_master" qualifiers="static">
+        <method name="get_multiplayer_authority" qualifiers="static">
             <return type="int" />
             <argument index="0" name="node" type="Node" />
+            <argument index="1" name="multiplayer_node_path" type="NodePath" />
             <description>
-                Get the network master ID for a target node.
+                Get the multiplayer authority ID for a target node.
                 If there is no network peer setup, it will not raise an error, it will return 1 (for root).
 
                 [source,gdscript]
                 .Example
                 ----
                 func _ready() -> void:
-                    var master_id := SxNetwork.get_network_master(self)
+                    var master_id := SxNetwork.get_multiplayer_authority(self, NodePath(""))
                 ----
             </description>
         </method>
-        <method name="is_network_server" qualifiers="static">
+        <method name="is_server" qualifiers="static">
             <return type="bool" />
             <argument index="0" name="tree" type="SceneTree" />
+            <argument index="1" name="multiplayer_node_path" type="NodePath" />
             <description>
-                Check if the target tree is a network server.
+                Check if the target tree is a server.
                 If there is no network peer setup, it will not raise an error, it will return true.
 
                 [source,gdscript]
                 .Example
                 ----
                 func _ready() -> void:
-                    var is_server := SxNetwork.is_network_server(get_tree())
+                    var is_server := SxNetwork.is_server(get_tree(), NodePath(""))
                 ----
             </description>
         </method>
         <method name="is_network_enabled" qualifiers="static">
             <return type="bool" />
             <argument index="0" name="tree" type="SceneTree" />
+            <argument index="1" name="multiplayer_node_path" type="NodePath" />
             <description>
                 Check if the target tree has a network peer enabled.
 
@@ -138,7 +145,7 @@
                 .Example
                 ----
                 func _ready() -> void:
-                    var is_network_peer_on := SxNetwork.is_network_enabled(get_tree())
+                    var is_network_peer_on := SxNetwork.is_network_enabled(get_tree(), NodePath(""))
                 ----
             </description>
         </method>

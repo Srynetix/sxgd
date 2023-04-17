@@ -4,6 +4,7 @@ class_name SxRpcService
 var client: SxClientRpc
 var server: SxServerRpc
 var sync_input: SxSyncInput
+var multiplayer_node_path: NodePath = ""
 
 func _ready():
     client = SxClientRpc.new()
@@ -17,6 +18,7 @@ func _ready():
 
     client.link_service(self)
     server.link_service(self)
+    sync_input.link_service(self)
 
 static func get_from_tree(tree: SceneTree):
     var target := tree.root.get_node_or_null("MainRpcService")

@@ -1,5 +1,5 @@
 # Array extensions
-extends Reference
+extends Object
 class_name SxArray
 
 # Trim each strings from a string array.

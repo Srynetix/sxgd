@@ -1,10 +1,10 @@
 # A debug panel showing performance info, shown with the F12 key.
 # When shown, you can reload the current scene with F5 and pause the game with F2.
-tool
+@tool
 extends CanvasLayer
 class_name SxDebugInfo
 
-const FONT_DATA := preload("res://addons/sxgd/assets/fonts/Jost-400-Book.ttf")
+const font := preload("res://addons/sxgd/assets/fonts/Jost-400-Book.ttf")
 
 var _label: RichTextLabel
 
@@ -17,33 +17,26 @@ func set_visibility(value: bool) -> void:
     _label.visible = value
 
 func _ready() -> void:
-    pause_mode = PAUSE_MODE_PROCESS
+    process_mode = Node.PROCESS_MODE_ALWAYS
     layer = 99
     name = "SxDebugInfo"
 
-    var font := DynamicFont.new()
-    font.size = 12
-    font.outline_size = 2
-    font.outline_color = Color.black
-    font.use_mipmaps = true
-    font.use_filter = true
-    font.font_data = FONT_DATA
-
     var container := MarginContainer.new()
-    container.set_anchors_and_margins_preset(Control.PRESET_WIDE)
+    container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
     container.mouse_filter = Control.MOUSE_FILTER_IGNORE
-    container.set("custom_constants/margin_right", 10)
-    container.set("custom_constants/margin_left", 10)
-    container.set("custom_constants/margin_top", 10)
-    container.set("custom_constants/margin_bottom", 10)
+    container.add_theme_constant_override("margin_right", 10)
+    container.add_theme_constant_override("margin_left", 10)
+    container.add_theme_constant_override("margin_top", 10)
+    container.add_theme_constant_override("margin_bottom", 10)
     add_child(container)
 
     _label = RichTextLabel.new()
-    _label.margin_left = 10.0
-    _label.margin_top = 10.0
     _label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-    _label.set("custom_colors/default_color", Color(1, 0.43, 0.52, 1))
-    _label.set("custom_fonts/normal_font", font)
+    _label.add_theme_color_override("default_color", Color(1, 0.43, 0.52, 1))
+    _label.add_theme_color_override("font_outline_color", Color.BLACK)
+    _label.add_theme_constant_override("outline_size", 6)
+    _label.add_theme_font_size_override("normal_font_size", 12)
+    _label.add_theme_font_override("normal_font", font)
     _label.text = "FPS"
     container.add_child(_label)
 
@@ -61,9 +54,7 @@ func _process(delta):
         text += " Audio latency: %s ms\n" % (Performance.get_monitor(Performance.AUDIO_OUTPUT_LATENCY) * 1000)
         text += " Video memory used: %s MB\n" % (mem_used_megs)
         text += "\n"
-        text += " 2D Draw calls: %s\n" % Performance.get_monitor(Performance.RENDER_2D_DRAW_CALLS_IN_FRAME)
-        text += " Draw calls: %s\n" % Performance.get_monitor(Performance.RENDER_DRAW_CALLS_IN_FRAME)
-        text += " 2D items: %s\n" % Performance.get_monitor(Performance.RENDER_2D_ITEMS_IN_FRAME)
+        text += " Draw calls: %s\n" % Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME)
         text += "\n"
         text += " Object count: %s\n" % Performance.get_monitor(Performance.OBJECT_COUNT)
         text += " Node count: %s\n" % Performance.get_monitor(Performance.OBJECT_NODE_COUNT)

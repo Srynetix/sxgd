@@ -1,4 +1,4 @@
-tool
+@tool
 extends RichTextEffect
 
 var bbcode := "sxgd-fadein"
@@ -9,7 +9,7 @@ func _process_custom_fx(char_fx: CharFXTransform) -> bool:
     var fade_out_delay := char_fx.env["fadeoutdelay"] as float
 
     var time_per_char := 1 * char_delay
-    var char_amount := time_per_char * char_fx.absolute_index
+    var char_amount := time_per_char * char_fx.relative_index
     var total_time := time_per_char * chars_count
 
     if char_fx.elapsed_time > char_amount - time_per_char:

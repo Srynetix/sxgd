@@ -5,8 +5,8 @@ class_name SxDoubleTap
 
 signal doubletap(touch_idx)
 
-export var should_process_input := true
-export var threshold_ms := 200
+@export var should_process_input := true
+@export var threshold_ms := 200
 
 var _time_per_touch := {}
 
@@ -44,7 +44,7 @@ func process_doubletap(event: InputEvent) -> DoubleTapData:
         var touch_event := event as InputEventScreenTouch
         var touch_idx := touch_event.index
         if touch_event.pressed:
-            var this_time := OS.get_ticks_msec()
+            var this_time := Time.get_ticks_msec()
             if _time_per_touch.has(touch_idx):
                 var last_time := _time_per_touch[touch_idx] as int
                 if this_time - last_time <= threshold_ms:

@@ -4,13 +4,13 @@
 extends Control
 class_name SxSceneRunner
 
-const FONT_DATA = preload("res://addons/sxgd/assets/fonts/Jost-400-Book.ttf")
+const font := preload("res://addons/sxgd/assets/fonts/Jost-400-Book.ttf")
 
 signal scene_loaded(name)
 signal go_back()
 
-export var show_back_button := true
-export(String, DIR) var scene_folder: String
+@export var show_back_button := true
+@export_dir var scene_folder: String
 
 const SCENE_KEY_RESET := KEY_I
 const SCENE_KEY_PREV := KEY_O
@@ -27,16 +27,9 @@ var _known_scenes := []
 var _current_scene := 0
 
 func _build_ui() -> void:
-    var font := DynamicFont.new()
-    font.size = 24
-    font.font_data = FONT_DATA
-
-    var smaller_font := DynamicFont.new()
-    smaller_font.font_data = FONT_DATA
-
     var color_rect := ColorRect.new()
     color_rect.name = "ColorRect"
-    color_rect.color = Color.black
+    color_rect.color = Color.BLACK
     SxUi.set_full_rect_no_mouse(color_rect)
     add_child(color_rect)
 
@@ -59,7 +52,8 @@ func _build_ui() -> void:
     _backbutton.name = "BackButton"
     _backbutton.size_flags_horizontal = Control.SIZE_SHRINK_END
     _backbutton.size_flags_vertical = 0
-    _backbutton.set("custom_fonts/font", font)
+    _backbutton.add_theme_font_override("font", font)
+    _backbutton.add_theme_font_size_override("font_size", 24)
     _backbutton.text = "Back"
     margin.add_child(_backbutton)
 
@@ -78,42 +72,45 @@ func _build_ui() -> void:
     _scene_name_label.name = "SceneName"
     _scene_name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
     _scene_name_label.size_flags_vertical = Control.SIZE_SHRINK_END
-    _scene_name_label.set("custom_fonts/font", smaller_font)
+    _scene_name_label.add_theme_font_override("font", font)
     _scene_name_label.text = "[NO SCENE FOUND]"
-    _scene_name_label.align = Label.ALIGN_RIGHT
+    _scene_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
     text_hbox.add_child(_scene_name_label)
 
     var inner_margin := MarginContainer.new()
     inner_margin.name = "Margin"
     inner_margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
-    inner_margin.set("custom_constants/margin_right", 10)
-    inner_margin.set("custom_constants/margin_top", 20)
-    inner_margin.set("custom_constants/margin_left", 10)
-    inner_margin.set("custom_constants/margin_bottom", 0)
+    inner_margin.add_theme_constant_override("margin_right", 10)
+    inner_margin.add_theme_constant_override("margin_top", 20)
+    inner_margin.add_theme_constant_override("margin_left", 10)
+    inner_margin.add_theme_constant_override("margin_bottom", 0)
     vbox.add_child(inner_margin)
 
     var buttons := HBoxContainer.new()
     buttons.name = "Buttons"
     buttons.mouse_filter = Control.MOUSE_FILTER_IGNORE
     buttons.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-    buttons.set("custom_constants/separation", 32)
+    buttons.add_theme_constant_override("separation", 32)
     inner_margin.add_child(buttons)
 
     _previous_btn = Button.new()
     _previous_btn.name = "Previous"
-    _previous_btn.set("custom_fonts/font", font)
+    _previous_btn.add_theme_font_override("font", font)
+    _previous_btn.add_theme_font_size_override("font_size", 24)
     _previous_btn.text = "< Prev."
     buttons.add_child(_previous_btn)
 
     _reset_btn = Button.new()
     _reset_btn.name = "Reset"
-    _reset_btn.set("custom_fonts/font", font)
+    _reset_btn.add_theme_font_override("font", font)
+    _reset_btn.add_theme_font_size_override("font_size", 24)
     _reset_btn.text = "Reset"
     buttons.add_child(_reset_btn)
 
     _next_btn = Button.new()
     _next_btn.name = "Next"
-    _next_btn.set("custom_fonts/font", font)
+    _next_btn.add_theme_font_override("font", font)
+    _next_btn.add_theme_font_size_override("font_size", 24)
     _next_btn.text = "Next >"
     buttons.add_child(_next_btn)
 
@@ -128,22 +125,22 @@ func _ready() -> void:
     _known_scenes = _discover_scenes()
     _load_first_scene()
 
-    _previous_btn.connect("pressed", self, "_load_prev_scene")
-    _reset_btn.connect("pressed", self, "_load_current_scene")
-    _next_btn.connect("pressed", self, "_load_next_scene")
-    _backbutton.connect("pressed", self, "_go_back")
+    _previous_btn.pressed.connect(_load_prev_scene)
+    _reset_btn.pressed.connect(_load_current_scene)
+    _next_btn.pressed.connect(_load_next_scene)
+    _backbutton.pressed.connect(_go_back)
 
 func _unhandled_input(event: InputEvent) -> void:
     if event is InputEventKey:
         var key_event := event as InputEventKey
         if key_event.pressed:
-            if key_event.scancode == SCENE_KEY_NEXT:
+            if key_event.keycode == SCENE_KEY_NEXT:
                 _load_next_scene()
-            elif key_event.scancode == SCENE_KEY_PREV:
+            elif key_event.keycode == SCENE_KEY_PREV:
                 _load_prev_scene()
-            elif key_event.scancode == SCENE_KEY_RESET:
+            elif key_event.keycode == SCENE_KEY_RESET:
                 _load_current_scene()
-            elif key_event.scancode == KEY_ESCAPE:
+            elif key_event.keycode == KEY_ESCAPE:
                 _go_back()
 
 func _notification(what: int) -> void:
@@ -159,14 +156,13 @@ func _load_first_scene() -> void:
 
 func _discover_scenes() -> Array:
     var scenes := []
-    var dir := Directory.new()
     var idx := 1
 
     # Stop on empty scene folder
     if scene_folder == "":
         return scenes
 
-    dir.open(scene_folder)
+    var dir := DirAccess.open(scene_folder)
     dir.list_dir_begin()
 
     while true:
@@ -174,8 +170,9 @@ func _discover_scenes() -> Array:
         if file == "":
             break
 
-        if file.ends_with(".tscn"):
-            scenes.append([idx, file.trim_suffix(".tscn"), load(scene_folder + "/" + file)])
+        var remapped_file = file.trim_suffix(".remap")
+        if remapped_file.ends_with(".tscn"):
+            scenes.append([idx, remapped_file.trim_suffix(".tscn"), load(scene_folder + "/" + remapped_file)])
             idx += 1
 
     dir.list_dir_end()
@@ -192,10 +189,10 @@ func _load_current_scene() -> void:
         child.queue_free()
 
     # Load instance
-    var instance := entry_model.instance()
+    var instance := entry_model.instantiate()
     _scene_name_label.text = str(entry_idx) + " - " + entry_name + "\n" + str(entry_idx) + "/" + str(len(_known_scenes))
     _current.add_child(instance)
-    emit_signal("scene_loaded", entry_name)
+    emit_signal(scene_loaded.get_name(), entry_name)
 
 func _load_next_scene() -> void:
     if _current_scene == len(_known_scenes) - 1:
@@ -211,6 +208,6 @@ func _load_prev_scene() -> void:
         _current_scene -= 1
     _load_current_scene()
 
-func _go_back():
+func _go_back() -> void:
     _backbutton.mouse_filter = MOUSE_FILTER_IGNORE
-    emit_signal("go_back")
+    emit_signal(go_back.get_name())

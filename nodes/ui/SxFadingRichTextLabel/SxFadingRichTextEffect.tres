@@ -1,6 +1,6 @@
-[gd_resource type="RichTextEffect" load_steps=2 format=2]
+[gd_resource type="RichTextEffect" load_steps=2 format=3 uid="uid://be56xcpwt6w8u"]
 
-[ext_resource path="res://addons/sxgd/nodes/ui/SxFadingRichTextLabel/SxFadingRichTextEffect.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://addons/sxgd/nodes/ui/SxFadingRichTextLabel/SxFadingRichTextEffect.gd" id="1"]
 
 [resource]
-script = ExtResource( 1 )
+script = ExtResource("1")

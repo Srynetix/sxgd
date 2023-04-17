@@ -5,7 +5,7 @@
 #
 # On buttons, you can affect an action key (mapped in the Input Map),
 # and on joysticks, you can affect 4 actions keys, one for each direction.
-tool
+@tool
 extends Control
 class_name SxVirtualControls
 
@@ -16,7 +16,7 @@ enum DisplayMode {
 }
 
 # Controls display mode, defaults to "Only mobile"
-export(DisplayMode) var display_mode := DisplayMode.OnlyMobile as int
+@export var display_mode := DisplayMode.OnlyMobile
 
 func _ready():
     visible = false
@@ -25,5 +25,5 @@ func _ready():
     elif display_mode == DisplayMode.Always:
         visible = true
 
-    set_anchors_and_margins_preset(Control.PRESET_WIDE)
+    set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
     mouse_filter = Control.MOUSE_FILTER_IGNORE

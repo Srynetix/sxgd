@@ -7,13 +7,13 @@ class_name SxAudioStreamPlayer
 const MUTED_VOLUME = -100.0
 
 # Maximum simultaneous voices.
-export(int, 1, 16) var max_voices := 4
+@export_range(1, 16) var max_voices := 4
 # Audio bus output
-export var audio_bus_output := "Master"
+@export var audio_bus_output := "Master"
 # Audio streams to play
-export var streams := {}
+@export var streams := {}
 # Initial volume for each audio players
-export var initial_volume_db := 0.0
+@export var initial_volume_db := 0.0
 
 var _players := Array()
 var _player_data := {}
@@ -57,7 +57,7 @@ func fade_in_on_voice(voice: int, duration: float = 0.5) -> void:
 
     var tween = create_tween()
     tween.tween_property(player, "volume_db", last_tweaked_volume, duration)
-    yield(tween, "finished")
+    await tween.finished
 
 # Apply a "fade out" effect on sound with an optional duration in seconds.
 # Duration defaults to 0.5 seconds.
@@ -66,7 +66,7 @@ func fade_out_on_voice(voice: int, duration: float = 0.5) -> void:
 
     var tween = create_tween()
     tween.tween_property(player, "volume_db", MUTED_VOLUME, duration)
-    yield(tween, "finished")
+    await tween.finished
 
 func set_volume_on_voice(voice: int, volume: float) -> void:
     var player := _players[voice] as AudioStreamPlayer

@@ -1,21 +1,19 @@
 extends MarginContainer
 class_name SxDebugConsole
 
-const FONT_DATA := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
+const font := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
 
 var _logger := SxLog.get_logger("SxDebugConsole")
 
-const _STATIC := {}
-
 class _Args:
     var command_name: String
-    var args: PoolStringArray
+    var args: PackedStringArray
 
     func _init(command: String):
         var parsed = command.split(" ")
 
         self.command_name = parsed[0]
-        self.args = PoolStringArray()
+        self.args = PackedStringArray()
 
         var i = 1
         while i < len(parsed):
@@ -36,30 +34,24 @@ var _scrollcontainer: ScrollContainer
 var _scrollbuffer: Label
 var _inputfield: SxDebugConsoleLineEdit
 
-var _history := PoolStringArray()
+var _history := PackedStringArray()
 var _history_cursor := 0
 
 static func bind_cvars(vars: SxCVars) -> void:
-    _STATIC["vars"] = vars
+    SxAttr.set_static_attribute("SxDebugConsole", "vars", vars)
 
 static func _get_cvars_object() -> SxCVars:
-    var elem = _STATIC.get("vars")
+    var elem := SxAttr.get_static_attribute("SxDebugConsole", "vars", null) as SxCVars
     assert(elem != null, "CVars are not bound to the SxDebugConsole. Use SxDebugConsole.bind_cvars(<instance>).")
     return elem
 
 func _build_ui() -> void:
-    var font := DynamicFont.new()
-    font.size = 14
-    font.use_mipmaps = true
-    font.use_filter = true
-    font.font_data = FONT_DATA
-
     anchor_right = 1.0
     anchor_bottom = 1.0
     SxUi.set_margin_container_margins(self, 10.0)
 
     var panel := Panel.new()
-    panel.self_modulate = SxColor.with_alpha_f(Color.white, 0.17)
+    panel.self_modulate = SxColor.with_alpha_f(Color.WHITE, 0.17)
     panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
     add_child(panel)
 
@@ -68,6 +60,7 @@ func _build_ui() -> void:
     add_child(container)
 
     var vbox := VBoxContainer.new()
+    vbox.add_theme_constant_override("separation", 10)
     container.add_child(vbox)
 
     _scrollcontainer = ScrollContainer.new()
@@ -78,26 +71,28 @@ func _build_ui() -> void:
     _scrollbuffer = Label.new()
     _scrollbuffer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
     _scrollbuffer.size_flags_vertical = Control.SIZE_EXPAND_FILL
-    _scrollbuffer.set("custom_fonts/font", font)
-    _scrollbuffer.valign = Label.VALIGN_BOTTOM
+    _scrollbuffer.add_theme_font_override("font", font)
+    _scrollbuffer.add_theme_font_size_override("font_size", 14)
+    _scrollbuffer.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
     _scrollcontainer.add_child(_scrollbuffer)
 
     _inputfield = SxDebugConsoleLineEdit.new()
-    _inputfield.caret_blink = true
+    _inputfield.add_theme_font_override("font", font)
+    _inputfield.add_theme_font_size_override("font_size", 14)
     vbox.add_child(_inputfield)
 
 func _ready() -> void:
     _build_ui()
 
-    _inputfield.connect("text_entered", self, "_process_input_field")
-    _inputfield.connect("history_up", self, "_history_up")
-    _inputfield.connect("history_down", self, "_history_down")
+    _inputfield.text_submitted.connect(_process_input_field)
+    _inputfield.history_up.connect(_history_up)
+    _inputfield.history_down.connect(_history_down)
 
     _clear_scrollbuffer()
     _add_scrollbuffer_contents(_print_motd())
 
 func _process_input_field(contents: String) -> void:
-    if !contents:
+    if contents == "":
         return
 
     _add_scrollbuffer_contents("\n>>> %s" % contents)
@@ -107,7 +102,7 @@ func _process_input_field(contents: String) -> void:
     _inputfield.text = ""
 
 func _get_font_height() -> int:
-    return int(_scrollbuffer.get_font("font").get_height()) * 2
+    return int(_scrollbuffer.get_theme_font("font").get_height()) * 2
 
 func _count_nl(contents: String) -> int:
     return contents.count("\n")
@@ -115,12 +110,12 @@ func _count_nl(contents: String) -> int:
 func _add_scrollbuffer_contents(contents: String) -> void:
     var newlines = _count_nl(contents) + 1
     _scrollbuffer.text += contents + "\n"
-    yield(get_tree(), "idle_frame")
+    await get_tree().process_frame
     _scrollcontainer.scroll_vertical += _get_font_height() * newlines
 
 func _clear_scrollbuffer() -> void:
     _scrollbuffer.text = ""
-    yield(get_tree(), "idle_frame")
+    await get_tree().process_frame
     _scrollcontainer.scroll_vertical = 0
 
 func _print_motd() -> String:
@@ -156,7 +151,8 @@ func _print_help() -> String:
 - motd: Show the initial message.
 - scene_reload: Reload the current scene.
 - set: Set a parameter value from a node (args: nodepath parameter value).
-- show: Get node information (args: nodepath)."""
+- show: Get node information (args: nodepath).
+- tree: Show node tree."""
 
 func _process_command(command: String) -> String:
     _add_history(command)
@@ -190,22 +186,24 @@ func _process_command(command: String) -> String:
             return _cmd_set(args.args)
         "show":
             return _cmd_show(args.args)
+        "tree":
+            return _cmd_tree()
     return "Unknown command: %s" % command
 
 func _parse_command(command: String) -> _Args:
     return _Args.new(command)
 
-func _cmd_echo(args: PoolStringArray) -> String:
-    return args.join(" ")
+func _cmd_echo(args: PackedStringArray) -> String:
+    return " ".join(args)
 
 func _cmd_history() -> String:
-    return _history.join("\n")
+    return "\n".join(_history)
 
 func _cmd_scene_reload() -> String:
     get_tree().reload_current_scene()
     return ""
 
-func _cmd_get(args: PoolStringArray) -> String:
+func _cmd_get(args: PackedStringArray) -> String:
     if len(args) != 2:
         return _cmd_error("'get' should take two arguments: the 'nodepath' and the 'parameter'.")
 
@@ -221,17 +219,35 @@ func _cmd_get(args: PoolStringArray) -> String:
 func _cmd_error(msg: String) -> String:
     return "Error: %s" % msg
 
-func _cmd_show(args: PoolStringArray) -> String:
+func _cmd_show(args: PackedStringArray) -> String:
     if len(args) != 1:
         return _cmd_error("'show' should take one argument: the 'nodepath'.")
 
     var nodepath := args[0] as String
-    var node = get_node_or_null(nodepath)
+    var node := get_node_or_null(nodepath)
     if !node:
         return _error_unknown_node(nodepath)
-    return str(node)
 
-func _cmd_set(args: PoolStringArray) -> String:
+    var node_name = str(node)
+    var output = "Node: " + node_name + "\n" + "Props: " + "\n"
+    var node_props = node.get_property_list()
+
+    for prop in node_props:
+        var usage = prop["usage"]
+        if usage & PROPERTY_USAGE_GROUP != 0:
+            continue
+        if usage & PROPERTY_USAGE_CATEGORY != 0:
+            continue
+        if usage & PROPERTY_USAGE_INTERNAL != 0:
+            continue
+        if usage & PROPERTY_USAGE_SUBGROUP != 0:
+            continue
+
+        output += " - " + prop["name"] + " = " + str(node.get(prop["name"])) + " (" + str(prop["usage"]) + ")\n"
+
+    return output
+
+func _cmd_set(args: PackedStringArray) -> String:
     if len(args) != 3:
         return _cmd_error("'set' should take three arguments: the 'nodepath', the 'parameter', and the 'value'.")
 
@@ -306,15 +322,15 @@ func _history_up() -> void:
     if _history:
         _history_cursor = int(clamp(_history_cursor - 1, 0, len(_history) - 1))
         _inputfield.text = _history[_history_cursor]
-        yield(get_tree(), "idle_frame")
-        _inputfield.caret_position = len(_inputfield.text)
+        await get_tree().process_frame
+        _inputfield.caret_column = len(_inputfield.text)
 
 func _history_down() -> void:
     if _history:
         _history_cursor = int(clamp(_history_cursor + 1, 0, len(_history) - 1))
         _inputfield.text = _history[_history_cursor]
 
-func _cmd_cvar_set(args: PoolStringArray) -> String:
+func _cmd_cvar_set(args: PackedStringArray) -> String:
     if len(args) != 2:
         return _cmd_error("'cvar_set' should take two arguments: the 'cvar_name', and the 'cvar_value'.")
 
@@ -328,7 +344,7 @@ func _cmd_cvar_set(args: PoolStringArray) -> String:
     cvars_obj.set_cvar(cvar_name, converted_value)
     return str(cvars_obj.get_cvar(cvar_name))
 
-func _cmd_cvar_get(args: PoolStringArray) -> String:
+func _cmd_cvar_get(args: PackedStringArray) -> String:
     if len(args) != 1:
         return _cmd_error("'cvar_get' should take one argument: the 'cvar_name'.")
 
@@ -339,7 +355,7 @@ func _cmd_cvar_list() -> String:
     var cvars_obj = _get_cvars_object()
     return cvars_obj.print_cvars()
 
-func _cmd_call(args: PoolStringArray) -> String:
+func _cmd_call(args: PackedStringArray) -> String:
     if len(args) < 2:
         return _cmd_error("'call' should take at least two arguments: the 'nodepath', the 'methodpath', then optional 'args'.")
 
@@ -355,3 +371,6 @@ func _cmd_call(args: PoolStringArray) -> String:
         i += 1
 
     return str(node.callv(args[1], remaining_args))
+
+func _cmd_tree() -> String:
+    return SxNode.print_tree_pretty_to_string(get_tree().root)

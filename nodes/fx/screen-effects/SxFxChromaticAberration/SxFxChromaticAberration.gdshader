@@ -1,6 +1,7 @@
 // Adapted from https://gist.github.com/uheartbeast/312a7ea761b8712c448b31c30c0d8f1f
 shader_type canvas_item;
 
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 uniform bool apply = false;
 uniform float amount = 1.0;
 

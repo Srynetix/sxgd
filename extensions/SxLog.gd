@@ -1,23 +1,25 @@
 # Log utilities.
-extends Reference
+extends Object
 class_name SxLog
 
 # Log level
 enum LogLevel { TRACE, DEBUG, INFO, WARN, ERROR, CRITICAL }
 
 class _LogData:
-    const _static_data := {"messages": [], "cursor": 0}
-
     static func get_messages() -> Array:
-        return _static_data["messages"]
+        SxAttr.setup_static_attribute("SxLog_LogData", "messages", [])
+        return SxAttr.get_static_attribute("SxLog_LogData", "messages")
 
     static func add_message(message: LogMessage) -> void:
-        _static_data["messages"].append(message)
+        SxAttr.setup_static_attribute("SxLog_LogData", "messages", [])
+        var arr := SxAttr.get_static_attribute("SxLog_LogData", "messages") as Array
+        arr.append(message)
 
     static func pop_messages() -> Array:
-        var messages := _static_data["messages"] as Array
-        _static_data["messages"] = []
-        return messages
+        SxAttr.setup_static_attribute("SxLog_LogData", "messages", [])
+        var msg := SxAttr.get_static_attribute("SxLog_LogData", "messages") as Array
+        SxAttr.set_static_attribute("SxLog_LogData", "messages", [])
+        return msg
 
 class _LogUtils:
     static func level_to_string(level: int) -> String:
@@ -74,7 +76,7 @@ class LogMessage:
 
 # Single logger handle
 class Logger:
-    extends Reference
+    extends Object
 
     var name: String
     var max_level: int
@@ -210,7 +212,7 @@ class Logger:
         })
 
     func _get_elapsed_time() -> float:
-        return OS.get_ticks_msec() / 1000.0
+        return Time.get_ticks_msec() / 1000.0
 
     func _log(level: int, message: String, args: Array = []) -> void:
         if !_is_level_shown(level):
@@ -248,10 +250,6 @@ class Logger:
         )
         _LogData.add_message(log_message)
 
-const _static_data := {
-    "loggers": {},
-}
-
 const SHOW_IN_CONSOLE := true
 const DEFAULT_LOG_LEVEL := LogLevel.INFO
 
@@ -260,12 +258,13 @@ const DEFAULT_LOG_LEVEL := LogLevel.INFO
 # Example:
 #   var logger := SxLog.get_logger("my_logger")
 static func get_logger(name: String) -> Logger:
-    var loggers := _static_data["loggers"] as Dictionary
+    SxAttr.setup_static_attribute("SxLog", "loggers", {})
+    var loggers := SxAttr.get_static_attribute("SxLog", "loggers") as Dictionary
     if loggers.has(name):
-        return _static_data["loggers"][name]
+        return loggers[name]
     else:
         var logger := Logger.new(name, DEFAULT_LOG_LEVEL, SHOW_IN_CONSOLE)
-        _static_data["loggers"][name] = logger
+        loggers[name] = logger
         return logger
 
 static func get_messages() -> Array:
