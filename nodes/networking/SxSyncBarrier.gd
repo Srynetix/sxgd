@@ -24,14 +24,14 @@ func set_server_peer(peer: SxServerPeer):
     _server_peer = peer
 
 func _ready() -> void:
-    if !SxNetwork.is_server(get_tree()):
+    if !SxNetwork.is_server(get_tree(), _server_peer.rpc_service.multiplayer_node_path):
         rpc_id(1, "_peer_ready")
         queue_free()
     else:
         _startup_time = Time.get_ticks_msec() / 1000
 
 @rpc("any_peer") func _peer_ready() -> void:
-    var peer_id = SxNetwork.get_sender_nuid(self)
+    var peer_id = SxNetwork.get_sender_nuid(self, _server_peer.rpc_service.multiplayer_node_path)
     _logger.debug_m("_peer_ready", "Peer %d is ready for barrier %s" % [peer_id, self])
     _count += 1
 
