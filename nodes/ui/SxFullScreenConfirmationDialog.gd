@@ -82,3 +82,7 @@ func _on_yes() -> void:
 func _on_no() -> void:
     hide_dialog()
     emit_signal(canceled.get_name())
+
+func show_dialog() -> void:
+    super.show_dialog()
+    _no_btn.grab_focus()
