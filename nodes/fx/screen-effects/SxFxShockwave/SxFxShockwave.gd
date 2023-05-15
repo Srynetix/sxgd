@@ -11,6 +11,19 @@ const shader := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxShockwave
 @export var thickness := 0.0 : set = _set_thickness
 @export var wave_on_startup := false
 
+class WaveBuilder:
+    extends Object
+
+    var position := Vector2.ZERO
+
+    var speed := 2.0
+    var initial_force := 0.0
+    var target_force := 0.25
+    var initial_thickness := 0.0
+    var target_thickness := 0.2
+    var initial_wave_size := 0.1
+    var target_wave_size := 1.25
+
 var _tween: Tween
 
 func _set_wave_size(value: float) -> void:
@@ -49,16 +62,40 @@ func _set_thickness(value: float) -> void:
 
         SxShader.set_shader_parameter(self, "thickness", value)
 
-func start_wave(position: Vector2) -> void:
-    _set_wave_center(position)
+func start_wave(unit_position: Vector2, speed: float = 2, max_force = 0.25, max_thickness = 0.2) -> void:
+    _set_wave_center(unit_position)
 
     if _tween:
         _tween.kill()
     _tween = get_tree().create_tween()
 
-    _tween.tween_property(material, "shader_parameter/size", 1.25, 2).from(0.1)
-    _tween.tween_property(material, "shader_parameter/force", 0.25, 2).from(0.0)
-    _tween.tween_property(material, "shader_parameter/thickness", 0.1, 2).from(0.0)
+    _tween.parallel().tween_property(self, "wave_size", 1.25, speed).from(0.1)
+    _tween.parallel().tween_property(self, "force", max_force, speed).from(0.0)
+    _tween.parallel().tween_property(self, "thickness", max_thickness, speed).from(0.0)
+
+    await _tween.finished
+
+    force = 0.0
+    thickness = 0.0
+
+func show_animated_wave(parameters: WaveBuilder) -> void:
+    var game_size := get_viewport_rect().size
+    var unit_position := parameters.position / game_size
+    wave_center = unit_position
+
+    if _tween:
+        _tween.kill()
+    _tween = get_tree().create_tween()
+
+    _tween.parallel().tween_property(self, "wave_size", parameters.target_wave_size, parameters.speed).from(parameters.initial_wave_size)
+    _tween.parallel().tween_property(self, "force", parameters.target_force, parameters.speed).from(parameters.initial_force)
+    _tween.parallel().tween_property(self, "thickness", parameters.target_thickness, parameters.speed).from(parameters.initial_thickness)
+
+    await _tween.finished
+
+    wave_size = 0.0
+    force = 0.0
+    thickness = 0.0
 
 func wave_is_running() -> bool:
     return _tween && _tween.is_running()
