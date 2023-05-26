@@ -1,6 +1,6 @@
 # A vignette effect.
 @tool
-extends ColorRect
+extends Control
 class_name SxFxVignette
 
 const shader := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxVignette/SxFxVignette.gdshader")
@@ -10,25 +10,24 @@ const shader := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxVignette/
 # Vignette ratio.
 @export var vignette_ratio := 0.25 : set = _set_vignette_ratio
 
+var _rect: ColorRect
 var _tween: Tween
 
 func _set_vignette_ratio(value: float) -> void:
     vignette_ratio = value
 
-    if !Engine.is_editor_hint():
-        if material == null:
-            await self.ready
+    if !_rect:
+        await self.ready
 
-        SxShader.set_shader_parameter(self, "ratio", value)
+    SxShader.set_shader_parameter(_rect, "ratio", value)
 
 func _set_vignette_size(value: float) -> void:
     vignette_size = value
 
-    if !Engine.is_editor_hint():
-        if material == null:
-            await self.ready
+    if !_rect:
+        await self.ready
 
-        SxShader.set_shader_parameter(self, "size", value)
+    SxShader.set_shader_parameter(_rect, "size", value)
 
 func fade(duration: float = 1) -> void:
     if _tween:
@@ -41,17 +40,19 @@ func fade(duration: float = 1) -> void:
 func _ready() -> void:
     set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
     mouse_filter = Control.MOUSE_FILTER_IGNORE
-    color = Color.TRANSPARENT
 
-    if !Engine.is_editor_hint():
-        var shader_material := ShaderMaterial.new()
-        shader_material.shader = shader
-        material = shader_material
+    var shader_material := ShaderMaterial.new()
+    shader_material.shader = shader
 
-        _set_vignette_ratio(vignette_ratio)
-        _set_vignette_size(vignette_size)
+    _rect = ColorRect.new()
+    _rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+    _rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    _rect.material = shader_material
+    add_child(_rect)
+
+    _set_vignette_ratio(vignette_ratio)
+    _set_vignette_size(vignette_size)
 
 func _exit_tree():
-    if !Engine.is_editor_hint():
-        if _tween:
-            _tween.kill()
+    if _tween:
+        _tween.kill()
