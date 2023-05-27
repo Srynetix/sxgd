@@ -3,49 +3,51 @@
 extends Control
 class_name SxFxBetterBlur
 
-const shader_x := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxBetterBlur/SxFxBetterBlurX.gdshader")
-const shader_y := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxBetterBlur/SxFxBetterBlurY.gdshader")
+const shader := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxBetterBlur/Shader.gdshader")
 
 @export var strength := 0.0 : set = _set_strength
 
 var _step1: ColorRect
 var _step2: ColorRect
-var _copy: BackBufferCopy
+var _step1_layer: CanvasLayer
+var _step2_layer: CanvasLayer
 
 func _set_strength(value: float) -> void:
     strength = value
 
-    if !Engine.is_editor_hint():
-        if !_step1:
-            await self.ready
-        SxShader.set_shader_parameter(_step1, "strength", value)
-        SxShader.set_shader_parameter(_step2, "strength", value)
+    if !_step1:
+        await self.ready
+
+    SxShader.set_shader_parameter(_step1, "strength", value)
+    SxShader.set_shader_parameter(_step2, "strength", value)
 
 func _ready() -> void:
     set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
     mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-    if !Engine.is_editor_hint():
-        var material_x := ShaderMaterial.new()
-        material_x.shader = shader_x
-        var material_y := ShaderMaterial.new()
-        material_y.shader = shader_y
+    var material_x := ShaderMaterial.new()
+    material_x.shader = shader
+    material_x.set_shader_parameter("direction", Vector2(1.0, 0.0))
+    var material_y := ShaderMaterial.new()
+    material_y.shader = shader
+    material_y.set_shader_parameter("direction", Vector2(0.0, 1.0))
 
-        _step1 = ColorRect.new()
-        _step1.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-        _step1.mouse_filter = Control.MOUSE_FILTER_IGNORE
-        _step1.material = material_x
-        add_child(_step1)
+    _step1_layer = CanvasLayer.new()
+    add_child(_step1_layer)
 
-        _copy = BackBufferCopy.new()
-        _copy.copy_mode = BackBufferCopy.COPY_MODE_VIEWPORT
-        add_child(_copy)
+    _step2_layer = CanvasLayer.new()
+    add_child(_step2_layer)
 
-        _step2 = ColorRect.new()
-        _step2.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-        _step2.mouse_filter = Control.MOUSE_FILTER_IGNORE
-        _step2.material = material_y
-        _copy.add_child(_step2)
+    _step1 = ColorRect.new()
+    _step1.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+    _step1.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    _step1.material = material_x
+    _step1_layer.add_child(_step1)
 
-        _copy.rect = Rect2(position, size)
-        _set_strength(strength)
+    _step2 = ColorRect.new()
+    _step2.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+    _step2.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    _step2.material = material_y
+    _step2_layer.add_child(_step2)
+
+    _set_strength(strength)

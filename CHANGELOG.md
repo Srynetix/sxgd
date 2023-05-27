@@ -11,9 +11,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - SxDebugConsole: Interactive in-game console you can use to live edit values and nodes
 - SxCVars: Simple console vars system, compatible with the SxDebugConsole
 
+### Changed
+
+- SxFxShockwave: Add a WaveBuilder structure to control the wave
+- SxFxBetterBlur: Rewrite the blur shader for better quality and still GLES2 compatibility
+
 ### Fixes
 
-- SxFxCamera: Do not force set "anchor mode" and "current" 
+- SxFxCamera: Do not force set "anchor mode" and "current"
+- SxFxVignette: Do not leak implementation details in the final scene
 
 ## [1.1.0] - 2023-03-07
 
