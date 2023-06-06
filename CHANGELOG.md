@@ -15,6 +15,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - SxFxShockwave: Add a WaveBuilder structure to control the wave
 - SxFxBetterBlur: Rewrite the blur shader for better quality and still GLES2 compatibility
+- SxFxBetterBlur: Disable the effect when hidden
+- SxDoubleTap: New "target_rect" var to detect the double tap on a specific surface
 
 ### Fixes
 
