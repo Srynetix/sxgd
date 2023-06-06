@@ -15,6 +15,10 @@
         <member name="should_process_input" type="bool" default="true">
             Disable this if the tap detector should process input or not.
         </member>
+        <member name="target_tect" type="Rect2">
+            Only detect double-tap on this surface.
+            Detect anywhere on screen if set to zero.
+        </member>
     </members>
     <signals>
         <signal name="doubletap">

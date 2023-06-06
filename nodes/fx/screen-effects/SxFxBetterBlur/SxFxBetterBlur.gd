@@ -51,3 +51,11 @@ func _ready() -> void:
     _step2_layer.add_child(_step2)
 
     _set_strength(strength)
+
+func _process(delta: float) -> void:
+    if is_visible_in_tree():
+        SxShader.set_shader_parameter(_step1, "strength", strength)
+        SxShader.set_shader_parameter(_step2, "strength", strength)
+    else:
+        SxShader.set_shader_parameter(_step1, "strength", 0)
+        SxShader.set_shader_parameter(_step2, "strength", 0)
