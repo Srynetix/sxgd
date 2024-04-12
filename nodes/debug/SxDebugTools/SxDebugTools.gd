@@ -223,6 +223,7 @@ func _show_panel(panel_type: PanelType) -> void:
             _show_scene_tree_dump()
         PanelType.CONSOLE:
             _debug_console.visible = true
+            _debug_console.focus_input()
 
 func _show_scene_tree_dump() -> void:
     _scene_tree_dump.visible = true
@@ -266,6 +267,8 @@ func _input(event: InputEvent):
             toggle()
 
         elif event.pressed && event.physical_keycode == KEY_QUOTELEFT && _visible:
+            # Do not bubble up the key.
+            get_viewport().set_input_as_handled()
             _show_panel(PanelType.CONSOLE)
 
         elif event.pressed && event.physical_keycode == KEY_F7 && _visible:

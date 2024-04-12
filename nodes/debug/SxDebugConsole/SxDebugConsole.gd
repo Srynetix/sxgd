@@ -37,6 +37,10 @@ var _inputfield: SxDebugConsoleLineEdit
 var _history := PackedStringArray()
 var _history_cursor := 0
 
+## Focus the console input.
+func focus_input() -> void:
+    _inputfield.grab_focus()
+
 func _build_ui() -> void:
     name = "SxDebugConsole"
 
