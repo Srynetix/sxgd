@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.20">
+<meta name="generator" content="Asciidoctor 2.0.22">
 <meta name="description" content="Documentation of the sxgd Godot plugin.">
 <meta name="author" content="Denis BOURGE">
 <title>sxgd documentation</title>
@@ -142,7 +142,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #content::before{content:none}
 #header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
 #header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
-#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
 #header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
 #header .details span:first-child{margin-left:-.125em}
 #header .details span.email a{color:rgba(0,0,0,.85)}
@@ -164,6 +164,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #toctitle{color:#7a2518;font-size:1.2em}
 @media screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
 #toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
 #toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
 #toc.toc2>ul{font-size:.9em;margin-bottom:0}
@@ -329,7 +330,7 @@ a.image{text-decoration:none;display:inline-block}
 a.image object{pointer-events:none}
 sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
 sup.footnote a,sup.footnoteref a{text-decoration:none}
-sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
 #footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
 #footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
 #footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
@@ -457,7 +458,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_classes">Classes</a>
 <ul class="sectlevel2">
 <li><a href="#_sxarray">SxArray</a></li>
-<li><a href="#_sxattr">SxAttr</a></li>
 <li><a href="#_sxaudiostreamplayer">SxAudioStreamPlayer</a></li>
 <li><a href="#_sxbuffer">SxBuffer</a></li>
 <li><a href="#_sxcvars">SxCVars</a></li>
@@ -676,9 +676,6 @@ func _ready() -&gt; void:
 <ul>
 <li>
 <p><strong><a href="#_sxarray">SxArray</a></strong>: Array helpers (<em>string trimming</em>, &#8230;&#8203;).</p>
-</li>
-<li>
-<p><strong><a href="#_sxattr">SxAttr</a></strong>: Static attribute helpers, for the lack of static attributes in GDScript.</p>
 </li>
 <li>
 <p><strong><a href="#_sxbuffer">SxBuffer</a></strong>: Buffer helpers (<em>zstd compression</em>, &#8230;&#8203;).</p>
@@ -1036,129 +1033,6 @@ Useful to load every needed resources at game startup.</p>
 <pre class="highlight"><code class="language-gdscript" data-lang="gdscript">var strings := ["  a", " b ", "c   "]
 var trimmed_strings := SxArray.trim_strings(strings)
 # =&gt; ["a", "b", "c"]</code></pre>
-</div>
-</div>
-<hr>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_sxattr"><a class="anchor" href="#_sxattr"></a>SxAttr</h3>
-<div class="paragraph">
-<p><strong>Inherits: <a href="https://docs.godotengine.org/en/stable/classes/class_reference.html#reference" target="_blank" rel="noopener">Reference</a></strong></p>
-</div>
-<div class="paragraph">
-<p>Atribute methods.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Description</dt>
-<dd>
-<p>Static attribute handling.</p>
-<div class="paragraph">
-<p>Used for the lack of support for static attributes in GDScript. This class piggybacks on Engine.set_meta/Engine.get_meta.</p>
-</div>
-</dd>
-</dl>
-</div>
-<div class="sect3">
-<h4 id="_sxattr_methods"><a class="anchor" href="#_sxattr_methods"></a>Methods</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxattr_method_set_static_attribute">set_static_attribute</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> value )</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxattr_method_setup_static_attribute">setup_static_attribute</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> value )</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxattr_method_has_static_attribute">has_static_attribute</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute )</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>static <a href="#_sxattr_method_get_static_attribute">get_static_attribute</a> ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> default = null )</code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_sxattr_method_descriptions"><a class="anchor" href="#_sxattr_method_descriptions"></a>Method Descriptions</h4>
-<div id="_sxattr_method_set_static_attribute" class="ulist">
-<ul>
-<li>
-<p><code>static void set_static_attribute ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> value )</code></p>
-<div class="paragraph">
-<p>Set a static attribute for a specific namespace and attribute name.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">SxAttr.set_static_attribute("MyNamespace", "foo", "bar")</code></pre>
-</div>
-</div>
-<div id="_sxattr_method_setup_static_attribute" class="ulist">
-<ul>
-<li>
-<p><code>static void setup_static_attribute ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> value )</code></p>
-<div class="paragraph">
-<p>Setup a static attribute, mostly used to set default values.</p>
-</div>
-<div class="paragraph">
-<p>If the attribute already exists, this method will not do anything.
-To override the attribute, use <code>set_static_attribute</code> instead.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">SxAttr.setup_static_attribute("MyNamespace", "foo", "default")</code></pre>
-</div>
-</div>
-<div id="_sxattr_method_has_static_attribute" class="ulist">
-<ul>
-<li>
-<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_bool.html#bool" target="_blank" rel="noopener">bool</a> has_static_attribute ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute )</code></p>
-<div class="paragraph">
-<p>Check if the static attribute exists.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">if SxAttr.has_static_attribute("MyNamespace", "foo"):
-    print("OK !")</code></pre>
-</div>
-</div>
-<div id="_sxattr_method_get_static_attribute" class="ulist">
-<ul>
-<li>
-<p><code>static <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> get_static_attribute ( <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> namespace_, <a href="https://docs.godotengine.org/en/stable/classes/class_string.html#string" target="_blank" rel="noopener">String</a> attribute, <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html#variant" target="_blank" rel="noopener">Variant</a> default = null )</code></p>
-<div class="paragraph">
-<p>Get a static attribute value.</p>
-</div>
-<div class="paragraph">
-<p>Return a default value if it does not exist.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-gdscript" data-lang="gdscript">var my_value := SxAttr.get_static_attribute("MyNamespace", "foo", "bar") as String</code></pre>
 </div>
 </div>
 <hr>
@@ -8634,7 +8508,7 @@ and on joysticks, you can affect 4 actions keys, one for each direction.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-06-06 19:09:16 UTC
+Last updated 2024-04-12 19:33:00 UTC
 </div>
 </div>
 </body>
