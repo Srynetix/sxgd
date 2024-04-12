@@ -185,7 +185,7 @@ func _build_ui() -> void:
     right_label.add_theme_color_override("font_outline_color", Color.BLACK)
     right_label.add_theme_font_size_override("font_size", 12)
     right_label.text = (
-        "~ - Show console\n"
+        "` - Show console\n"
         + "F3 - Toggle mouse visibility\n"
         + "F7 - Show scene tree dumps\n"
         + "F9 - Show node traces\n"
@@ -262,31 +262,31 @@ func _hide_panels() -> void:
 
 func _input(event: InputEvent):
     if event is InputEventKey:
-        if event.pressed && event.keycode == KEY_F12:
+        if event.pressed && event.physical_keycode == KEY_F12:
             toggle()
 
-        elif event.pressed && event.keycode == KEY_ASCIITILDE && _visible:
+        elif event.pressed && event.physical_keycode == KEY_QUOTELEFT && _visible:
             _show_panel(PanelType.CONSOLE)
 
-        elif event.pressed && event.keycode == KEY_F7 && _visible:
+        elif event.pressed && event.physical_keycode == KEY_F7 && _visible:
             _show_panel(PanelType.SCENE_TREE_DUMP)
 
-        elif event.pressed && event.keycode == KEY_F9 && _visible:
+        elif event.pressed && event.physical_keycode == KEY_F9 && _visible:
             _show_panel(PanelType.NODE_TRACER)
 
-        elif event.pressed && event.keycode == KEY_F10 && _visible:
+        elif event.pressed && event.physical_keycode == KEY_F10 && _visible:
             _show_panel(PanelType.LOG)
 
-        elif event.pressed && event.keycode == KEY_F11 && _visible:
+        elif event.pressed && event.physical_keycode == KEY_F11 && _visible:
             _show_panel(PanelType.DEBUG_INFO)
 
-        elif event.pressed && event.keycode == KEY_F5 && _visible:
+        elif event.pressed && event.physical_keycode == KEY_F5 && _visible:
             get_tree().reload_current_scene()
 
-        elif event.pressed && event.keycode == KEY_F2 && _visible:
+        elif event.pressed && event.physical_keycode == KEY_F2 && _visible:
             get_tree().paused = !get_tree().paused
 
-        elif event.pressed && event.keycode == KEY_F3 && _visible:
+        elif event.pressed && event.physical_keycode == KEY_F3 && _visible:
             if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
                 Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
             else:

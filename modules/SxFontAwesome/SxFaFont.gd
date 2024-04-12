@@ -1,3 +1,4 @@
+@tool
 extends Object
 class_name SxFaFont
 ## Font management wrapper around FontAwesome.
@@ -41,7 +42,7 @@ static func _get_font_family(family: int) -> Font:
             return FARegularFont
 
 static func _has_definition() -> bool:
-    return _definition != null
+    return _definition != {}
 
 static func _get_definition() -> Dictionary:
     if !_has_definition():

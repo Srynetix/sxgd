@@ -76,7 +76,7 @@ class FilePath:
 
 ## List all files in a directory.
 static func list_files_in_directory(path: String, filters: Array[String]) -> Array[FilePath]:
-    var files := []
+    var files: Array[FilePath] = []
     var directory := DirAccess.open(path)
     directory.list_dir_begin()
     var file_name := directory.get_next()

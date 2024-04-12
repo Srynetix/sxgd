@@ -52,7 +52,7 @@ var _filename_lbl: LineEdit
 var _cancel_btn: Button
 var _validate_btn: Button
 
-var _filters := []
+var _filters: Array[String] = []
 var _shortcuts := []
 var _current_files := []
 var _current_path := "" : set = _set_current_path
@@ -156,7 +156,9 @@ func _ready() -> void:
     _open_delayer.autostart = false
     add_child(_open_delayer)
 
-    _filters = SxArray.trim_strings(file_filter.split(","))
+    var split_filters: Array[String]
+    split_filters.assign(file_filter.split(","))
+    _filters = SxArray.trim_strings(split_filters)
 
     match mode:
         Mode.OPEN_FILE:
