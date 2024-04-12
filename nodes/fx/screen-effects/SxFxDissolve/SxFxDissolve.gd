@@ -1,11 +1,15 @@
 @tool
 extends ColorRect
 class_name SxFxDissolve
+## A ready-to-use dissolution effect.
 
-const shader := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxDissolve/SxFxDissolve.gdshader")
+const _SHADER := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxDissolve/SxFxDissolve.gdshader")
 
+## Noise frequency.
 @export var noise_frequency := 0.01 : set = _set_noise_frequency
+## Replacement color.
 @export var replacement_color := Color(1, 1, 1, 0) : set = _set_replacement_color
+## Ratio.
 @export var ratio := 0.0 : set = _set_ratio
 
 func _set_ratio(value: float) -> void:
@@ -48,7 +52,7 @@ func _ready() -> void:
         noise_texture.noise = noise
 
         var shader_material := ShaderMaterial.new()
-        shader_material.shader = shader
+        shader_material.shader = _SHADER
         shader_material.set_shader_parameter("noise", noise_texture)
         shader_material.set_shader_parameter("edge_width", 0.0)
         shader_material.set_shader_parameter("edge_color1", Color.BLACK)

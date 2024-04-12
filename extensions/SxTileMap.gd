@@ -1,15 +1,21 @@
 extends Object
 class_name SxTileMap
+## [TileMap] extensions.
+##
+## Additional methods to work with [TileMap]s.
 
-# Helper class representing transpose/flip parameters for a TileMap cell
+# Helper class representing transpose/flip parameters for a [TileMap] cell.
 class CellRotationParams:
     extends Node
 
+    ## Cell is transposed.
     var transpose: bool
+    ## Cell is X flipped.
     var flip_x: bool
+    ## Cell is Y flipped.
     var flip_y: bool
 
-    # Create params instance from arguments
+    ## Create rotation params instance from arguments.
     static func from_values(transpose: bool, flip_x: bool, flip_y: bool) -> CellRotationParams:
         var obj := CellRotationParams.new()
         obj.transpose = transpose
@@ -17,15 +23,17 @@ class CellRotationParams:
         obj.flip_y = flip_y
         return obj
 
-# Get rotation for a specific cell, in radians.
-#
-# Example:
-#   var r := SxTileMap.get_cell_rotation(tilemap, pos)
+## Get rotation for a specific cell, in radians.[br]
+##
+## Usage:
+## [codeblock]
+## var r := SxTileMap.get_cell_rotation(tilemap, pos)
+## [/codeblock]
 static func get_cell_rotation(tilemap: TileMap, pos: Vector2) -> float:
     var params := get_cell_rotation_params(tilemap, pos)
     return rotation_params_to_angle(params)
 
-# Get rotation for a specific cell, in a custom class format.
+## Get rotation for a specific cell, in a custom class format.
 static func get_cell_rotation_params(tilemap: TileMap, pos: Vector2) -> CellRotationParams:
     var x := int(pos.x)
     var y := int(pos.y)
@@ -36,7 +44,7 @@ static func get_cell_rotation_params(tilemap: TileMap, pos: Vector2) -> CellRota
 
     return CellRotationParams.from_values(transposed, flip_x, flip_y)
 
-# Convert rotation params to an angle in radians.
+## Convert rotation params to an angle in radians.
 static func rotation_params_to_angle(params: CellRotationParams) -> float:
     var logger := SxLog.get_logger("SxTileMap")
 
@@ -59,7 +67,7 @@ static func rotation_params_to_angle(params: CellRotationParams) -> float:
 
     return 0.0
 
-# Generate cell rotation parameters from an angle in degrees.
+## Generate cell rotation parameters from an angle in degrees.
 static func rotation_degrees_to_params(angle_degrees: int) -> CellRotationParams:
     assert(angle_degrees in [0, 90, 180, 270], "Unsupported angle %d in 'rotation_degrees_to_params'" % angle_degrees)
 
@@ -72,11 +80,11 @@ static func rotation_degrees_to_params(angle_degrees: int) -> CellRotationParams
     else:
         return CellRotationParams.from_values(false, false, false)
 
-# Create a dump from tilemap contents.
+## Create a dump from tilemap contents.
 static func create_dump(tilemap: TileMap) -> PackedInt32Array:
     return tilemap.get("tile_data")
 
-# Overwrite tilemap contents with a dump.
+## Overwrite tilemap contents with a dump.
 static func apply_dump(tilemap: TileMap, array: PackedInt32Array) -> void:
     tilemap.clear()
     tilemap.set("tile_data", array)

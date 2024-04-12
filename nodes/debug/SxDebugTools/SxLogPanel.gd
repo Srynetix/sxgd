@@ -1,16 +1,20 @@
-# Log panel, display scrollable logs.
 extends MarginContainer
 class_name SxLogPanel
+## Log panel, display scrollable logs.
 
-const normal_font = preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
-const bold_font = preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Bold.otf")
+const _NORMAL_FONT = preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
+const _BOLD_FONT = preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Bold.otf")
 
-# Max messages to display.
+## Max messages to display.
 @export var max_messages := 100
 
 var _last_message: SxLog.LogMessage
 var _template: RichTextLabel
 var _container: VBoxContainer
+
+## Toggle the log panel.
+func toggle():
+    visible = !visible
 
 func _ready():
     set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -32,8 +36,8 @@ func _ready():
 
     _template = RichTextLabel.new()
     _template.size_flags_vertical = Control.SIZE_EXPAND | Control.SIZE_SHRINK_END
-    _template.add_theme_font_override("bold_font", bold_font)
-    _template.add_theme_font_override("normal_font", normal_font)
+    _template.add_theme_font_override("bold_font", _BOLD_FONT)
+    _template.add_theme_font_override("normal_font", _NORMAL_FONT)
     _template.add_theme_font_size_override("bold_font_size", 12)
     _template.add_theme_font_size_override("normal_font_size", 12)
     _template.add_theme_color_override("font_outline_color", Color.BLACK)
@@ -47,10 +51,6 @@ func _ready():
 
 func _process(delta: float):
     _update_text()
-
-# Toggle the log panel.
-func toggle():
-    visible = !visible
 
 func _update_text():
     for entry in SxLog.pop_messages():

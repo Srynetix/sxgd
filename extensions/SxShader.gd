@@ -1,8 +1,11 @@
 extends Object
 class_name SxShader
+## Shader extensions.
+##
+## Additional methods to work with shaders.
 
-# Get a shader param from a canvas item.
-# Handles edge cases like missing material or non-shader material.
+## Get a shader parameter from a canvas item.[br]
+## Handles edge cases like missing material or non-shader material.
 static func get_shader_parameter(item: CanvasItem, name: String) -> Variant:
     var logger := SxLog.get_logger("SxShader")
     var material := item.material
@@ -17,8 +20,8 @@ static func get_shader_parameter(item: CanvasItem, name: String) -> Variant:
 
     return null
 
-# Set a shader param from a canvas item.
-# Handles edge cases like missing material or non-shader material.
+## Set a shader parameter from a canvas item.[br]
+## Handles edge cases like missing material or non-shader material.
 static func set_shader_parameter(item: CanvasItem, name: String, value: Variant) -> void:
     var logger := SxLog.get_logger("SxShader")
     var material := item.material

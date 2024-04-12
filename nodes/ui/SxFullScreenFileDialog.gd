@@ -1,32 +1,45 @@
 extends SxFullScreenDialog
 class_name SxFullScreenFileDialog
+## Simple full-screen file selection dialog.
 
-signal cancelled()
+## On cancel.
+signal canceled()
+## On file selected.
 signal file_selected(file)
 
 signal _item_doubleclicked(file)
 
+## Path shortcut.
 class PathShortcut:
+    ## Shortcut name.
     var name: String
+    ## Shortcut path.
     var path: String
 
     func _init(name_: String, path_: String):
         name = name_
         path = path_
 
+    ## Build shortcut from dictionary.
     static func from_dict(d: Dictionary) -> PathShortcut:
         return PathShortcut.new(d["name"], d["path"])
 
+## Selection mode.
 enum Mode {
+    ## Open.
     OPEN_FILE = 0,
+    ## Save.
     SAVE_FILE = 1
 }
 
-const light_font := preload("res://addons/sxgd/assets/fonts/Jost-400-Book.ttf")
-const code_font := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
+const _LIGHT_FONT := preload("res://addons/sxgd/assets/fonts/Jost-400-Book.ttf")
+const _CODE_FONT := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
 
+## Selection mode.
 @export var mode := Mode.OPEN_FILE
+## Shortcuts.
 @export var shortcuts := [] as Array[Dictionary]
+## File filter.
 @export var file_filter := ""
 
 var _doubletap: SxDoubleTap
@@ -46,6 +59,14 @@ var _current_path := "" : set = _set_current_path
 var _file_selected := ""
 var _open_delayer: Timer
 
+## Invalidate selection.
+func invalidate() -> void:
+    if _shortcuts_list.item_count > 0:
+        _shortcuts_list.select(0)
+        _select_shortcut(0)
+    _file_selected = ""
+    _validate_btn.disabled = true
+
 func _build_ui_file() -> void:
     _doubletap = SxDoubleTap.new()
     _doubletap.should_process_input = false
@@ -61,7 +82,7 @@ func _build_ui_file() -> void:
 
     _current_path_lineedit = LineEdit.new()
     _current_path_lineedit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-    _current_path_lineedit.add_theme_font_override("font", light_font)
+    _current_path_lineedit.add_theme_font_override("font", _LIGHT_FONT)
     _current_path_lineedit.add_theme_font_size_override("font_size", 24)
     _current_path_lineedit.text = "user://"
     _current_path_lineedit.editable = false
@@ -79,13 +100,13 @@ func _build_ui_file() -> void:
     _shortcuts_list = SxItemList.new()
     _shortcuts_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
     _shortcuts_list.size_flags_stretch_ratio = 0.5
-    _shortcuts_list.add_theme_font_override("font", code_font)
+    _shortcuts_list.add_theme_font_override("font", _CODE_FONT)
     _shortcuts_list.add_theme_font_size_override("font_size", 24)
     hbox_container.add_child(_shortcuts_list)
 
     _files_list = SxItemList.new()
     _files_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-    _files_list.add_theme_font_override("font", code_font)
+    _files_list.add_theme_font_override("font", _CODE_FONT)
     _files_list.add_theme_font_size_override("font_size", 24)
     hbox_container.add_child(_files_list)
 
@@ -96,18 +117,18 @@ func _build_ui_file() -> void:
 
     _filename_lbl = LineEdit.new()
     _filename_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-    _filename_lbl.add_theme_font_override("font", light_font)
+    _filename_lbl.add_theme_font_override("font", _LIGHT_FONT)
     _filename_lbl.add_theme_font_size_override("font_size", 24)
     hbox_container2.add_child(_filename_lbl)
 
     _cancel_btn = Button.new()
-    _cancel_btn.add_theme_font_override("font", light_font)
+    _cancel_btn.add_theme_font_override("font", _LIGHT_FONT)
     _cancel_btn.add_theme_font_size_override("font_size", 24)
     _cancel_btn.text = "Cancel"
     hbox_container2.add_child(_cancel_btn)
 
     _validate_btn = Button.new()
-    _validate_btn.add_theme_font_override("font", light_font)
+    _validate_btn.add_theme_font_override("font", _LIGHT_FONT)
     _validate_btn.add_theme_font_size_override("font_size", 24)
     _validate_btn.text = "Open"
     hbox_container2.add_child(_validate_btn)
@@ -154,14 +175,7 @@ func _ready() -> void:
 
     invalidate()
 
-func invalidate() -> void:
-    if _shortcuts_list.item_count > 0:
-        _shortcuts_list.select(0)
-        _select_shortcut(0)
-    _file_selected = ""
-    _validate_btn.disabled = true
-
-func _set_selected_file(file: SxOs.DirOrFile) -> void:
+func _set_selected_file(file: SxOs.FilePath) -> void:
     _file_selected = file.path
     _validate_btn.disabled = false
     _filename_lbl.text = file.name
@@ -172,7 +186,7 @@ func _reset_selected_file() -> void:
     _filename_lbl.text = ""
 
 func _cancel() -> void:
-    emit_signal(cancelled.get_name())
+    emit_signal(canceled.get_name())
     if autohide:
         hide_dialog()
 
@@ -209,7 +223,7 @@ func _handle_directory_open(item_id: int) -> void:
     _open_delayer.start()
     emit_signal(_item_doubleclicked.get_name(), _current_files[item_id])
 
-func _on_file_doubleclick(item: SxOs.DirOrFile):
+func _on_file_doubleclick(item: SxOs.FilePath):
     if item.is_directory():
         _set_current_path(item.path)
     else:
@@ -226,7 +240,7 @@ func _go_up() -> void:
     _set_current_path(_current_path.get_base_dir())
 
 func _select_file(item_id: int) -> void:
-    var file := _current_files[item_id] as SxOs.DirOrFile
+    var file := _current_files[item_id] as SxOs.FilePath
     if file.is_directory():
         _reset_selected_file()
     else:
@@ -256,7 +270,7 @@ func _update_files() -> void:
 
     for file in files:
         _current_files.append(file)
-        if file.type == SxOs.DirOrFile.Type.DIRECTORY:
+        if file.type == SxOs.FilePath.Type.DIRECTORY:
             _files_list.add_item(file.name + "/")
         else:
             _files_list.add_item(file.name)

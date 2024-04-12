@@ -1,32 +1,42 @@
 @tool
 extends TextureRect
 class_name SxVirtualJoystick
+## Virtual joystick, to use with [SxVirtualControls].
 
 const BACKGROUND_TEXTURE := preload("res://addons/sxgd/modules/SxVirtualControls/assets/textures/transparentDark/transparentDark05.png")
 const HEAD_TEXTURE := preload("res://addons/sxgd/modules/SxVirtualControls/assets/textures/transparentDark/transparentDark49.png")
 
-# Joystick axis
-enum Axis { Left = 0, Right, Up, Down }
+## Joystick axis.
+enum Axis {
+    ## Left.
+    Left = 0,
+    ## Right.
+    Right,
+    ## Up.
+    Up,
+    ## Down.
+    Down
+}
 
 const INITIAL_OPACITY := 0.5
 const TOUCHED_OPACITY := 1.0
 
-# On joystick change (with movement)
+## On joystick change (with movement).
 signal changed(movement)
-# On joystick touch
+## On joystick touch.
 signal touched()
-# On joystick release
+## On joystick release.
 signal released()
 
-# Action on left axis
+## Action on left axis.
 @export var action_axis_left: String
-# Action on right axis
+## Action on right axis.
 @export var action_axis_right: String
-# Action on up axis
+## Action on up axis.
 @export var action_axis_up: String
-# Action on down axis
+## Action on down axis.
 @export var action_axis_down: String
-# Dead zone
+## Dead zone.
 @export var dead_zone := 0.3
 
 var _initial_head_position: Vector2

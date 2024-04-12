@@ -1,16 +1,40 @@
 @tool
 extends Panel
 class_name SxFullScreenDialog
+## Simple full-screen dialog.
 
-const font := preload("res://addons/sxgd/assets/fonts/Jost-800-Heavy.ttf")
+const _FONT := preload("res://addons/sxgd/assets/fonts/Jost-800-Heavy.ttf")
 
+## Dialog title.
 @export var title := "Dialog title" : set = _set_dialog_title
+## Autohide dialog?
 @export var autohide := true
+## Show dialog title?
 @export var show_title := true : set = _set_show_title
 
 var _tween: Tween
 var _title_label: Label
 var _vbox_container: VBoxContainer
+
+## Show dialog.
+func show_dialog() -> void:
+    if _tween:
+        _tween.kill()
+    _tween = get_tree().create_tween()
+
+    visible = true
+    _tween.tween_property(self, "modulate", Color.WHITE, 0.25).from(Color.TRANSPARENT).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+## Hide dialog.
+func hide_dialog() -> void:
+    if _tween:
+        _tween.kill()
+    _tween = get_tree().create_tween()
+
+    _tween.tween_property(self, "modulate", Color.TRANSPARENT, 0.25).from(Color.WHITE).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+    await _tween.finished
+    visible = false
 
 func _build_ui() -> void:
     var background_style = StyleBoxFlat.new()
@@ -28,7 +52,7 @@ func _build_ui() -> void:
     margin_container.add_child(_vbox_container)
 
     _title_label = Label.new()
-    _title_label.add_theme_font_override("font", font)
+    _title_label.add_theme_font_override("font", _FONT)
     _title_label.add_theme_font_size_override("font_size", 24)
     _title_label.text = title
     _title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -55,21 +79,3 @@ func _ready() -> void:
     visible = false
     _title_label.text = title
     _title_label.visible = show_title
-
-func show_dialog() -> void:
-    if _tween:
-        _tween.kill()
-    _tween = get_tree().create_tween()
-
-    visible = true
-    _tween.tween_property(self, "modulate", Color.WHITE, 0.25).from(Color.TRANSPARENT).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-
-func hide_dialog() -> void:
-    if _tween:
-        _tween.kill()
-    _tween = get_tree().create_tween()
-
-    _tween.tween_property(self, "modulate", Color.TRANSPARENT, 0.25).from(Color.WHITE).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-
-    await _tween.finished
-    visible = false

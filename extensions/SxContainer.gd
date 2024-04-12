@@ -1,6 +1,10 @@
 extends Object
 class_name SxContainer
+## Container extensions.
+##
+## Additional methods to work with containers.
 
+## Check if two [Variant] values are equal.
 static func are_values_equal(v1: Variant, v2: Variant) -> bool:
     var v1_type := typeof(v1)
     var v2_type := typeof(v2)
@@ -19,6 +23,7 @@ static func are_values_equal(v1: Variant, v2: Variant) -> bool:
                 return false
     return true
 
+## Check if two [Dictionary] values are equal.
 static func are_dictionaries_equal(d1: Dictionary, d2: Dictionary) -> bool:
     var d1_keys := d1.keys()
     var d2_keys := d2.keys()
@@ -33,6 +38,7 @@ static func are_dictionaries_equal(d1: Dictionary, d2: Dictionary) -> bool:
             return false
     return true
 
+## Check if two [Array] values are equal.
 static func are_arrays_equal(a1: Array, a2: Array) -> bool:
     if len(a1) != len(a2):
         return false

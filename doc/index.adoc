@@ -92,7 +92,6 @@ This section contains all of the components included in the plugins, with a shor
 Static methods and related utilities for any relevant part of Godot Engine.
 
 * *<<_sxarray>>*: Array helpers (_string trimming_, ...).
-* *<<_sxattr>>*: Static attribute helpers, for the lack of static attributes in GDScript.
 * *<<_sxbuffer>>*: Buffer helpers (_zstd compression_, ...).
 * *<<_sxcolor>>*: Color helpers (_applying an alpha value on an existing color_, _generating a random color_, ...).
 * *<<_sxcontainer>>*: Generic container (_Array_, _Dictionary_) helpers (_equality checks_, ...).

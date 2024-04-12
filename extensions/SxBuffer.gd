@@ -1,11 +1,13 @@
-# Buffer utilities.
 extends Object
 class_name SxBuffer
+## Buffer extensions.
+##
+## Additional methods to work with buffers.
 
-# Compress a byte array using zstd, adding original content size at the beginning.
-# The content size is needed for Godot to decompress, so the resulting byte array
-# is not valid zstd compressed data.
-# To have a valid zstd compressed data, you need to strip the first 64 bits.
+## Compress a byte array using zstd, adding original content size at the beginning.
+## The content size is needed for Godot to decompress, so the resulting byte array
+## is not valid zstd compressed data.
+## To have a valid zstd compressed data, you need to strip the first 64 bits.
 static func zstd_compress(array: PackedByteArray) -> PackedByteArray:
     var size := len(array)
     var compressed := array.compress(FileAccess.COMPRESSION_ZSTD)
@@ -15,9 +17,9 @@ static func zstd_compress(array: PackedByteArray) -> PackedByteArray:
     out_buffer.put_data(compressed)
     return out_buffer.data_array
 
-# Decompress a byte array generated with `zstd_compress`.
-# It is not usable with zstd compressed data generated elsewhere, because it expects
-# a 64 bit integer at first representing the original data size (needed for Godot).
+## Decompress a byte array generated with `zstd_compress`.
+## It is not usable with zstd compressed data generated elsewhere, because it expects
+## a 64 bit integer at first representing the original data size (needed for Godot).
 static func zstd_decompress(array: PackedByteArray) -> PackedByteArray:
     var buffer := StreamPeerBuffer.new()
     buffer.data_array = array

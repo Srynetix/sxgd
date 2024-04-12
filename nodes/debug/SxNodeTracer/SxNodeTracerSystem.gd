@@ -1,7 +1,12 @@
 extends MarginContainer
 class_name SxNodeTracerSystem
+## Node tracer system.
+##
+## Allow to display custom updated information for specific nodes in the
+## [SxDebugTools].
+## To use with [SxNodeTracer]s.
 
-const font := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Bold.otf")
+const _FONT := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Bold.otf")
 
 var _tracers := {}
 var _tracers_ui := {}
@@ -22,7 +27,7 @@ func _ready() -> void:
 
     var title := Label.new()
     title.size_flags_vertical = 0
-    title.add_theme_font_override("font", font)
+    title.add_theme_font_override("font", _FONT)
     title.add_theme_font_size_override("font_size", 18)
     title.add_theme_constant_override("outline_size", 3)
     title.add_theme_color_override("font_outline_color", Color.BLACK)
@@ -45,12 +50,12 @@ func _ready() -> void:
     margin_container2.add_child(_grid)
 
 func _process(delta: float) -> void:
-    for node in get_tree().get_nodes_in_group("NodeTracer"):
+    for node in get_tree().get_nodes_in_group("SxNodeTracer"):
         var tracer := node as SxNodeTracer
         var node_path := str(tracer.get_path())
 
         if !_tracers.has(node_path):
-            _logger.debug_m("_process", "Registering NodeTracer '%s'." % tracer.title)
+            _logger.debug_m("_process", "Registering SxNodeTracer '%s'." % tracer.title)
             _tracers[node_path] = node
             var ui := _create_tracer_ui(node_path, node)
             node.tree_exiting.connect(_remove_tracer_ui.bind(node_path, ui))

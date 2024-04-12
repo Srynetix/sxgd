@@ -1,10 +1,13 @@
 @tool
 extends ColorRect
 class_name SxFxChromaticAberration
+## A ready-to-use chromatic aberration effect.
 
-const shader := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxChromaticAberration/SxFxChromaticAberration.gdshader")
+const _SHADER := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxChromaticAberration/SxFxChromaticAberration.gdshader")
 
+## Enable the effect.
 @export var enabled := true : set = _set_enabled
+## Effect amount.
 @export var amount := 1.0 : set = _set_amount
 
 func _ready() -> void:
@@ -13,7 +16,7 @@ func _ready() -> void:
 
     if !Engine.is_editor_hint():
         var shader_material := ShaderMaterial.new()
-        shader_material.shader = shader
+        shader_material.shader = _SHADER
         material = shader_material
 
         _set_enabled(enabled)

@@ -1,15 +1,19 @@
-# Scene runner, can be used as a test suite.
-# Inherit the scene, define a "scene_folder", then you can navigate scenes.
-
 extends Control
 class_name SxSceneRunner
+## Scene runner, can be used as a test suite.
+##
+## Inherit the scene, define a "scene_folder", then you can navigate scenes.
 
 const font := preload("res://addons/sxgd/assets/fonts/Jost-400-Book.ttf")
 
-signal scene_loaded(name)
+## When a scene is loaded.
+signal scene_loaded(name: String)
+## When quitting the runner.
 signal go_back()
 
+## Show the "back" button.
 @export var show_back_button := true
+## Folder containing scenes to load.
 @export_dir var scene_folder: String
 
 const SCENE_KEY_RESET := KEY_I

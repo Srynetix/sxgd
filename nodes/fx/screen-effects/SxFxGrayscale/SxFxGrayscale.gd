@@ -1,9 +1,11 @@
 @tool
 extends ColorRect
 class_name SxFxGrayscale
+## A ready-to-use grayscale effect.
 
-const shader := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxGrayscale/SxFxGrayscale.gdshader")
+const _SHADER := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxGrayscale/SxFxGrayscale.gdshader")
 
+## Effect ratio.
 @export var ratio := 0.0 : set = _set_ratio
 
 func _set_ratio(value: float) -> void:
@@ -23,7 +25,7 @@ func _ready() -> void:
 
     if !Engine.is_editor_hint():
         var shader_material := ShaderMaterial.new()
-        shader_material.shader = shader
+        shader_material.shader = _SHADER
         material = shader_material
 
         _set_ratio(ratio)

@@ -1,28 +1,41 @@
-# Log utilities.
 extends Object
 class_name SxLog
+## Log utilities.
+##
+## Tools to help with logging.
 
-# Log level
-enum LogLevel { TRACE, DEBUG, INFO, WARN, ERROR, CRITICAL }
+## Log level.
+enum LogLevel {
+    ## Trace level.
+    TRACE,
+    ## Debug level.
+    DEBUG,
+    ## Info level.
+    INFO,
+    ## Warn level.
+    WARN,
+    ## Error level.
+    ERROR,
+    ## Critical level.
+    CRITICAL
+}
 
 class _LogData:
+    static var _messages: Array[LogMessage] = []
+
     static func get_messages() -> Array:
-        SxAttr.setup_static_attribute("SxLog_LogData", "messages", [])
-        return SxAttr.get_static_attribute("SxLog_LogData", "messages")
+        return _messages
 
     static func add_message(message: LogMessage) -> void:
-        SxAttr.setup_static_attribute("SxLog_LogData", "messages", [])
-        var arr := SxAttr.get_static_attribute("SxLog_LogData", "messages") as Array
-        arr.append(message)
+        _messages.append(message)
 
     static func pop_messages() -> Array:
-        SxAttr.setup_static_attribute("SxLog_LogData", "messages", [])
-        var msg := SxAttr.get_static_attribute("SxLog_LogData", "messages") as Array
-        SxAttr.set_static_attribute("SxLog_LogData", "messages", [])
-        return msg
+        var messages = get_messages()
+        _messages = []
+        return messages
 
 class _LogUtils:
-    static func level_to_string(level: int) -> String:
+    static func level_to_string(level: LogLevel) -> String:
         match level:
             LogLevel.TRACE:
                 return "trace"
@@ -37,7 +50,7 @@ class _LogUtils:
 
         return "critical"
 
-    static func level_from_name(name: String) -> int:
+    static func level_from_name(name: String) -> LogLevel:
         match name:
             "trace":
                 return LogLevel.TRACE
@@ -55,17 +68,23 @@ class _LogUtils:
         printerr("[SxLog] Unknown log level %s. Defaulting to INFO" % name)
         return LogLevel.INFO
 
-# Log message
+## A log message.
 class LogMessage:
     extends Node
 
+    ## Message timestamp.
     var time: float
-    var level: int
+    ## Message level.
+    var level: LogLevel
+    ## Message logger name.
     var logger_name: String
+    ## Message content.
     var message: String
+    ## Peer ID (for network messages).
     var peer_id: int
 
-    static func new_message(time: float, level: int, name: String, message: String, peer_id: int = -1) -> LogMessage:
+    ## Create a new message.
+    static func new_message(time: float, level: LogLevel, name: String, message: String, peer_id: int = -1) -> LogMessage:
         var msg := LogMessage.new()
         msg.time = time
         msg.level = level
@@ -74,12 +93,15 @@ class LogMessage:
         msg.peer_id = peer_id
         return msg
 
-# Single logger handle
+## Logger handle.
 class Logger:
     extends Object
 
+    ## Logger name.
     var name: String
-    var max_level: int
+    ## Logger max level.
+    var max_level: LogLevel
+    ## Should display messages in Godot console.
     var display_in_console: bool
 
     func _init(name: String, max_level: int, display_in_console: bool):
@@ -87,79 +109,79 @@ class Logger:
         self.max_level = max_level
         self.display_in_console = display_in_console
 
-    # Set max log level for this logger
+    ## Set max log level for this logger.
     func set_max_log_level(level: int) -> void:
         self.max_level = level
 
-    # Show a trace message
+    ## Show a trace message.
     func trace(message: String, args: Array = []) -> void:
         _log(LogLevel.TRACE, message, args)
 
-    # Show a debug message
+    ## Show a debug message.
     func debug(message: String, args: Array = []) -> void:
         _log(LogLevel.DEBUG, message, args)
 
-    # Show an info message
+    ## Show an info message.
     func info(message: String, args: Array = []) -> void:
         _log(LogLevel.INFO, message, args)
 
-    # Show a warn message
+    ## Show a warn message.
     func warn(message: String, args: Array = []) -> void:
         _log(LogLevel.WARN, message, args)
 
-    # Show an error message
+    ## Show an error message
     func error(message: String, args: Array = []) -> void:
         _log(LogLevel.ERROR, message, args)
 
-    # Show a critical message
+    ## Show a critical message.
     func critical(message: String, args: Array = []) -> void:
         _log(LogLevel.CRITICAL, message, args)
 
-    # Show a trace message for a method name
+    ## Show a trace message for a method name.
     func trace_m(method: String, message: String, args: Array = []) -> void:
         _log_method(LogLevel.TRACE, method, message, args)
 
-    # Show a debug message for a method name
+    ## Show a debug message for a method name.
     func debug_m(method: String, message: String, args: Array = []) -> void:
         _log_method(LogLevel.DEBUG, method, message, args)
 
-    # Show an info message for a method name
+    ## Show an info message for a method name.
     func info_m(method: String, message: String, args: Array = []) -> void:
         _log_method(LogLevel.INFO, method, message, args)
 
-    # Show a warn message for a method name
+    ## Show a warn message for a method name.
     func warn_m(method: String, message: String, args: Array = []) -> void:
         _log_method(LogLevel.WARN, method, message, args)
 
-    # Show an error message for a method name
+    ## Show an error message for a method name.
     func error_m(method: String, message: String, args: Array = []) -> void:
         _log_method(LogLevel.ERROR, method, message, args)
 
-    # Show a critical message for a method name
+    ## Show a critical message for a method name.
     func critical_m(method: String, message: String, args: Array = []) -> void:
         _log_method(LogLevel.CRITICAL, method, message, args)
 
-    # Show a trace message for a peer ID and method name
+    ## Show a trace message for a peer ID and method name.
     func trace_mn(peer_id: int, method: String, message: String, args: Array = []) -> void:
         _log_method_network(LogLevel.TRACE, peer_id, method, message, args)
 
-    # Show a debug message for a peer ID and method name
+    ## Show a debug message for a peer ID and method name.
     func debug_mn(peer_id: int, method: String, message: String, args: Array = []) -> void:
         _log_method_network(LogLevel.DEBUG, peer_id, method, message, args)
 
-    # Show an info message for a peer ID and method name
+    ## Show an info message for a peer ID and method name.
     func info_mn(peer_id: int, method: String, message: String, args: Array = []) -> void:
         _log_method_network(LogLevel.INFO, peer_id, method, message, args)
 
-    # Show a warn message for a peer ID and method name
+    ## Show a warn message for a peer ID and method name.
     func warn_mn(peer_id: int, method: String, message: String, args: Array = []) -> void:
         _log_method_network(LogLevel.WARN, peer_id, method, message, args)
 
-    # Show an error message for a peer ID and method name
+    ## Show an error message for a peer ID and method name.
     func error_mn(peer_id: int, method: String, message: String, args: Array = []) -> void:
         _log_method_network(LogLevel.ERROR, peer_id, method, message, args)
 
-    # Show a critical message for a peer ID and method name
+    ## Show a critical message for a peer ID and method name.
     func critical_mn(peer_id: int, method: String, message: String, args: Array = []) -> void:
         _log_method_network(LogLevel.CRITICAL, peer_id, method, message, args)
 
@@ -250,33 +272,42 @@ class Logger:
         )
         _LogData.add_message(log_message)
 
+static var _loggers: Dictionary = {}
+
+## Show all messages in Godot console.
 const SHOW_IN_CONSOLE := true
+## Default log level.
 const DEFAULT_LOG_LEVEL := LogLevel.INFO
 
-# Get logger from name.
+# Get logger from name.[br]
 #
-# Example:
-#   var logger := SxLog.get_logger("my_logger")
+# Usage:
+# [codeblock]
+# var logger := SxLog.get_logger("my_logger")
+# logger.info("Hello")
+# [/codeblock]
 static func get_logger(name: String) -> Logger:
-    SxAttr.setup_static_attribute("SxLog", "loggers", {})
-    var loggers := SxAttr.get_static_attribute("SxLog", "loggers") as Dictionary
-    if loggers.has(name):
-        return loggers[name]
+    if _loggers.has(name):
+        return _loggers[name]
     else:
         var logger := Logger.new(name, DEFAULT_LOG_LEVEL, SHOW_IN_CONSOLE)
-        loggers[name] = logger
+        _loggers[name] = logger
         return logger
 
+## Get last generated messages.
 static func get_messages() -> Array:
     return _LogData.get_messages()
 
+## Pop last generated messages.
 static func pop_messages() -> Array:
     return _LogData.pop_messages()
 
-# Configure log level for each loggers using a configuration string.
-#
-# Example:
-#   SxLog.configure_log_levels("info,my_logger=debug")
+## Configure log level for each loggers using a configuration string.[br]
+##
+## Usage:
+## [codeblock]
+## SxLog.configure_log_levels("info,my_logger=debug")
+## [/codeblock]
 static func configure_log_levels(conf: String) -> void:
     var all_split := conf.split(",")
     for log_conf in all_split:
@@ -289,10 +320,12 @@ static func configure_log_levels(conf: String) -> void:
         elif len_split == 2:
             set_max_log_level(split[0], _LogUtils.level_from_name(split[0]))
 
-# Set maximum log level for a specific logger.
-#
-# Example:
-#   SxLog.set_max_log_level("my_logger", LogLevel.WARN)
+## Set maximum log level for a specific logger.[br]
+##
+## Usage:
+## [codeblock]
+## SxLog.set_max_log_level("my_logger", LogLevel.WARN)
+## [/codeblock]
 static func set_max_log_level(name: String, level: int) -> void:
     var logger := get_logger(name)
     logger.set_max_log_level(level)

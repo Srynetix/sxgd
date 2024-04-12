@@ -1,22 +1,28 @@
-# Global debug tools, displaying debug info and logs.
 extends CanvasLayer
 class_name SxDebugTools
+## Global debug tools.
 
-const normal_font := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
-const bold_font := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Bold.otf")
-const code_font := preload("res://addons/sxgd/assets/fonts/Inconsolata-Regular.ttf")
+const _NORMAL_FONT := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
+const _BOLD_FONT := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Bold.otf")
+const _CODE_FONT := preload("res://addons/sxgd/assets/fonts/Inconsolata-Regular.ttf")
 
-# Panel type to display.
+## Panel type to display.
 enum PanelType {
+    ## Debug info.
     DEBUG_INFO,
+    ## Log.
     LOG,
+    ## Node tracer.
     NODE_TRACER,
+    ## Scene tree dump.
     SCENE_TREE_DUMP,
+    ## Console.
     CONSOLE,
 }
 
-# Should the panel be visible on startup?
+## Should the panel be visible on startup?
 @export var visible_on_startup := false
+## Panel to show on startup.
 @export var panel_on_startup := PanelType.DEBUG_INFO
 
 @onready var _visible := visible_on_startup
@@ -29,17 +35,42 @@ var _scene_tree_dump: MarginContainer
 var _debug_console: SxDebugConsole
 var _debug_info: SxDebugInfo
 
-var _previous_mouse_mode := Input.MOUSE_MODE_VISIBLE as int
+## Hide the debug panel.
+func hide_tools() -> void:
+    _hide_panels()
+    _main_panel.visible = false
+    _visible = false
+
+## Show the debug panel.
+func show_tools() -> void:
+    _main_panel.visible = true
+    _visible = true
+    _show_panel(_current_panel)
+
+## Toggle the debug panel.
+func toggle() -> void:
+    if _visible:
+        hide_tools()
+    else:
+        show_tools()
+
+## Show a specific panel.
+func show_specific_panel(panel_type: PanelType) -> void:
+    _show_panel(panel_type)
 
 func _build_ui() -> void:
     var box := StyleBoxEmpty.new()
 
     layer = 4
 
+    var _main_panel_stylebox := StyleBoxFlat.new()
+    _main_panel_stylebox.bg_color = SxColor.with_alpha_f(Color.BLACK, 0.5)
+
     _main_panel = Panel.new()
     _main_panel.name = "Panel"
     _main_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
     _main_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    _main_panel.add_theme_stylebox_override("panel", _main_panel_stylebox)
     add_child(_main_panel)
 
     _debug_info = SxDebugInfo.new()
@@ -87,7 +118,7 @@ func _build_ui() -> void:
 
     var local_scene_tree_title := Label.new()
     local_scene_tree_title.name = "Title"
-    local_scene_tree_title.add_theme_font_override("font", bold_font)
+    local_scene_tree_title.add_theme_font_override("font", _BOLD_FONT)
     local_scene_tree_title.text = "Local tree"
     local_scene_tree_container.add_child(local_scene_tree_title)
 
@@ -96,10 +127,10 @@ func _build_ui() -> void:
     local_scene_tree.size_flags_vertical = Control.SIZE_EXPAND_FILL
     local_scene_tree.add_theme_constant_override("draw_guides", 0)
     local_scene_tree.add_theme_constant_override("draw_relationship_lines", 1)
-    local_scene_tree.add_theme_font_override("font", code_font)
+    local_scene_tree.add_theme_font_override("font", _CODE_FONT)
     local_scene_tree.add_theme_font_size_override("font_size", 13)
     local_scene_tree.add_theme_color_override("font_outline_color", Color.BLACK)
-    local_scene_tree.add_theme_constant_override("outline_size", 2)
+    local_scene_tree.add_theme_constant_override("outline_size", 6)
     local_scene_tree.add_theme_stylebox_override("panel", box)
     local_scene_tree_container.add_child(local_scene_tree)
 
@@ -112,7 +143,7 @@ func _build_ui() -> void:
 
     var listenserver_scene_tree_title := Label.new()
     listenserver_scene_tree_title.name = "Title"
-    listenserver_scene_tree_title.add_theme_font_override("font", bold_font)
+    listenserver_scene_tree_title.add_theme_font_override("font", _BOLD_FONT)
     listenserver_scene_tree_title.text = "Listen server tree"
     listenserver_scene_tree_container.add_child(listenserver_scene_tree_title)
 
@@ -121,7 +152,7 @@ func _build_ui() -> void:
     listenserver_scene_tree.size_flags_vertical = Control.SIZE_EXPAND_FILL
     listenserver_scene_tree.add_theme_constant_override("draw_guides", 0)
     listenserver_scene_tree.add_theme_constant_override("draw_relationship_lines", 1)
-    listenserver_scene_tree.add_theme_font_override("font", code_font)
+    listenserver_scene_tree.add_theme_font_override("font", _CODE_FONT)
     listenserver_scene_tree.add_theme_font_size_override("font_size", 13)
     listenserver_scene_tree.add_theme_color_override("font_outline_color", Color.BLACK)
     listenserver_scene_tree.add_theme_constant_override("outline_size", 2)
@@ -141,20 +172,21 @@ func _build_ui() -> void:
     right_title.name = "Title"
     right_title.size_flags_horizontal = Control.SIZE_SHRINK_END
     right_title.size_flags_vertical = 0
-    right_title.add_theme_font_override("font", bold_font)
-    right_title.text = "Debug Tools™"
+    right_title.add_theme_font_override("font", _BOLD_FONT)
+    right_title.add_theme_color_override("font_outline_color", Color.BLACK)
+    right_title.text = "Debug Tools"
     right_container.add_child(right_title)
 
     var right_label := Label.new()
     right_label.name = "Instructions"
     right_label.size_flags_horizontal = Control.SIZE_SHRINK_END
     right_label.size_flags_vertical = Control.SIZE_SHRINK_END
-    right_label.add_theme_font_override("font", normal_font)
+    right_label.add_theme_font_override("font", _NORMAL_FONT)
     right_label.add_theme_color_override("font_outline_color", Color.BLACK)
-    right_label.add_theme_constant_override("outline_size", 3)
     right_label.add_theme_font_size_override("font_size", 12)
     right_label.text = (
-        "F6 - Show console\n"
+        "~ - Show console\n"
+        + "F3 - Toggle mouse visibility\n"
         + "F7 - Show scene tree dumps\n"
         + "F9 - Show node traces\n"
         + "F10 - Show logs\n"
@@ -175,32 +207,6 @@ func _ready() -> void:
 
     if visible_on_startup:
         show_tools()
-
-# Hide the debug panel.
-func hide_tools() -> void:
-    _hide_panels()
-    _main_panel.visible = false
-    _visible = false
-    Input.mouse_mode = _previous_mouse_mode
-
-# Show the debug panel.
-func show_tools() -> void:
-    _previous_mouse_mode = Input.mouse_mode
-    _main_panel.visible = true
-    _visible = true
-    _show_panel(_current_panel)
-    Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
-# Toggle the debug panel.
-func toggle() -> void:
-    if _visible:
-        hide_tools()
-    else:
-        show_tools()
-
-# Show a specific panel.
-func show_specific_panel(panel_type: PanelType) -> void:
-    _show_panel(panel_type)
 
 func _show_panel(panel_type: PanelType) -> void:
     _current_panel = panel_type
@@ -259,7 +265,7 @@ func _input(event: InputEvent):
         if event.pressed && event.keycode == KEY_F12:
             toggle()
 
-        elif event.pressed && event.keycode == KEY_F6 && _visible:
+        elif event.pressed && event.keycode == KEY_ASCIITILDE && _visible:
             _show_panel(PanelType.CONSOLE)
 
         elif event.pressed && event.keycode == KEY_F7 && _visible:
@@ -279,3 +285,9 @@ func _input(event: InputEvent):
 
         elif event.pressed && event.keycode == KEY_F2 && _visible:
             get_tree().paused = !get_tree().paused
+
+        elif event.pressed && event.keycode == KEY_F3 && _visible:
+            if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+                Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+            else:
+                Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

@@ -1,7 +1,8 @@
-# A touch-compatible ItemList.
-# From https://github.com/godotengine/godot-proposals/issues/2429
 extends ItemList
 class_name SxItemList
+## A touch-compatible ItemList.
+##
+## From https://github.com/godotengine/godot-proposals/issues/2429
 
 func _ready() -> void:
     gui_input.connect(_gui_input)

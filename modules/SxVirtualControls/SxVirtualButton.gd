@@ -1,18 +1,19 @@
 @tool
 extends TextureRect
 class_name SxVirtualButton
+## Virtual button, to use with the [SxVirtualControls].
 
 const BACKGROUND = preload("res://addons/sxgd/modules/SxVirtualControls/assets/textures/transparentDark/transparentDark09.png")
 
 const INITIAL_OPACITY := 0.5
 const TOUCHED_OPACITY := 1.0
 
-# On button touch
+## On button touch.
 signal touched()
-# On button release
+## On button release.
 signal released()
 
-# Action button
+## Action button.
 @export var action_button: String
 
 var _button_touch_index := -1

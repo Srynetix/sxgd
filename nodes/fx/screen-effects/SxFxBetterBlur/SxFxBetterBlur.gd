@@ -1,10 +1,11 @@
-# A ready-to-use gaussian blur, compatible with GLES2.
 @tool
 extends Control
 class_name SxFxBetterBlur
+## A ready-to-use gaussian blur, compatible with GLES2.
 
-const shader := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxBetterBlur/Shader.gdshader")
+const _SHADER := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxBetterBlur/Shader.gdshader")
 
+## Blur strength.
 @export var strength := 0.0 : set = _set_strength
 
 var _step1: ColorRect
@@ -26,10 +27,10 @@ func _ready() -> void:
     mouse_filter = Control.MOUSE_FILTER_IGNORE
 
     var material_x := ShaderMaterial.new()
-    material_x.shader = shader
+    material_x.shader = _SHADER
     material_x.set_shader_parameter("direction", Vector2(1.0, 0.0))
     var material_y := ShaderMaterial.new()
-    material_y.shader = shader
+    material_y.shader = _SHADER
     material_y.set_shader_parameter("direction", Vector2(0.0, 1.0))
 
     _step1_layer = CanvasLayer.new()
