@@ -1,15 +1,15 @@
-# FontAwesome button, displaying an icon.
 @tool
 extends Button
 class_name SxFaButton
+## FontAwesome button, displaying an icon.
 
-# Icon name
+## Icon name
 @export var icon_name := "anchor" : set = _set_icon_name
-# Icon size
+## Icon size
 @export var icon_size := 24 : set = _set_icon_size
-# Icon color
+## Icon color
 @export var icon_color := Color.WHITE : set = _set_icon_color
-# Icon rotation
+## Icon rotation
 @export var icon_rotation := 0.0 : set = _set_icon_rotation
 
 var _label: SxFaLabel

@@ -1,8 +1,8 @@
 extends MarginContainer
 class_name SxDebugConsole
+## In-Game debug console.
 
-const font := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
-
+const _FONT := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
 var _logger := SxLog.get_logger("SxDebugConsole")
 
 class _Args:
@@ -37,21 +37,19 @@ var _inputfield: SxDebugConsoleLineEdit
 var _history := PackedStringArray()
 var _history_cursor := 0
 
-static func bind_cvars(vars: SxCVars) -> void:
-    SxAttr.set_static_attribute("SxDebugConsole", "vars", vars)
-
-static func _get_cvars_object() -> SxCVars:
-    var elem := SxAttr.get_static_attribute("SxDebugConsole", "vars", null) as SxCVars
-    assert(elem != null, "CVars are not bound to the SxDebugConsole. Use SxDebugConsole.bind_cvars(<instance>).")
-    return elem
+## Focus the console input.
+func focus_input() -> void:
+    _inputfield.grab_focus()
 
 func _build_ui() -> void:
+    name = "SxDebugConsole"
+
     anchor_right = 1.0
     anchor_bottom = 1.0
     SxUi.set_margin_container_margins(self, 10.0)
 
     var panel := Panel.new()
-    panel.self_modulate = SxColor.with_alpha_f(Color.WHITE, 0.17)
+    panel.self_modulate = SxColor.with_alpha_f(Color.BLACK, 0.75)
     panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
     add_child(panel)
 
@@ -68,17 +66,24 @@ func _build_ui() -> void:
     _scrollcontainer.size_flags_vertical = Control.SIZE_EXPAND_FILL
     vbox.add_child(_scrollcontainer)
 
+    var margin_container = MarginContainer.new()
+    margin_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+    margin_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
+    margin_container.add_theme_constant_override("margin_left", 2.0)
+    margin_container.add_theme_constant_override("margin_bottom", 2.0)
+    _scrollcontainer.add_child(margin_container)
+
     _scrollbuffer = Label.new()
     _scrollbuffer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
     _scrollbuffer.size_flags_vertical = Control.SIZE_EXPAND_FILL
-    _scrollbuffer.add_theme_font_override("font", font)
-    _scrollbuffer.add_theme_font_size_override("font_size", 14)
+    _scrollbuffer.add_theme_font_override("font", _FONT)
+    _scrollbuffer.add_theme_font_size_override("font_size", 11)
     _scrollbuffer.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
-    _scrollcontainer.add_child(_scrollbuffer)
+    margin_container.add_child(_scrollbuffer)
 
     _inputfield = SxDebugConsoleLineEdit.new()
-    _inputfield.add_theme_font_override("font", font)
-    _inputfield.add_theme_font_size_override("font_size", 14)
+    _inputfield.add_theme_font_override("font", _FONT)
+    _inputfield.add_theme_font_size_override("font_size", 11)
     vbox.add_child(_inputfield)
 
 func _ready() -> void:
@@ -337,23 +342,20 @@ func _cmd_cvar_set(args: PackedStringArray) -> String:
     var cvar_name = args[0] as String
     var cvar_value = args[1] as String
 
-    var cvars_obj = _get_cvars_object()
-    var current = cvars_obj.get_cvar(cvar_name)
+    var current = SxCVars.get_cvar(cvar_name)
     var converted_value = _convert_value(current, cvar_value)
     _logger.info("Will set CVar %s to value %s (was: %s)" % [cvar_name, converted_value, current])
-    cvars_obj.set_cvar(cvar_name, converted_value)
-    return str(cvars_obj.get_cvar(cvar_name))
+    SxCVars.set_cvar(cvar_name, converted_value)
+    return str(SxCVars.get_cvar(cvar_name))
 
 func _cmd_cvar_get(args: PackedStringArray) -> String:
     if len(args) != 1:
         return _cmd_error("'cvar_get' should take one argument: the 'cvar_name'.")
 
-    var cvars_obj = _get_cvars_object()
-    return str(cvars_obj.get_cvar(args[0]))
+    return str(SxCVars.get_cvar(args[0]))
 
 func _cmd_cvar_list() -> String:
-    var cvars_obj = _get_cvars_object()
-    return cvars_obj.print_cvars()
+    return SxCVars.print_cvars()
 
 func _cmd_call(args: PackedStringArray) -> String:
     if len(args) < 2:

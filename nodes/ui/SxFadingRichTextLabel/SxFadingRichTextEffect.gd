@@ -1,6 +1,8 @@
 @tool
 extends RichTextEffect
+## Fading text effect.
 
+## BBCode to use.
 var bbcode := "sxgd-fadein"
 
 func _process_custom_fx(char_fx: CharFXTransform) -> bool:

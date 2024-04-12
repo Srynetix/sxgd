@@ -1,21 +1,29 @@
-# Double tap detector
-
 extends Node
 class_name SxDoubleTap
+## Double tap detector.
 
+## On double tap.
 signal doubletap(touch_idx)
 
+## Should process input.
 @export var should_process_input := true
+## Threshold in milliseconds.
 @export var threshold_ms := 200
+## Target rectangle.
 @export var target_rect: Rect2
 
 var _time_per_touch := {}
 
+## Represents double tap data.
 class DoubleTapData:
+    ## Double tap detected?
     var result: bool
+    ## Tap index.
     var index: int
+    ## Tap position.
     var position: Vector2
 
+    ## Build an empty double tap data.
     static func none() -> DoubleTapData:
         var value := DoubleTapData.new()
         value.result = false
@@ -23,6 +31,7 @@ class DoubleTapData:
         value.position = Vector2.ZERO
         return value
 
+    ## Build a detected double tap data.
     static func some(index: int, position: Vector2) -> DoubleTapData:
         var value := DoubleTapData.new()
         value.result = true
@@ -30,19 +39,7 @@ class DoubleTapData:
         value.position = position
         return value
 
-func _ready() -> void:
-    set_process_input(should_process_input)
-
-func _input(event: InputEvent) -> void:
-    var has_doubletap := process_doubletap(event)
-    if has_doubletap.result:
-        emit_signal("doubletap", has_doubletap.index)
-
-func _touch_in_rect(touch_position: Vector2) -> bool:
-    if target_rect:
-        return target_rect.has_point(touch_position)
-    return true
-
+## Try to detect a double tap from an [InputEvent].
 func process_doubletap(event: InputEvent) -> DoubleTapData:
     var result = DoubleTapData.none()
 
@@ -58,3 +55,16 @@ func process_doubletap(event: InputEvent) -> DoubleTapData:
             _time_per_touch[touch_idx] = this_time
 
     return result
+
+func _ready() -> void:
+    set_process_input(should_process_input)
+
+func _input(event: InputEvent) -> void:
+    var has_doubletap := process_doubletap(event)
+    if has_doubletap.result:
+        emit_signal("doubletap", has_doubletap.index)
+
+func _touch_in_rect(touch_position: Vector2) -> bool:
+    if target_rect:
+        return target_rect.has_point(touch_position)
+    return true

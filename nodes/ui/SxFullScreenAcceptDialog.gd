@@ -1,13 +1,17 @@
 @tool
 extends SxFullScreenDialog
 class_name SxFullScreenAcceptDialog
+## Simple full-screen accept dialog.
 
+## Message to display.
 @export_multiline var message := "Message." : set = _set_message
+## Label for the accept button.
 @export var ok_message := "OK" : set = _set_ok_message
 
 var _message_label: Label
 var _ok_btn: Button
 
+## On dialog acceptation.
 signal confirmed()
 
 func _build_ui_accept() -> void:
@@ -17,7 +21,7 @@ func _build_ui_accept() -> void:
     _vbox_container.add_child(inner_vbox)
 
     _message_label = Label.new()
-    _message_label.add_theme_font_override("font", font)
+    _message_label.add_theme_font_override("font", _FONT)
     _message_label.add_theme_font_size_override("font_size", 34)
     _message_label.text = message
     _message_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -31,7 +35,7 @@ func _build_ui_accept() -> void:
     inner_vbox.add_child(hbox_container)
 
     _ok_btn = Button.new()
-    _ok_btn.add_theme_font_override("font", font)
+    _ok_btn.add_theme_font_override("font", _FONT)
     _ok_btn.add_theme_font_size_override("font_size", 34)
     _ok_btn.text = ok_message
     _ok_btn.flat = true

@@ -1,10 +1,14 @@
-# Global node utilities
 extends Object
 class_name SxNode
+## Base node extensions.
+##
+## Additional methods to work with nodes.
 
+## Print a node tree to string.
 static func print_tree_to_string(node: Node) -> String:
     return _print_tree_to_string(node, node)
 
+## Print a pretty node tree to string.
 static func print_tree_pretty_to_string(node: Node) -> String:
     return _print_tree_pretty_to_string(node, "", true)
 

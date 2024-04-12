@@ -1,18 +1,17 @@
-# A debug panel showing performance info, shown with the F12 key.
-# When shown, you can reload the current scene with F5 and pause the game with F2.
 @tool
 extends CanvasLayer
 class_name SxDebugInfo
+## A debug panel showing performance info.
 
 const font := preload("res://addons/sxgd/assets/fonts/Jost-400-Book.ttf")
 
 var _label: RichTextLabel
 
-# Get the visibility status.
+## Get the visibility status.
 func get_visibility() -> bool:
     return _label.visible
 
-# Set the visibility status.
+## Set the visibility status.
 func set_visibility(value: bool) -> void:
     _label.visible = value
 
@@ -33,8 +32,6 @@ func _ready() -> void:
     _label = RichTextLabel.new()
     _label.mouse_filter = Control.MOUSE_FILTER_IGNORE
     _label.add_theme_color_override("default_color", Color(1, 0.43, 0.52, 1))
-    _label.add_theme_color_override("font_outline_color", Color.BLACK)
-    _label.add_theme_constant_override("outline_size", 6)
     _label.add_theme_font_size_override("normal_font_size", 12)
     _label.add_theme_font_override("normal_font", font)
     _label.text = "FPS"

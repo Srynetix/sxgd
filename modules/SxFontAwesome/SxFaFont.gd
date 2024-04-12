@@ -1,31 +1,33 @@
-# Font management wrapper around FontAwesome.
+@tool
 extends Object
 class_name SxFaFont
+## Font management wrapper around FontAwesome.
+
+static var _fonts: Dictionary = {}
+static var _definition: Dictionary = {}
 
 const FASolidFont := preload("res://addons/sxgd/modules/SxFontAwesome/assets/otfs/Font Awesome 6 Free-Solid-900.otf")
 const FARegularFont := preload("res://addons/sxgd/modules/SxFontAwesome/assets/otfs/Font Awesome 6 Free-Regular-400.otf")
-
 const SxFaJsonData = preload("res://addons/sxgd/modules/SxFontAwesome/SxFaJsonData.gd")
 
-# Font family
+## Font family.
 enum Family {
+    ## Solid.
     Solid,
+    ## Regular.
     Regular
 }
 
-# Lazily create a FontAwesome font, using a specific font family and a size.
-# If the font already exists, it will be returned.
-# If not, it will be created.
+## Lazily create a FontAwesome font, using a specific font family and a size.[br]
+## If the font already exists, it will be returned.[br]
+## If not, it will be created.
 static func create_fa_font(family: int) -> Font:
-    SxAttr.setup_static_attribute("SxFaFont", "fonts", {})
-
-    var cached_data := SxAttr.get_static_attribute("SxFaFont", "fonts") as Dictionary
-    if cached_data.has(family):
-        return cached_data[family]
+    if _fonts.has(family):
+        return _fonts[family]
 
     return _get_font_family(family)
 
-# Get the icon unicode from its string representation.
+## Get the icon unicode from its string representation.
 static func get_icon_code(name: String) -> int:
     var definition := _get_definition()
     if definition.has(name):
@@ -40,14 +42,12 @@ static func _get_font_family(family: int) -> Font:
             return FARegularFont
 
 static func _has_definition() -> bool:
-    return SxAttr.get_static_attribute("SxFaFont", "definition") != null
+    return _definition != {}
 
 static func _get_definition() -> Dictionary:
-    SxAttr.setup_static_attribute("SxFaFont", "definition", null)
-
     if !_has_definition():
-        SxAttr.set_static_attribute("SxFaFont", "definition", _load_definition())
-    return SxAttr.get_static_attribute("SxFaFont", "definition")
+        _definition = _load_definition()
+    return _definition
 
 static func _load_definition() -> Dictionary:
     return SxFaJsonData.DATA

@@ -1,13 +1,13 @@
-# FontAwesome label, used to easily display a FontAwesome icon.
 @tool
 extends Label
 class_name SxFaLabel
+## FontAwesome label, used to easily display a FontAwesome icon.
 
-# Icon name
+## Icon name
 @export var icon_name := "anchor" : set = _set_icon_name
-# Icon size
+## Icon size
 @export var icon_size := 24 : set = _set_icon_size
-# Icon color
+## Icon color
 @export var icon_color := Color.WHITE : set = _set_icon_color
 
 func _init() -> void:

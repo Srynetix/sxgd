@@ -1,16 +1,22 @@
 @tool
 extends SxFullScreenDialog
 class_name SxFullScreenConfirmationDialog
+## Simple full-screen confirmation dialog.
 
+## Message to display.
 @export_multiline var message := "Are you sure?" : set = _set_message
+## Label for the confirmation button.
 @export var yes_message := "Yes" : set = _set_yes_message
+## Label for the cancellation button.
 @export var no_message := "No" : set = _set_no_message
 
 var _message_label: Label
 var _yes_btn: Button
 var _no_btn: Button
 
+## On dialog confirmed.
 signal confirmed()
+## On dialog canceled.
 signal canceled()
 
 func _build_ui_confirmation() -> void:
@@ -20,7 +26,7 @@ func _build_ui_confirmation() -> void:
     _vbox_container.add_child(inner_vbox)
 
     _message_label = Label.new()
-    _message_label.add_theme_font_override("font", font)
+    _message_label.add_theme_font_override("font", _FONT)
     _message_label.add_theme_font_size_override("font_size", 32)
     _message_label.text = message
     _message_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -34,14 +40,14 @@ func _build_ui_confirmation() -> void:
     inner_vbox.add_child(hbox_container)
 
     _yes_btn = Button.new()
-    _yes_btn.add_theme_font_override("font", font)
+    _yes_btn.add_theme_font_override("font", _FONT)
     _yes_btn.add_theme_font_size_override("font_size", 32)
     _yes_btn.text = yes_message
     _yes_btn.flat = true
     hbox_container.add_child(_yes_btn)
 
     _no_btn = Button.new()
-    _no_btn.add_theme_font_override("font", font)
+    _no_btn.add_theme_font_override("font", _FONT)
     _no_btn.add_theme_font_size_override("font_size", 32)
     _no_btn.text = no_message
     _no_btn.flat = true

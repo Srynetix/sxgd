@@ -1,9 +1,16 @@
 extends Object
 class_name SxText
+## Text extensions.
+##
+## Additional methods to work with text.
 
-# Convert a text to camel case.
-# Example:
-#   SxText.to_camel_case("hello_world")  # => "helloWorld"
+## Convert a text to 'camelCase'.[br]
+##
+## Usage:
+## [codeblock]
+## SxText.to_camel_case("hello_world")
+## # => "helloWorld"
+## [/codeblock]
 static func to_camel_case(s: String) -> String:
     var should_upper := false
     var output := ""
@@ -18,9 +25,13 @@ static func to_camel_case(s: String) -> String:
                 output += c
     return output
 
-# Convert a text to pascal case.
-# Example:
-#   SxText.to_pascal_case("hello_world")  # => "HelloWorld"
+## Convert a text to 'PascalCase'.[br]
+##
+## Usage:
+## [codeblock]
+## SxText.to_pascal_case("hello_world")
+## # => "HelloWorld"
+## [/codeblock]
 static func to_pascal_case(s: String) -> String:
     var should_upper := true
     var output := ""

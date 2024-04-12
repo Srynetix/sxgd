@@ -1,13 +1,13 @@
-# A ready-to-use motion blur.
 @tool
 extends ColorRect
 class_name SxFxMotionBlur
+## A ready-to-use motion blur effect.
 
-const shader := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxMotionBlur/SxFxMotionBlur.gdshader")
+const _SHADER := preload("res://addons/sxgd/nodes/fx/screen-effects/SxFxMotionBlur/SxFxMotionBlur.gdshader")
 
-# Rotation angle in degrees.
+## Rotation angle in degrees.
 @export var angle_degrees := 0.0 : set = _set_angle_degrees
-# Effect strength.
+## Effect strength.
 @export var strength := 0.0 : set = _set_strength
 
 func _set_strength(value: float) -> void:
@@ -33,7 +33,7 @@ func _ready() -> void:
 
     if !Engine.is_editor_hint():
         var shader_material := ShaderMaterial.new()
-        shader_material.shader = shader
+        shader_material.shader = _SHADER
         material = shader_material
 
         _set_strength(strength)
