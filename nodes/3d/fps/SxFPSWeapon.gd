@@ -44,5 +44,8 @@ func _spawn_decal(parent: Node3D, decal_position: Vector3, normal: Vector3):
     decal_controller.spawn_decal(decal_scene, parent, decal_position, normal)
 
 func _set_cooldown_seconds(value: float) -> void:
+    if _cooldown_timer == null:
+        await self.ready
+
     cooldown_seconds = value
     _cooldown_timer.wait_time = value

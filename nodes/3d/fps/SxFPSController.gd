@@ -33,10 +33,15 @@ const MAX_LOOK_ANGLE := 90
 @export var crouch_action: String
 @export var walk_action: String
 
+@export var enable_movement := true
+@export var enable_weapon := true
+
 @export var camera: Camera3D
 @export var weapon: SxFPSWeapon
 @export var collision_shape: CollisionShape3D
 @export var hitbox: Area3D
+@export var knee_raycast: RayCast3D
+@export var foot_raycast: RayCast3D
 
 var _acceleration := Vector3.ZERO
 var _rotation_helper: Node3D
@@ -62,16 +67,13 @@ func _ready() -> void:
     # Setup node
     _rotation_helper = Node3D.new()
     _rotation_helper.name = "RotationHelper"
+    _rotation_helper.position = camera.position
     add_child(_rotation_helper)
 
     remove_child(camera)
     _rotation_helper.add_child(camera)
+    camera.position = Vector3.ZERO
     add_to_group("SxFPSController")
-
-    var remote_xform = RemoteTransform3D.new()
-    remote_xform.name = "RemoteTransform3D"
-    remote_xform.remote_path = NodePath("../RotationHelper")
-    camera.add_child(remote_xform)
 
     _dash_timer = Timer.new()
     _dash_timer.timeout.connect(func(): _dashing = false)
@@ -100,10 +102,11 @@ func _get_configuration_warnings() -> PackedStringArray:
         warnings.append("Missing CollisionShape node")
     if camera == null:
         warnings.append("Missing Camera node")
+    if foot_raycast == null:
+        warnings.append("Missing FootRaycast node")
     return warnings
 
-
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
         if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
             var motion_event := event as InputEventMouseMotion
@@ -143,10 +146,11 @@ func _physics_process(delta: float) -> void:
         pass
 
     # Fire
-    if _is_fire_pressed():
-        weapon.fire()
-    else:
-        weapon.release()
+    if enable_weapon:
+        if _is_fire_pressed():
+            weapon.fire()
+        else:
+            weapon.release()
 
     if noclip:
         collision_shape.disabled = true
@@ -223,16 +227,19 @@ func _physics_process(delta: float) -> void:
                 _acceleration.z = -velocity.z * 0.5;
     else:
         # In air
-        if !_inside_force_field:
-            var movement := _handle_movement()
-            if movement:
-                var camera_xform := camera.global_transform
-                var forward := camera_xform.basis.z
-                var right := camera_xform.basis.x
-                var relative_dir := (forward * movement.z + right * movement.x).normalized()
-                var move_velocity = relative_dir * _get_movement_speed()
-                _acceleration.x += move_velocity.x * delta
-                _acceleration.z += move_velocity.z * delta
+        var movement := _handle_movement()
+        if movement:
+            var camera_xform := camera.global_transform
+            var forward := camera_xform.basis.z
+            var right := camera_xform.basis.x
+            var relative_dir := (forward * movement.z + right * movement.x).normalized()
+            var move_velocity = relative_dir * _get_movement_speed()
+            _acceleration.x += move_velocity.x * delta
+            _acceleration.z += move_velocity.z * delta
+
+    if foot_raycast.is_colliding() && !knee_raycast.is_colliding():
+        # Go up!
+        _acceleration += global_transform.basis.y * 1.0;
 
     velocity += _acceleration
     move_and_slide()
@@ -264,8 +271,14 @@ func _physics_process_post() -> void:
 
     _force_field_amount = Vector3.ZERO
 
+func _process(delta: float):
+    if enable_weapon:
+        weapon.visible = true
+    else:
+        weapon.visible = false
+
 func _is_input_enabled() -> bool:
-    return true
+    return enable_movement
 
 func _on_hitbox_entered(area: Area3D) -> void:
     pass

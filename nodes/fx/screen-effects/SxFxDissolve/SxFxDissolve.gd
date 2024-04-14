@@ -46,19 +46,18 @@ func _ready() -> void:
     set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
     color = Color.TRANSPARENT
 
-    if !Engine.is_editor_hint():
-        var noise := FastNoiseLite.new()
-        var noise_texture := NoiseTexture2D.new()
-        noise_texture.noise = noise
+    var noise := FastNoiseLite.new()
+    var noise_texture := NoiseTexture2D.new()
+    noise_texture.noise = noise
 
-        var shader_material := ShaderMaterial.new()
-        shader_material.shader = _SHADER
-        shader_material.set_shader_parameter("noise", noise_texture)
-        shader_material.set_shader_parameter("edge_width", 0.0)
-        shader_material.set_shader_parameter("edge_color1", Color.BLACK)
-        shader_material.set_shader_parameter("edge_color2", Color.BLACK)
-        material = shader_material
+    var shader_material := ShaderMaterial.new()
+    shader_material.shader = _SHADER
+    shader_material.set_shader_parameter("noise", noise_texture)
+    shader_material.set_shader_parameter("edge_width", 0.0)
+    shader_material.set_shader_parameter("edge_color1", Color.BLACK)
+    shader_material.set_shader_parameter("edge_color2", Color.BLACK)
+    material = shader_material
 
-        _set_ratio(ratio)
-        _set_replacement_color(replacement_color)
-        _set_noise_frequency(noise_frequency)
+    _set_ratio(ratio)
+    _set_replacement_color(replacement_color)
+    _set_noise_frequency(noise_frequency)

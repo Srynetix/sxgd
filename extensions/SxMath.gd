@@ -31,6 +31,24 @@ static func align_with_y(transform: Transform3D, new_y: Vector3) -> Transform3D:
     transform.basis = transform.basis.orthonormalized()
     return transform
 
+static func align_with_normal(transform: Transform3D, new_y: Vector3) -> Transform3D:
+    # Source: https://github.com/godotengine/godot/issues/85903#issuecomment-1846245217
+    var normalized_y := transform.basis.y.normalized()
+    var cos_value := normalized_y.dot(new_y)
+    if cos_value >= 0.99:
+        # No need to align
+        return transform
+
+    var alpha_angle := acos(cos_value)
+    var axis := normalized_y.cross(new_y).normalized()
+    if axis == Vector3.ZERO:
+        axis = Vector3.FORWARD
+
+    var prev_position = transform.origin
+    var rotated = transform.rotated(axis, alpha_angle)
+    rotated.origin = prev_position
+    return rotated
+
 ## Align a transform with a Y vector using interpolation.[br]
 ## See [method align_with_y].
 static func interpolate_align_with_y(transform: Transform3D, new_y: Vector3, weight: float) -> Transform3D:

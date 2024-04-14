@@ -16,7 +16,9 @@ func spawn_decal(decal_scene: PackedScene, parent: Node3D, position: Vector3, no
     while len(_decals) > SxCVars.get_cvar("SxDecalControllerMaxDecals"):
         var decal_to_remove = _decals[0]
         _decals.remove_at(0)
-        decal_to_remove.queue_free()
+
+        if is_instance_valid(decal_to_remove):
+            decal_to_remove.queue_free()
 
     var decal: SxDecal = decal_scene.instantiate()
     parent.add_child(decal)
