@@ -35,6 +35,7 @@ const MAX_LOOK_ANGLE := 90
 
 @export var enable_movement := true
 @export var enable_weapon := true
+@export var enable_look := true
 
 @export var camera: Camera3D
 @export var weapon: SxFPSWeapon
@@ -107,10 +108,11 @@ func _get_configuration_warnings() -> PackedStringArray:
     return warnings
 
 func _input(event: InputEvent) -> void:
-    if event is InputEventMouseMotion:
-        if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-            var motion_event := event as InputEventMouseMotion
-            _mouse_delta = motion_event.relative
+    if enable_look:
+        if event is InputEventMouseMotion:
+            if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+                var motion_event := event as InputEventMouseMotion
+                _mouse_delta = motion_event.relative
 
 # func _physics_process_noclip(delta: float) -> void:
 #     var look_sensitivity = SxCVars.get_cvar("SxFPSControllerLookSensitivity")
@@ -175,6 +177,7 @@ func _physics_process(delta: float) -> void:
         _jumping = true
         _current_jumps += 1
         _acceleration.y = -velocity.y + jump_speed
+        _on_jump()
 
     if on_floor:
         _current_jumps = 0
@@ -283,6 +286,9 @@ func _is_input_enabled() -> bool:
 func _on_hitbox_entered(area: Area3D) -> void:
     pass
 
+func _on_jump() -> void:
+    pass
+
 func _handle_movement() -> Vector3:
     var movement := Vector3()
     if !_is_input_enabled():
@@ -315,6 +321,7 @@ func _handle_dash_i(action: String) -> void:
     if _prev_movement_action == action && _prev_movement_time && now_time - _prev_movement_time < threshold:
         _dashing = true
         _dash_timer.start()
+        _on_dash()
     else:
         _dash_timer.stop()
         _dashing = false
@@ -330,6 +337,9 @@ func _handle_peeking() -> Vector3:
         peek_direction.x += 1
 
     return peek_direction.normalized()
+
+func _on_dash() -> void:
+    pass
 
 func _apply_force_field(force: Vector3) -> void:
     _inside_force_field = true
