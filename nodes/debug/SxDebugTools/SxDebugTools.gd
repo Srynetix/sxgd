@@ -35,6 +35,13 @@ var _scene_tree_dump: MarginContainer
 var _debug_console: SxDebugConsole
 var _debug_info: SxDebugInfo
 
+static func get_global_instance(tree: SceneTree) -> SxDebugTools:
+    if !tree.root.has_node("SxDebugTools"):
+        tree.root.call_deferred("add_child", SxDebugTools.new())
+        await tree.process_frame
+
+    return tree.root.get_node("SxDebugTools")
+
 ## Hide the debug panel.
 func hide_tools() -> void:
     _hide_panels()
@@ -57,6 +64,9 @@ func toggle() -> void:
 ## Show a specific panel.
 func show_specific_panel(panel_type: PanelType) -> void:
     _show_panel(panel_type)
+
+func _init() -> void:
+    name = "SxDebugTools"
 
 func _build_ui() -> void:
     var box := StyleBoxEmpty.new()
