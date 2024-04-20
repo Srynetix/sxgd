@@ -9,6 +9,16 @@ const COLOR_TRANSPARENT_BLACK := Color(0, 0, 0, 0)
 
 var _overlay: ColorRect
 
+## Setup a global instance.
+static func setup_global_instance(tree: SceneTree):
+    if !tree.root.has_node("SxSceneTransitioner"):
+        tree.root.call_deferred("add_child", SxSceneTransitioner.new())
+        await tree.process_frame
+
+## Get a global instance.
+static func get_global_instance(tree: SceneTree) -> SxSceneTransitioner:
+    return tree.root.get_node("SxSceneTransitioner")
+
 ## Fade current scene to another loaded scene.[br]
 ##
 ## Usage:
@@ -66,6 +76,9 @@ func fade_out(duration: float = 1.0, interpolation: int = Tween.TRANS_LINEAR) ->
 func fade_in(duration: float = 1.0, interpolation: int = Tween.TRANS_LINEAR) -> void:
     await _tween_fade_in(duration, interpolation)
     emit_signal("finished")
+
+func _init() -> void:
+    name = "SxSceneTransitioner"
 
 func _ready() -> void:
     layer = 10

@@ -198,10 +198,7 @@ class Logger:
             printerr(line)
 
     func _format_args(message: String, args: Array = []) -> String:
-        var output := message
-        for a in args:
-            output += " " + str(a)
-        return output
+        return message % args
 
     func _format_log(time: float, level: int, message: String, args: Array = []) -> String:
         var level_str := _LogUtils.level_to_string(level).to_upper()

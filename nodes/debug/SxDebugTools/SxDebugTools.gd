@@ -35,11 +35,14 @@ var _scene_tree_dump: MarginContainer
 var _debug_console: SxDebugConsole
 var _debug_info: SxDebugInfo
 
-static func get_global_instance(tree: SceneTree) -> SxDebugTools:
+## Setup a global instance.
+static func setup_global_instance(tree: SceneTree):
     if !tree.root.has_node("SxDebugTools"):
         tree.root.call_deferred("add_child", SxDebugTools.new())
         await tree.process_frame
 
+## Get a global instance.
+static func get_global_instance(tree: SceneTree) -> SxDebugTools:
     return tree.root.get_node("SxDebugTools")
 
 ## Hide the debug panel.

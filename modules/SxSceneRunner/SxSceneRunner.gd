@@ -67,11 +67,6 @@ func _build_ui() -> void:
     vbox.size_flags_vertical = Control.SIZE_SHRINK_END
     margin.add_child(vbox)
 
-    var text_hbox := HBoxContainer.new()
-    text_hbox.name = "Text"
-    text_hbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
-    vbox.add_child(text_hbox)
-
     _scene_name_label = Label.new()
     _scene_name_label.name = "SceneName"
     _scene_name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -79,7 +74,7 @@ func _build_ui() -> void:
     _scene_name_label.add_theme_font_override("font", font)
     _scene_name_label.text = "[NO SCENE FOUND]"
     _scene_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-    text_hbox.add_child(_scene_name_label)
+    margin.add_child(_scene_name_label)
 
     var inner_margin := MarginContainer.new()
     inner_margin.name = "Margin"
