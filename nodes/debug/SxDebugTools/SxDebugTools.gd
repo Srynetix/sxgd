@@ -147,31 +147,6 @@ func _build_ui() -> void:
     local_scene_tree.add_theme_stylebox_override("panel", box)
     local_scene_tree_container.add_child(local_scene_tree)
 
-    var listenserver_scene_tree_container := VBoxContainer.new()
-    listenserver_scene_tree_container.name = "ListenServerTreeContainer"
-    listenserver_scene_tree_container.visible = false
-    listenserver_scene_tree_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-    listenserver_scene_tree_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
-    scene_tree_hbox_container.add_child(listenserver_scene_tree_container)
-
-    var listenserver_scene_tree_title := Label.new()
-    listenserver_scene_tree_title.name = "Title"
-    listenserver_scene_tree_title.add_theme_font_override("font", _BOLD_FONT)
-    listenserver_scene_tree_title.text = "Listen server tree"
-    listenserver_scene_tree_container.add_child(listenserver_scene_tree_title)
-
-    var listenserver_scene_tree := Tree.new()
-    listenserver_scene_tree.name = "Tree"
-    listenserver_scene_tree.size_flags_vertical = Control.SIZE_EXPAND_FILL
-    listenserver_scene_tree.add_theme_constant_override("draw_guides", 0)
-    listenserver_scene_tree.add_theme_constant_override("draw_relationship_lines", 1)
-    listenserver_scene_tree.add_theme_font_override("font", _CODE_FONT)
-    listenserver_scene_tree.add_theme_font_size_override("font_size", 13)
-    listenserver_scene_tree.add_theme_color_override("font_outline_color", Color.BLACK)
-    listenserver_scene_tree.add_theme_constant_override("outline_size", 2)
-    listenserver_scene_tree.add_theme_stylebox_override("panel", box)
-    listenserver_scene_tree_container.add_child(listenserver_scene_tree)
-
     var right_container := MarginContainer.new()
     right_container.name = "RightContainer"
     right_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -241,17 +216,7 @@ func _show_panel(panel_type: PanelType) -> void:
 func _show_scene_tree_dump() -> void:
     _scene_tree_dump.visible = true
     var local_tree := _scene_tree_dump.get_node("HBox/LocalTreeContainer/Tree") as Tree
-    var ls_tree := _scene_tree_dump.get_node("HBox/ListenServerTreeContainer/Tree") as Tree
-    var ls_container := _scene_tree_dump.get_node("HBox/ListenServerTreeContainer") as VBoxContainer
     _build_node_tree(local_tree, get_tree().root)
-
-    # Check for a listen server
-    ls_container.visible = false
-    var listen_server_peer := get_tree().root.find_child("SxListenServerPeer", true, false) as Node
-    if listen_server_peer != null:
-        ls_container.visible = true
-        var peer := listen_server_peer as SxListenServerPeer
-        _build_node_tree(ls_tree, peer)
 
 func _build_node_tree(tree: Tree, node: Node) -> void:
     tree.clear()
