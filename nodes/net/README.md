@@ -135,7 +135,7 @@ It's mostly like the usage above (with the SxNetPeerProtocol), but using methods
 
 Here's a sample doing the same thing as previously, but with handlers.
 
-```gdignore
+```gdscript
 # In MyScene.gd
 
 # Arbitrary enum which represents message sent to the server
