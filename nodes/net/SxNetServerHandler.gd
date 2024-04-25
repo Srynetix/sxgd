@@ -26,5 +26,6 @@ func _peer_connected(id: int) -> void:
 func _peer_disconnected(id: int) -> void:
     pass
 
+## React to a client message.
 func _on_message(peer_id: int, kind: Variant, payload: Variant) -> void:
     pass

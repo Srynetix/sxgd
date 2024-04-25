@@ -103,7 +103,7 @@ func _ready() -> void:
     # There we declare an arbitrary payload.
     # You can omit the payload if not needed.
     var payload = {"foo": "bar"}
-    protocol.send_to_server(MessageToServer.Ready, payload)
+    client.protocol.send_to_server(MessageToServer.Ready, payload)
   )
 
   # Listen on incoming messages from clients through the protocol.
@@ -114,7 +114,7 @@ func _ready() -> void:
 
       # Then send back to all peers that this specific player is ready, using the
       # payload to indicate the peer ID.
-      protocol.send_to_all_clients(MessageToClient.PlayerReady, {"peer_id": peer_id})
+      server.protocol.send_to_all_clients(MessageToClient.PlayerReady, {"peer_id": peer_id})
   )
 
   # Listen on incoming messages from server through the protocol.
