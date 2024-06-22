@@ -6,8 +6,6 @@ class_name SxNodeTracerSystem
 ## [SxDebugTools].
 ## To use with [SxNodeTracer]s.
 
-const _FONT := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Bold.otf")
-
 var _tracers := {}
 var _tracers_ui := {}
 var _logger := SxLog.get_logger("SxNodeTracerSystem")
@@ -24,15 +22,6 @@ func _ready() -> void:
 
     var margin_container := MarginContainer.new()
     vbox_container.add_child(margin_container)
-
-    var title := Label.new()
-    title.size_flags_vertical = 0
-    title.add_theme_font_override("font", _FONT)
-    title.add_theme_font_size_override("font_size", 18)
-    title.add_theme_constant_override("outline_size", 3)
-    title.add_theme_color_override("font_outline_color", Color.BLACK)
-    title.text = " Node Tracer"
-    margin_container.add_child(title)
 
     var margin_container2 := MarginContainer.new()
     margin_container2.size_flags_horizontal = Control.SIZE_EXPAND_FILL

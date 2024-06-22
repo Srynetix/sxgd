@@ -2,45 +2,56 @@ extends Node
 class_name SxCVars
 ## Console variables (CVars) system, inspired by Quake/Source.
 
-## Variable collection.
-##
-## Inherit this class to define new CVars.
-##
-## Do not forget to register your collection using the [method bind_collection] method.
-class VarCollection:
-    extends Object
+class CVarUnit:
+    extends RefCounted
 
-static var _collections: Array[VarCollection] = []
-static var _data: Dictionary = {}
+    signal value_changed(value: Variant)
 
-## Bind a [VarCollection] to the CVar system.
-static func bind_collection(vars: VarCollection) -> void:
-    var plist := vars.get_property_list()
-    for p in plist:
-        if p["usage"] == PROPERTY_USAGE_SCRIPT_VARIABLE:
-            var name = p["name"]
-            var value = vars.get(p["name"])
+    var _name: String
+    var _value: Variant
 
-            if !_data.has(name):
-                _data[name] = value
+    var name: String:
+        get:
+            return _name
+
+    var value: Variant:
+        get:
+            return _value
+        set(value):
+            _value = value
+            value_changed.emit(_value)
+
+    func _init(name: String, value: Variant):
+        _name = name
+        _value = value
+
+static var _units: Dictionary = {}
+
+static func _register_unit(unit: CVarUnit) -> void:
+    if !_units.has(unit._name):
+        _units[unit._name] = unit
+
+static func register(name: String, initial_value: Variant) -> CVarUnit:
+    var unit := CVarUnit.new(name, initial_value)
+    _register_unit(unit)
+    return unit
+
+static func list_units() -> Array[SxCVars.CVarUnit]:
+    var typed: Array[SxCVars.CVarUnit]
+    typed.assign(_units.values())
+    return typed
+
+## Get a known CVar unit.
+static func get_unit(name: String) -> CVarUnit:
+    return _units[name]
 
 ## Get a known CVar value.
 static func get_cvar(name: String) -> Variant:
-    return _data.get(name)
+    if name in _units:
+        return _units[name].value
+    return null
 
 ## Set a known CVar value.
 static func set_cvar(name: String, value: Variant) -> void:
-    if _data.has(name):
-        _data[name] = value
-
-## Print available CVars into a string.
-static func print_cvars() -> String:
-    var output := ""
-    for cvar in _data:
-        var value = _data[cvar]
-        output += "%s (%s)\n" % [cvar, value]
-
-    if output != "":
-        output = output.substr(0, len(output) - 1)
-
-    return output
+    if name in _units:
+        _units[name].value = value

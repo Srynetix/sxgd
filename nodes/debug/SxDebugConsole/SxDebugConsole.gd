@@ -2,6 +2,8 @@ extends MarginContainer
 class_name SxDebugConsole
 ## In-Game debug console.
 
+const AutocompletionItem := SxAutocompleteLineEdit.AutocompletionItem
+
 const _FONT := preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
 var _logger := SxLog.get_logger("SxDebugConsole")
 
@@ -37,13 +39,14 @@ var _inputfield: SxDebugConsoleLineEdit
 var _history := PackedStringArray()
 var _history_cursor := 0
 
+func _init() -> void:
+    name = "SxDebugConsole"
+
 ## Focus the console input.
 func focus_input() -> void:
     _inputfield.grab_focus()
 
 func _build_ui() -> void:
-    name = "SxDebugConsole"
-
     anchor_right = 1.0
     anchor_bottom = 1.0
     SxUi.set_margin_container_margins(self, 10.0)
@@ -84,7 +87,38 @@ func _build_ui() -> void:
     _inputfield = SxDebugConsoleLineEdit.new()
     _inputfield.add_theme_font_override("font", _FONT)
     _inputfield.add_theme_font_size_override("font_size", 11)
+    _inputfield.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+    _inputfield.autocomplete_func = _autocomplete_func
+    _inputfield.clear_screen.connect(func(): _clear_scrollbuffer())
     vbox.add_child(_inputfield)
+
+func _autocomplete_func(words: Array, word_position: int) -> Array[AutocompletionItem]:
+    if word_position == 0:
+        return [
+            AutocompletionItem.new("call", "Call a method on a node"),
+            AutocompletionItem.new("clear", "Clear the screen"),
+            AutocompletionItem.new("cvar_get", "Get a console variable"),
+            AutocompletionItem.new("cvar_list", "List console variables"),
+            AutocompletionItem.new("cvar_set", "Set a console variable"),
+            AutocompletionItem.new("echo", "Echo something"),
+            AutocompletionItem.new("get", "Get a node value"),
+            AutocompletionItem.new("history", "Get command history"),
+            AutocompletionItem.new("help", "Show help"),
+            AutocompletionItem.new("motd", "Show the initial message"),
+            AutocompletionItem.new("scene_reload", "Reload the current scene"),
+            AutocompletionItem.new("set", "Set a node value"),
+            AutocompletionItem.new("show", "Get node information"),
+            AutocompletionItem.new("tree", "Show node tree"),
+        ]
+
+    elif word_position == 1:
+        if words[0] == "cvar_set" || words[0] == "cvar_get":
+            var items: Array[AutocompletionItem] = []
+            for unit in SxCVars.list_units():
+                items.push_back(AutocompletionItem.new(unit.name))
+            return items
+
+    return []
 
 func _ready() -> void:
     _build_ui()
@@ -342,11 +376,11 @@ func _cmd_cvar_set(args: PackedStringArray) -> String:
     var cvar_name = args[0] as String
     var cvar_value = args[1] as String
 
-    var current = SxCVars.get_cvar(cvar_name)
-    var converted_value = _convert_value(current, cvar_value)
-    _logger.info("Will set CVar %s to value %s (was: %s)" % [cvar_name, converted_value, current])
-    SxCVars.set_cvar(cvar_name, converted_value)
-    return str(SxCVars.get_cvar(cvar_name))
+    var current = SxCVars.get_unit(cvar_name)
+    var converted_value = _convert_value(current.value, cvar_value)
+    _logger.info("Will set CVar %s to value %s (was: %s)" % [cvar_name, converted_value, current.value])
+    current.value = converted_value
+    return str(current.value)
 
 func _cmd_cvar_get(args: PackedStringArray) -> String:
     if len(args) != 1:
@@ -355,7 +389,10 @@ func _cmd_cvar_get(args: PackedStringArray) -> String:
     return str(SxCVars.get_cvar(args[0]))
 
 func _cmd_cvar_list() -> String:
-    return SxCVars.print_cvars()
+    var output = ""
+    for unit in SxCVars.list_units():
+        output += "%s (%s)\n" % [unit.name, str(unit.value)]
+    return output
 
 func _cmd_call(args: PackedStringArray) -> String:
     if len(args) < 2:

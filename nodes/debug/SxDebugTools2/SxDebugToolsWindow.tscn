@@ -1,0 +1,173 @@
+[gd_scene load_steps=9 format=3 uid="uid://wt28y3ryajsp"]
+
+[ext_resource type="Theme" uid="uid://dacshy1ac2g0h" path="res://addons/sxgd/nodes/debug/SxDebugTools2/DebugToolsTheme.tres" id="1_4folg"]
+[ext_resource type="Script" path="res://addons/sxgd/nodes/debug/SxDebugTools2/SxDebugToolsWindow.gd" id="1_8uj0m"]
+[ext_resource type="Script" path="res://addons/sxgd/nodes/debug/SxDebugTools/SxDebugInfo.gd" id="2_vccqj"]
+[ext_resource type="Script" path="res://addons/sxgd/nodes/debug/SxDebugTools2/SxDebugNodeInspector.gd" id="3_lwh2w"]
+[ext_resource type="Script" path="res://addons/sxgd/nodes/debug/SxDebugTools2/SxDebugCVarsEditor.gd" id="4_uvdnj"]
+[ext_resource type="Script" path="res://addons/sxgd/nodes/debug/SxNodeTracer/SxNodeTracerSystem.gd" id="5_qcgby"]
+[ext_resource type="Script" path="res://addons/sxgd/nodes/debug/SxDebugTools/SxLogPanel.gd" id="5_vtgq4"]
+[ext_resource type="Script" path="res://addons/sxgd/nodes/debug/SxDebugConsole/SxDebugConsole.gd" id="6_ldr6x"]
+
+[node name="SxDebugToolsWindow" type="Window"]
+title = "SxDebugTools"
+size = Vector2i(500, 500)
+min_size = Vector2i(400, 400)
+theme_override_font_sizes/title_font_size = 10
+script = ExtResource("1_8uj0m")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(400, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_4folg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="PickButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Pick"
+
+[node name="DockButton" type="MenuButton" parent="Panel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Dock"
+flat = false
+switch_on_hover = true
+item_count = 4
+popup/item_0/text = "Right"
+popup/item_1/text = "Bottom"
+popup/item_1/id = 1
+popup/item_2/text = "Left"
+popup/item_2/id = 2
+popup/item_3/text = "Full screen"
+popup/item_3/id = 3
+
+[node name="Tabs" type="TabContainer" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 1
+
+[node name="Stats" type="MarginContainer" parent="Panel/VBoxContainer/Tabs"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 0
+
+[node name="SxDebugInfo" type="Control" parent="Panel/VBoxContainer/Tabs/Stats"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("2_vccqj")
+
+[node name="Scene Graph" type="MarginContainer" parent="Panel/VBoxContainer/Tabs"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 1
+
+[node name="HBoxContainer" type="HSplitContainer" parent="Panel/VBoxContainer/Tabs/Scene Graph"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Tabs/Scene Graph/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Tabs/Scene Graph/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="Panel/VBoxContainer/Tabs/Scene Graph/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RefreshNodeTreeButton" type="Button" parent="Panel/VBoxContainer/Tabs/Scene Graph/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Refresh"
+
+[node name="NodeTree" type="Tree" parent="Panel/VBoxContainer/Tabs/Scene Graph/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/Tabs/Scene Graph/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NodeInspector" type="VBoxContainer" parent="Panel/VBoxContainer/Tabs/Scene Graph/HBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("3_lwh2w")
+
+[node name="Node Tracer" type="MarginContainer" parent="Panel/VBoxContainer/Tabs"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="SxNodeTracerSystem" type="MarginContainer" parent="Panel/VBoxContainer/Tabs/Node Tracer"]
+layout_mode = 2
+script = ExtResource("5_qcgby")
+
+[node name="CVars" type="MarginContainer" parent="Panel/VBoxContainer/Tabs"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 3
+
+[node name="SxDebugCVarsEditor" type="MarginContainer" parent="Panel/VBoxContainer/Tabs/CVars"]
+layout_mode = 2
+script = ExtResource("4_uvdnj")
+
+[node name="Logs" type="MarginContainer" parent="Panel/VBoxContainer/Tabs"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 4
+
+[node name="SxLogPanel" type="MarginContainer" parent="Panel/VBoxContainer/Tabs/Logs"]
+layout_mode = 2
+script = ExtResource("5_vtgq4")
+
+[node name="ConsolePanel" type="VBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ToggleConsole" type="Button" parent="Panel/VBoxContainer/ConsolePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Toggle Console"
+alignment = 0
+
+[node name="Console" type="MarginContainer" parent="Panel/VBoxContainer/ConsolePanel"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_vertical = 10
+script = ExtResource("6_ldr6x")

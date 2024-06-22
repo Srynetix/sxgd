@@ -2,22 +2,19 @@ extends CharacterBody3D
 class_name SxFPSController
 ## FPS controller.
 
-class SxFPSControllerVarCollection:
-    extends SxCVars.VarCollection
-
-    var SxFPSControllerAirMoveSpeed := 10.0
-    var SxFPSControllerCrouchSpeed := 2
-    var SxFPSControllerDashDelay := 100
-    var SxFPSControllerDashSpeed := 300.0
-    var SxFPSControllerDashThreshold := 200
-    var SxFPSControllerGravity := -40
-    var SxFPSControllerJumpSpeed := 18
-    var SxFPSControllerLookSensitivity := 10
-    var SxFPSControllerMaxGroundVelocity := 10.0
-    var SxFPSControllerMaxJumps := 2
-    var SxFPSControllerMoveSpeed := 100.0
-    var SxFPSControllerNoClip := false
-    var SxFPSControllerWalkSpeed := 2
+var SxFPSControllerAirMoveSpeed := SxCVars.register("SxFPSControllerAirMoveSpeed", 10.0)
+var SxFPSControllerCrouchSpeed := SxCVars.register("SxFPSControllerCrouchSpeed", 2)
+var SxFPSControllerDashDelay := SxCVars.register("SxFPSControllerDashDelay", 100)
+var SxFPSControllerDashSpeed := SxCVars.register("SxFPSControllerDashSpeed", 300.0)
+var SxFPSControllerDashThreshold := SxCVars.register("SxFPSControllerDashThreshold", 200)
+var SxFPSControllerGravity := SxCVars.register("SxFPSControllerGravity", -40)
+var SxFPSControllerJumpSpeed := SxCVars.register("SxFPSControllerJumpSpeed", 18)
+var SxFPSControllerLookSensitivity := SxCVars.register("SxFPSControllerLookSensitivity", 10)
+var SxFPSControllerMaxGroundVelocity := SxCVars.register("SxFPSControllerMaxGroundVelocity", 10.0)
+var SxFPSControllerMaxJumps := SxCVars.register("SxFPSControllerMaxJumps", 2)
+var SxFPSControllerMoveSpeed := SxCVars.register("SxFPSControllerMoveSpeed", 100.0)
+var SxFPSControllerNoClip := SxCVars.register("SxFPSControllerNoClip", false)
+var SxFPSControllerWalkSpeed := SxCVars.register("SxFPSControllerWalkSpeed", 2)
 
 const MIN_LOOK_ANGLE := -90
 const MAX_LOOK_ANGLE := 90
@@ -63,8 +60,6 @@ var _current_jumps := 0
 var _force_field_timer: Timer
 
 func _ready() -> void:
-    SxCVars.bind_collection(SxFPSControllerVarCollection.new())
-
     # Setup node
     _rotation_helper = Node3D.new()
     _rotation_helper.name = "RotationHelper"
@@ -78,7 +73,7 @@ func _ready() -> void:
 
     _dash_timer = Timer.new()
     _dash_timer.timeout.connect(func(): _dashing = false)
-    _dash_timer.wait_time = SxCVars.get_cvar("SxFPSControllerDashDelay") / 1000.0
+    _dash_timer.wait_time = SxFPSControllerDashDelay.value / 1000.0
     _dash_timer.one_shot = true
     add_child(_dash_timer)
 
@@ -115,8 +110,8 @@ func _input(event: InputEvent) -> void:
                 _mouse_delta = motion_event.relative
 
 # func _physics_process_noclip(delta: float) -> void:
-#     var look_sensitivity = SxCVars.get_cvar("SxFPSControllerLookSensitivity")
-#     var speed := float(SxCVars.get_cvar("SxFPSControllerMoveSpeed"))
+#     var look_sensitivity = SxFPSControllerLookSensitivity.value as float
+#     var speed := SxFPSControllerMoveSpeed.value as float
 #     acceleration = Vector3.ZERO
 
 #     var helper_rotation = _rotation_helper.rotation_degrees
@@ -138,11 +133,11 @@ func _input(event: InputEvent) -> void:
 #     _physics_process_post()
 
 func _physics_process(delta: float) -> void:
-    var gravity = SxCVars.get_cvar("SxFPSControllerGravity") as int
-    var look_sensitivity = SxCVars.get_cvar("SxFPSControllerLookSensitivity") as int
-    var jump_speed = SxCVars.get_cvar("SxFPSControllerJumpSpeed") as int
-    var max_ground_velocity = SxCVars.get_cvar("SxFPSControllerMaxGroundVelocity") as float
-    var noclip = SxCVars.get_cvar("SxFPSControllerNoClip") as bool
+    var gravity = SxFPSControllerGravity.value as int
+    var look_sensitivity = SxFPSControllerLookSensitivity.value as int
+    var jump_speed = SxFPSControllerJumpSpeed.value as int
+    var max_ground_velocity = SxFPSControllerMaxGroundVelocity.value as float
+    var noclip = SxFPSControllerNoClip.value as bool
 
     if _crouching:
         pass
@@ -173,7 +168,7 @@ func _physics_process(delta: float) -> void:
         _acceleration = _force_field_amount
 
     # Jumping
-    if _is_jump_pressed() && (_current_jumps + 1) < SxCVars.get_cvar("SxFPSControllerMaxJumps"):
+    if _is_jump_pressed() && (_current_jumps + 1) < SxFPSControllerMaxJumps.value:
         _jumping = true
         _current_jumps += 1
         _acceleration.y = -velocity.y + jump_speed
@@ -316,7 +311,7 @@ func _handle_dash() -> void:
         _handle_dash_i("backward")
 
 func _handle_dash_i(action: String) -> void:
-    var threshold = SxCVars.get_cvar("SxFPSControllerDashThreshold")
+    var threshold = SxFPSControllerDashThreshold.value
     var now_time = Time.get_ticks_msec()
     if _prev_movement_action == action && _prev_movement_time && now_time - _prev_movement_time < threshold:
         _dashing = true
@@ -358,15 +353,15 @@ func _fire_pressed() -> void:
 
 func _get_movement_speed() -> float:
     if !is_on_floor():
-        return float(SxCVars.get_cvar("SxFPSControllerAirMoveSpeed"))
+        return float(SxFPSControllerAirMoveSpeed.value)
     elif _dashing:
-        return float(SxCVars.get_cvar("SxFPSControllerDashSpeed"))
+        return float(SxFPSControllerDashSpeed.value)
     elif _crouching:
-        return float(SxCVars.get_cvar("SxFPSControllerCrouchSpeed"))
+        return float(SxFPSControllerCrouchSpeed.value)
     elif _walking:
-        return float(SxCVars.get_cvar("SxFPSControllerWalkSpeed"))
+        return float(SxFPSControllerWalkSpeed.value)
     else:
-        return float(SxCVars.get_cvar("SxFPSControllerMoveSpeed"))
+        return float(SxFPSControllerMoveSpeed.value)
 
 func _is_action_pressed(action: String) -> bool:
     if !action:

@@ -1,9 +1,6 @@
-@tool
-extends CanvasLayer
+extends Control
 class_name SxDebugInfo
 ## A debug panel showing performance info.
-
-const font := preload("res://addons/sxgd/assets/fonts/Jost-400-Book.ttf")
 
 var _label: RichTextLabel
 
@@ -15,25 +12,18 @@ func get_visibility() -> bool:
 func set_visibility(value: bool) -> void:
     _label.visible = value
 
-func _ready() -> void:
+func _init() -> void:
     process_mode = Node.PROCESS_MODE_ALWAYS
-    layer = 99
     name = "SxDebugInfo"
 
+func _ready() -> void:
     var container := MarginContainer.new()
     container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
     container.mouse_filter = Control.MOUSE_FILTER_IGNORE
-    container.add_theme_constant_override("margin_right", 10)
-    container.add_theme_constant_override("margin_left", 10)
-    container.add_theme_constant_override("margin_top", 10)
-    container.add_theme_constant_override("margin_bottom", 10)
     add_child(container)
 
     _label = RichTextLabel.new()
     _label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-    _label.add_theme_color_override("default_color", Color(1, 0.43, 0.52, 1))
-    _label.add_theme_font_size_override("normal_font_size", 12)
-    _label.add_theme_font_override("normal_font", font)
     _label.text = "FPS"
     container.add_child(_label)
 

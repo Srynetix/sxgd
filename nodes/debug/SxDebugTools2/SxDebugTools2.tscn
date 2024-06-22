@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk27fikaomber"]
+
+[ext_resource type="Script" path="res://addons/sxgd/nodes/debug/SxDebugTools2/SxDebugTools2.gd" id="1_0n824"]
+[ext_resource type="PackedScene" uid="uid://wt28y3ryajsp" path="res://addons/sxgd/nodes/debug/SxDebugTools2/SxDebugToolsWindow.tscn" id="2_f3kya"]
+
+[node name="SxDebugTools2" type="CanvasLayer"]
+script = ExtResource("1_0n824")
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="ToolsWindow" parent="." instance=ExtResource("2_f3kya")]
+unique_name_in_owner = true

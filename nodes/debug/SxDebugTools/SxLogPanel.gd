@@ -2,9 +2,6 @@ extends MarginContainer
 class_name SxLogPanel
 ## Log panel, display scrollable logs.
 
-const _NORMAL_FONT = preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Regular.otf")
-const _BOLD_FONT = preload("res://addons/sxgd/assets/fonts/OfficeCodePro-Bold.otf")
-
 ## Max messages to display.
 @export var max_messages := 100
 
@@ -20,10 +17,6 @@ func _ready():
     set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
     mouse_filter = Control.MOUSE_FILTER_IGNORE
     size_flags_vertical = Control.SIZE_EXPAND_FILL
-    add_theme_constant_override("margin_right", 10)
-    add_theme_constant_override("margin_top", 10)
-    add_theme_constant_override("margin_left", 10)
-    add_theme_constant_override("margin_bottom", 10)
 
     var scroll_container := ScrollContainer.new()
     add_child(scroll_container)
@@ -36,16 +29,10 @@ func _ready():
 
     _template = RichTextLabel.new()
     _template.size_flags_vertical = Control.SIZE_EXPAND | Control.SIZE_SHRINK_END
-    _template.add_theme_font_override("bold_font", _BOLD_FONT)
-    _template.add_theme_font_override("normal_font", _NORMAL_FONT)
-    _template.add_theme_font_size_override("bold_font_size", 12)
-    _template.add_theme_font_size_override("normal_font_size", 12)
-    _template.add_theme_color_override("font_outline_color", Color.BLACK)
-    _template.add_theme_constant_override("outline_size", 3)
     _template.bbcode_enabled = true
     _template.text = "Hello."
     _template.fit_content = true
-    _template.scroll_active = false
+    _template.scroll_active = true
 
     _update_text()
 

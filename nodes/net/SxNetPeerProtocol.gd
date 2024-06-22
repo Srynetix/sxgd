@@ -29,6 +29,9 @@ func _ready() -> void:
     var peer_id := multiplayer.get_unique_id()
     _logger.info("PeerProtocol spawned at %s (UID: %d)", [get_path(), peer_id])
 
+func _sizeof(obj: Variant) -> int:
+    return len(var_to_bytes_with_objects(obj))
+
 ## Send a message to a server, using a `kind` and a `payload`.
 func send_to_server(kind: Variant, payload: Variant = null) -> void:
     _send_to_server.rpc_id(1, kind, payload)
@@ -54,7 +57,7 @@ func _send_to_server(kind: Variant, payload: Variant) -> void:
 
     var sender_id = multiplayer.get_remote_sender_id()
 
-    _logger.debug("Emitting server message (kind=%s, peer_id=%d)", [kind, sender_id])
+    _logger.debug("Server received (kind=%s, peer_id=%d, payload_size=%d)", [kind, sender_id, _sizeof(payload)])
     on_message_for_server.emit(sender_id, kind, payload)
 
 @rpc("reliable")
@@ -63,5 +66,5 @@ func _send_to_client(kind: Variant, payload: Variant) -> void:
     if multiplayer.is_server():
         return
 
-    _logger.debug("Emitting client message (kind=%s)", [kind])
+    _logger.debug("Client received (peer_id=%d, kind=%s, payload_size=%d)", [multiplayer.get_unique_id(), kind, _sizeof(payload)])
     on_message_for_client.emit(kind, payload)

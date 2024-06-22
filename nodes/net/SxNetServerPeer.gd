@@ -54,7 +54,7 @@ func _ready() -> void:
         var ws_peer = WebSocketMultiplayerPeer.new()
         var error := ws_peer.create_server(port)
         if error:
-            _logger.error("Error while creating client: %s", [error])
+            _logger.error("Error while creating server: %s", [error])
             return
 
         _logger.info("Creating WebSockets server...")
@@ -63,7 +63,7 @@ func _ready() -> void:
         var en_peer = ENetMultiplayerPeer.new()
         var error := en_peer.create_server(port, max_clients)
         if error:
-            _logger.error("Error while creating client: %s", [error])
+            _logger.error("Error while creating server: %s", [error])
             return
         _logger.info("Creating ENet server...")
         peer = en_peer

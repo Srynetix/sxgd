@@ -4,16 +4,13 @@ class_name SxDecalController
 ##
 ## Used to control decal counts on the scene.
 
-class SxDecalVarCollection:
-    extends SxCVars.VarCollection
-
-    var SxDecalControllerMaxDecals := 10
+var SxDecalControllerMaxDecals := SxCVars.register("SxDecalControllerMaxDecals", 10)
 
 var _decals: Array[SxDecal] = []
 
 ## Spawn a decal.
 func spawn_decal(decal_scene: PackedScene, parent: Node3D, position: Vector3, normal: Vector3) -> void:
-    while len(_decals) > SxCVars.get_cvar("SxDecalControllerMaxDecals"):
+    while len(_decals) > SxDecalControllerMaxDecals.value:
         var decal_to_remove = _decals[0]
         _decals.remove_at(0)
 
@@ -39,6 +36,5 @@ static func get_global_instance(tree: SceneTree) -> SxDecalController:
 
     return tree.root.get_node("SxDecalController")
 
-func _ready():
+func _init():
     name = "SxDecalController"
-    SxCVars.bind_collection(SxDecalVarCollection.new())
